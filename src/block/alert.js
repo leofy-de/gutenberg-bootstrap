@@ -12,9 +12,15 @@ import './editor.scss';
 // Import JS.
 import '../../node_modules/bootstrap/js/src/alert';
 
-const {__}                = wp.i18n; // Import __() from wp.i18n
-const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-
+const {__}                  = wp.i18n; // Import __() from wp.i18n
+const {registerBlockType}   = wp.blocks; // Import registerBlockType() from wp.blocks
+const {PanelBody, PanelRow} = wp.components;
+const {Fragment}            = wp.element;
+const {
+		  BlockControls,
+		  AlignmentToolbar,
+		  InspectorControls,
+	  }                     = wp.editor;
 /**
  * Register: aa Gutenberg Block.
  *
@@ -49,8 +55,8 @@ registerBlockType('gbb/alert', {
 		__('Notification'),
 	],
 	attributes : {
-		theme: {
-			type: 'string',
+		theme      : {
+			type   : 'string',
 			default: 'success'
 		},
 		title      : {
@@ -63,7 +69,10 @@ registerBlockType('gbb/alert', {
 		},
 		dismissable: {
 			type: 'boolean',
-		}
+		},
+		alignment  : {
+			type: 'string',
+		},
 	},
 
 	/**
@@ -78,17 +87,22 @@ registerBlockType('gbb/alert', {
 		// Creates a <p class='wp-block-gbb-alert'></p>.
 
 		// Theme selection
-		const { attributes: { theme }, setAttributes } = props;
-		function setTheme( event ) {
-			const selected = event.target.querySelector( 'option:checked' );
-			setAttributes( { theme: selected.value } );
+		const {attributes: {theme, alignment}, setAttributes, isSelected} = props;
+
+		function setTheme(event) {
+			const selected = event.target.querySelector('option:checked');
+			setAttributes({theme: selected.value});
 			event.preventDefault();
 		}
 
-		return (
-			<div className={props.className}>
-				<form onSubmit={ setTheme }>
-					<select value={ theme } onChange={ setTheme }>
+		function onChangeAlignment(newAlignment) {
+			setAttributes({alignment: newAlignment});
+		}
+
+		function showThemeForm() {
+			return (
+				<form onSubmit={setTheme} style={{textAlign: alignment}}>
+					<select value={theme} onChange={setTheme}>
 						<option value="primary">Primary</option>
 						<option value="secondary">Secondary</option>
 						<option value="success">Success</option>
@@ -99,16 +113,38 @@ registerBlockType('gbb/alert', {
 						<option value="dark">Dark</option>
 					</select>
 				</form>
-				<div className={`alert alert-${theme} alert-dismissible fade show`} role="alert">
-					<h4 className="alert-heading">Editor View</h4>
-					<div className="content">
-						Ok, so this is only available in the editor?!?
+			);
+		}
+
+		return (
+			<Fragment>
+				<InspectorControls>
+					<PanelBody title={ __('Select colors') }>
+						<PanelRow>
+							<label>{ __('Theme') }</label>
+							{ showThemeForm() }
+						</PanelRow>
+					</PanelBody>
+				</InspectorControls>
+				<BlockControls>
+					<AlignmentToolbar
+						value={alignment}
+						onChange={onChangeAlignment}
+					/>
+				</BlockControls>
+				<div className={props.className}>
+					<div className={`alert alert-${theme} alert-dismissible fade show`} role="alert"
+						 style={{textAlign: alignment}}>
+						<h4 className="alert-heading">Editor View</h4>
+						<div className="content">
+							Ok, so this is only available in the editor?!?
+						</div>
+						<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
 				</div>
-			</div>
+			</Fragment>
 		);
 	},
 
@@ -121,9 +157,16 @@ registerBlockType('gbb/alert', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function (props) {
+
+		// Initialize theme
+		const {attributes: {theme, alignment}} = props;
+
 		return (
 			<div>
-				<div className="alert alert-success alert-dismissible fade show" role="alert">
+				<div className={`alert alert-${theme} alert-dismissible fade show`}
+					 role="alert"
+					 style={{textAlign: alignment}}
+				>
 					<h4 className="alert-heading">Frontend View</h4>
 					<div className="content">
 						So it seems to be different, what will be saved out!
