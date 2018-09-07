@@ -63,3 +63,16 @@ function bootstrap_blocks_cgb_editor_assets() {
 
 // Hook: Editor assets.
 add_action( 'enqueue_block_editor_assets', 'bootstrap_blocks_cgb_editor_assets' );
+
+// Add a custom block category
+add_filter( 'block_categories', function( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'gbb',
+				'title' => __( 'Bootstrap', 'gbb' ),
+			),
+		)
+	);
+}, 10, 2 );

@@ -9,4 +9,7 @@
  * Webpack is compiling as the input file.
  */
 
-import './block/block.js';
+// Import bootstrap dependencies
+import '../node_modules/bootstrap/js/src/util';
+
+import './block/alert.js';
