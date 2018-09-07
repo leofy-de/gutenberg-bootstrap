@@ -1,32 +1,70 @@
-/**
- * Note that these styles are loaded *before* editor styles, so that
- * editor-specific styles using the same selectors will take precedence.
- */
-.wp-block-gutenberg-bootstrap-alert-esnext .recipe-image {
-  background: #f1f1f1;
-  float: right;
-  width: 50%;
-  min-height: 100px;
-  text-align: center; }
+/*
+Error: Undefined variable: "$red".
+        on line 8 of style.scss
 
-.wp-block-gutenberg-bootstrap-alert-esnext .recipe-image button {
-  margin-top: 30px; }
+3:  *
+4:  * CSS for both Frontend+Backend.
+5:  *\/
+6: 
+7: .wp-block-cgb-block-bootstrap-blocks  {
+8:   background: $red;
+9:   border: 0.2rem solid $black;
+10:   color: $black;
+11:   margin: 0 auto;
+12:   max-width: 740px;
+13:   padding: 2rem;
 
-.wp-block-gutenberg-bootstrap-alert-esnext .recipe-image button.image-button {
-  margin: 0;
-  padding: 0;
-  display: block; }
-
-.wp-block-gutenberg-bootstrap-alert-esnext .recipe-image img {
-  display: block;
-  z-index: 1;
-  position: relative; }
-
-.wp-block-gutenberg-bootstrap-alert-esnext h2 {
-  font-size: 1.5em; }
-
-.wp-block-gutenberg-bootstrap-alert-esnext ul {
-  padding-left: 2.5em !important;
-  /* Needs fix in Gutenberg. */ }
-
-/*# sourceMappingURL=style.css.map */
+Backtrace:
+style.scss:8
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/script/tree/node.rb:50:in `perform'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:398:in `visit_prop'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `block in with_base'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:135:in `with_frame'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `with_base'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:440:in `block (2 levels) in visit_rule'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:440:in `map'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:440:in `block in visit_rule'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:438:in `visit_rule'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `block in with_base'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:135:in `with_frame'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `with_base'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:10:in `visit'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/engine.rb:307:in `render_with_sourcemap'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `each'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin.rb:82:in `update_stylesheets'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/exec/sass_scss.rb:338:in `watch_or_update'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/exec/base.rb:50:in `parse'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/exec/base.rb:18:in `parse!'
+C:/tools/ruby25/lib/ruby/gems/2.5.0/gems/sass-3.5.7/bin/scss:13:in `<top (required)>'
+C:/tools/ruby25/bin/scss:23:in `load'
+C:/tools/ruby25/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$red\".\A         on line 8 of style.scss\A \A 3:  *\A 4:  * CSS for both Frontend+Backend.\A 5:  */\A 6: \A 7: .wp-block-cgb-block-bootstrap-blocks  {\A 8:   background: $red;\A 9:   border: 0.2rem solid $black;\A 10:   color: $black;\A 11:   margin: 0 auto;\A 12:   max-width: 740px;\A 13:   padding: 2rem;"; }
