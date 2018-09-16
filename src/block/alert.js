@@ -14,12 +14,14 @@ import '../../node_modules/bootstrap/js/src/alert';
 
 const {__}                  = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType}   = wp.blocks; // Import registerBlockType() from wp.blocks
-const {PanelBody, PanelRow} = wp.components;
+const {CheckboxControl, PanelBody, PanelRow} = wp.components;
 const {Fragment}            = wp.element;
 const {
-		  BlockControls,
 		  AlignmentToolbar,
+		  BlockControls,
+		  ColorPalette,
 		  InspectorControls,
+		  RichText,
 	  }                     = wp.editor;
 /**
  * Register: aa Gutenberg Block.
@@ -59,15 +61,19 @@ registerBlockType('gbb/alert', {
 			type   : 'string',
 			default: 'success'
 		},
+		textColor      : {
+			source  : 'string',
+		},
 		title      : {
 			source  : 'text',
 			selector: 'h4.alert-heading'
 		},
 		content    : {
+			type    : 'array',
 			source  : 'children',
 			selector: 'div.content'
 		},
-		dismissable: {
+		isDismissable: {
 			type: 'boolean',
 		},
 		alignment  : {
@@ -87,7 +93,7 @@ registerBlockType('gbb/alert', {
 		// Creates a <p class='wp-block-gbb-alert'></p>.
 
 		// Theme selection
-		const {attributes: {theme, alignment}, setAttributes, isSelected} = props;
+		const {attributes: {alignment, content, isDismissable, textColor, title, theme}, setAttributes, isSelected} = props;
 
 		function setTheme(event) {
 			const selected = event.target.querySelector('option:checked');
@@ -97,6 +103,14 @@ registerBlockType('gbb/alert', {
 
 		function onChangeAlignment(newAlignment) {
 			setAttributes({alignment: newAlignment});
+		}
+
+		function onChangeContent(newContent) {
+			setAttributes({content: newContent});
+		}
+
+		function onTitleContent(newTitle) {
+			setAttributes({title: newTitle});
 		}
 
 		function showThemeForm() {
@@ -112,6 +126,9 @@ registerBlockType('gbb/alert', {
 						<option value="light">Light</option>
 						<option value="dark">Dark</option>
 					</select>
+					{/*<ColorPalette
+						value={textColor}
+						onChange={(textColor) => setAttributes({ textColor })} />*/}
 				</form>
 			);
 		}
@@ -119,10 +136,18 @@ registerBlockType('gbb/alert', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __('Select colors') }>
+					<PanelBody title={__('Select options')}>
 						<PanelRow>
-							<label>{ __('Theme') }</label>
-							{ showThemeForm() }
+							<label>{__('Theme')}</label>
+							{showThemeForm()}
+						</PanelRow>
+						<PanelRow>
+							<CheckboxControl
+								label={__('Is dismissable?')}
+								help={__('Can the user hide the alert by clicking a X button on the top right.')}
+								checked={ isDismissable }
+								onChange={ ( isDismissable ) => { setAttributes( { isDismissable } ) } }
+							/>
 						</PanelRow>
 					</PanelBody>
 				</InspectorControls>
@@ -135,13 +160,24 @@ registerBlockType('gbb/alert', {
 				<div className={props.className}>
 					<div className={`alert alert-${theme} alert-dismissible fade show`} role="alert"
 						 style={{textAlign: alignment}}>
-						<h4 className="alert-heading">Editor View</h4>
-						<div className="content">
-							Ok, so this is only available in the editor?!?
-						</div>
-						<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+						<RichText
+							className="alert-heading"
+							tagName="h4"
+							onChange={onTitleContent}
+							value={title}
+						/>
+						<RichText
+							className="content"
+							tagName="div"
+							onChange={onChangeContent}
+							value={content}
+						/>
+						{
+							isDismissable &&
+							<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						}
 					</div>
 				</div>
 			</Fragment>
@@ -159,7 +195,7 @@ registerBlockType('gbb/alert', {
 	save: function (props) {
 
 		// Initialize theme
-		const {attributes: {theme, alignment}} = props;
+		const {attributes: {alignment, content, title, theme}} = props;
 
 		return (
 			<div>
@@ -167,10 +203,16 @@ registerBlockType('gbb/alert', {
 					 role="alert"
 					 style={{textAlign: alignment}}
 				>
-					<h4 className="alert-heading">Frontend View</h4>
-					<div className="content">
-						So it seems to be different, what will be saved out!
-					</div>
+					<RichText.Content
+						className="alert-heading"
+						tagName="h4"
+						value={title}
+					/>
+					<RichText.Content
+						className="content"
+						tagName="div"
+						value={content}
+					/>
 					<button type="button" className="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

@@ -4,7 +4,13 @@
  * CSS for both Frontend+Backend.
  */
 
+// Alerts
 .wp-block-gbb-alert  {
   @import "~bootstrap/scss/alert";
   @import "~bootstrap/scss/close";
+}
+
+// Buttons
+.wp-block-gbb-button  {
+  @import "~bootstrap/scss/buttons";
 }

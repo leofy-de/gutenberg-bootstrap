@@ -25,8 +25,8 @@ function bootstrap_blocks_cgb_block_assets() {
 	wp_enqueue_style(
 		'bootstrap_blocks-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
+		[ 'wp-blocks' ] // Dependency to include the CSS after it.
+	// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 } // End function bootstrap_blocks_cgb_block_assets().
 
@@ -47,7 +47,7 @@ function bootstrap_blocks_cgb_editor_assets() {
 	wp_enqueue_script(
 		'bootstrap_blocks-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Dependencies, defined above.
+		[ 'wp-blocks', 'wp-i18n', 'wp-element' ], // Dependencies, defined above.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
@@ -56,8 +56,8 @@ function bootstrap_blocks_cgb_editor_assets() {
 	wp_enqueue_style(
 		'bootstrap_blocks-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
+		[ 'wp-edit-blocks' ] // Dependency to include the CSS after it.
+	// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 } // End function bootstrap_blocks_cgb_editor_assets().
 
@@ -65,14 +65,14 @@ function bootstrap_blocks_cgb_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'bootstrap_blocks_cgb_editor_assets' );
 
 // Add a custom block category
-add_filter( 'block_categories', function( $categories, $post ) {
+add_filter( 'block_categories', function ( $categories, $post ) {
 	return array_merge(
 		$categories,
-		array(
-			array(
-				'slug' => 'gbb',
+		[
+			[
+				'slug'  => 'gbb',
 				'title' => __( 'Bootstrap', 'gbb' ),
-			),
-		)
+			],
+		]
 	);
 }, 10, 2 );

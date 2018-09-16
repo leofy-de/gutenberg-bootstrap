@@ -13,3 +13,4 @@
 import '../node_modules/bootstrap/js/src/util';
 
 import './block/alert.js';
+import './block/button.js';
