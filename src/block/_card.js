@@ -12,17 +12,17 @@ import './editor.scss';
 // Import JS.
 import '../../node_modules/bootstrap/js/src/alert';
 
-const {__}                                   = wp.i18n; // Import __() from wp.i18n
-const {registerBlockType}                    = wp.blocks; // Import registerBlockType() from wp.blocks
+const {__}                  = wp.i18n; // Import __() from wp.i18n
+const {registerBlockType}   = wp.blocks; // Import registerBlockType() from wp.blocks
 const {CheckboxControl, PanelBody, PanelRow} = wp.components;
-const {Fragment}                             = wp.element;
+const {Fragment}            = wp.element;
 const {
 		  AlignmentToolbar,
 		  BlockControls,
 		  ColorPalette,
 		  InspectorControls,
 		  RichText,
-	  }                                      = wp.editor;
+	  }                     = wp.editor;
 /**
  * Register: aa Gutenberg Block.
  *
@@ -41,12 +41,15 @@ registerBlockType('gbb/alert', {
 	title      : __('Bootstrap Alert'), // Block title.
 	description: __(
 		'Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.'), // Block title.
-	icon       : <svg aria-hidden="true" data-prefix="far" data-icon="comment-alt"
-					  className="svg-inline--fa fa-comment-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg"
-					  viewBox="0 0 512 512">
-		<path fill="currentColor"
-			  d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288z"></path>
-	</svg>,
+	icon       : {
+		// Specifying a background color to appear with the icon e.g.: in the inserter.
+		background: '#fff',
+		// Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+		foreground: '#0088cc',
+		// Specifying a dashicon for the block
+		src       : 'admin-comments',
+	}, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+	//icon: <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M19 13H5v-2h14v2z" /></svg>,
 	category   : 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords   : [
 		__('Bootstrap'),
@@ -54,18 +57,18 @@ registerBlockType('gbb/alert', {
 		__('Notification'),
 	],
 	attributes : {
-		theme        : {
+		theme      : {
 			type   : 'string',
 			default: 'success'
 		},
-		textColor    : {
-			source: 'string',
+		textColor      : {
+			source  : 'string',
 		},
-		title        : {
+		title      : {
 			source  : 'text',
 			selector: 'h4.alert-heading'
 		},
-		content      : {
+		content    : {
 			type    : 'array',
 			source  : 'children',
 			selector: 'div.content'
@@ -73,7 +76,7 @@ registerBlockType('gbb/alert', {
 		isDismissable: {
 			type: 'boolean',
 		},
-		alignment    : {
+		alignment  : {
 			type: 'string',
 		},
 	},
@@ -142,10 +145,8 @@ registerBlockType('gbb/alert', {
 							<CheckboxControl
 								label={__('Is dismissable?')}
 								help={__('Can the user hide the alert by clicking a X button on the top right.')}
-								checked={isDismissable}
-								onChange={(isDismissable) => {
-									setAttributes({isDismissable})
-								}}
+								checked={ isDismissable }
+								onChange={ ( isDismissable ) => { setAttributes( { isDismissable } ) } }
 							/>
 						</PanelRow>
 					</PanelBody>
