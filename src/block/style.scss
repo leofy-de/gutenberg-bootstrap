@@ -16,6 +16,11 @@
   @import "~bootstrap/scss/buttons";
 }
 
+// Container
+.wp-block-gbb-container {
+  @import "~bootstrap/scss/grid";
+}
+
 // Lead, Blockquote
 .wp-block-gbb-type, .wp-block-gbb-blockquote {
   @import "~bootstrap/scss/type";

@@ -14,5 +14,6 @@
 
 import './block/alert.js';
 import './block/blockquote.js';
+import './block/container.js';
 import './block/button.js';
 import './block/type.js';
