@@ -3,19 +3,24 @@
  *
  * CSS for both Frontend+Backend.
  */
+@import "~bootstrap/scss/alert";
 
 // Alerts
-.wp-block-gbb-alert  {
+.wp-block-gbb-alert {
   @import "~bootstrap/scss/alert";
   @import "~bootstrap/scss/close";
 }
 
 // Buttons
-.wp-block-gbb-button  {
+.wp-block-gbb-button {
   @import "~bootstrap/scss/buttons";
 }
 
-// Lead
-.wp-block-gbb-type  {
+// Lead, Blockquote
+.wp-block-gbb-type, .wp-block-gbb-blockquote {
   @import "~bootstrap/scss/type";
+  .blockquote.mb-0 {
+    margin-bottom: 0;
+  }
 }
+

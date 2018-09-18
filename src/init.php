@@ -21,6 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 function bootstrap_blocks_cgb_block_assets() {
+	// Scripts.
+	wp_enqueue_script(
+		'bootstrap_blocks-cgb-block-js', // Handle.
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
+		[ 'wp-blocks', 'wp-i18n', 'wp-element', 'jquery' ], // Dependencies, defined above.
+		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
+		true // Enqueue the script in the footer.
+	);
+
 	// Styles.
 	wp_enqueue_style(
 		'bootstrap_blocks-cgb-style-css', // Handle.
@@ -45,8 +54,8 @@ add_action( 'enqueue_block_assets', 'bootstrap_blocks_cgb_block_assets' );
 function bootstrap_blocks_cgb_editor_assets() {
 	// Scripts.
 	wp_enqueue_script(
-		'bootstrap_blocks-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
+		'bootstrap_blocks-cgb-block-editor-js', // Handle.
+		plugins_url( '/dist/blocks.editor.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		[ 'wp-blocks', 'wp-i18n', 'wp-element' ], // Dependencies, defined above.
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
