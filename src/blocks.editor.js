@@ -12,8 +12,9 @@
 // Import bootstrap dependencies
 //import '../node_modules/bootstrap/js/src/util';
 
-import './block/alert.js';
-import './block/blockquote.js';
-import './block/container.js';
-import './block/button.js';
-import './block/type.js';
+import './block/alert';
+import './block/blockquote';
+import './block/button';
+import './block/container';
+//import './block/modal';
+import './block/type';

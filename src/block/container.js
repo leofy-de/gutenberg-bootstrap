@@ -31,11 +31,8 @@ registerBlockType('gbb/container', {
 	title      : __('Bootstrap Container'), // Block title.
 	description: __(
 		'Containers are the most basic layout element in Bootstrap and are required when using our default grid system. Choose from a responsive, fixed-width container (meaning its max-width changes at each breakpoint) or fluid-width (meaning it’s 100% wide all the time).'), // Block title.
-	icon       : <svg aria-hidden="true" data-prefix="far" data-icon="square"
-					  className="svg-inline--fa fa-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg"
-					  viewBox="0 0 448 512">
-		<path fill="currentColor"
-			  d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h340c3.3 0 6 2.7 6 6v340c0 3.3-2.7 6-6 6z"></path>
+	icon       : <svg viewBox="0 0 512 512">
+		<path d="M16.797 51.094C-.044 52.193 0 67.02 0 67.02l1.244 386.934C1.26 458.667 3.821 460 8.533 460h494.933a8.533 8.533 0 0 0 8.533-8.533V58.933c-.071-.893 1.598-6.042-13.602-7.431 0 0-405.152-1.724-481.6-.408zm68.536 391.839H17.067V67.467h68.267v375.466zm324.267 0H102.4V67.467h307.2zm85.333 0h-68.267V67.467h68.267z" />
 	</svg>,
 	category   : 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords   : [

@@ -14,3 +14,7 @@ import '../node_modules/bootstrap/js/src/util';
 
 // Alert
 import '../node_modules/bootstrap/js/src/alert';
+
+// Modal
+//import '../node_modules/bootstrap/js/dist/modal';
+

@@ -9,8 +9,9 @@
 import './style.scss';
 import './editor.scss';
 
+
 // Import JS.
-import '../../node_modules/bootstrap/js/src/alert';
+import '../../node_modules/bootstrap/js/src/modal';
 
 const {__}                  = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType}   = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -36,25 +37,17 @@ const {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('gbb/alert', {
+registerBlockType('gbb/modal', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title      : __('Bootstrap Alert'), // Block title.
+	title      : __('Bootstrap Modal'), // Block title.
 	description: __(
-		'Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.'), // Block title.
-	icon       : {
-		// Specifying a background color to appear with the icon e.g.: in the inserter.
-		background: '#fff',
-		// Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
-		foreground: '#0088cc',
-		// Specifying a dashicon for the block
-		src       : 'admin-comments',
-	}, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
-	//icon: <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z" /><path d="M19 13H5v-2h14v2z" /></svg>,
+		'Provide contextual feedback messages for typical user actions with the handful of available and flexible modal messages.'), // Block title.
+	icon: <svg version="1.1" id="Capa_1" x="0px" y="0px"	 width="437.348px" height="437.348px" viewBox="0 0 437.348 437.348" style="enable-background:new 0 0 437.348 437.348;"><g>	<g>		<polygon style="fill:#030303;" points="428.233,324.297 350.983,324.297 350.983,312.587 416.523,312.587 416.523,11.711 			115.647,11.711 115.647,95.474 103.936,95.474 103.936,0 428.233,0 		"/>	</g>	<g>		<polygon style="fill:#030303;" points="333.417,437.348 9.115,437.348 9.115,113.04 86.371,113.04 86.371,124.75 20.825,124.75 			20.825,425.638 321.707,425.638 321.707,341.863 333.417,341.863 		"/>	</g>	<g>		<polygon style="fill:#030303;" points="333.417,341.863 321.707,341.863 321.707,124.75 86.371,124.75 86.371,113.04 			333.417,113.04 		"/>	</g></g></svg>,
 	category   : 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords   : [
 		__('Bootstrap'),
-		__('Alert'),
-		__('Notification'),
+		__('Modal'),
+		__('Popup'),
 	],
 	attributes : {
 		theme      : {
@@ -66,7 +59,7 @@ registerBlockType('gbb/alert', {
 		},
 		title      : {
 			source  : 'text',
-			selector: 'h4.alert-heading'
+			selector: 'h4.modal-heading'
 		},
 		content    : {
 			type    : 'array',
@@ -90,7 +83,7 @@ registerBlockType('gbb/alert', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function (props) {
-		// Creates a <p class='wp-block-gbb-alert'></p>.
+		// Creates a <p class='wp-block-gbb-modal'></p>.
 
 		// Theme selection
 		const {attributes: {alignment, content, isDismissable, textColor, title, theme}, setAttributes, isSelected} = props;
@@ -144,7 +137,7 @@ registerBlockType('gbb/alert', {
 						<PanelRow>
 							<CheckboxControl
 								label={__('Is dismissable?')}
-								help={__('Can the user hide the alert by clicking a X button on the top right.')}
+								help={__('Can the user hide the modal by clicking a X button on the top right.')}
 								checked={ isDismissable }
 								onChange={ ( isDismissable ) => { setAttributes( { isDismissable } ) } }
 							/>
@@ -158,10 +151,10 @@ registerBlockType('gbb/alert', {
 					/>
 				</BlockControls>
 				<div className={props.className}>
-					<div className={`alert alert-${theme} alert-dismissible fade show`} role="alert"
+					<div className={`modal modal-${theme} modal-dismissible fade show`} role="modal"
 						 style={{textAlign: alignment}}>
 						<RichText
-							className="alert-heading"
+							className="modal-heading"
 							tagName="h4"
 							onChange={onTitleContent}
 							value={title}
@@ -174,7 +167,7 @@ registerBlockType('gbb/alert', {
 						/>
 						{
 							isDismissable &&
-							<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						}
@@ -199,12 +192,12 @@ registerBlockType('gbb/alert', {
 
 		return (
 			<div>
-				<div className={`alert alert-${theme} alert-dismissible fade show`}
-					 role="alert"
+				<div className={`modal modal-${theme} modal-dismissible fade show`}
+					 role="modal"
 					 style={{textAlign: alignment}}
 				>
 					<RichText.Content
-						className="alert-heading"
+						className="modal-heading"
 						tagName="h4"
 						value={title}
 					/>
@@ -213,7 +206,7 @@ registerBlockType('gbb/alert', {
 						tagName="div"
 						value={content}
 					/>
-					<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+					<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
