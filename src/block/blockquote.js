@@ -44,6 +44,10 @@ registerBlockType('gbb/blockquote', {
 		textColor: {
 			source: 'string',
 		},
+		margin   : {
+			type: 'string',
+			default: 'my-3'
+		},
 		quote    : {
 			source  : 'text',
 			selector: '.blockquote'
@@ -67,10 +71,32 @@ registerBlockType('gbb/blockquote', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function (props) {
-		const {attributes: {alignment, quote, source}, setAttributes} = props;
+		const {attributes: {alignment, margin, quote, source}, setAttributes} = props;
+		function setMargin(event) {
+			const selected = event.target.querySelector('option:checked');
+			setAttributes({margin: selected.value});
+			event.preventDefault();
+		}
 
 		return (
 			<Fragment>
+				<InspectorControls>
+					<PanelBody title={__('Select options')}>
+						<PanelRow>
+							<label>{__('Margin')}</label>
+							<form onSubmit={setMargin}>
+								<select value={margin} onChange={setMargin}>
+									<option value="my-0">No margin</option>
+									<option value="my-1">my-1 - Tiny margin</option>
+									<option value="my-2">my-2 - Small margin</option>
+									<option value="my-3">my-3 - Middle margin</option>
+									<option value="my-4">my-4 - Large margin</option>
+									<option value="my-5">my-5 - Hugh margin</option>
+								</select>
+							</form>
+						</PanelRow>
+					</PanelBody>
+				</InspectorControls>
 				<BlockControls>
 					<AlignmentToolbar
 						value={alignment}
@@ -80,7 +106,7 @@ registerBlockType('gbb/blockquote', {
 					/>
 				</BlockControls>
 				<div className={props.className}>
-					<blockquote className="blockquote" style={{textAlign: alignment}}>
+					<blockquote className={`blockquote ${margin}`} style={{textAlign: alignment}}>
 						<RichText
 							className="mb-0 blockquote"
 							tagName="p"
@@ -115,11 +141,11 @@ registerBlockType('gbb/blockquote', {
 	save: function (props) {
 
 		// Initialize theme
-		const {attributes: {alignment, quote, source}} = props;
+		const {attributes: {alignment, margin, quote, source}} = props;
 
 		return (
 			<div>
-				<div className={`blockquote`} style={{textAlign: alignment}}>
+				<div className={`blockquote ${margin}`} style={{textAlign: alignment}}>
 					<RichText.Content
 						className="mb-0 blockquote"
 						tagName="p"

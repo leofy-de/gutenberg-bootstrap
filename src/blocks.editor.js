@@ -16,5 +16,6 @@ import './block/alert';
 import './block/blockquote';
 import './block/button';
 import './block/container';
+import './block/media';
 //import './block/modal';
 import './block/type';

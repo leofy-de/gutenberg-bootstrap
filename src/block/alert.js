@@ -63,6 +63,10 @@ registerBlockType('gbb/alert', {
 			source  : 'text',
 			selector: 'h4.alert-heading'
 		},
+		margin   : {
+			type: 'string',
+			default: 'my-3'
+		},
 		content      : {
 			type    : 'array',
 			source  : 'children',
@@ -88,7 +92,12 @@ registerBlockType('gbb/alert', {
 		// Creates a <p class='wp-block-gbb-alert'></p>.
 
 		// Theme selection
-		const {attributes: {alignment, content, isDismissable, textColor, title, theme}, setAttributes, isSelected} = props;
+		const {attributes: {alignment, content, isDismissable, margin, title, theme}, setAttributes, isSelected} = props;
+		function setMargin(event) {
+			const selected = event.target.querySelector('option:checked');
+			setAttributes({margin: selected.value});
+			event.preventDefault();
+		}
 
 		function setTheme(event) {
 			const selected = event.target.querySelector('option:checked');
@@ -133,6 +142,19 @@ registerBlockType('gbb/alert', {
 				<InspectorControls>
 					<PanelBody title={__('Select options')}>
 						<PanelRow>
+							<label>{__('Margin')}</label>
+							<form onSubmit={setMargin}>
+								<select value={margin} onChange={setMargin}>
+									<option value="my-0">No margin</option>
+									<option value="my-1">my-1 - Tiny margin</option>
+									<option value="my-2">my-2 - Small margin</option>
+									<option value="my-3">my-3 - Middle margin</option>
+									<option value="my-4">my-4 - Large margin</option>
+									<option value="my-5">my-5 - Hugh margin</option>
+								</select>
+							</form>
+						</PanelRow>
+						<PanelRow>
 							<label>{__('Theme')}</label>
 							{showThemeForm()}
 						</PanelRow>
@@ -155,7 +177,7 @@ registerBlockType('gbb/alert', {
 					/>
 				</BlockControls>
 				<div className={props.className}>
-					<div className={`alert alert-${theme} alert-dismissible fade show`} role="alert"
+					<div className={`alert alert-${theme} alert-dismissible fade show ${margin}`} role="alert"
 						 style={{textAlign: alignment}}>
 						<RichText
 							className="alert-heading"
@@ -192,11 +214,11 @@ registerBlockType('gbb/alert', {
 	save: function (props) {
 
 		// Initialize theme
-		const {attributes: {alignment, content, title, theme}} = props;
+		const {attributes: {alignment, content, margin, title, theme}} = props;
 
 		return (
 			<div>
-				<div className={`alert alert-${theme} alert-dismissible fade show`}
+				<div className={`alert alert-${theme} alert-dismissible fade show ${margin}`}
 					 role="alert"
 					 style={{textAlign: alignment}}
 				>

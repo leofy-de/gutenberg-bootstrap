@@ -1,0 +1,8 @@
+// Media
+.wp-block-gbb-media {
+  @import "~bootstrap/scss/media";
+
+  .media-image {
+    max-width: 30%;
+  }
+}
