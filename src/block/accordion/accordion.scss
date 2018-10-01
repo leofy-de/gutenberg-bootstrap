@@ -1,0 +1,10 @@
+// Accordion
+.wp-block-gbb-accordion {
+  @import "~bootstrap/scss/card";
+
+  .card {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+}

@@ -80,7 +80,7 @@ add_filter( 'block_categories', function ( $categories, $post ) {
 		[
 			[
 				'slug'  => 'gbb',
-				'title' => __( 'Bootstrap', 'gbb' ),
+				'title' => __( 'Bootstrap Blocks', 'gbb' ),
 			],
 		]
 	);

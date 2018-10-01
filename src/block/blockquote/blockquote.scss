@@ -1,0 +1,7 @@
+// Blockquote
+.wp-block-gbb-blockquote {
+  @import "~bootstrap/scss/type";
+  .blockquote.mb-0 {
+    margin-bottom: 0;
+  }
+}

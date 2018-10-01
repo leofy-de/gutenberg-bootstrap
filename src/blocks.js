@@ -10,10 +10,11 @@
  */
 
 // Import bootstrap dependencies
-import '../node_modules/bootstrap/js/src/util';
+import '../node_modules/bootstrap/js/dist/util';
 
 // Alert
-import '../node_modules/bootstrap/js/src/alert';
+import '../node_modules/bootstrap/js/dist/alert';
+import '../node_modules/bootstrap/js/dist/collapse';
 
 // Modal
 //import '../node_modules/bootstrap/js/dist/modal';

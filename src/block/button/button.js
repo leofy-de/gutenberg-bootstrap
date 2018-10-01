@@ -6,11 +6,11 @@
  */
 
 //  Import CSS.
-import './style.scss';
-import './editor.scss';
+import '../style.scss';
+import '../editor.scss';
 
 // Import JS.
-import '../../node_modules/bootstrap/js/src/button';
+import '../../../node_modules/bootstrap/js/src/button';
 
 const {__}                                   = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType}                    = wp.blocks; // Import registerBlockType() from wp.blocks

@@ -8,29 +8,12 @@
 @import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/utilities/spacing";
 
-// Alerts
-.wp-block-gbb-alert {
-  @import "~bootstrap/scss/alert";
-  @import "~bootstrap/scss/close";
-}
-
-// Buttons
-.wp-block-gbb-button {
-  @import "~bootstrap/scss/buttons";
-}
-
-// Container
-.wp-block-gbb-container {
-  @import "~bootstrap/scss/grid";
-}
-
-// Lead, Blockquote
-.wp-block-gbb-type, .wp-block-gbb-blockquote {
-  @import "~bootstrap/scss/type";
-  .blockquote.mb-0 {
-    margin-bottom: 0;
-  }
-}
-
+@import "accordion/accordion";
+@import "alert/alert";
+@import "blockquote/blockquote";
+@import "button/button";
+@import "container/container";
 @import "media/media";
+@import "type/type";
+
 

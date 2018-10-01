@@ -65,34 +65,34 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/*! dynamic exports provided */
-/*! exports used: default */
-/***/ (function(module, exports) {
-
-module.exports = jQuery;
-
-/***/ }),
-/* 1 */
 /*!******************************!*\
   !*** ./src/block/style.scss ***!
   \******************************/
 /*! dynamic exports provided */
 /***/ (function(module, exports) {
 
-eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9zdHlsZS5zY3NzPzgwZjMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gcmVtb3ZlZCBieSBleHRyYWN0LXRleHQtd2VicGFjay1wbHVnaW5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9zdHlsZS5zY3NzXG4vLyBtb2R1bGUgaWQgPSAxXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */
+/* 1 */
 /*!*******************************!*\
   !*** ./src/block/editor.scss ***!
   \*******************************/
 /*! dynamic exports provided */
 /***/ (function(module, exports) {
 
-eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9lZGl0b3Iuc2Nzcz80OWQyIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIHJlbW92ZWQgYnkgZXh0cmFjdC10ZXh0LXdlYnBhY2stcGx1Z2luXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2svZWRpdG9yLnNjc3Ncbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///2\n");
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 2 */
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+module.exports = jQuery;
 
 /***/ }),
 /* 3 */
@@ -104,7 +104,161 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);\n\n\n/**\n * --------------------------------------------------------------------------\n * Bootstrap (v4.1.3): util.js\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n * --------------------------------------------------------------------------\n */\n\nconst Util = (($) => {\n  /**\n   * ------------------------------------------------------------------------\n   * Private TransitionEnd Helpers\n   * ------------------------------------------------------------------------\n   */\n\n  const TRANSITION_END = 'transitionend'\n  const MAX_UID = 1000000\n  const MILLISECONDS_MULTIPLIER = 1000\n\n  // Shoutout AngusCroll (https://goo.gl/pxwQGp)\n  function toType(obj) {\n    return {}.toString.call(obj).match(/\\s([a-z]+)/i)[1].toLowerCase()\n  }\n\n  function getSpecialTransitionEndEvent() {\n    return {\n      bindType: TRANSITION_END,\n      delegateType: TRANSITION_END,\n      handle(event) {\n        if ($(event.target).is(this)) {\n          return event.handleObj.handler.apply(this, arguments) // eslint-disable-line prefer-rest-params\n        }\n        return undefined // eslint-disable-line no-undefined\n      }\n    }\n  }\n\n  function transitionEndEmulator(duration) {\n    let called = false\n\n    $(this).one(Util.TRANSITION_END, () => {\n      called = true\n    })\n\n    setTimeout(() => {\n      if (!called) {\n        Util.triggerTransitionEnd(this)\n      }\n    }, duration)\n\n    return this\n  }\n\n  function setTransitionEndSupport() {\n    $.fn.emulateTransitionEnd = transitionEndEmulator\n    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent()\n  }\n\n  /**\n   * --------------------------------------------------------------------------\n   * Public Util Api\n   * --------------------------------------------------------------------------\n   */\n\n  const Util = {\n\n    TRANSITION_END: 'bsTransitionEnd',\n\n    getUID(prefix) {\n      do {\n        // eslint-disable-next-line no-bitwise\n        prefix += ~~(Math.random() * MAX_UID) // \"~~\" acts like a faster Math.floor() here\n      } while (document.getElementById(prefix))\n      return prefix\n    },\n\n    getSelectorFromElement(element) {\n      let selector = element.getAttribute('data-target')\n      if (!selector || selector === '#') {\n        selector = element.getAttribute('href') || ''\n      }\n\n      try {\n        return document.querySelector(selector) ? selector : null\n      } catch (err) {\n        return null\n      }\n    },\n\n    getTransitionDurationFromElement(element) {\n      if (!element) {\n        return 0\n      }\n\n      // Get transition-duration of the element\n      let transitionDuration = $(element).css('transition-duration')\n      const floatTransitionDuration = parseFloat(transitionDuration)\n\n      // Return 0 if element or transition duration is not found\n      if (!floatTransitionDuration) {\n        return 0\n      }\n\n      // If multiple durations are defined, take the first\n      transitionDuration = transitionDuration.split(',')[0]\n\n      return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER\n    },\n\n    reflow(element) {\n      return element.offsetHeight\n    },\n\n    triggerTransitionEnd(element) {\n      $(element).trigger(TRANSITION_END)\n    },\n\n    // TODO: Remove in v5\n    supportsTransitionEnd() {\n      return Boolean(TRANSITION_END)\n    },\n\n    isElement(obj) {\n      return (obj[0] || obj).nodeType\n    },\n\n    typeCheckConfig(componentName, config, configTypes) {\n      for (const property in configTypes) {\n        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {\n          const expectedTypes = configTypes[property]\n          const value         = config[property]\n          const valueType     = value && Util.isElement(value)\n            ? 'element' : toType(value)\n\n          if (!new RegExp(expectedTypes).test(valueType)) {\n            throw new Error(\n              `${componentName.toUpperCase()}: ` +\n              `Option \"${property}\" provided type \"${valueType}\" ` +\n              `but expected type \"${expectedTypes}\".`)\n          }\n        }\n      }\n    }\n  }\n\n  setTransitionEndSupport()\n\n  return Util\n})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (Util);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL3V0aWwuanM/YmExYiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJCBmcm9tICdqcXVlcnknXG5cbi8qKlxuICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAqIEJvb3RzdHJhcCAodjQuMS4zKTogdXRpbC5qc1xuICogTGljZW5zZWQgdW5kZXIgTUlUIChodHRwczovL2dpdGh1Yi5jb20vdHdicy9ib290c3RyYXAvYmxvYi9tYXN0ZXIvTElDRU5TRSlcbiAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gKi9cblxuY29uc3QgVXRpbCA9ICgoJCkgPT4ge1xuICAvKipcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIFByaXZhdGUgVHJhbnNpdGlvbkVuZCBIZWxwZXJzXG4gICAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgKi9cblxuICBjb25zdCBUUkFOU0lUSU9OX0VORCA9ICd0cmFuc2l0aW9uZW5kJ1xuICBjb25zdCBNQVhfVUlEID0gMTAwMDAwMFxuICBjb25zdCBNSUxMSVNFQ09ORFNfTVVMVElQTElFUiA9IDEwMDBcblxuICAvLyBTaG91dG91dCBBbmd1c0Nyb2xsIChodHRwczovL2dvby5nbC9weHdRR3ApXG4gIGZ1bmN0aW9uIHRvVHlwZShvYmopIHtcbiAgICByZXR1cm4ge30udG9TdHJpbmcuY2FsbChvYmopLm1hdGNoKC9cXHMoW2Etel0rKS9pKVsxXS50b0xvd2VyQ2FzZSgpXG4gIH1cblxuICBmdW5jdGlvbiBnZXRTcGVjaWFsVHJhbnNpdGlvbkVuZEV2ZW50KCkge1xuICAgIHJldHVybiB7XG4gICAgICBiaW5kVHlwZTogVFJBTlNJVElPTl9FTkQsXG4gICAgICBkZWxlZ2F0ZVR5cGU6IFRSQU5TSVRJT05fRU5ELFxuICAgICAgaGFuZGxlKGV2ZW50KSB7XG4gICAgICAgIGlmICgkKGV2ZW50LnRhcmdldCkuaXModGhpcykpIHtcbiAgICAgICAgICByZXR1cm4gZXZlbnQuaGFuZGxlT2JqLmhhbmRsZXIuYXBwbHkodGhpcywgYXJndW1lbnRzKSAvLyBlc2xpbnQtZGlzYWJsZS1saW5lIHByZWZlci1yZXN0LXBhcmFtc1xuICAgICAgICB9XG4gICAgICAgIHJldHVybiB1bmRlZmluZWQgLy8gZXNsaW50LWRpc2FibGUtbGluZSBuby11bmRlZmluZWRcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICBmdW5jdGlvbiB0cmFuc2l0aW9uRW5kRW11bGF0b3IoZHVyYXRpb24pIHtcbiAgICBsZXQgY2FsbGVkID0gZmFsc2VcblxuICAgICQodGhpcykub25lKFV0aWwuVFJBTlNJVElPTl9FTkQsICgpID0+IHtcbiAgICAgIGNhbGxlZCA9IHRydWVcbiAgICB9KVxuXG4gICAgc2V0VGltZW91dCgoKSA9PiB7XG4gICAgICBpZiAoIWNhbGxlZCkge1xuICAgICAgICBVdGlsLnRyaWdnZXJUcmFuc2l0aW9uRW5kKHRoaXMpXG4gICAgICB9XG4gICAgfSwgZHVyYXRpb24pXG5cbiAgICByZXR1cm4gdGhpc1xuICB9XG5cbiAgZnVuY3Rpb24gc2V0VHJhbnNpdGlvbkVuZFN1cHBvcnQoKSB7XG4gICAgJC5mbi5lbXVsYXRlVHJhbnNpdGlvbkVuZCA9IHRyYW5zaXRpb25FbmRFbXVsYXRvclxuICAgICQuZXZlbnQuc3BlY2lhbFtVdGlsLlRSQU5TSVRJT05fRU5EXSA9IGdldFNwZWNpYWxUcmFuc2l0aW9uRW5kRXZlbnQoKVxuICB9XG5cbiAgLyoqXG4gICAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIFB1YmxpYyBVdGlsIEFwaVxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgKi9cblxuICBjb25zdCBVdGlsID0ge1xuXG4gICAgVFJBTlNJVElPTl9FTkQ6ICdic1RyYW5zaXRpb25FbmQnLFxuXG4gICAgZ2V0VUlEKHByZWZpeCkge1xuICAgICAgZG8ge1xuICAgICAgICAvLyBlc2xpbnQtZGlzYWJsZS1uZXh0LWxpbmUgbm8tYml0d2lzZVxuICAgICAgICBwcmVmaXggKz0gfn4oTWF0aC5yYW5kb20oKSAqIE1BWF9VSUQpIC8vIFwifn5cIiBhY3RzIGxpa2UgYSBmYXN0ZXIgTWF0aC5mbG9vcigpIGhlcmVcbiAgICAgIH0gd2hpbGUgKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKHByZWZpeCkpXG4gICAgICByZXR1cm4gcHJlZml4XG4gICAgfSxcblxuICAgIGdldFNlbGVjdG9yRnJvbUVsZW1lbnQoZWxlbWVudCkge1xuICAgICAgbGV0IHNlbGVjdG9yID0gZWxlbWVudC5nZXRBdHRyaWJ1dGUoJ2RhdGEtdGFyZ2V0JylcbiAgICAgIGlmICghc2VsZWN0b3IgfHwgc2VsZWN0b3IgPT09ICcjJykge1xuICAgICAgICBzZWxlY3RvciA9IGVsZW1lbnQuZ2V0QXR0cmlidXRlKCdocmVmJykgfHwgJydcbiAgICAgIH1cblxuICAgICAgdHJ5IHtcbiAgICAgICAgcmV0dXJuIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3Ioc2VsZWN0b3IpID8gc2VsZWN0b3IgOiBudWxsXG4gICAgICB9IGNhdGNoIChlcnIpIHtcbiAgICAgICAgcmV0dXJuIG51bGxcbiAgICAgIH1cbiAgICB9LFxuXG4gICAgZ2V0VHJhbnNpdGlvbkR1cmF0aW9uRnJvbUVsZW1lbnQoZWxlbWVudCkge1xuICAgICAgaWYgKCFlbGVtZW50KSB7XG4gICAgICAgIHJldHVybiAwXG4gICAgICB9XG5cbiAgICAgIC8vIEdldCB0cmFuc2l0aW9uLWR1cmF0aW9uIG9mIHRoZSBlbGVtZW50XG4gICAgICBsZXQgdHJhbnNpdGlvbkR1cmF0aW9uID0gJChlbGVtZW50KS5jc3MoJ3RyYW5zaXRpb24tZHVyYXRpb24nKVxuICAgICAgY29uc3QgZmxvYXRUcmFuc2l0aW9uRHVyYXRpb24gPSBwYXJzZUZsb2F0KHRyYW5zaXRpb25EdXJhdGlvbilcblxuICAgICAgLy8gUmV0dXJuIDAgaWYgZWxlbWVudCBvciB0cmFuc2l0aW9uIGR1cmF0aW9uIGlzIG5vdCBmb3VuZFxuICAgICAgaWYgKCFmbG9hdFRyYW5zaXRpb25EdXJhdGlvbikge1xuICAgICAgICByZXR1cm4gMFxuICAgICAgfVxuXG4gICAgICAvLyBJZiBtdWx0aXBsZSBkdXJhdGlvbnMgYXJlIGRlZmluZWQsIHRha2UgdGhlIGZpcnN0XG4gICAgICB0cmFuc2l0aW9uRHVyYXRpb24gPSB0cmFuc2l0aW9uRHVyYXRpb24uc3BsaXQoJywnKVswXVxuXG4gICAgICByZXR1cm4gcGFyc2VGbG9hdCh0cmFuc2l0aW9uRHVyYXRpb24pICogTUlMTElTRUNPTkRTX01VTFRJUExJRVJcbiAgICB9LFxuXG4gICAgcmVmbG93KGVsZW1lbnQpIHtcbiAgICAgIHJldHVybiBlbGVtZW50Lm9mZnNldEhlaWdodFxuICAgIH0sXG5cbiAgICB0cmlnZ2VyVHJhbnNpdGlvbkVuZChlbGVtZW50KSB7XG4gICAgICAkKGVsZW1lbnQpLnRyaWdnZXIoVFJBTlNJVElPTl9FTkQpXG4gICAgfSxcblxuICAgIC8vIFRPRE86IFJlbW92ZSBpbiB2NVxuICAgIHN1cHBvcnRzVHJhbnNpdGlvbkVuZCgpIHtcbiAgICAgIHJldHVybiBCb29sZWFuKFRSQU5TSVRJT05fRU5EKVxuICAgIH0sXG5cbiAgICBpc0VsZW1lbnQob2JqKSB7XG4gICAgICByZXR1cm4gKG9ialswXSB8fCBvYmopLm5vZGVUeXBlXG4gICAgfSxcblxuICAgIHR5cGVDaGVja0NvbmZpZyhjb21wb25lbnROYW1lLCBjb25maWcsIGNvbmZpZ1R5cGVzKSB7XG4gICAgICBmb3IgKGNvbnN0IHByb3BlcnR5IGluIGNvbmZpZ1R5cGVzKSB7XG4gICAgICAgIGlmIChPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoY29uZmlnVHlwZXMsIHByb3BlcnR5KSkge1xuICAgICAgICAgIGNvbnN0IGV4cGVjdGVkVHlwZXMgPSBjb25maWdUeXBlc1twcm9wZXJ0eV1cbiAgICAgICAgICBjb25zdCB2YWx1ZSAgICAgICAgID0gY29uZmlnW3Byb3BlcnR5XVxuICAgICAgICAgIGNvbnN0IHZhbHVlVHlwZSAgICAgPSB2YWx1ZSAmJiBVdGlsLmlzRWxlbWVudCh2YWx1ZSlcbiAgICAgICAgICAgID8gJ2VsZW1lbnQnIDogdG9UeXBlKHZhbHVlKVxuXG4gICAgICAgICAgaWYgKCFuZXcgUmVnRXhwKGV4cGVjdGVkVHlwZXMpLnRlc3QodmFsdWVUeXBlKSkge1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKFxuICAgICAgICAgICAgICBgJHtjb21wb25lbnROYW1lLnRvVXBwZXJDYXNlKCl9OiBgICtcbiAgICAgICAgICAgICAgYE9wdGlvbiBcIiR7cHJvcGVydHl9XCIgcHJvdmlkZWQgdHlwZSBcIiR7dmFsdWVUeXBlfVwiIGAgK1xuICAgICAgICAgICAgICBgYnV0IGV4cGVjdGVkIHR5cGUgXCIke2V4cGVjdGVkVHlwZXN9XCIuYClcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICBzZXRUcmFuc2l0aW9uRW5kU3VwcG9ydCgpXG5cbiAgcmV0dXJuIFV0aWxcbn0pKCQpXG5cbmV4cG9ydCBkZWZhdWx0IFV0aWxcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vbm9kZV9tb2R1bGVzL2Jvb3RzdHJhcC9qcy9zcmMvdXRpbC5qc1xuLy8gbW9kdWxlIGlkID0gM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAgMSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///3\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.1.3): util.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+const Util = (($) => {
+  /**
+   * ------------------------------------------------------------------------
+   * Private TransitionEnd Helpers
+   * ------------------------------------------------------------------------
+   */
+
+  const TRANSITION_END = 'transitionend'
+  const MAX_UID = 1000000
+  const MILLISECONDS_MULTIPLIER = 1000
+
+  // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+  function toType(obj) {
+    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
+  }
+
+  function getSpecialTransitionEndEvent() {
+    return {
+      bindType: TRANSITION_END,
+      delegateType: TRANSITION_END,
+      handle(event) {
+        if ($(event.target).is(this)) {
+          return event.handleObj.handler.apply(this, arguments) // eslint-disable-line prefer-rest-params
+        }
+        return undefined // eslint-disable-line no-undefined
+      }
+    }
+  }
+
+  function transitionEndEmulator(duration) {
+    let called = false
+
+    $(this).one(Util.TRANSITION_END, () => {
+      called = true
+    })
+
+    setTimeout(() => {
+      if (!called) {
+        Util.triggerTransitionEnd(this)
+      }
+    }, duration)
+
+    return this
+  }
+
+  function setTransitionEndSupport() {
+    $.fn.emulateTransitionEnd = transitionEndEmulator
+    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent()
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Public Util Api
+   * --------------------------------------------------------------------------
+   */
+
+  const Util = {
+
+    TRANSITION_END: 'bsTransitionEnd',
+
+    getUID(prefix) {
+      do {
+        // eslint-disable-next-line no-bitwise
+        prefix += ~~(Math.random() * MAX_UID) // "~~" acts like a faster Math.floor() here
+      } while (document.getElementById(prefix))
+      return prefix
+    },
+
+    getSelectorFromElement(element) {
+      let selector = element.getAttribute('data-target')
+      if (!selector || selector === '#') {
+        selector = element.getAttribute('href') || ''
+      }
+
+      try {
+        return document.querySelector(selector) ? selector : null
+      } catch (err) {
+        return null
+      }
+    },
+
+    getTransitionDurationFromElement(element) {
+      if (!element) {
+        return 0
+      }
+
+      // Get transition-duration of the element
+      let transitionDuration = $(element).css('transition-duration')
+      const floatTransitionDuration = parseFloat(transitionDuration)
+
+      // Return 0 if element or transition duration is not found
+      if (!floatTransitionDuration) {
+        return 0
+      }
+
+      // If multiple durations are defined, take the first
+      transitionDuration = transitionDuration.split(',')[0]
+
+      return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER
+    },
+
+    reflow(element) {
+      return element.offsetHeight
+    },
+
+    triggerTransitionEnd(element) {
+      $(element).trigger(TRANSITION_END)
+    },
+
+    // TODO: Remove in v5
+    supportsTransitionEnd() {
+      return Boolean(TRANSITION_END)
+    },
+
+    isElement(obj) {
+      return (obj[0] || obj).nodeType
+    },
+
+    typeCheckConfig(componentName, config, configTypes) {
+      for (const property in configTypes) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
+          const expectedTypes = configTypes[property]
+          const value         = config[property]
+          const valueType     = value && Util.isElement(value)
+            ? 'element' : toType(value)
+
+          if (!new RegExp(expectedTypes).test(valueType)) {
+            throw new Error(
+              `${componentName.toUpperCase()}: ` +
+              `Option "${property}" provided type "${valueType}" ` +
+              `but expected type "${expectedTypes}".`)
+          }
+        }
+      }
+    }
+  }
+
+  setTransitionEndSupport()
+
+  return Util
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
+
+/* harmony default export */ __webpack_exports__["a"] = (Util);
+
 
 /***/ }),
 /* 4 */
@@ -115,7 +269,193 @@ eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(/*! ./util */ 3);\n\n\n\n/**\n * --------------------------------------------------------------------------\n * Bootstrap (v4.1.3): alert.js\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n * --------------------------------------------------------------------------\n */\n\nconst Alert = (($) => {\n  /**\n   * ------------------------------------------------------------------------\n   * Constants\n   * ------------------------------------------------------------------------\n   */\n\n  const NAME                = 'alert'\n  const VERSION             = '4.1.3'\n  const DATA_KEY            = 'bs.alert'\n  const EVENT_KEY           = `.${DATA_KEY}`\n  const DATA_API_KEY        = '.data-api'\n  const JQUERY_NO_CONFLICT  = $.fn[NAME]\n\n  const Selector = {\n    DISMISS : '[data-dismiss=\"alert\"]'\n  }\n\n  const Event = {\n    CLOSE          : `close${EVENT_KEY}`,\n    CLOSED         : `closed${EVENT_KEY}`,\n    CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`\n  }\n\n  const ClassName = {\n    ALERT : 'alert',\n    FADE  : 'fade',\n    SHOW  : 'show'\n  }\n\n  /**\n   * ------------------------------------------------------------------------\n   * Class Definition\n   * ------------------------------------------------------------------------\n   */\n\n  class Alert {\n    constructor(element) {\n      this._element = element\n    }\n\n    // Getters\n\n    static get VERSION() {\n      return VERSION\n    }\n\n    // Public\n\n    close(element) {\n      let rootElement = this._element\n      if (element) {\n        rootElement = this._getRootElement(element)\n      }\n\n      const customEvent = this._triggerCloseEvent(rootElement)\n\n      if (customEvent.isDefaultPrevented()) {\n        return\n      }\n\n      this._removeElement(rootElement)\n    }\n\n    dispose() {\n      $.removeData(this._element, DATA_KEY)\n      this._element = null\n    }\n\n    // Private\n\n    _getRootElement(element) {\n      const selector = __WEBPACK_IMPORTED_MODULE_1__util__[\"a\" /* default */].getSelectorFromElement(element)\n      let parent     = false\n\n      if (selector) {\n        parent = document.querySelector(selector)\n      }\n\n      if (!parent) {\n        parent = $(element).closest(`.${ClassName.ALERT}`)[0]\n      }\n\n      return parent\n    }\n\n    _triggerCloseEvent(element) {\n      const closeEvent = $.Event(Event.CLOSE)\n\n      $(element).trigger(closeEvent)\n      return closeEvent\n    }\n\n    _removeElement(element) {\n      $(element).removeClass(ClassName.SHOW)\n\n      if (!$(element).hasClass(ClassName.FADE)) {\n        this._destroyElement(element)\n        return\n      }\n\n      const transitionDuration = __WEBPACK_IMPORTED_MODULE_1__util__[\"a\" /* default */].getTransitionDurationFromElement(element)\n\n      $(element)\n        .one(__WEBPACK_IMPORTED_MODULE_1__util__[\"a\" /* default */].TRANSITION_END, (event) => this._destroyElement(element, event))\n        .emulateTransitionEnd(transitionDuration)\n    }\n\n    _destroyElement(element) {\n      $(element)\n        .detach()\n        .trigger(Event.CLOSED)\n        .remove()\n    }\n\n    // Static\n\n    static _jQueryInterface(config) {\n      return this.each(function () {\n        const $element = $(this)\n        let data       = $element.data(DATA_KEY)\n\n        if (!data) {\n          data = new Alert(this)\n          $element.data(DATA_KEY, data)\n        }\n\n        if (config === 'close') {\n          data[config](this)\n        }\n      })\n    }\n\n    static _handleDismiss(alertInstance) {\n      return function (event) {\n        if (event) {\n          event.preventDefault()\n        }\n\n        alertInstance.close(this)\n      }\n    }\n  }\n\n  /**\n   * ------------------------------------------------------------------------\n   * Data Api implementation\n   * ------------------------------------------------------------------------\n   */\n\n  $(document).on(\n    Event.CLICK_DATA_API,\n    Selector.DISMISS,\n    Alert._handleDismiss(new Alert())\n  )\n\n  /**\n   * ------------------------------------------------------------------------\n   * jQuery\n   * ------------------------------------------------------------------------\n   */\n\n  $.fn[NAME]             = Alert._jQueryInterface\n  $.fn[NAME].Constructor = Alert\n  $.fn[NAME].noConflict  = function () {\n    $.fn[NAME] = JQUERY_NO_CONFLICT\n    return Alert._jQueryInterface\n  }\n\n  return Alert\n})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)\n\n/* unused harmony default export */ var _unused_webpack_default_export = (Alert);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL2FsZXJ0LmpzPzhkNmYiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICQgZnJvbSAnanF1ZXJ5J1xuaW1wb3J0IFV0aWwgZnJvbSAnLi91dGlsJ1xuXG4vKipcbiAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gKiBCb290c3RyYXAgKHY0LjEuMyk6IGFsZXJ0LmpzXG4gKiBMaWNlbnNlZCB1bmRlciBNSVQgKGh0dHBzOi8vZ2l0aHViLmNvbS90d2JzL2Jvb3RzdHJhcC9ibG9iL21hc3Rlci9MSUNFTlNFKVxuICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAqL1xuXG5jb25zdCBBbGVydCA9ICgoJCkgPT4ge1xuICAvKipcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIENvbnN0YW50c1xuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICovXG5cbiAgY29uc3QgTkFNRSAgICAgICAgICAgICAgICA9ICdhbGVydCdcbiAgY29uc3QgVkVSU0lPTiAgICAgICAgICAgICA9ICc0LjEuMydcbiAgY29uc3QgREFUQV9LRVkgICAgICAgICAgICA9ICdicy5hbGVydCdcbiAgY29uc3QgRVZFTlRfS0VZICAgICAgICAgICA9IGAuJHtEQVRBX0tFWX1gXG4gIGNvbnN0IERBVEFfQVBJX0tFWSAgICAgICAgPSAnLmRhdGEtYXBpJ1xuICBjb25zdCBKUVVFUllfTk9fQ09ORkxJQ1QgID0gJC5mbltOQU1FXVxuXG4gIGNvbnN0IFNlbGVjdG9yID0ge1xuICAgIERJU01JU1MgOiAnW2RhdGEtZGlzbWlzcz1cImFsZXJ0XCJdJ1xuICB9XG5cbiAgY29uc3QgRXZlbnQgPSB7XG4gICAgQ0xPU0UgICAgICAgICAgOiBgY2xvc2Uke0VWRU5UX0tFWX1gLFxuICAgIENMT1NFRCAgICAgICAgIDogYGNsb3NlZCR7RVZFTlRfS0VZfWAsXG4gICAgQ0xJQ0tfREFUQV9BUEkgOiBgY2xpY2ske0VWRU5UX0tFWX0ke0RBVEFfQVBJX0tFWX1gXG4gIH1cblxuICBjb25zdCBDbGFzc05hbWUgPSB7XG4gICAgQUxFUlQgOiAnYWxlcnQnLFxuICAgIEZBREUgIDogJ2ZhZGUnLFxuICAgIFNIT1cgIDogJ3Nob3cnXG4gIH1cblxuICAvKipcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIENsYXNzIERlZmluaXRpb25cbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqL1xuXG4gIGNsYXNzIEFsZXJ0IHtcbiAgICBjb25zdHJ1Y3RvcihlbGVtZW50KSB7XG4gICAgICB0aGlzLl9lbGVtZW50ID0gZWxlbWVudFxuICAgIH1cblxuICAgIC8vIEdldHRlcnNcblxuICAgIHN0YXRpYyBnZXQgVkVSU0lPTigpIHtcbiAgICAgIHJldHVybiBWRVJTSU9OXG4gICAgfVxuXG4gICAgLy8gUHVibGljXG5cbiAgICBjbG9zZShlbGVtZW50KSB7XG4gICAgICBsZXQgcm9vdEVsZW1lbnQgPSB0aGlzLl9lbGVtZW50XG4gICAgICBpZiAoZWxlbWVudCkge1xuICAgICAgICByb290RWxlbWVudCA9IHRoaXMuX2dldFJvb3RFbGVtZW50KGVsZW1lbnQpXG4gICAgICB9XG5cbiAgICAgIGNvbnN0IGN1c3RvbUV2ZW50ID0gdGhpcy5fdHJpZ2dlckNsb3NlRXZlbnQocm9vdEVsZW1lbnQpXG5cbiAgICAgIGlmIChjdXN0b21FdmVudC5pc0RlZmF1bHRQcmV2ZW50ZWQoKSkge1xuICAgICAgICByZXR1cm5cbiAgICAgIH1cblxuICAgICAgdGhpcy5fcmVtb3ZlRWxlbWVudChyb290RWxlbWVudClcbiAgICB9XG5cbiAgICBkaXNwb3NlKCkge1xuICAgICAgJC5yZW1vdmVEYXRhKHRoaXMuX2VsZW1lbnQsIERBVEFfS0VZKVxuICAgICAgdGhpcy5fZWxlbWVudCA9IG51bGxcbiAgICB9XG5cbiAgICAvLyBQcml2YXRlXG5cbiAgICBfZ2V0Um9vdEVsZW1lbnQoZWxlbWVudCkge1xuICAgICAgY29uc3Qgc2VsZWN0b3IgPSBVdGlsLmdldFNlbGVjdG9yRnJvbUVsZW1lbnQoZWxlbWVudClcbiAgICAgIGxldCBwYXJlbnQgICAgID0gZmFsc2VcblxuICAgICAgaWYgKHNlbGVjdG9yKSB7XG4gICAgICAgIHBhcmVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3Ioc2VsZWN0b3IpXG4gICAgICB9XG5cbiAgICAgIGlmICghcGFyZW50KSB7XG4gICAgICAgIHBhcmVudCA9ICQoZWxlbWVudCkuY2xvc2VzdChgLiR7Q2xhc3NOYW1lLkFMRVJUfWApWzBdXG4gICAgICB9XG5cbiAgICAgIHJldHVybiBwYXJlbnRcbiAgICB9XG5cbiAgICBfdHJpZ2dlckNsb3NlRXZlbnQoZWxlbWVudCkge1xuICAgICAgY29uc3QgY2xvc2VFdmVudCA9ICQuRXZlbnQoRXZlbnQuQ0xPU0UpXG5cbiAgICAgICQoZWxlbWVudCkudHJpZ2dlcihjbG9zZUV2ZW50KVxuICAgICAgcmV0dXJuIGNsb3NlRXZlbnRcbiAgICB9XG5cbiAgICBfcmVtb3ZlRWxlbWVudChlbGVtZW50KSB7XG4gICAgICAkKGVsZW1lbnQpLnJlbW92ZUNsYXNzKENsYXNzTmFtZS5TSE9XKVxuXG4gICAgICBpZiAoISQoZWxlbWVudCkuaGFzQ2xhc3MoQ2xhc3NOYW1lLkZBREUpKSB7XG4gICAgICAgIHRoaXMuX2Rlc3Ryb3lFbGVtZW50KGVsZW1lbnQpXG4gICAgICAgIHJldHVyblxuICAgICAgfVxuXG4gICAgICBjb25zdCB0cmFuc2l0aW9uRHVyYXRpb24gPSBVdGlsLmdldFRyYW5zaXRpb25EdXJhdGlvbkZyb21FbGVtZW50KGVsZW1lbnQpXG5cbiAgICAgICQoZWxlbWVudClcbiAgICAgICAgLm9uZShVdGlsLlRSQU5TSVRJT05fRU5ELCAoZXZlbnQpID0+IHRoaXMuX2Rlc3Ryb3lFbGVtZW50KGVsZW1lbnQsIGV2ZW50KSlcbiAgICAgICAgLmVtdWxhdGVUcmFuc2l0aW9uRW5kKHRyYW5zaXRpb25EdXJhdGlvbilcbiAgICB9XG5cbiAgICBfZGVzdHJveUVsZW1lbnQoZWxlbWVudCkge1xuICAgICAgJChlbGVtZW50KVxuICAgICAgICAuZGV0YWNoKClcbiAgICAgICAgLnRyaWdnZXIoRXZlbnQuQ0xPU0VEKVxuICAgICAgICAucmVtb3ZlKClcbiAgICB9XG5cbiAgICAvLyBTdGF0aWNcblxuICAgIHN0YXRpYyBfalF1ZXJ5SW50ZXJmYWNlKGNvbmZpZykge1xuICAgICAgcmV0dXJuIHRoaXMuZWFjaChmdW5jdGlvbiAoKSB7XG4gICAgICAgIGNvbnN0ICRlbGVtZW50ID0gJCh0aGlzKVxuICAgICAgICBsZXQgZGF0YSAgICAgICA9ICRlbGVtZW50LmRhdGEoREFUQV9LRVkpXG5cbiAgICAgICAgaWYgKCFkYXRhKSB7XG4gICAgICAgICAgZGF0YSA9IG5ldyBBbGVydCh0aGlzKVxuICAgICAgICAgICRlbGVtZW50LmRhdGEoREFUQV9LRVksIGRhdGEpXG4gICAgICAgIH1cblxuICAgICAgICBpZiAoY29uZmlnID09PSAnY2xvc2UnKSB7XG4gICAgICAgICAgZGF0YVtjb25maWddKHRoaXMpXG4gICAgICAgIH1cbiAgICAgIH0pXG4gICAgfVxuXG4gICAgc3RhdGljIF9oYW5kbGVEaXNtaXNzKGFsZXJ0SW5zdGFuY2UpIHtcbiAgICAgIHJldHVybiBmdW5jdGlvbiAoZXZlbnQpIHtcbiAgICAgICAgaWYgKGV2ZW50KSB7XG4gICAgICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKVxuICAgICAgICB9XG5cbiAgICAgICAgYWxlcnRJbnN0YW5jZS5jbG9zZSh0aGlzKVxuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gIC8qKlxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICogRGF0YSBBcGkgaW1wbGVtZW50YXRpb25cbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqL1xuXG4gICQoZG9jdW1lbnQpLm9uKFxuICAgIEV2ZW50LkNMSUNLX0RBVEFfQVBJLFxuICAgIFNlbGVjdG9yLkRJU01JU1MsXG4gICAgQWxlcnQuX2hhbmRsZURpc21pc3MobmV3IEFsZXJ0KCkpXG4gIClcblxuICAvKipcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIGpRdWVyeVxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICovXG5cbiAgJC5mbltOQU1FXSAgICAgICAgICAgICA9IEFsZXJ0Ll9qUXVlcnlJbnRlcmZhY2VcbiAgJC5mbltOQU1FXS5Db25zdHJ1Y3RvciA9IEFsZXJ0XG4gICQuZm5bTkFNRV0ubm9Db25mbGljdCAgPSBmdW5jdGlvbiAoKSB7XG4gICAgJC5mbltOQU1FXSA9IEpRVUVSWV9OT19DT05GTElDVFxuICAgIHJldHVybiBBbGVydC5falF1ZXJ5SW50ZXJmYWNlXG4gIH1cblxuICByZXR1cm4gQWxlcnRcbn0pKCQpXG5cbmV4cG9ydCBkZWZhdWx0IEFsZXJ0XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL2FsZXJ0LmpzXG4vLyBtb2R1bGUgaWQgPSA0XG4vLyBtb2R1bGUgY2h1bmtzID0gMCAxIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///4\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(/*! ./util */ 3);
+
+
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.1.3): alert.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+const Alert = (($) => {
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  const NAME                = 'alert'
+  const VERSION             = '4.1.3'
+  const DATA_KEY            = 'bs.alert'
+  const EVENT_KEY           = `.${DATA_KEY}`
+  const DATA_API_KEY        = '.data-api'
+  const JQUERY_NO_CONFLICT  = $.fn[NAME]
+
+  const Selector = {
+    DISMISS : '[data-dismiss="alert"]'
+  }
+
+  const Event = {
+    CLOSE          : `close${EVENT_KEY}`,
+    CLOSED         : `closed${EVENT_KEY}`,
+    CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
+  }
+
+  const ClassName = {
+    ALERT : 'alert',
+    FADE  : 'fade',
+    SHOW  : 'show'
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  class Alert {
+    constructor(element) {
+      this._element = element
+    }
+
+    // Getters
+
+    static get VERSION() {
+      return VERSION
+    }
+
+    // Public
+
+    close(element) {
+      let rootElement = this._element
+      if (element) {
+        rootElement = this._getRootElement(element)
+      }
+
+      const customEvent = this._triggerCloseEvent(rootElement)
+
+      if (customEvent.isDefaultPrevented()) {
+        return
+      }
+
+      this._removeElement(rootElement)
+    }
+
+    dispose() {
+      $.removeData(this._element, DATA_KEY)
+      this._element = null
+    }
+
+    // Private
+
+    _getRootElement(element) {
+      const selector = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getSelectorFromElement(element)
+      let parent     = false
+
+      if (selector) {
+        parent = document.querySelector(selector)
+      }
+
+      if (!parent) {
+        parent = $(element).closest(`.${ClassName.ALERT}`)[0]
+      }
+
+      return parent
+    }
+
+    _triggerCloseEvent(element) {
+      const closeEvent = $.Event(Event.CLOSE)
+
+      $(element).trigger(closeEvent)
+      return closeEvent
+    }
+
+    _removeElement(element) {
+      $(element).removeClass(ClassName.SHOW)
+
+      if (!$(element).hasClass(ClassName.FADE)) {
+        this._destroyElement(element)
+        return
+      }
+
+      const transitionDuration = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getTransitionDurationFromElement(element)
+
+      $(element)
+        .one(__WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].TRANSITION_END, (event) => this._destroyElement(element, event))
+        .emulateTransitionEnd(transitionDuration)
+    }
+
+    _destroyElement(element) {
+      $(element)
+        .detach()
+        .trigger(Event.CLOSED)
+        .remove()
+    }
+
+    // Static
+
+    static _jQueryInterface(config) {
+      return this.each(function () {
+        const $element = $(this)
+        let data       = $element.data(DATA_KEY)
+
+        if (!data) {
+          data = new Alert(this)
+          $element.data(DATA_KEY, data)
+        }
+
+        if (config === 'close') {
+          data[config](this)
+        }
+      })
+    }
+
+    static _handleDismiss(alertInstance) {
+      return function (event) {
+        if (event) {
+          event.preventDefault()
+        }
+
+        alertInstance.close(this)
+      }
+    }
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+  $(document).on(
+    Event.CLICK_DATA_API,
+    Selector.DISMISS,
+    Alert._handleDismiss(new Alert())
+  )
+
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME]             = Alert._jQueryInterface
+  $.fn[NAME].Constructor = Alert
+  $.fn[NAME].noConflict  = function () {
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return Alert._jQueryInterface
+  }
+
+  return Alert
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Alert);
+
 
 /***/ }),
 /* 5 */,
@@ -128,43 +468,1316 @@ eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true });\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_alert__ = __webpack_require__(/*! ./block/alert */ 7);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_blockquote__ = __webpack_require__(/*! ./block/blockquote */ 8);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__block_button__ = __webpack_require__(/*! ./block/button */ 9);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__block_container__ = __webpack_require__(/*! ./block/container */ 11);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__block_media__ = __webpack_require__(/*! ./block/media */ 12);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__block_type__ = __webpack_require__(/*! ./block/type */ 13);\n/**\n * Gutenberg Blocks\n *\n * All blocks related JavaScript files should be imported here.\n * You can create a new block folder in this dir and include code\n * for that block here as well.\n *\n * All blocks should be included here since this is the file that\n * Webpack is compiling as the input file.\n */\n\n// Import bootstrap dependencies\n//import '../node_modules/bootstrap/js/src/util';\n\n\n\n\n\n\n//import './block/modal';\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9ja3MuZWRpdG9yLmpzP2I1ZGQiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBHdXRlbmJlcmcgQmxvY2tzXG4gKlxuICogQWxsIGJsb2NrcyByZWxhdGVkIEphdmFTY3JpcHQgZmlsZXMgc2hvdWxkIGJlIGltcG9ydGVkIGhlcmUuXG4gKiBZb3UgY2FuIGNyZWF0ZSBhIG5ldyBibG9jayBmb2xkZXIgaW4gdGhpcyBkaXIgYW5kIGluY2x1ZGUgY29kZVxuICogZm9yIHRoYXQgYmxvY2sgaGVyZSBhcyB3ZWxsLlxuICpcbiAqIEFsbCBibG9ja3Mgc2hvdWxkIGJlIGluY2x1ZGVkIGhlcmUgc2luY2UgdGhpcyBpcyB0aGUgZmlsZSB0aGF0XG4gKiBXZWJwYWNrIGlzIGNvbXBpbGluZyBhcyB0aGUgaW5wdXQgZmlsZS5cbiAqL1xuXG4vLyBJbXBvcnQgYm9vdHN0cmFwIGRlcGVuZGVuY2llc1xuLy9pbXBvcnQgJy4uL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL3V0aWwnO1xuXG5pbXBvcnQgJy4vYmxvY2svYWxlcnQnO1xuaW1wb3J0ICcuL2Jsb2NrL2Jsb2NrcXVvdGUnO1xuaW1wb3J0ICcuL2Jsb2NrL2J1dHRvbic7XG5pbXBvcnQgJy4vYmxvY2svY29udGFpbmVyJztcbmltcG9ydCAnLi9ibG9jay9tZWRpYSc7XG4vL2ltcG9ydCAnLi9ibG9jay9tb2RhbCc7XG5pbXBvcnQgJy4vYmxvY2svdHlwZSc7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2tzLmVkaXRvci5qc1xuLy8gbW9kdWxlIGlkID0gNlxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///6\n");
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_accordion_accordion__ = __webpack_require__(/*! ./block/accordion/accordion */ 7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_alert_alert__ = __webpack_require__(/*! ./block/alert/alert */ 8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__block_blockquote_blockquote__ = __webpack_require__(/*! ./block/blockquote/blockquote */ 9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__block_button_button__ = __webpack_require__(/*! ./block/button/button */ 10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__block_container_container__ = __webpack_require__(/*! ./block/container/container */ 12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__block_media_media__ = __webpack_require__(/*! ./block/media/media */ 13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__block_type_type__ = __webpack_require__(/*! ./block/type/type */ 15);
+/**
+ * Gutenberg Blocks
+ *
+ * All blocks related JavaScript files should be imported here.
+ * You can create a new block folder in this dir and include code
+ * for that block here as well.
+ *
+ * All blocks should be included here since this is the file that
+ * Webpack is compiling as the input file.
+ */
+
+// Import bootstrap dependencies
+//import '../node_modules/bootstrap/js/src/util';
+
+
+
+
+
+
+
+//import './block/modal';
+
 
 /***/ }),
 /* 7 */
-/*!****************************!*\
-  !*** ./src/block/alert.js ***!
-  \****************************/
+/*!******************************************!*\
+  !*** ./src/block/accordion/accordion.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_alert__ = __webpack_require__(/*! ../../node_modules/bootstrap/js/src/alert */ 4);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\n// Import JS.\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar _wp$components = wp.components,\n    CheckboxControl = _wp$components.CheckboxControl,\n    PanelBody = _wp$components.PanelBody,\n    PanelRow = _wp$components.PanelRow;\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    ColorPalette = _wp$editor.ColorPalette,\n    InspectorControls = _wp$editor.InspectorControls,\n    RichText = _wp$editor.RichText;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/alert', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Alert'), // Block title.\n\tdescription: __('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ viewBox: '0 0 512 512' },\n\t\twp.element.createElement('path', { d: 'M505.403 406.394L295.389 58.102c-8.274-13.721-23.367-22.245-39.39-22.245s-31.116 8.524-39.391 22.246L6.595 406.394c-8.551 14.182-8.804 31.95-.661 46.37 8.145 14.42 23.491 23.378 40.051 23.378h420.028c16.56 0 31.907-8.958 40.052-23.379 8.143-14.421 7.89-32.189-.662-46.369zm-28.364 29.978a12.684 12.684 0 0 1-11.026 6.436H45.985a12.68 12.68 0 0 1-11.025-6.435 12.683 12.683 0 0 1 .181-12.765L245.156 75.316A12.732 12.732 0 0 1 256 69.192c4.41 0 8.565 2.347 10.843 6.124l210.013 348.292a12.677 12.677 0 0 1 .183 12.764z' }),\n\t\twp.element.createElement('path', { d: 'M256.154 173.005c-12.68 0-22.576 6.804-22.576 18.866 0 36.802 4.329 89.686 4.329 126.489.001 9.587 8.352 13.607 18.248 13.607 7.422 0 17.937-4.02 17.937-13.607 0-36.802 4.329-89.686 4.329-126.489 0-12.061-10.205-18.866-22.267-18.866zM256.465 353.306c-13.607 0-23.814 10.824-23.814 23.814 0 12.68 10.206 23.814 23.814 23.814 12.68 0 23.505-11.134 23.505-23.814 0-12.99-10.826-23.814-23.505-23.814z' })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Alert'), __('Notification')],\n\tattributes: {\n\t\ttheme: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'success'\n\t\t},\n\t\ttextColor: {\n\t\t\tsource: 'string'\n\t\t},\n\t\ttitle: {\n\t\t\tsource: 'text',\n\t\t\tselector: 'h4.alert-heading'\n\t\t},\n\t\tmargin: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'my-3'\n\t\t},\n\t\tcontent: {\n\t\t\ttype: 'array',\n\t\t\tsource: 'children',\n\t\t\tselector: 'div.content'\n\t\t},\n\t\tisDismissable: {\n\t\t\ttype: 'boolean'\n\t\t},\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\t// Creates a <p class='wp-block-gbb-alert'></p>.\n\n\t\t// Theme selection\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    content = _props$attributes.content,\n\t\t    isDismissable = _props$attributes.isDismissable,\n\t\t    margin = _props$attributes.margin,\n\t\t    title = _props$attributes.title,\n\t\t    theme = _props$attributes.theme,\n\t\t    setAttributes = props.setAttributes,\n\t\t    isSelected = props.isSelected;\n\n\t\tfunction setMargin(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ margin: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\tfunction setTheme(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ theme: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\tfunction onChangeAlignment(newAlignment) {\n\t\t\tsetAttributes({ alignment: newAlignment });\n\t\t}\n\n\t\tfunction onChangeContent(newContent) {\n\t\t\tsetAttributes({ content: newContent });\n\t\t}\n\n\t\tfunction onTitleContent(newTitle) {\n\t\t\tsetAttributes({ title: newTitle });\n\t\t}\n\n\t\tfunction showThemeForm() {\n\t\t\treturn wp.element.createElement(\n\t\t\t\t'form',\n\t\t\t\t{ onSubmit: setTheme, style: { textAlign: alignment } },\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'select',\n\t\t\t\t\t{ value: theme, onChange: setTheme },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'primary' },\n\t\t\t\t\t\t'Primary'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'secondary' },\n\t\t\t\t\t\t'Secondary'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'success' },\n\t\t\t\t\t\t'Success'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'danger' },\n\t\t\t\t\t\t'Danger'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'warning' },\n\t\t\t\t\t\t'Warning'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'info' },\n\t\t\t\t\t\t'Info'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'light' },\n\t\t\t\t\t\t'Light'\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'option',\n\t\t\t\t\t\t{ value: 'dark' },\n\t\t\t\t\t\t'Dark'\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t);\n\t\t}\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\tInspectorControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(\n\t\t\t\t\tPanelBody,\n\t\t\t\t\t{ title: __('Select options') },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Margin')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setMargin },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: margin, onChange: setMargin },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-0' },\n\t\t\t\t\t\t\t\t\t'No margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-1' },\n\t\t\t\t\t\t\t\t\t'my-1 - Tiny margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-2' },\n\t\t\t\t\t\t\t\t\t'my-2 - Small margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-3' },\n\t\t\t\t\t\t\t\t\t'my-3 - Middle margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-4' },\n\t\t\t\t\t\t\t\t\t'my-4 - Large margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-5' },\n\t\t\t\t\t\t\t\t\t'my-5 - Hugh margin'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Theme')\n\t\t\t\t\t\t),\n\t\t\t\t\t\tshowThemeForm()\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(CheckboxControl, {\n\t\t\t\t\t\t\tlabel: __('Is dismissable?'),\n\t\t\t\t\t\t\thelp: __('Can the user hide the alert by clicking a X button on the top right.'),\n\t\t\t\t\t\t\tchecked: isDismissable,\n\t\t\t\t\t\t\tonChange: function onChange(isDismissable) {\n\t\t\t\t\t\t\t\tsetAttributes({ isDismissable: isDismissable });\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t})\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\tBlockControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(AlignmentToolbar, {\n\t\t\t\t\tvalue: alignment,\n\t\t\t\t\tonChange: onChangeAlignment\n\t\t\t\t})\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className },\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ className: 'alert alert-' + theme + ' alert-dismissible fade show ' + margin, role: 'alert',\n\t\t\t\t\t\tstyle: { textAlign: alignment } },\n\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\tclassName: 'alert-heading',\n\t\t\t\t\t\ttagName: 'h4',\n\t\t\t\t\t\tonChange: onTitleContent,\n\t\t\t\t\t\tvalue: title\n\t\t\t\t\t}),\n\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\tclassName: 'content',\n\t\t\t\t\t\ttagName: 'div',\n\t\t\t\t\t\tonChange: onChangeContent,\n\t\t\t\t\t\tvalue: content\n\t\t\t\t\t}),\n\t\t\t\t\tisDismissable && wp.element.createElement(\n\t\t\t\t\t\t'button',\n\t\t\t\t\t\t{ type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'span',\n\t\t\t\t\t\t\t{ 'aria-hidden': 'true' },\n\t\t\t\t\t\t\t'\\xD7'\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar _props$attributes2 = props.attributes,\n\t\t    alignment = _props$attributes2.alignment,\n\t\t    content = _props$attributes2.content,\n\t\t    margin = _props$attributes2.margin,\n\t\t    title = _props$attributes2.title,\n\t\t    theme = _props$attributes2.theme;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'alert alert-' + theme + ' alert-dismissible fade show ' + margin,\n\t\t\t\t\trole: 'alert',\n\t\t\t\t\tstyle: { textAlign: alignment }\n\t\t\t\t},\n\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\tclassName: 'alert-heading',\n\t\t\t\t\ttagName: 'h4',\n\t\t\t\t\tvalue: title\n\t\t\t\t}),\n\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\tclassName: 'content',\n\t\t\t\t\ttagName: 'div',\n\t\t\t\t\tvalue: content\n\t\t\t\t}),\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'button',\n\t\t\t\t\t{ type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'span',\n\t\t\t\t\t\t{ 'aria-hidden': 'true' },\n\t\t\t\t\t\t'\\xD7'\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9hbGVydC5qcz8zZGRlIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQkxPQ0s6IGJvb3RzdHJhcC1ibG9ja3NcbiAqXG4gKiBSZWdpc3RlcmluZyBhIGJhc2ljIGJsb2NrIHdpdGggR3V0ZW5iZXJnLlxuICogU2ltcGxlIGJsb2NrLCByZW5kZXJzIGFuZCBzYXZlcyB0aGUgc2FtZSBjb250ZW50IHdpdGhvdXQgYW55IGludGVyYWN0aXZpdHkuXG4gKi9cblxuLy8gIEltcG9ydCBDU1MuXG5pbXBvcnQgJy4vc3R5bGUuc2Nzcyc7XG5pbXBvcnQgJy4vZWRpdG9yLnNjc3MnO1xuXG4vLyBJbXBvcnQgSlMuXG5pbXBvcnQgJy4uLy4uL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL2FsZXJ0JztcblxudmFyIF9fID0gd3AuaTE4bi5fXzsgLy8gSW1wb3J0IF9fKCkgZnJvbSB3cC5pMThuXG5cbnZhciByZWdpc3RlckJsb2NrVHlwZSA9IHdwLmJsb2Nrcy5yZWdpc3RlckJsb2NrVHlwZTsgLy8gSW1wb3J0IHJlZ2lzdGVyQmxvY2tUeXBlKCkgZnJvbSB3cC5ibG9ja3NcblxudmFyIF93cCRjb21wb25lbnRzID0gd3AuY29tcG9uZW50cyxcbiAgICBDaGVja2JveENvbnRyb2wgPSBfd3AkY29tcG9uZW50cy5DaGVja2JveENvbnRyb2wsXG4gICAgUGFuZWxCb2R5ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxCb2R5LFxuICAgIFBhbmVsUm93ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxSb3c7XG52YXIgRnJhZ21lbnQgPSB3cC5lbGVtZW50LkZyYWdtZW50O1xudmFyIF93cCRlZGl0b3IgPSB3cC5lZGl0b3IsXG4gICAgQWxpZ25tZW50VG9vbGJhciA9IF93cCRlZGl0b3IuQWxpZ25tZW50VG9vbGJhcixcbiAgICBCbG9ja0NvbnRyb2xzID0gX3dwJGVkaXRvci5CbG9ja0NvbnRyb2xzLFxuICAgIENvbG9yUGFsZXR0ZSA9IF93cCRlZGl0b3IuQ29sb3JQYWxldHRlLFxuICAgIEluc3BlY3RvckNvbnRyb2xzID0gX3dwJGVkaXRvci5JbnNwZWN0b3JDb250cm9scyxcbiAgICBSaWNoVGV4dCA9IF93cCRlZGl0b3IuUmljaFRleHQ7XG4vKipcbiAqIFJlZ2lzdGVyOiBhYSBHdXRlbmJlcmcgQmxvY2suXG4gKlxuICogUmVnaXN0ZXJzIGEgbmV3IGJsb2NrIHByb3ZpZGVkIGEgdW5pcXVlIG5hbWUgYW5kIGFuIG9iamVjdCBkZWZpbmluZyBpdHNcbiAqIGJlaGF2aW9yLiBPbmNlIHJlZ2lzdGVyZWQsIHRoZSBibG9jayBpcyBtYWRlIGVkaXRvciBhcyBhbiBvcHRpb24gdG8gYW55XG4gKiBlZGl0b3IgaW50ZXJmYWNlIHdoZXJlIGJsb2NrcyBhcmUgaW1wbGVtZW50ZWQuXG4gKlxuICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvXG4gKiBAcGFyYW0gIHtzdHJpbmd9ICAgbmFtZSAgICAgQmxvY2sgbmFtZS5cbiAqIEBwYXJhbSAge09iamVjdH0gICBzZXR0aW5ncyBCbG9jayBzZXR0aW5ncy5cbiAqIEByZXR1cm4gez9XUEJsb2NrfSAgICAgICAgICBUaGUgYmxvY2ssIGlmIGl0IGhhcyBiZWVuIHN1Y2Nlc3NmdWxseVxuICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ2lzdGVyZWQ7IG90aGVyd2lzZSBgdW5kZWZpbmVkYC5cbiAqL1xuXG5yZWdpc3RlckJsb2NrVHlwZSgnZ2JiL2FsZXJ0Jywge1xuXHQvLyBCbG9jayBuYW1lLiBCbG9jayBuYW1lcyBtdXN0IGJlIHN0cmluZyB0aGF0IGNvbnRhaW5zIGEgbmFtZXNwYWNlIHByZWZpeC4gRXhhbXBsZTogbXktcGx1Z2luL215LWN1c3RvbS1ibG9jay5cblx0dGl0bGU6IF9fKCdCb290c3RyYXAgQWxlcnQnKSwgLy8gQmxvY2sgdGl0bGUuXG5cdGRlc2NyaXB0aW9uOiBfXygnUHJvdmlkZSBjb250ZXh0dWFsIGZlZWRiYWNrIG1lc3NhZ2VzIGZvciB0eXBpY2FsIHVzZXIgYWN0aW9ucyB3aXRoIHRoZSBoYW5kZnVsIG9mIGF2YWlsYWJsZSBhbmQgZmxleGlibGUgYWxlcnQgbWVzc2FnZXMuJyksIC8vIEJsb2NrIHRpdGxlLlxuXHRpY29uOiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0J3N2ZycsXG5cdFx0eyB2aWV3Qm94OiAnMCAwIDUxMiA1MTInIH0sXG5cdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdwYXRoJywgeyBkOiAnTTUwNS40MDMgNDA2LjM5NEwyOTUuMzg5IDU4LjEwMmMtOC4yNzQtMTMuNzIxLTIzLjM2Ny0yMi4yNDUtMzkuMzktMjIuMjQ1cy0zMS4xMTYgOC41MjQtMzkuMzkxIDIyLjI0Nkw2LjU5NSA0MDYuMzk0Yy04LjU1MSAxNC4xODItOC44MDQgMzEuOTUtLjY2MSA0Ni4zNyA4LjE0NSAxNC40MiAyMy40OTEgMjMuMzc4IDQwLjA1MSAyMy4zNzhoNDIwLjAyOGMxNi41NiAwIDMxLjkwNy04Ljk1OCA0MC4wNTItMjMuMzc5IDguMTQzLTE0LjQyMSA3Ljg5LTMyLjE4OS0uNjYyLTQ2LjM2OXptLTI4LjM2NCAyOS45NzhhMTIuNjg0IDEyLjY4NCAwIDAgMS0xMS4wMjYgNi40MzZINDUuOTg1YTEyLjY4IDEyLjY4IDAgMCAxLTExLjAyNS02LjQzNSAxMi42ODMgMTIuNjgzIDAgMCAxIC4xODEtMTIuNzY1TDI0NS4xNTYgNzUuMzE2QTEyLjczMiAxMi43MzIgMCAwIDEgMjU2IDY5LjE5MmM0LjQxIDAgOC41NjUgMi4zNDcgMTAuODQzIDYuMTI0bDIxMC4wMTMgMzQ4LjI5MmExMi42NzcgMTIuNjc3IDAgMCAxIC4xODMgMTIuNzY0eicgfSksXG5cdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdwYXRoJywgeyBkOiAnTTI1Ni4xNTQgMTczLjAwNWMtMTIuNjggMC0yMi41NzYgNi44MDQtMjIuNTc2IDE4Ljg2NiAwIDM2LjgwMiA0LjMyOSA4OS42ODYgNC4zMjkgMTI2LjQ4OS4wMDEgOS41ODcgOC4zNTIgMTMuNjA3IDE4LjI0OCAxMy42MDcgNy40MjIgMCAxNy45MzctNC4wMiAxNy45MzctMTMuNjA3IDAtMzYuODAyIDQuMzI5LTg5LjY4NiA0LjMyOS0xMjYuNDg5IDAtMTIuMDYxLTEwLjIwNS0xOC44NjYtMjIuMjY3LTE4Ljg2NnpNMjU2LjQ2NSAzNTMuMzA2Yy0xMy42MDcgMC0yMy44MTQgMTAuODI0LTIzLjgxNCAyMy44MTQgMCAxMi42OCAxMC4yMDYgMjMuODE0IDIzLjgxNCAyMy44MTQgMTIuNjggMCAyMy41MDUtMTEuMTM0IDIzLjUwNS0yMy44MTQgMC0xMi45OS0xMC44MjYtMjMuODE0LTIzLjUwNS0yMy44MTR6JyB9KVxuXHQpLFxuXHRjYXRlZ29yeTogJ2diYicsIC8vIEJsb2NrIGNhdGVnb3J5IOKAlCBHcm91cCBibG9ja3MgdG9nZXRoZXIgYmFzZWQgb24gY29tbW9uIHRyYWl0cyBFLmcuIGNvbW1vbiwgZm9ybWF0dGluZywgbGF5b3V0IHdpZGdldHMsIGVtYmVkLlxuXHRrZXl3b3JkczogW19fKCdCb290c3RyYXAnKSwgX18oJ0FsZXJ0JyksIF9fKCdOb3RpZmljYXRpb24nKV0sXG5cdGF0dHJpYnV0ZXM6IHtcblx0XHR0aGVtZToge1xuXHRcdFx0dHlwZTogJ3N0cmluZycsXG5cdFx0XHRkZWZhdWx0OiAnc3VjY2Vzcydcblx0XHR9LFxuXHRcdHRleHRDb2xvcjoge1xuXHRcdFx0c291cmNlOiAnc3RyaW5nJ1xuXHRcdH0sXG5cdFx0dGl0bGU6IHtcblx0XHRcdHNvdXJjZTogJ3RleHQnLFxuXHRcdFx0c2VsZWN0b3I6ICdoNC5hbGVydC1oZWFkaW5nJ1xuXHRcdH0sXG5cdFx0bWFyZ2luOiB7XG5cdFx0XHR0eXBlOiAnc3RyaW5nJyxcblx0XHRcdGRlZmF1bHQ6ICdteS0zJ1xuXHRcdH0sXG5cdFx0Y29udGVudDoge1xuXHRcdFx0dHlwZTogJ2FycmF5Jyxcblx0XHRcdHNvdXJjZTogJ2NoaWxkcmVuJyxcblx0XHRcdHNlbGVjdG9yOiAnZGl2LmNvbnRlbnQnXG5cdFx0fSxcblx0XHRpc0Rpc21pc3NhYmxlOiB7XG5cdFx0XHR0eXBlOiAnYm9vbGVhbidcblx0XHR9LFxuXHRcdGFsaWdubWVudDoge1xuXHRcdFx0dHlwZTogJ3N0cmluZydcblx0XHR9XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIGVkaXQgZnVuY3Rpb24gZGVzY3JpYmVzIHRoZSBzdHJ1Y3R1cmUgb2YgeW91ciBibG9jayBpbiB0aGUgY29udGV4dCBvZiB0aGUgZWRpdG9yLlxuICAqIFRoaXMgcmVwcmVzZW50cyB3aGF0IHRoZSBlZGl0b3Igd2lsbCByZW5kZXIgd2hlbiB0aGUgYmxvY2sgaXMgdXNlZC5cbiAgKlxuICAqIFRoZSBcImVkaXRcIiBwcm9wZXJ0eSBtdXN0IGJlIGEgdmFsaWQgZnVuY3Rpb24uXG4gICpcbiAgKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9ibG9jay1lZGl0LXNhdmUvXG4gICovXG5cdGVkaXQ6IGZ1bmN0aW9uIGVkaXQocHJvcHMpIHtcblx0XHQvLyBDcmVhdGVzIGEgPHAgY2xhc3M9J3dwLWJsb2NrLWdiYi1hbGVydCc+PC9wPi5cblxuXHRcdC8vIFRoZW1lIHNlbGVjdGlvblxuXHRcdHZhciBfcHJvcHMkYXR0cmlidXRlcyA9IHByb3BzLmF0dHJpYnV0ZXMsXG5cdFx0ICAgIGFsaWdubWVudCA9IF9wcm9wcyRhdHRyaWJ1dGVzLmFsaWdubWVudCxcblx0XHQgICAgY29udGVudCA9IF9wcm9wcyRhdHRyaWJ1dGVzLmNvbnRlbnQsXG5cdFx0ICAgIGlzRGlzbWlzc2FibGUgPSBfcHJvcHMkYXR0cmlidXRlcy5pc0Rpc21pc3NhYmxlLFxuXHRcdCAgICBtYXJnaW4gPSBfcHJvcHMkYXR0cmlidXRlcy5tYXJnaW4sXG5cdFx0ICAgIHRpdGxlID0gX3Byb3BzJGF0dHJpYnV0ZXMudGl0bGUsXG5cdFx0ICAgIHRoZW1lID0gX3Byb3BzJGF0dHJpYnV0ZXMudGhlbWUsXG5cdFx0ICAgIHNldEF0dHJpYnV0ZXMgPSBwcm9wcy5zZXRBdHRyaWJ1dGVzLFxuXHRcdCAgICBpc1NlbGVjdGVkID0gcHJvcHMuaXNTZWxlY3RlZDtcblxuXHRcdGZ1bmN0aW9uIHNldE1hcmdpbihldmVudCkge1xuXHRcdFx0dmFyIHNlbGVjdGVkID0gZXZlbnQudGFyZ2V0LnF1ZXJ5U2VsZWN0b3IoJ29wdGlvbjpjaGVja2VkJyk7XG5cdFx0XHRzZXRBdHRyaWJ1dGVzKHsgbWFyZ2luOiBzZWxlY3RlZC52YWx1ZSB9KTtcblx0XHRcdGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cdFx0fVxuXG5cdFx0ZnVuY3Rpb24gc2V0VGhlbWUoZXZlbnQpIHtcblx0XHRcdHZhciBzZWxlY3RlZCA9IGV2ZW50LnRhcmdldC5xdWVyeVNlbGVjdG9yKCdvcHRpb246Y2hlY2tlZCcpO1xuXHRcdFx0c2V0QXR0cmlidXRlcyh7IHRoZW1lOiBzZWxlY3RlZC52YWx1ZSB9KTtcblx0XHRcdGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cdFx0fVxuXG5cdFx0ZnVuY3Rpb24gb25DaGFuZ2VBbGlnbm1lbnQobmV3QWxpZ25tZW50KSB7XG5cdFx0XHRzZXRBdHRyaWJ1dGVzKHsgYWxpZ25tZW50OiBuZXdBbGlnbm1lbnQgfSk7XG5cdFx0fVxuXG5cdFx0ZnVuY3Rpb24gb25DaGFuZ2VDb250ZW50KG5ld0NvbnRlbnQpIHtcblx0XHRcdHNldEF0dHJpYnV0ZXMoeyBjb250ZW50OiBuZXdDb250ZW50IH0pO1xuXHRcdH1cblxuXHRcdGZ1bmN0aW9uIG9uVGl0bGVDb250ZW50KG5ld1RpdGxlKSB7XG5cdFx0XHRzZXRBdHRyaWJ1dGVzKHsgdGl0bGU6IG5ld1RpdGxlIH0pO1xuXHRcdH1cblxuXHRcdGZ1bmN0aW9uIHNob3dUaGVtZUZvcm0oKSB7XG5cdFx0XHRyZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHQnZm9ybScsXG5cdFx0XHRcdHsgb25TdWJtaXQ6IHNldFRoZW1lLCBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHQnc2VsZWN0Jyxcblx0XHRcdFx0XHR7IHZhbHVlOiB0aGVtZSwgb25DaGFuZ2U6IHNldFRoZW1lIH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHR7IHZhbHVlOiAncHJpbWFyeScgfSxcblx0XHRcdFx0XHRcdCdQcmltYXJ5J1xuXHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHR7IHZhbHVlOiAnc2Vjb25kYXJ5JyB9LFxuXHRcdFx0XHRcdFx0J1NlY29uZGFyeSdcblx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0eyB2YWx1ZTogJ3N1Y2Nlc3MnIH0sXG5cdFx0XHRcdFx0XHQnU3VjY2Vzcydcblx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2RhbmdlcicgfSxcblx0XHRcdFx0XHRcdCdEYW5nZXInXG5cdFx0XHRcdFx0KSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdHsgdmFsdWU6ICd3YXJuaW5nJyB9LFxuXHRcdFx0XHRcdFx0J1dhcm5pbmcnXG5cdFx0XHRcdFx0KSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdHsgdmFsdWU6ICdpbmZvJyB9LFxuXHRcdFx0XHRcdFx0J0luZm8nXG5cdFx0XHRcdFx0KSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdHsgdmFsdWU6ICdsaWdodCcgfSxcblx0XHRcdFx0XHRcdCdMaWdodCdcblx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2RhcmsnIH0sXG5cdFx0XHRcdFx0XHQnRGFyaydcblx0XHRcdFx0XHQpXG5cdFx0XHRcdClcblx0XHRcdCk7XG5cdFx0fVxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdEZyYWdtZW50LFxuXHRcdFx0bnVsbCxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0SW5zcGVjdG9yQ29udHJvbHMsXG5cdFx0XHRcdG51bGwsXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRQYW5lbEJvZHksXG5cdFx0XHRcdFx0eyB0aXRsZTogX18oJ1NlbGVjdCBvcHRpb25zJykgfSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRQYW5lbFJvdyxcblx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdCdsYWJlbCcsXG5cdFx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHRcdF9fKCdNYXJnaW4nKVxuXHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0J2Zvcm0nLFxuXHRcdFx0XHRcdFx0XHR7IG9uU3VibWl0OiBzZXRNYXJnaW4gfSxcblx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdCdzZWxlY3QnLFxuXHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6IG1hcmdpbiwgb25DaGFuZ2U6IHNldE1hcmdpbiB9LFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTAnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnTm8gbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktMScgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS0xIC0gVGlueSBtYXJnaW4nXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdteS0yJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J215LTIgLSBTbWFsbCBtYXJnaW4nXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdteS0zJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J215LTMgLSBNaWRkbGUgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktNCcgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS00IC0gTGFyZ2UgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktNScgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS01IC0gSHVnaCBtYXJnaW4nXG5cdFx0XHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0KSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRQYW5lbFJvdyxcblx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdCdsYWJlbCcsXG5cdFx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHRcdF9fKCdUaGVtZScpXG5cdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0c2hvd1RoZW1lRm9ybSgpXG5cdFx0XHRcdFx0KSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRQYW5lbFJvdyxcblx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoQ2hlY2tib3hDb250cm9sLCB7XG5cdFx0XHRcdFx0XHRcdGxhYmVsOiBfXygnSXMgZGlzbWlzc2FibGU/JyksXG5cdFx0XHRcdFx0XHRcdGhlbHA6IF9fKCdDYW4gdGhlIHVzZXIgaGlkZSB0aGUgYWxlcnQgYnkgY2xpY2tpbmcgYSBYIGJ1dHRvbiBvbiB0aGUgdG9wIHJpZ2h0LicpLFxuXHRcdFx0XHRcdFx0XHRjaGVja2VkOiBpc0Rpc21pc3NhYmxlLFxuXHRcdFx0XHRcdFx0XHRvbkNoYW5nZTogZnVuY3Rpb24gb25DaGFuZ2UoaXNEaXNtaXNzYWJsZSkge1xuXHRcdFx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBpc0Rpc21pc3NhYmxlOiBpc0Rpc21pc3NhYmxlIH0pO1xuXHRcdFx0XHRcdFx0XHR9XG5cdFx0XHRcdFx0XHR9KVxuXHRcdFx0XHRcdClcblx0XHRcdFx0KVxuXHRcdFx0KSxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0QmxvY2tDb250cm9scyxcblx0XHRcdFx0bnVsbCxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KEFsaWdubWVudFRvb2xiYXIsIHtcblx0XHRcdFx0XHR2YWx1ZTogYWxpZ25tZW50LFxuXHRcdFx0XHRcdG9uQ2hhbmdlOiBvbkNoYW5nZUFsaWdubWVudFxuXHRcdFx0XHR9KVxuXHRcdFx0KSxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdHsgY2xhc3NOYW1lOiBwcm9wcy5jbGFzc05hbWUgfSxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdCdkaXYnLFxuXHRcdFx0XHRcdHsgY2xhc3NOYW1lOiAnYWxlcnQgYWxlcnQtJyArIHRoZW1lICsgJyBhbGVydC1kaXNtaXNzaWJsZSBmYWRlIHNob3cgJyArIG1hcmdpbiwgcm9sZTogJ2FsZXJ0Jyxcblx0XHRcdFx0XHRcdHN0eWxlOiB7IHRleHRBbGlnbjogYWxpZ25tZW50IH0gfSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQsIHtcblx0XHRcdFx0XHRcdGNsYXNzTmFtZTogJ2FsZXJ0LWhlYWRpbmcnLFxuXHRcdFx0XHRcdFx0dGFnTmFtZTogJ2g0Jyxcblx0XHRcdFx0XHRcdG9uQ2hhbmdlOiBvblRpdGxlQ29udGVudCxcblx0XHRcdFx0XHRcdHZhbHVlOiB0aXRsZVxuXHRcdFx0XHRcdH0pLFxuXHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChSaWNoVGV4dCwge1xuXHRcdFx0XHRcdFx0Y2xhc3NOYW1lOiAnY29udGVudCcsXG5cdFx0XHRcdFx0XHR0YWdOYW1lOiAnZGl2Jyxcblx0XHRcdFx0XHRcdG9uQ2hhbmdlOiBvbkNoYW5nZUNvbnRlbnQsXG5cdFx0XHRcdFx0XHR2YWx1ZTogY29udGVudFxuXHRcdFx0XHRcdH0pLFxuXHRcdFx0XHRcdGlzRGlzbWlzc2FibGUgJiYgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0J2J1dHRvbicsXG5cdFx0XHRcdFx0XHR7IHR5cGU6ICdidXR0b24nLCBjbGFzc05hbWU6ICdjbG9zZScsICdkYXRhLWRpc21pc3MnOiAnYWxlcnQnLCAnYXJpYS1sYWJlbCc6ICdDbG9zZScgfSxcblx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0J3NwYW4nLFxuXHRcdFx0XHRcdFx0XHR7ICdhcmlhLWhpZGRlbic6ICd0cnVlJyB9LFxuXHRcdFx0XHRcdFx0XHQnXFx4RDcnXG5cdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0KVxuXHRcdFx0XHQpXG5cdFx0XHQpXG5cdFx0KTtcblx0fSxcblxuXHQvKipcbiAgKiBUaGUgc2F2ZSBmdW5jdGlvbiBkZWZpbmVzIHRoZSB3YXkgaW4gd2hpY2ggdGhlIGRpZmZlcmVudCBhdHRyaWJ1dGVzIHNob3VsZCBiZSBjb21iaW5lZFxuICAqIGludG8gdGhlIGZpbmFsIG1hcmt1cCwgd2hpY2ggaXMgdGhlbiBzZXJpYWxpemVkIGJ5IEd1dGVuYmVyZyBpbnRvIHBvc3RfY29udGVudC5cbiAgKlxuICAqIFRoZSBcInNhdmVcIiBwcm9wZXJ0eSBtdXN0IGJlIHNwZWNpZmllZCBhbmQgbXVzdCBiZSBhIHZhbGlkIGZ1bmN0aW9uLlxuICAqXG4gICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvYmxvY2stZWRpdC1zYXZlL1xuICAqL1xuXHRzYXZlOiBmdW5jdGlvbiBzYXZlKHByb3BzKSB7XG5cblx0XHQvLyBJbml0aWFsaXplIHRoZW1lXG5cdFx0dmFyIF9wcm9wcyRhdHRyaWJ1dGVzMiA9IHByb3BzLmF0dHJpYnV0ZXMsXG5cdFx0ICAgIGFsaWdubWVudCA9IF9wcm9wcyRhdHRyaWJ1dGVzMi5hbGlnbm1lbnQsXG5cdFx0ICAgIGNvbnRlbnQgPSBfcHJvcHMkYXR0cmlidXRlczIuY29udGVudCxcblx0XHQgICAgbWFyZ2luID0gX3Byb3BzJGF0dHJpYnV0ZXMyLm1hcmdpbixcblx0XHQgICAgdGl0bGUgPSBfcHJvcHMkYXR0cmlidXRlczIudGl0bGUsXG5cdFx0ICAgIHRoZW1lID0gX3Byb3BzJGF0dHJpYnV0ZXMyLnRoZW1lO1xuXG5cblx0XHRyZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0J2RpdicsXG5cdFx0XHRudWxsLFxuXHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHQnZGl2Jyxcblx0XHRcdFx0eyBjbGFzc05hbWU6ICdhbGVydCBhbGVydC0nICsgdGhlbWUgKyAnIGFsZXJ0LWRpc21pc3NpYmxlIGZhZGUgc2hvdyAnICsgbWFyZ2luLFxuXHRcdFx0XHRcdHJvbGU6ICdhbGVydCcsXG5cdFx0XHRcdFx0c3R5bGU6IHsgdGV4dEFsaWduOiBhbGlnbm1lbnQgfVxuXHRcdFx0XHR9LFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRcdGNsYXNzTmFtZTogJ2FsZXJ0LWhlYWRpbmcnLFxuXHRcdFx0XHRcdHRhZ05hbWU6ICdoNCcsXG5cdFx0XHRcdFx0dmFsdWU6IHRpdGxlXG5cdFx0XHRcdH0pLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRcdGNsYXNzTmFtZTogJ2NvbnRlbnQnLFxuXHRcdFx0XHRcdHRhZ05hbWU6ICdkaXYnLFxuXHRcdFx0XHRcdHZhbHVlOiBjb250ZW50XG5cdFx0XHRcdH0pLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0J2J1dHRvbicsXG5cdFx0XHRcdFx0eyB0eXBlOiAnYnV0dG9uJywgY2xhc3NOYW1lOiAnY2xvc2UnLCAnZGF0YS1kaXNtaXNzJzogJ2FsZXJ0JywgJ2FyaWEtbGFiZWwnOiAnQ2xvc2UnIH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0J3NwYW4nLFxuXHRcdFx0XHRcdFx0eyAnYXJpYS1oaWRkZW4nOiAndHJ1ZScgfSxcblx0XHRcdFx0XHRcdCdcXHhENydcblx0XHRcdFx0XHQpXG5cdFx0XHRcdClcblx0XHRcdClcblx0XHQpO1xuXHR9XG59KTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9hbGVydC5qc1xuLy8gbW9kdWxlIGlkID0gN1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///7\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var _wp$components = wp.components,
+    CheckboxControl = _wp$components.CheckboxControl,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    InspectorControls = _wp$editor.InspectorControls,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/accordion', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Accordion/Collapsible'), // Block title.
+	description: __('Using the card component, you can extend the default collapse behavior to create an accordion.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ width: 512, height: 512, viewBox: '0 0 16 16' },
+		wp.element.createElement('path', {
+			fill: '#444',
+			d: 'M0 4v8h16V4H0zm15 7H1V7h14v4zM0 0h16v3H0V0zM0 13h16v3H0v-3z',
+			'data-original': '#444444',
+			className: 'active-path',
+			'data-old_color': '#5D5C5C'
+		})
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Accordion'), __('Collapse')],
+	attributes: {
+		alignment: {
+			type: 'string'
+		},
+		content: {
+			type: 'array',
+			source: 'query',
+			default: [{
+				title: 'Collapsible Group Item #1',
+				body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			}, {
+				title: 'Collapsible Group Item #2',
+				body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			}, {
+				title: 'Collapsible Group Item #3',
+				body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			}],
+			selector: '.accordion .card',
+			query: {
+				/*active: {
+    	type   : 'boolean',
+    	source  : 'text',
+    	default: false,
+    },*/
+				title: {
+					type: 'string',
+					source: 'text',
+					selector: '.card-header h5'
+				},
+				body: {
+					type: 'array',
+					selector: '.card-body',
+					source: 'children'
+				}
+			}
+		},
+		theme: {
+			type: 'string',
+			default: 'success'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		// Theme selection
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    content = _props$attributes.content,
+		    theme = _props$attributes.theme,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected;
+
+
+		function setTheme(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ theme: selected.value });
+			event.preventDefault();
+		}
+
+		function onChangeCardBody(key, body) {
+			var newContent = content;
+			newContent[key].body = body;
+			setAttributes({ content: newContent });
+		}
+
+		function onChangeCardTitle(key, title) {
+			var newContent = content;
+			newContent[key].title = title;
+			setAttributes({ content: newContent });
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Theme')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setTheme, style: { textAlign: alignment } },
+							wp.element.createElement(
+								'select',
+								{ value: theme, onChange: setTheme },
+								wp.element.createElement(
+									'option',
+									{ value: 'primary' },
+									'Primary'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'secondary' },
+									'Secondary'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'success' },
+									'Success'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'danger' },
+									'Danger'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'warning' },
+									'Warning'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'info' },
+									'Info'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'light' },
+									'Light'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'dark' },
+									'Dark'
+								)
+							)
+						)
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: function onChange(newAlignment) {
+						setAttributes({ alignment: newAlignment });
+					}
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className },
+				wp.element.createElement(
+					'div',
+					{
+						className: 'accordion',
+						style: { textAlign: alignment }
+					},
+					content.map(function (card, key) {
+						return wp.element.createElement(
+							'div',
+							{ className: 'card' },
+							wp.element.createElement(
+								'div',
+								{ className: 'card-header',
+									'data-toggle': 'collapse',
+									'data-target': '#collapse' + key
+								},
+								wp.element.createElement(RichText, {
+									tagName: 'h5',
+									className: 'mb-0',
+									onChange: function onChange(title) {
+										return onChangeCardTitle(key, title);
+									},
+									value: card.title
+								})
+							),
+							wp.element.createElement(
+								'div',
+								{
+									id: '#collapse' + key,
+									className: 'collapse'
+								},
+								wp.element.createElement(RichText, {
+									className: 'card-body',
+									tagName: 'div',
+									onChange: function onChange(body) {
+										return onChangeCardBody(key, body);
+									},
+									value: card.body
+								})
+							)
+						);
+					})
+				)
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    content = _props$attributes2.content,
+		    theme = _props$attributes2.theme;
+
+
+		return wp.element.createElement(
+			'div',
+			null,
+			wp.element.createElement(
+				'div',
+				{
+					className: 'accordion',
+					style: { textAlign: alignment }
+				},
+				content.map(function (card, key) {
+					return wp.element.createElement(
+						'div',
+						{ className: 'card' },
+						wp.element.createElement(
+							'div',
+							{ className: 'card-header',
+								'data-toggle': 'collapse',
+								'data-target': '#collapse' + key
+							},
+							wp.element.createElement(RichText.Content, {
+								className: 'mb-0',
+								tagName: 'h5',
+								value: card.title
+							})
+						),
+						wp.element.createElement(
+							'div',
+							{
+								id: '#collapse' + key,
+								className: 'collapse'
+							},
+							wp.element.createElement(RichText.Content, {
+								className: 'card-body',
+								tagName: 'div',
+								value: card.body
+							})
+						)
+					);
+				})
+			)
+		);
+	}
+});
 
 /***/ }),
 /* 8 */
-/*!*********************************!*\
-  !*** ./src/block/blockquote.js ***!
-  \*********************************/
+/*!**********************************!*\
+  !*** ./src/block/alert/alert.js ***!
+  \**********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    RichText = _wp$editor.RichText;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/blockquote', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Blockquote'), // Block title.\n\tdescription: __('For quoting blocks of content from another source within your document.'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ viewBox: '0 0 512 512' },\n\t\twp.element.createElement('path', { d: 'M228 119c5.523 0 10-4.478 10-10V77c0-27.57-22.43-50-50-50H50C22.43 27 0 49.43 0 77v119.988c0 27.57 22.43 50 50 50h64.692c-2.276 74.706-30.621 113.542-86.459 118.622a10 10 0 0 0-9.094 9.959V475a10 10 0 0 0 10.561 9.984c68.908-3.876 121.511-27.591 156.349-70.487C220.521 372.051 238 310.029 238 230.152v-35.819c0-5.522-4.477-10-10-10s-10 4.478-10 10v35.819c0 146.644-58.535 223.331-178.86 234.097v-79.836c30.411-4.73 53.934-18.886 70.007-42.161 17.049-24.691 25.694-60.106 25.694-105.264 0-5.522-4.477-10-10-10H50c-16.542 0-30-13.458-30-30V77c0-16.542 13.458-30 30-30h138c16.542 0 30 13.458 30 30v32c0 5.522 4.477 10 10 10zM462 27H324c-27.57 0-50 22.43-50 50v119.988c0 27.57 22.43 50 50 50h64.692c-2.276 74.706-30.621 113.542-86.459 118.622a10 10 0 0 0-9.094 9.959V475a10 10 0 0 0 10.561 9.984c68.908-3.876 121.511-27.591 156.349-70.487C494.521 372.052 512 310.029 512 230.152V77c0-27.57-22.43-50-50-50zm30 203.152c0 146.644-58.535 223.331-178.861 234.097v-79.836c30.412-4.73 53.935-18.886 70.007-42.161 17.049-24.69 25.694-60.105 25.694-105.264 0-5.522-4.477-10-10-10H324c-16.542 0-30-13.458-30-30V77c0-16.542 13.458-30 30-30h120v74.034c0 5.522 4.477 10 10 10s10-4.478 10-10v-73.96c15.612 1.034 28 14.057 28 29.926v153.152z' }),\n\t\twp.element.createElement('path', { d: 'M454 145.751c-5.523 0-10 4.527-10 10.049 0 5.522 4.477 10 10 10 5.522 0 10-4.478 10-10v-.099c0-5.522-4.477-9.95-10-9.95zM228 141.666c-5.523 0-10 4.478-10 10v.209c0 5.522 4.477 10 10 10s10-4.478 10-10v-.209c0-5.522-4.477-10-10-10z' })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Blockquote'), __('Quote')],\n\tattributes: {\n\t\ttextColor: {\n\t\t\tsource: 'string'\n\t\t},\n\t\tmargin: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'my-3'\n\t\t},\n\t\tquote: {\n\t\t\tsource: 'text',\n\t\t\tselector: '.blockquote'\n\t\t},\n\t\tsource: {\n\t\t\tsource: 'text',\n\t\t\tselector: 'footer.blockquote-footer',\n\t\t\tdefault: 'Someone famous in <cite>Source Title</cite>'\n\t\t},\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    margin = _props$attributes.margin,\n\t\t    quote = _props$attributes.quote,\n\t\t    source = _props$attributes.source,\n\t\t    setAttributes = props.setAttributes;\n\n\t\tfunction setMargin(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ margin: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\tInspectorControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(\n\t\t\t\t\tPanelBody,\n\t\t\t\t\t{ title: __('Select options') },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Margin')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setMargin },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: margin, onChange: setMargin },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-0' },\n\t\t\t\t\t\t\t\t\t'No margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-1' },\n\t\t\t\t\t\t\t\t\t'my-1 - Tiny margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-2' },\n\t\t\t\t\t\t\t\t\t'my-2 - Small margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-3' },\n\t\t\t\t\t\t\t\t\t'my-3 - Middle margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-4' },\n\t\t\t\t\t\t\t\t\t'my-4 - Large margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-5' },\n\t\t\t\t\t\t\t\t\t'my-5 - Hugh margin'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\tBlockControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(AlignmentToolbar, {\n\t\t\t\t\tvalue: alignment,\n\t\t\t\t\tonChange: function onChange(alignment) {\n\t\t\t\t\t\tsetAttributes({ alignment: alignment });\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className },\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'blockquote',\n\t\t\t\t\t{ className: 'blockquote ' + margin, style: { textAlign: alignment } },\n\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\tclassName: 'mb-0 blockquote',\n\t\t\t\t\t\ttagName: 'p',\n\t\t\t\t\t\tonChange: function onChange(quote) {\n\t\t\t\t\t\t\tsetAttributes({ quote: quote });\n\t\t\t\t\t\t},\n\t\t\t\t\t\tvalue: quote\n\t\t\t\t\t}),\n\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\tclassName: 'blockquote-footer',\n\t\t\t\t\t\tformat: 'string',\n\t\t\t\t\t\ttagName: 'footer',\n\t\t\t\t\t\tonChange: function onChange(source) {\n\t\t\t\t\t\t\tsetAttributes({ source: source });\n\t\t\t\t\t\t},\n\t\t\t\t\t\tvalue: source\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar _props$attributes2 = props.attributes,\n\t\t    alignment = _props$attributes2.alignment,\n\t\t    margin = _props$attributes2.margin,\n\t\t    quote = _props$attributes2.quote,\n\t\t    source = _props$attributes2.source;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'blockquote ' + margin, style: { textAlign: alignment } },\n\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\tclassName: 'mb-0 blockquote',\n\t\t\t\t\ttagName: 'p',\n\t\t\t\t\tvalue: quote\n\t\t\t\t}),\n\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\tclassName: 'blockquote-footer',\n\t\t\t\t\tformat: 'string',\n\t\t\t\t\ttagName: 'footer',\n\t\t\t\t\tvalue: source\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9ibG9ja3F1b3RlLmpzP2ExMTciXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBCTE9DSzogYm9vdHN0cmFwLWJsb2Nrc1xuICpcbiAqIFJlZ2lzdGVyaW5nIGEgYmFzaWMgYmxvY2sgd2l0aCBHdXRlbmJlcmcuXG4gKiBTaW1wbGUgYmxvY2ssIHJlbmRlcnMgYW5kIHNhdmVzIHRoZSBzYW1lIGNvbnRlbnQgd2l0aG91dCBhbnkgaW50ZXJhY3Rpdml0eS5cbiAqL1xuXG4vLyAgSW1wb3J0IENTUy5cbmltcG9ydCAnLi9zdHlsZS5zY3NzJztcbmltcG9ydCAnLi9lZGl0b3Iuc2Nzcyc7XG5cbnZhciBfXyA9IHdwLmkxOG4uX187IC8vIEltcG9ydCBfXygpIGZyb20gd3AuaTE4blxuXG52YXIgcmVnaXN0ZXJCbG9ja1R5cGUgPSB3cC5ibG9ja3MucmVnaXN0ZXJCbG9ja1R5cGU7IC8vIEltcG9ydCByZWdpc3RlckJsb2NrVHlwZSgpIGZyb20gd3AuYmxvY2tzXG5cbnZhciBGcmFnbWVudCA9IHdwLmVsZW1lbnQuRnJhZ21lbnQ7XG52YXIgX3dwJGVkaXRvciA9IHdwLmVkaXRvcixcbiAgICBBbGlnbm1lbnRUb29sYmFyID0gX3dwJGVkaXRvci5BbGlnbm1lbnRUb29sYmFyLFxuICAgIEJsb2NrQ29udHJvbHMgPSBfd3AkZWRpdG9yLkJsb2NrQ29udHJvbHMsXG4gICAgUmljaFRleHQgPSBfd3AkZWRpdG9yLlJpY2hUZXh0O1xuLyoqXG4gKiBSZWdpc3RlcjogYWEgR3V0ZW5iZXJnIEJsb2NrLlxuICpcbiAqIFJlZ2lzdGVycyBhIG5ldyBibG9jayBwcm92aWRlZCBhIHVuaXF1ZSBuYW1lIGFuZCBhbiBvYmplY3QgZGVmaW5pbmcgaXRzXG4gKiBiZWhhdmlvci4gT25jZSByZWdpc3RlcmVkLCB0aGUgYmxvY2sgaXMgbWFkZSBlZGl0b3IgYXMgYW4gb3B0aW9uIHRvIGFueVxuICogZWRpdG9yIGludGVyZmFjZSB3aGVyZSBibG9ja3MgYXJlIGltcGxlbWVudGVkLlxuICpcbiAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL1xuICogQHBhcmFtICB7c3RyaW5nfSAgIG5hbWUgICAgIEJsb2NrIG5hbWUuXG4gKiBAcGFyYW0gIHtPYmplY3R9ICAgc2V0dGluZ3MgQmxvY2sgc2V0dGluZ3MuXG4gKiBAcmV0dXJuIHs/V1BCbG9ja30gICAgICAgICAgVGhlIGJsb2NrLCBpZiBpdCBoYXMgYmVlbiBzdWNjZXNzZnVsbHlcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWdpc3RlcmVkOyBvdGhlcndpc2UgYHVuZGVmaW5lZGAuXG4gKi9cblxucmVnaXN0ZXJCbG9ja1R5cGUoJ2diYi9ibG9ja3F1b3RlJywge1xuXHQvLyBCbG9jayBuYW1lLiBCbG9jayBuYW1lcyBtdXN0IGJlIHN0cmluZyB0aGF0IGNvbnRhaW5zIGEgbmFtZXNwYWNlIHByZWZpeC4gRXhhbXBsZTogbXktcGx1Z2luL215LWN1c3RvbS1ibG9jay5cblx0dGl0bGU6IF9fKCdCb290c3RyYXAgQmxvY2txdW90ZScpLCAvLyBCbG9jayB0aXRsZS5cblx0ZGVzY3JpcHRpb246IF9fKCdGb3IgcXVvdGluZyBibG9ja3Mgb2YgY29udGVudCBmcm9tIGFub3RoZXIgc291cmNlIHdpdGhpbiB5b3VyIGRvY3VtZW50LicpLCAvLyBCbG9jayB0aXRsZS5cblx0aWNvbjogd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdCdzdmcnLFxuXHRcdHsgdmlld0JveDogJzAgMCA1MTIgNTEyJyB9LFxuXHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgncGF0aCcsIHsgZDogJ00yMjggMTE5YzUuNTIzIDAgMTAtNC40NzggMTAtMTBWNzdjMC0yNy41Ny0yMi40My01MC01MC01MEg1MEMyMi40MyAyNyAwIDQ5LjQzIDAgNzd2MTE5Ljk4OGMwIDI3LjU3IDIyLjQzIDUwIDUwIDUwaDY0LjY5MmMtMi4yNzYgNzQuNzA2LTMwLjYyMSAxMTMuNTQyLTg2LjQ1OSAxMTguNjIyYTEwIDEwIDAgMCAwLTkuMDk0IDkuOTU5VjQ3NWExMCAxMCAwIDAgMCAxMC41NjEgOS45ODRjNjguOTA4LTMuODc2IDEyMS41MTEtMjcuNTkxIDE1Ni4zNDktNzAuNDg3QzIyMC41MjEgMzcyLjA1MSAyMzggMzEwLjAyOSAyMzggMjMwLjE1MnYtMzUuODE5YzAtNS41MjItNC40NzctMTAtMTAtMTBzLTEwIDQuNDc4LTEwIDEwdjM1LjgxOWMwIDE0Ni42NDQtNTguNTM1IDIyMy4zMzEtMTc4Ljg2IDIzNC4wOTd2LTc5LjgzNmMzMC40MTEtNC43MyA1My45MzQtMTguODg2IDcwLjAwNy00Mi4xNjEgMTcuMDQ5LTI0LjY5MSAyNS42OTQtNjAuMTA2IDI1LjY5NC0xMDUuMjY0IDAtNS41MjItNC40NzctMTAtMTAtMTBINTBjLTE2LjU0MiAwLTMwLTEzLjQ1OC0zMC0zMFY3N2MwLTE2LjU0MiAxMy40NTgtMzAgMzAtMzBoMTM4YzE2LjU0MiAwIDMwIDEzLjQ1OCAzMCAzMHYzMmMwIDUuNTIyIDQuNDc3IDEwIDEwIDEwek00NjIgMjdIMzI0Yy0yNy41NyAwLTUwIDIyLjQzLTUwIDUwdjExOS45ODhjMCAyNy41NyAyMi40MyA1MCA1MCA1MGg2NC42OTJjLTIuMjc2IDc0LjcwNi0zMC42MjEgMTEzLjU0Mi04Ni40NTkgMTE4LjYyMmExMCAxMCAwIDAgMC05LjA5NCA5Ljk1OVY0NzVhMTAgMTAgMCAwIDAgMTAuNTYxIDkuOTg0YzY4LjkwOC0zLjg3NiAxMjEuNTExLTI3LjU5MSAxNTYuMzQ5LTcwLjQ4N0M0OTQuNTIxIDM3Mi4wNTIgNTEyIDMxMC4wMjkgNTEyIDIzMC4xNTJWNzdjMC0yNy41Ny0yMi40My01MC01MC01MHptMzAgMjAzLjE1MmMwIDE0Ni42NDQtNTguNTM1IDIyMy4zMzEtMTc4Ljg2MSAyMzQuMDk3di03OS44MzZjMzAuNDEyLTQuNzMgNTMuOTM1LTE4Ljg4NiA3MC4wMDctNDIuMTYxIDE3LjA0OS0yNC42OSAyNS42OTQtNjAuMTA1IDI1LjY5NC0xMDUuMjY0IDAtNS41MjItNC40NzctMTAtMTAtMTBIMzI0Yy0xNi41NDIgMC0zMC0xMy40NTgtMzAtMzBWNzdjMC0xNi41NDIgMTMuNDU4LTMwIDMwLTMwaDEyMHY3NC4wMzRjMCA1LjUyMiA0LjQ3NyAxMCAxMCAxMHMxMC00LjQ3OCAxMC0xMHYtNzMuOTZjMTUuNjEyIDEuMDM0IDI4IDE0LjA1NyAyOCAyOS45MjZ2MTUzLjE1MnonIH0pLFxuXHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgncGF0aCcsIHsgZDogJ000NTQgMTQ1Ljc1MWMtNS41MjMgMC0xMCA0LjUyNy0xMCAxMC4wNDkgMCA1LjUyMiA0LjQ3NyAxMCAxMCAxMCA1LjUyMiAwIDEwLTQuNDc4IDEwLTEwdi0uMDk5YzAtNS41MjItNC40NzctOS45NS0xMC05Ljk1ek0yMjggMTQxLjY2NmMtNS41MjMgMC0xMCA0LjQ3OC0xMCAxMHYuMjA5YzAgNS41MjIgNC40NzcgMTAgMTAgMTBzMTAtNC40NzggMTAtMTB2LS4yMDljMC01LjUyMi00LjQ3Ny0xMC0xMC0xMHonIH0pXG5cdCksXG5cdGNhdGVnb3J5OiAnZ2JiJywgLy8gQmxvY2sgY2F0ZWdvcnkg4oCUIEdyb3VwIGJsb2NrcyB0b2dldGhlciBiYXNlZCBvbiBjb21tb24gdHJhaXRzIEUuZy4gY29tbW9uLCBmb3JtYXR0aW5nLCBsYXlvdXQgd2lkZ2V0cywgZW1iZWQuXG5cdGtleXdvcmRzOiBbX18oJ0Jvb3RzdHJhcCcpLCBfXygnQmxvY2txdW90ZScpLCBfXygnUXVvdGUnKV0sXG5cdGF0dHJpYnV0ZXM6IHtcblx0XHR0ZXh0Q29sb3I6IHtcblx0XHRcdHNvdXJjZTogJ3N0cmluZydcblx0XHR9LFxuXHRcdG1hcmdpbjoge1xuXHRcdFx0dHlwZTogJ3N0cmluZycsXG5cdFx0XHRkZWZhdWx0OiAnbXktMydcblx0XHR9LFxuXHRcdHF1b3RlOiB7XG5cdFx0XHRzb3VyY2U6ICd0ZXh0Jyxcblx0XHRcdHNlbGVjdG9yOiAnLmJsb2NrcXVvdGUnXG5cdFx0fSxcblx0XHRzb3VyY2U6IHtcblx0XHRcdHNvdXJjZTogJ3RleHQnLFxuXHRcdFx0c2VsZWN0b3I6ICdmb290ZXIuYmxvY2txdW90ZS1mb290ZXInLFxuXHRcdFx0ZGVmYXVsdDogJ1NvbWVvbmUgZmFtb3VzIGluIDxjaXRlPlNvdXJjZSBUaXRsZTwvY2l0ZT4nXG5cdFx0fSxcblx0XHRhbGlnbm1lbnQ6IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnXG5cdFx0fVxuXHR9LFxuXG5cdC8qKlxuICAqIFRoZSBlZGl0IGZ1bmN0aW9uIGRlc2NyaWJlcyB0aGUgc3RydWN0dXJlIG9mIHlvdXIgYmxvY2sgaW4gdGhlIGNvbnRleHQgb2YgdGhlIGVkaXRvci5cbiAgKiBUaGlzIHJlcHJlc2VudHMgd2hhdCB0aGUgZWRpdG9yIHdpbGwgcmVuZGVyIHdoZW4gdGhlIGJsb2NrIGlzIHVzZWQuXG4gICpcbiAgKiBUaGUgXCJlZGl0XCIgcHJvcGVydHkgbXVzdCBiZSBhIHZhbGlkIGZ1bmN0aW9uLlxuICAqXG4gICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvYmxvY2stZWRpdC1zYXZlL1xuICAqL1xuXHRlZGl0OiBmdW5jdGlvbiBlZGl0KHByb3BzKSB7XG5cdFx0dmFyIF9wcm9wcyRhdHRyaWJ1dGVzID0gcHJvcHMuYXR0cmlidXRlcyxcblx0XHQgICAgYWxpZ25tZW50ID0gX3Byb3BzJGF0dHJpYnV0ZXMuYWxpZ25tZW50LFxuXHRcdCAgICBtYXJnaW4gPSBfcHJvcHMkYXR0cmlidXRlcy5tYXJnaW4sXG5cdFx0ICAgIHF1b3RlID0gX3Byb3BzJGF0dHJpYnV0ZXMucXVvdGUsXG5cdFx0ICAgIHNvdXJjZSA9IF9wcm9wcyRhdHRyaWJ1dGVzLnNvdXJjZSxcblx0XHQgICAgc2V0QXR0cmlidXRlcyA9IHByb3BzLnNldEF0dHJpYnV0ZXM7XG5cblx0XHRmdW5jdGlvbiBzZXRNYXJnaW4oZXZlbnQpIHtcblx0XHRcdHZhciBzZWxlY3RlZCA9IGV2ZW50LnRhcmdldC5xdWVyeVNlbGVjdG9yKCdvcHRpb246Y2hlY2tlZCcpO1xuXHRcdFx0c2V0QXR0cmlidXRlcyh7IG1hcmdpbjogc2VsZWN0ZWQudmFsdWUgfSk7XG5cdFx0XHRldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuXHRcdH1cblxuXHRcdHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRGcmFnbWVudCxcblx0XHRcdG51bGwsXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdEluc3BlY3RvckNvbnRyb2xzLFxuXHRcdFx0XHRudWxsLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0UGFuZWxCb2R5LFxuXHRcdFx0XHRcdHsgdGl0bGU6IF9fKCdTZWxlY3Qgb3B0aW9ucycpIH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0UGFuZWxSb3csXG5cdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnbGFiZWwnLFxuXHRcdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0XHRfXygnTWFyZ2luJylcblx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdCdmb3JtJyxcblx0XHRcdFx0XHRcdFx0eyBvblN1Ym1pdDogc2V0TWFyZ2luIH0sXG5cdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHQnc2VsZWN0Jyxcblx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiBtYXJnaW4sIG9uQ2hhbmdlOiBzZXRNYXJnaW4gfSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdteS0wJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J05vIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTEnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktMSAtIFRpbnkgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktMicgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS0yIC0gU21hbGwgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktMycgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS0zIC0gTWlkZGxlIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTQnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktNCAtIExhcmdlIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTUnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktNSAtIEh1Z2ggbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdClcblx0XHRcdFx0KVxuXHRcdFx0KSxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0QmxvY2tDb250cm9scyxcblx0XHRcdFx0bnVsbCxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KEFsaWdubWVudFRvb2xiYXIsIHtcblx0XHRcdFx0XHR2YWx1ZTogYWxpZ25tZW50LFxuXHRcdFx0XHRcdG9uQ2hhbmdlOiBmdW5jdGlvbiBvbkNoYW5nZShhbGlnbm1lbnQpIHtcblx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBhbGlnbm1lbnQ6IGFsaWdubWVudCB9KTtcblx0XHRcdFx0XHR9XG5cdFx0XHRcdH0pXG5cdFx0XHQpLFxuXHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHQnZGl2Jyxcblx0XHRcdFx0eyBjbGFzc05hbWU6IHByb3BzLmNsYXNzTmFtZSB9LFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0J2Jsb2NrcXVvdGUnLFxuXHRcdFx0XHRcdHsgY2xhc3NOYW1lOiAnYmxvY2txdW90ZSAnICsgbWFyZ2luLCBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFJpY2hUZXh0LCB7XG5cdFx0XHRcdFx0XHRjbGFzc05hbWU6ICdtYi0wIGJsb2NrcXVvdGUnLFxuXHRcdFx0XHRcdFx0dGFnTmFtZTogJ3AnLFxuXHRcdFx0XHRcdFx0b25DaGFuZ2U6IGZ1bmN0aW9uIG9uQ2hhbmdlKHF1b3RlKSB7XG5cdFx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBxdW90ZTogcXVvdGUgfSk7XG5cdFx0XHRcdFx0XHR9LFxuXHRcdFx0XHRcdFx0dmFsdWU6IHF1b3RlXG5cdFx0XHRcdFx0fSksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFJpY2hUZXh0LCB7XG5cdFx0XHRcdFx0XHRjbGFzc05hbWU6ICdibG9ja3F1b3RlLWZvb3RlcicsXG5cdFx0XHRcdFx0XHRmb3JtYXQ6ICdzdHJpbmcnLFxuXHRcdFx0XHRcdFx0dGFnTmFtZTogJ2Zvb3RlcicsXG5cdFx0XHRcdFx0XHRvbkNoYW5nZTogZnVuY3Rpb24gb25DaGFuZ2Uoc291cmNlKSB7XG5cdFx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBzb3VyY2U6IHNvdXJjZSB9KTtcblx0XHRcdFx0XHRcdH0sXG5cdFx0XHRcdFx0XHR2YWx1ZTogc291cmNlXG5cdFx0XHRcdFx0fSlcblx0XHRcdFx0KVxuXHRcdFx0KVxuXHRcdCk7XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIHNhdmUgZnVuY3Rpb24gZGVmaW5lcyB0aGUgd2F5IGluIHdoaWNoIHRoZSBkaWZmZXJlbnQgYXR0cmlidXRlcyBzaG91bGQgYmUgY29tYmluZWRcbiAgKiBpbnRvIHRoZSBmaW5hbCBtYXJrdXAsIHdoaWNoIGlzIHRoZW4gc2VyaWFsaXplZCBieSBHdXRlbmJlcmcgaW50byBwb3N0X2NvbnRlbnQuXG4gICpcbiAgKiBUaGUgXCJzYXZlXCIgcHJvcGVydHkgbXVzdCBiZSBzcGVjaWZpZWQgYW5kIG11c3QgYmUgYSB2YWxpZCBmdW5jdGlvbi5cbiAgKlxuICAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL2Jsb2NrLWVkaXQtc2F2ZS9cbiAgKi9cblx0c2F2ZTogZnVuY3Rpb24gc2F2ZShwcm9wcykge1xuXG5cdFx0Ly8gSW5pdGlhbGl6ZSB0aGVtZVxuXHRcdHZhciBfcHJvcHMkYXR0cmlidXRlczIgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlczIuYWxpZ25tZW50LFxuXHRcdCAgICBtYXJnaW4gPSBfcHJvcHMkYXR0cmlidXRlczIubWFyZ2luLFxuXHRcdCAgICBxdW90ZSA9IF9wcm9wcyRhdHRyaWJ1dGVzMi5xdW90ZSxcblx0XHQgICAgc291cmNlID0gX3Byb3BzJGF0dHJpYnV0ZXMyLnNvdXJjZTtcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdCdkaXYnLFxuXHRcdFx0bnVsbCxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdHsgY2xhc3NOYW1lOiAnYmxvY2txdW90ZSAnICsgbWFyZ2luLCBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChSaWNoVGV4dC5Db250ZW50LCB7XG5cdFx0XHRcdFx0Y2xhc3NOYW1lOiAnbWItMCBibG9ja3F1b3RlJyxcblx0XHRcdFx0XHR0YWdOYW1lOiAncCcsXG5cdFx0XHRcdFx0dmFsdWU6IHF1b3RlXG5cdFx0XHRcdH0pLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRcdGNsYXNzTmFtZTogJ2Jsb2NrcXVvdGUtZm9vdGVyJyxcblx0XHRcdFx0XHRmb3JtYXQ6ICdzdHJpbmcnLFxuXHRcdFx0XHRcdHRhZ05hbWU6ICdmb290ZXInLFxuXHRcdFx0XHRcdHZhbHVlOiBzb3VyY2Vcblx0XHRcdFx0fSlcblx0XHRcdClcblx0XHQpO1xuXHR9XG59KTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9ibG9ja3F1b3RlLmpzXG4vLyBtb2R1bGUgaWQgPSA4XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///8\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_alert__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/alert */ 4);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+// Import JS.
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var _wp$components = wp.components,
+    CheckboxControl = _wp$components.CheckboxControl,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    InspectorControls = _wp$editor.InspectorControls,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/alert', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Alert'), // Block title.
+	description: __('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ viewBox: '0 0 512 512' },
+		wp.element.createElement('path', { d: 'M505.403 406.394L295.389 58.102c-8.274-13.721-23.367-22.245-39.39-22.245s-31.116 8.524-39.391 22.246L6.595 406.394c-8.551 14.182-8.804 31.95-.661 46.37 8.145 14.42 23.491 23.378 40.051 23.378h420.028c16.56 0 31.907-8.958 40.052-23.379 8.143-14.421 7.89-32.189-.662-46.369zm-28.364 29.978a12.684 12.684 0 0 1-11.026 6.436H45.985a12.68 12.68 0 0 1-11.025-6.435 12.683 12.683 0 0 1 .181-12.765L245.156 75.316A12.732 12.732 0 0 1 256 69.192c4.41 0 8.565 2.347 10.843 6.124l210.013 348.292a12.677 12.677 0 0 1 .183 12.764z' }),
+		wp.element.createElement('path', { d: 'M256.154 173.005c-12.68 0-22.576 6.804-22.576 18.866 0 36.802 4.329 89.686 4.329 126.489.001 9.587 8.352 13.607 18.248 13.607 7.422 0 17.937-4.02 17.937-13.607 0-36.802 4.329-89.686 4.329-126.489 0-12.061-10.205-18.866-22.267-18.866zM256.465 353.306c-13.607 0-23.814 10.824-23.814 23.814 0 12.68 10.206 23.814 23.814 23.814 12.68 0 23.505-11.134 23.505-23.814 0-12.99-10.826-23.814-23.505-23.814z' })
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Alert'), __('Notification')],
+	attributes: {
+		theme: {
+			type: 'string',
+			default: 'success'
+		},
+		textColor: {
+			source: 'string'
+		},
+		title: {
+			source: 'text',
+			selector: 'h4.alert-heading'
+		},
+		margin: {
+			type: 'string',
+			default: 'my-3'
+		},
+		content: {
+			type: 'array',
+			source: 'children',
+			selector: 'div.content'
+		},
+		isDismissable: {
+			type: 'boolean'
+		},
+		alignment: {
+			type: 'string'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		// Creates a <p class='wp-block-gbb-alert'></p>.
+
+		// Theme selection
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    content = _props$attributes.content,
+		    isDismissable = _props$attributes.isDismissable,
+		    margin = _props$attributes.margin,
+		    title = _props$attributes.title,
+		    theme = _props$attributes.theme,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected;
+
+		function setMargin(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ margin: selected.value });
+			event.preventDefault();
+		}
+
+		function setTheme(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ theme: selected.value });
+			event.preventDefault();
+		}
+
+		function onChangeAlignment(newAlignment) {
+			setAttributes({ alignment: newAlignment });
+		}
+
+		function onChangeContent(newContent) {
+			setAttributes({ content: newContent });
+		}
+
+		function onTitleContent(newTitle) {
+			setAttributes({ title: newTitle });
+		}
+
+		function showThemeForm() {
+			return wp.element.createElement(
+				'form',
+				{ onSubmit: setTheme, style: { textAlign: alignment } },
+				wp.element.createElement(
+					'select',
+					{ value: theme, onChange: setTheme },
+					wp.element.createElement(
+						'option',
+						{ value: 'primary' },
+						'Primary'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'secondary' },
+						'Secondary'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'success' },
+						'Success'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'danger' },
+						'Danger'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'warning' },
+						'Warning'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'info' },
+						'Info'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'light' },
+						'Light'
+					),
+					wp.element.createElement(
+						'option',
+						{ value: 'dark' },
+						'Dark'
+					)
+				)
+			);
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Margin')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setMargin },
+							wp.element.createElement(
+								'select',
+								{ value: margin, onChange: setMargin },
+								wp.element.createElement(
+									'option',
+									{ value: 'my-0' },
+									'No margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-1' },
+									'my-1 - Tiny margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-2' },
+									'my-2 - Small margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-3' },
+									'my-3 - Middle margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-4' },
+									'my-4 - Large margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-5' },
+									'my-5 - Hugh margin'
+								)
+							)
+						)
+					),
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Theme')
+						),
+						showThemeForm()
+					),
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(CheckboxControl, {
+							label: __('Is dismissable?'),
+							help: __('Can the user hide the alert by clicking a X button on the top right.'),
+							checked: isDismissable,
+							onChange: function onChange(isDismissable) {
+								setAttributes({ isDismissable: isDismissable });
+							}
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: onChangeAlignment
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className },
+				wp.element.createElement(
+					'div',
+					{ className: 'alert alert-' + theme + ' alert-dismissible fade show ' + margin, role: 'alert',
+						style: { textAlign: alignment } },
+					wp.element.createElement(RichText, {
+						className: 'alert-heading',
+						tagName: 'h4',
+						onChange: onTitleContent,
+						value: title
+					}),
+					wp.element.createElement(RichText, {
+						className: 'content',
+						tagName: 'div',
+						onChange: onChangeContent,
+						value: content
+					}),
+					isDismissable && wp.element.createElement(
+						'button',
+						{ type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
+						wp.element.createElement(
+							'span',
+							{ 'aria-hidden': 'true' },
+							'\xD7'
+						)
+					)
+				)
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    content = _props$attributes2.content,
+		    margin = _props$attributes2.margin,
+		    title = _props$attributes2.title,
+		    theme = _props$attributes2.theme;
+
+
+		return wp.element.createElement(
+			'div',
+			null,
+			wp.element.createElement(
+				'div',
+				{ className: 'alert alert-' + theme + ' alert-dismissible fade show ' + margin,
+					role: 'alert',
+					style: { textAlign: alignment }
+				},
+				wp.element.createElement(RichText.Content, {
+					className: 'alert-heading',
+					tagName: 'h4',
+					value: title
+				}),
+				wp.element.createElement(RichText.Content, {
+					className: 'content',
+					tagName: 'div',
+					value: content
+				}),
+				wp.element.createElement(
+					'button',
+					{ type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
+					wp.element.createElement(
+						'span',
+						{ 'aria-hidden': 'true' },
+						'\xD7'
+					)
+				)
+			)
+		);
+	}
+});
 
 /***/ }),
 /* 9 */
-/*!*****************************!*\
-  !*** ./src/block/button.js ***!
-  \*****************************/
+/*!********************************************!*\
+  !*** ./src/block/blockquote/blockquote.js ***!
+  \********************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_button__ = __webpack_require__(/*! ../../node_modules/bootstrap/js/src/button */ 10);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\n// Import JS.\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar _wp$components = wp.components,\n    CheckboxControl = _wp$components.CheckboxControl,\n    PanelBody = _wp$components.PanelBody,\n    PanelRow = _wp$components.PanelRow;\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    ColorPalette = _wp$editor.ColorPalette,\n    InspectorControls = _wp$editor.InspectorControls,\n    RichText = _wp$editor.RichText,\n    URLInput = _wp$editor.URLInput;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/button', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Button'), // Block title.\n\tdescription: __('Use Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ viewBox: '0 0 512 512' },\n\t\twp.element.createElement('path', { d: 'M466.959 2.467H39.783C17.847 2.467 0 20.313 0 42.249V282.76c0 21.936 17.847 39.782 39.783 39.782h98.397c5.545 0 10.039-4.495 10.039-10.039s-4.495-10.039-10.04-10.039H39.783c-10.865 0-19.704-8.839-19.704-19.704V42.249c0-10.865 8.839-19.704 19.704-19.704h427.176c10.865 0 19.704 8.839 19.704 19.704V282.76c0 10.865-8.839 19.704-19.704 19.704h-30.148c-5.545 0-10.039 4.495-10.039 10.039s4.495 10.039 10.039 10.039h30.148c21.936 0 39.782-17.846 39.782-39.782V42.249c0-21.936-17.846-39.782-39.782-39.782z' }),\n\t\twp.element.createElement('path', { d: 'M511.99 371.309a19.331 19.331 0 0 0-12.644-17.566v-.001l-166.048-61.603c-11.245-4.17-23.498-1.494-31.978 6.984-8.481 8.478-11.16 20.731-6.992 31.975l61.447 165.775c2.767 7.464 9.696 12.43 17.653 12.652.186.006.37.008.554.008 7.735 0 14.672-4.527 17.776-11.655l16.997-39.021 36.85 36.861c10.488 10.491 27.557 10.495 38.049.006l14.215-14.212c5.082-5.081 7.882-11.837 7.883-19.024.001-7.186-2.797-13.943-7.877-19.025L461.49 407.07l39.016-17.417a19.331 19.331 0 0 0 11.484-18.344zm-72.007 23.372a10.04 10.04 0 0 0-3.008 16.266l46.7 46.713a6.833 6.833 0 0 1-.001 9.653l-14.215 14.212a6.78 6.78 0 0 1-4.826 1.998h-.001a6.778 6.778 0 0 1-4.827-2l-47.269-47.282a10.038 10.038 0 0 0-16.304 3.089l-22.212 50.994-60.865-164.203c-2.117-5.712 1.272-9.709 2.361-10.798.839-.838 3.403-3.041 7.148-3.041 1.117 0 2.34.196 3.651.683l164.497 61.027-50.829 22.689zm52.386-22.11a.016.016 0 0 0-.007-.004l3.492-9.412-3.485 9.416zM285.926 269.48l-28.368-28.37c-3.921-3.919-10.277-3.919-14.198 0-3.921 3.921-3.921 10.277-.001 14.198l28.369 28.37a10.009 10.009 0 0 0 7.099 2.94c2.569 0 5.139-.98 7.099-2.94 3.921-3.921 3.921-10.277 0-14.198zM258.097 302.551h-40.12c-5.545 0-10.039 4.495-10.039 10.039s4.495 10.039 10.039 10.039h40.12c5.544 0 10.039-4.495 10.039-10.039s-4.495-10.039-10.039-10.039zM315.704 204.824c-5.544 0-10.039 4.495-10.039 10.039v40.12c0 5.544 4.495 10.039 10.039 10.039s10.039-4.495 10.039-10.039v-40.12c0-5.544-4.495-10.039-10.039-10.039zM399.987 223.474c-3.921-3.919-10.277-3.92-14.198 0l-28.369 28.369c-3.921 3.921-3.921 10.277-.001 14.198a10.011 10.011 0 0 0 7.1 2.94c2.569 0 5.139-.98 7.099-2.94l28.369-28.369c3.921-3.921 3.921-10.277 0-14.198zM274.284 349.176c-3.921-3.919-10.278-3.919-14.198 0l-28.369 28.37c-3.921 3.921-3.92 10.277 0 14.198a10.007 10.007 0 0 0 7.099 2.94c2.57 0 5.139-.98 7.099-2.94l28.369-28.37c3.921-3.921 3.92-10.277 0-14.198z' }),\n\t\twp.element.createElement('circle', { cx: 178.01, cy: 312.5, r: 10.07 })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Button')],\n\tattributes: {\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t},\n\t\tcaption: {\n\t\t\ttype: 'array',\n\t\t\tsource: 'children',\n\t\t\tselector: 'div.content'\n\t\t},\n\t\tisBlockWidth: {\n\t\t\ttype: 'boolean'\n\t\t},\n\t\tisOutline: {\n\t\t\ttype: 'boolean'\n\t\t},\n\t\tsize: {\n\t\t\ttype: 'string',\n\t\t\tdefault: ''\n\t\t},\n\t\ttheme: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'primary'\n\t\t},\n\t\turl: {\n\t\t\ttype: 'string',\n\t\t\tsource: 'attribute',\n\t\t\tselector: 'a',\n\t\t\tattribute: 'href'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\t// Theme selection\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    caption = _props$attributes.caption,\n\t\t    isBlockWidth = _props$attributes.isBlockWidth,\n\t\t    isOutline = _props$attributes.isOutline,\n\t\t    size = _props$attributes.size,\n\t\t    theme = _props$attributes.theme,\n\t\t    url = _props$attributes.url,\n\t\t    setAttributes = props.setAttributes,\n\t\t    isSelected = props.isSelected;\n\n\n\t\tfunction setSize(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ size: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\tfunction setTheme(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ theme: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\tfunction onChangeAlignment(newAlignment) {\n\t\t\tsetAttributes({ alignment: newAlignment });\n\t\t}\n\n\t\tfunction onChangeCaption(newCaption) {\n\t\t\tsetAttributes({ caption: newCaption });\n\t\t}\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\tInspectorControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(\n\t\t\t\t\tPanelBody,\n\t\t\t\t\t{ title: __('Select options') },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Theme')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setTheme },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: theme, onChange: setTheme },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'primary' },\n\t\t\t\t\t\t\t\t\t'Primary'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'secondary' },\n\t\t\t\t\t\t\t\t\t'Secondary'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'success' },\n\t\t\t\t\t\t\t\t\t'Success'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'danger' },\n\t\t\t\t\t\t\t\t\t'Danger'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'warning' },\n\t\t\t\t\t\t\t\t\t'Warning'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'info' },\n\t\t\t\t\t\t\t\t\t'Info'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'light' },\n\t\t\t\t\t\t\t\t\t'Light'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'dark' },\n\t\t\t\t\t\t\t\t\t'Dark'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(CheckboxControl, {\n\t\t\t\t\t\t\tlabel: __('Outline Button?'),\n\t\t\t\t\t\t\tchecked: isOutline,\n\t\t\t\t\t\t\tonChange: function onChange(isOutline) {\n\t\t\t\t\t\t\t\tsetAttributes({ isOutline: isOutline });\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t})\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Size')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setSize },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: size, onChange: setSize },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: '' },\n\t\t\t\t\t\t\t\t\t'Default'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'sm' },\n\t\t\t\t\t\t\t\t\t'Small'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'lg' },\n\t\t\t\t\t\t\t\t\t'Large'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(CheckboxControl, {\n\t\t\t\t\t\t\tlabel: __('Block Button / Full width?'),\n\t\t\t\t\t\t\tchecked: isBlockWidth,\n\t\t\t\t\t\t\tonChange: function onChange(isBlockWidth) {\n\t\t\t\t\t\t\t\tsetAttributes({ isBlockWidth: isBlockWidth });\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t})\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\tBlockControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(AlignmentToolbar, {\n\t\t\t\t\tvalue: alignment,\n\t\t\t\t\tonChange: onChangeAlignment\n\t\t\t\t})\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className, style: { textAlign: alignment } },\n\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\tautoFocus: true,\n\t\t\t\t\tclassName: 'btn btn-' + (isOutline ? 'outline-' : '') + theme + ' ' + (size !== '' ? 'btn-' + size : '') + ' ' + (isBlockWidth ? 'btn-block' : ''),\n\t\t\t\t\trole: 'button',\n\t\t\t\t\thref: '#',\n\t\t\t\t\ttagName: 'a',\n\t\t\t\t\tonChange: onChangeCaption,\n\t\t\t\t\tvalue: caption\n\t\t\t\t}),\n\t\t\t\twp.element.createElement(URLInput, {\n\t\t\t\t\tautoFocus: false,\n\t\t\t\t\tclassName: 'button-url',\n\t\t\t\t\tvalue: url,\n\t\t\t\t\tonChange: function onChange(value) {\n\t\t\t\t\t\treturn setAttributes({ url: value });\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar _props$attributes2 = props.attributes,\n\t\t    alignment = _props$attributes2.alignment,\n\t\t    caption = _props$attributes2.caption,\n\t\t    isBlockWidth = _props$attributes2.isBlockWidth,\n\t\t    isOutline = _props$attributes2.isOutline,\n\t\t    size = _props$attributes2.size,\n\t\t    theme = _props$attributes2.theme,\n\t\t    url = _props$attributes2.url;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\t{ style: { textAlign: alignment } },\n\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\tclassName: 'btn btn-' + (isOutline ? 'outline-' : '') + theme + ' ' + (size !== '' ? 'btn-' + size : '') + ' ' + (isBlockWidth ? 'btn-block' : ''),\n\t\t\t\thref: url,\n\t\t\t\trole: 'button',\n\t\t\t\ttagName: 'a',\n\t\t\t\tvalue: caption\n\t\t\t})\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9idXR0b24uanM/MmUzMSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEJMT0NLOiBib290c3RyYXAtYmxvY2tzXG4gKlxuICogUmVnaXN0ZXJpbmcgYSBiYXNpYyBibG9jayB3aXRoIEd1dGVuYmVyZy5cbiAqIFNpbXBsZSBibG9jaywgcmVuZGVycyBhbmQgc2F2ZXMgdGhlIHNhbWUgY29udGVudCB3aXRob3V0IGFueSBpbnRlcmFjdGl2aXR5LlxuICovXG5cbi8vICBJbXBvcnQgQ1NTLlxuaW1wb3J0ICcuL3N0eWxlLnNjc3MnO1xuaW1wb3J0ICcuL2VkaXRvci5zY3NzJztcblxuLy8gSW1wb3J0IEpTLlxuaW1wb3J0ICcuLi8uLi9ub2RlX21vZHVsZXMvYm9vdHN0cmFwL2pzL3NyYy9idXR0b24nO1xuXG52YXIgX18gPSB3cC5pMThuLl9fOyAvLyBJbXBvcnQgX18oKSBmcm9tIHdwLmkxOG5cblxudmFyIHJlZ2lzdGVyQmxvY2tUeXBlID0gd3AuYmxvY2tzLnJlZ2lzdGVyQmxvY2tUeXBlOyAvLyBJbXBvcnQgcmVnaXN0ZXJCbG9ja1R5cGUoKSBmcm9tIHdwLmJsb2Nrc1xuXG52YXIgX3dwJGNvbXBvbmVudHMgPSB3cC5jb21wb25lbnRzLFxuICAgIENoZWNrYm94Q29udHJvbCA9IF93cCRjb21wb25lbnRzLkNoZWNrYm94Q29udHJvbCxcbiAgICBQYW5lbEJvZHkgPSBfd3AkY29tcG9uZW50cy5QYW5lbEJvZHksXG4gICAgUGFuZWxSb3cgPSBfd3AkY29tcG9uZW50cy5QYW5lbFJvdztcbnZhciBGcmFnbWVudCA9IHdwLmVsZW1lbnQuRnJhZ21lbnQ7XG52YXIgX3dwJGVkaXRvciA9IHdwLmVkaXRvcixcbiAgICBBbGlnbm1lbnRUb29sYmFyID0gX3dwJGVkaXRvci5BbGlnbm1lbnRUb29sYmFyLFxuICAgIEJsb2NrQ29udHJvbHMgPSBfd3AkZWRpdG9yLkJsb2NrQ29udHJvbHMsXG4gICAgQ29sb3JQYWxldHRlID0gX3dwJGVkaXRvci5Db2xvclBhbGV0dGUsXG4gICAgSW5zcGVjdG9yQ29udHJvbHMgPSBfd3AkZWRpdG9yLkluc3BlY3RvckNvbnRyb2xzLFxuICAgIFJpY2hUZXh0ID0gX3dwJGVkaXRvci5SaWNoVGV4dCxcbiAgICBVUkxJbnB1dCA9IF93cCRlZGl0b3IuVVJMSW5wdXQ7XG4vKipcbiAqIFJlZ2lzdGVyOiBhYSBHdXRlbmJlcmcgQmxvY2suXG4gKlxuICogUmVnaXN0ZXJzIGEgbmV3IGJsb2NrIHByb3ZpZGVkIGEgdW5pcXVlIG5hbWUgYW5kIGFuIG9iamVjdCBkZWZpbmluZyBpdHNcbiAqIGJlaGF2aW9yLiBPbmNlIHJlZ2lzdGVyZWQsIHRoZSBibG9jayBpcyBtYWRlIGVkaXRvciBhcyBhbiBvcHRpb24gdG8gYW55XG4gKiBlZGl0b3IgaW50ZXJmYWNlIHdoZXJlIGJsb2NrcyBhcmUgaW1wbGVtZW50ZWQuXG4gKlxuICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvXG4gKiBAcGFyYW0gIHtzdHJpbmd9ICAgbmFtZSAgICAgQmxvY2sgbmFtZS5cbiAqIEBwYXJhbSAge09iamVjdH0gICBzZXR0aW5ncyBCbG9jayBzZXR0aW5ncy5cbiAqIEByZXR1cm4gez9XUEJsb2NrfSAgICAgICAgICBUaGUgYmxvY2ssIGlmIGl0IGhhcyBiZWVuIHN1Y2Nlc3NmdWxseVxuICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ2lzdGVyZWQ7IG90aGVyd2lzZSBgdW5kZWZpbmVkYC5cbiAqL1xuXG5yZWdpc3RlckJsb2NrVHlwZSgnZ2JiL2J1dHRvbicsIHtcblx0Ly8gQmxvY2sgbmFtZS4gQmxvY2sgbmFtZXMgbXVzdCBiZSBzdHJpbmcgdGhhdCBjb250YWlucyBhIG5hbWVzcGFjZSBwcmVmaXguIEV4YW1wbGU6IG15LXBsdWdpbi9teS1jdXN0b20tYmxvY2suXG5cdHRpdGxlOiBfXygnQm9vdHN0cmFwIEJ1dHRvbicpLCAvLyBCbG9jayB0aXRsZS5cblx0ZGVzY3JpcHRpb246IF9fKCdVc2UgQm9vdHN0cmFw4oCZcyBjdXN0b20gYnV0dG9uIHN0eWxlcyBmb3IgYWN0aW9ucyBpbiBmb3JtcywgZGlhbG9ncywgYW5kIG1vcmUgd2l0aCBzdXBwb3J0IGZvciBtdWx0aXBsZSBzaXplcywgc3RhdGVzLCBhbmQgbW9yZS4nKSwgLy8gQmxvY2sgdGl0bGUuXG5cdGljb246IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHQnc3ZnJyxcblx0XHR7IHZpZXdCb3g6ICcwIDAgNTEyIDUxMicgfSxcblx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ3BhdGgnLCB7IGQ6ICdNNDY2Ljk1OSAyLjQ2N0gzOS43ODNDMTcuODQ3IDIuNDY3IDAgMjAuMzEzIDAgNDIuMjQ5VjI4Mi43NmMwIDIxLjkzNiAxNy44NDcgMzkuNzgyIDM5Ljc4MyAzOS43ODJoOTguMzk3YzUuNTQ1IDAgMTAuMDM5LTQuNDk1IDEwLjAzOS0xMC4wMzlzLTQuNDk1LTEwLjAzOS0xMC4wNC0xMC4wMzlIMzkuNzgzYy0xMC44NjUgMC0xOS43MDQtOC44MzktMTkuNzA0LTE5LjcwNFY0Mi4yNDljMC0xMC44NjUgOC44MzktMTkuNzA0IDE5LjcwNC0xOS43MDRoNDI3LjE3NmMxMC44NjUgMCAxOS43MDQgOC44MzkgMTkuNzA0IDE5LjcwNFYyODIuNzZjMCAxMC44NjUtOC44MzkgMTkuNzA0LTE5LjcwNCAxOS43MDRoLTMwLjE0OGMtNS41NDUgMC0xMC4wMzkgNC40OTUtMTAuMDM5IDEwLjAzOXM0LjQ5NSAxMC4wMzkgMTAuMDM5IDEwLjAzOWgzMC4xNDhjMjEuOTM2IDAgMzkuNzgyLTE3Ljg0NiAzOS43ODItMzkuNzgyVjQyLjI0OWMwLTIxLjkzNi0xNy44NDYtMzkuNzgyLTM5Ljc4Mi0zOS43ODJ6JyB9KSxcblx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ3BhdGgnLCB7IGQ6ICdNNTExLjk5IDM3MS4zMDlhMTkuMzMxIDE5LjMzMSAwIDAgMC0xMi42NDQtMTcuNTY2di0uMDAxbC0xNjYuMDQ4LTYxLjYwM2MtMTEuMjQ1LTQuMTctMjMuNDk4LTEuNDk0LTMxLjk3OCA2Ljk4NC04LjQ4MSA4LjQ3OC0xMS4xNiAyMC43MzEtNi45OTIgMzEuOTc1bDYxLjQ0NyAxNjUuNzc1YzIuNzY3IDcuNDY0IDkuNjk2IDEyLjQzIDE3LjY1MyAxMi42NTIuMTg2LjAwNi4zNy4wMDguNTU0LjAwOCA3LjczNSAwIDE0LjY3Mi00LjUyNyAxNy43NzYtMTEuNjU1bDE2Ljk5Ny0zOS4wMjEgMzYuODUgMzYuODYxYzEwLjQ4OCAxMC40OTEgMjcuNTU3IDEwLjQ5NSAzOC4wNDkuMDA2bDE0LjIxNS0xNC4yMTJjNS4wODItNS4wODEgNy44ODItMTEuODM3IDcuODgzLTE5LjAyNC4wMDEtNy4xODYtMi43OTctMTMuOTQzLTcuODc3LTE5LjAyNUw0NjEuNDkgNDA3LjA3bDM5LjAxNi0xNy40MTdhMTkuMzMxIDE5LjMzMSAwIDAgMCAxMS40ODQtMTguMzQ0em0tNzIuMDA3IDIzLjM3MmExMC4wNCAxMC4wNCAwIDAgMC0zLjAwOCAxNi4yNjZsNDYuNyA0Ni43MTNhNi44MzMgNi44MzMgMCAwIDEtLjAwMSA5LjY1M2wtMTQuMjE1IDE0LjIxMmE2Ljc4IDYuNzggMCAwIDEtNC44MjYgMS45OThoLS4wMDFhNi43NzggNi43NzggMCAwIDEtNC44MjctMmwtNDcuMjY5LTQ3LjI4MmExMC4wMzggMTAuMDM4IDAgMCAwLTE2LjMwNCAzLjA4OWwtMjIuMjEyIDUwLjk5NC02MC44NjUtMTY0LjIwM2MtMi4xMTctNS43MTIgMS4yNzItOS43MDkgMi4zNjEtMTAuNzk4LjgzOS0uODM4IDMuNDAzLTMuMDQxIDcuMTQ4LTMuMDQxIDEuMTE3IDAgMi4zNC4xOTYgMy42NTEuNjgzbDE2NC40OTcgNjEuMDI3LTUwLjgyOSAyMi42ODl6bTUyLjM4Ni0yMi4xMWEuMDE2LjAxNiAwIDAgMC0uMDA3LS4wMDRsMy40OTItOS40MTItMy40ODUgOS40MTZ6TTI4NS45MjYgMjY5LjQ4bC0yOC4zNjgtMjguMzdjLTMuOTIxLTMuOTE5LTEwLjI3Ny0zLjkxOS0xNC4xOTggMC0zLjkyMSAzLjkyMS0zLjkyMSAxMC4yNzctLjAwMSAxNC4xOThsMjguMzY5IDI4LjM3YTEwLjAwOSAxMC4wMDkgMCAwIDAgNy4wOTkgMi45NGMyLjU2OSAwIDUuMTM5LS45OCA3LjA5OS0yLjk0IDMuOTIxLTMuOTIxIDMuOTIxLTEwLjI3NyAwLTE0LjE5OHpNMjU4LjA5NyAzMDIuNTUxaC00MC4xMmMtNS41NDUgMC0xMC4wMzkgNC40OTUtMTAuMDM5IDEwLjAzOXM0LjQ5NSAxMC4wMzkgMTAuMDM5IDEwLjAzOWg0MC4xMmM1LjU0NCAwIDEwLjAzOS00LjQ5NSAxMC4wMzktMTAuMDM5cy00LjQ5NS0xMC4wMzktMTAuMDM5LTEwLjAzOXpNMzE1LjcwNCAyMDQuODI0Yy01LjU0NCAwLTEwLjAzOSA0LjQ5NS0xMC4wMzkgMTAuMDM5djQwLjEyYzAgNS41NDQgNC40OTUgMTAuMDM5IDEwLjAzOSAxMC4wMzlzMTAuMDM5LTQuNDk1IDEwLjAzOS0xMC4wMzl2LTQwLjEyYzAtNS41NDQtNC40OTUtMTAuMDM5LTEwLjAzOS0xMC4wMzl6TTM5OS45ODcgMjIzLjQ3NGMtMy45MjEtMy45MTktMTAuMjc3LTMuOTItMTQuMTk4IDBsLTI4LjM2OSAyOC4zNjljLTMuOTIxIDMuOTIxLTMuOTIxIDEwLjI3Ny0uMDAxIDE0LjE5OGExMC4wMTEgMTAuMDExIDAgMCAwIDcuMSAyLjk0YzIuNTY5IDAgNS4xMzktLjk4IDcuMDk5LTIuOTRsMjguMzY5LTI4LjM2OWMzLjkyMS0zLjkyMSAzLjkyMS0xMC4yNzcgMC0xNC4xOTh6TTI3NC4yODQgMzQ5LjE3NmMtMy45MjEtMy45MTktMTAuMjc4LTMuOTE5LTE0LjE5OCAwbC0yOC4zNjkgMjguMzdjLTMuOTIxIDMuOTIxLTMuOTIgMTAuMjc3IDAgMTQuMTk4YTEwLjAwNyAxMC4wMDcgMCAwIDAgNy4wOTkgMi45NGMyLjU3IDAgNS4xMzktLjk4IDcuMDk5LTIuOTRsMjguMzY5LTI4LjM3YzMuOTIxLTMuOTIxIDMuOTItMTAuMjc3IDAtMTQuMTk4eicgfSksXG5cdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdjaXJjbGUnLCB7IGN4OiAxNzguMDEsIGN5OiAzMTIuNSwgcjogMTAuMDcgfSlcblx0KSxcblx0Y2F0ZWdvcnk6ICdnYmInLCAvLyBCbG9jayBjYXRlZ29yeSDigJQgR3JvdXAgYmxvY2tzIHRvZ2V0aGVyIGJhc2VkIG9uIGNvbW1vbiB0cmFpdHMgRS5nLiBjb21tb24sIGZvcm1hdHRpbmcsIGxheW91dCB3aWRnZXRzLCBlbWJlZC5cblx0a2V5d29yZHM6IFtfXygnQm9vdHN0cmFwJyksIF9fKCdCdXR0b24nKV0sXG5cdGF0dHJpYnV0ZXM6IHtcblx0XHRhbGlnbm1lbnQ6IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnXG5cdFx0fSxcblx0XHRjYXB0aW9uOiB7XG5cdFx0XHR0eXBlOiAnYXJyYXknLFxuXHRcdFx0c291cmNlOiAnY2hpbGRyZW4nLFxuXHRcdFx0c2VsZWN0b3I6ICdkaXYuY29udGVudCdcblx0XHR9LFxuXHRcdGlzQmxvY2tXaWR0aDoge1xuXHRcdFx0dHlwZTogJ2Jvb2xlYW4nXG5cdFx0fSxcblx0XHRpc091dGxpbmU6IHtcblx0XHRcdHR5cGU6ICdib29sZWFuJ1xuXHRcdH0sXG5cdFx0c2l6ZToge1xuXHRcdFx0dHlwZTogJ3N0cmluZycsXG5cdFx0XHRkZWZhdWx0OiAnJ1xuXHRcdH0sXG5cdFx0dGhlbWU6IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnLFxuXHRcdFx0ZGVmYXVsdDogJ3ByaW1hcnknXG5cdFx0fSxcblx0XHR1cmw6IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnLFxuXHRcdFx0c291cmNlOiAnYXR0cmlidXRlJyxcblx0XHRcdHNlbGVjdG9yOiAnYScsXG5cdFx0XHRhdHRyaWJ1dGU6ICdocmVmJ1xuXHRcdH1cblx0fSxcblxuXHQvKipcbiAgKiBUaGUgZWRpdCBmdW5jdGlvbiBkZXNjcmliZXMgdGhlIHN0cnVjdHVyZSBvZiB5b3VyIGJsb2NrIGluIHRoZSBjb250ZXh0IG9mIHRoZSBlZGl0b3IuXG4gICogVGhpcyByZXByZXNlbnRzIHdoYXQgdGhlIGVkaXRvciB3aWxsIHJlbmRlciB3aGVuIHRoZSBibG9jayBpcyB1c2VkLlxuICAqXG4gICogVGhlIFwiZWRpdFwiIHByb3BlcnR5IG11c3QgYmUgYSB2YWxpZCBmdW5jdGlvbi5cbiAgKlxuICAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL2Jsb2NrLWVkaXQtc2F2ZS9cbiAgKi9cblx0ZWRpdDogZnVuY3Rpb24gZWRpdChwcm9wcykge1xuXHRcdC8vIFRoZW1lIHNlbGVjdGlvblxuXHRcdHZhciBfcHJvcHMkYXR0cmlidXRlcyA9IHByb3BzLmF0dHJpYnV0ZXMsXG5cdFx0ICAgIGFsaWdubWVudCA9IF9wcm9wcyRhdHRyaWJ1dGVzLmFsaWdubWVudCxcblx0XHQgICAgY2FwdGlvbiA9IF9wcm9wcyRhdHRyaWJ1dGVzLmNhcHRpb24sXG5cdFx0ICAgIGlzQmxvY2tXaWR0aCA9IF9wcm9wcyRhdHRyaWJ1dGVzLmlzQmxvY2tXaWR0aCxcblx0XHQgICAgaXNPdXRsaW5lID0gX3Byb3BzJGF0dHJpYnV0ZXMuaXNPdXRsaW5lLFxuXHRcdCAgICBzaXplID0gX3Byb3BzJGF0dHJpYnV0ZXMuc2l6ZSxcblx0XHQgICAgdGhlbWUgPSBfcHJvcHMkYXR0cmlidXRlcy50aGVtZSxcblx0XHQgICAgdXJsID0gX3Byb3BzJGF0dHJpYnV0ZXMudXJsLFxuXHRcdCAgICBzZXRBdHRyaWJ1dGVzID0gcHJvcHMuc2V0QXR0cmlidXRlcyxcblx0XHQgICAgaXNTZWxlY3RlZCA9IHByb3BzLmlzU2VsZWN0ZWQ7XG5cblxuXHRcdGZ1bmN0aW9uIHNldFNpemUoZXZlbnQpIHtcblx0XHRcdHZhciBzZWxlY3RlZCA9IGV2ZW50LnRhcmdldC5xdWVyeVNlbGVjdG9yKCdvcHRpb246Y2hlY2tlZCcpO1xuXHRcdFx0c2V0QXR0cmlidXRlcyh7IHNpemU6IHNlbGVjdGVkLnZhbHVlIH0pO1xuXHRcdFx0ZXZlbnQucHJldmVudERlZmF1bHQoKTtcblx0XHR9XG5cblx0XHRmdW5jdGlvbiBzZXRUaGVtZShldmVudCkge1xuXHRcdFx0dmFyIHNlbGVjdGVkID0gZXZlbnQudGFyZ2V0LnF1ZXJ5U2VsZWN0b3IoJ29wdGlvbjpjaGVja2VkJyk7XG5cdFx0XHRzZXRBdHRyaWJ1dGVzKHsgdGhlbWU6IHNlbGVjdGVkLnZhbHVlIH0pO1xuXHRcdFx0ZXZlbnQucHJldmVudERlZmF1bHQoKTtcblx0XHR9XG5cblx0XHRmdW5jdGlvbiBvbkNoYW5nZUFsaWdubWVudChuZXdBbGlnbm1lbnQpIHtcblx0XHRcdHNldEF0dHJpYnV0ZXMoeyBhbGlnbm1lbnQ6IG5ld0FsaWdubWVudCB9KTtcblx0XHR9XG5cblx0XHRmdW5jdGlvbiBvbkNoYW5nZUNhcHRpb24obmV3Q2FwdGlvbikge1xuXHRcdFx0c2V0QXR0cmlidXRlcyh7IGNhcHRpb246IG5ld0NhcHRpb24gfSk7XG5cdFx0fVxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdEZyYWdtZW50LFxuXHRcdFx0bnVsbCxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0SW5zcGVjdG9yQ29udHJvbHMsXG5cdFx0XHRcdG51bGwsXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRQYW5lbEJvZHksXG5cdFx0XHRcdFx0eyB0aXRsZTogX18oJ1NlbGVjdCBvcHRpb25zJykgfSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRQYW5lbFJvdyxcblx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdCdsYWJlbCcsXG5cdFx0XHRcdFx0XHRcdG51bGwsXG5cdFx0XHRcdFx0XHRcdF9fKCdUaGVtZScpXG5cdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnZm9ybScsXG5cdFx0XHRcdFx0XHRcdHsgb25TdWJtaXQ6IHNldFRoZW1lIH0sXG5cdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHQnc2VsZWN0Jyxcblx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiB0aGVtZSwgb25DaGFuZ2U6IHNldFRoZW1lIH0sXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAncHJpbWFyeScgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdQcmltYXJ5J1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnc2Vjb25kYXJ5JyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J1NlY29uZGFyeSdcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ3N1Y2Nlc3MnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnU3VjY2Vzcydcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2RhbmdlcicgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdEYW5nZXInXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICd3YXJuaW5nJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J1dhcm5pbmcnXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdpbmZvJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J0luZm8nXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdsaWdodCcgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdMaWdodCdcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2RhcmsnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnRGFyaydcblx0XHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFBhbmVsUm93LFxuXHRcdFx0XHRcdFx0bnVsbCxcblx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChDaGVja2JveENvbnRyb2wsIHtcblx0XHRcdFx0XHRcdFx0bGFiZWw6IF9fKCdPdXRsaW5lIEJ1dHRvbj8nKSxcblx0XHRcdFx0XHRcdFx0Y2hlY2tlZDogaXNPdXRsaW5lLFxuXHRcdFx0XHRcdFx0XHRvbkNoYW5nZTogZnVuY3Rpb24gb25DaGFuZ2UoaXNPdXRsaW5lKSB7XG5cdFx0XHRcdFx0XHRcdFx0c2V0QXR0cmlidXRlcyh7IGlzT3V0bGluZTogaXNPdXRsaW5lIH0pO1xuXHRcdFx0XHRcdFx0XHR9XG5cdFx0XHRcdFx0XHR9KVxuXHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0UGFuZWxSb3csXG5cdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnbGFiZWwnLFxuXHRcdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0XHRfXygnU2l6ZScpXG5cdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnZm9ybScsXG5cdFx0XHRcdFx0XHRcdHsgb25TdWJtaXQ6IHNldFNpemUgfSxcblx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdCdzZWxlY3QnLFxuXHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6IHNpemUsIG9uQ2hhbmdlOiBzZXRTaXplIH0sXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J0RlZmF1bHQnXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdzbScgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdTbWFsbCdcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2xnJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J0xhcmdlJ1xuXHRcdFx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0UGFuZWxSb3csXG5cdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KENoZWNrYm94Q29udHJvbCwge1xuXHRcdFx0XHRcdFx0XHRsYWJlbDogX18oJ0Jsb2NrIEJ1dHRvbiAvIEZ1bGwgd2lkdGg/JyksXG5cdFx0XHRcdFx0XHRcdGNoZWNrZWQ6IGlzQmxvY2tXaWR0aCxcblx0XHRcdFx0XHRcdFx0b25DaGFuZ2U6IGZ1bmN0aW9uIG9uQ2hhbmdlKGlzQmxvY2tXaWR0aCkge1xuXHRcdFx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBpc0Jsb2NrV2lkdGg6IGlzQmxvY2tXaWR0aCB9KTtcblx0XHRcdFx0XHRcdFx0fVxuXHRcdFx0XHRcdFx0fSlcblx0XHRcdFx0XHQpXG5cdFx0XHRcdClcblx0XHRcdCksXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdEJsb2NrQ29udHJvbHMsXG5cdFx0XHRcdG51bGwsXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChBbGlnbm1lbnRUb29sYmFyLCB7XG5cdFx0XHRcdFx0dmFsdWU6IGFsaWdubWVudCxcblx0XHRcdFx0XHRvbkNoYW5nZTogb25DaGFuZ2VBbGlnbm1lbnRcblx0XHRcdFx0fSlcblx0XHRcdCksXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdCdkaXYnLFxuXHRcdFx0XHR7IGNsYXNzTmFtZTogcHJvcHMuY2xhc3NOYW1lLCBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChSaWNoVGV4dCwge1xuXHRcdFx0XHRcdGF1dG9Gb2N1czogdHJ1ZSxcblx0XHRcdFx0XHRjbGFzc05hbWU6ICdidG4gYnRuLScgKyAoaXNPdXRsaW5lID8gJ291dGxpbmUtJyA6ICcnKSArIHRoZW1lICsgJyAnICsgKHNpemUgIT09ICcnID8gJ2J0bi0nICsgc2l6ZSA6ICcnKSArICcgJyArIChpc0Jsb2NrV2lkdGggPyAnYnRuLWJsb2NrJyA6ICcnKSxcblx0XHRcdFx0XHRyb2xlOiAnYnV0dG9uJyxcblx0XHRcdFx0XHRocmVmOiAnIycsXG5cdFx0XHRcdFx0dGFnTmFtZTogJ2EnLFxuXHRcdFx0XHRcdG9uQ2hhbmdlOiBvbkNoYW5nZUNhcHRpb24sXG5cdFx0XHRcdFx0dmFsdWU6IGNhcHRpb25cblx0XHRcdFx0fSksXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChVUkxJbnB1dCwge1xuXHRcdFx0XHRcdGF1dG9Gb2N1czogZmFsc2UsXG5cdFx0XHRcdFx0Y2xhc3NOYW1lOiAnYnV0dG9uLXVybCcsXG5cdFx0XHRcdFx0dmFsdWU6IHVybCxcblx0XHRcdFx0XHRvbkNoYW5nZTogZnVuY3Rpb24gb25DaGFuZ2UodmFsdWUpIHtcblx0XHRcdFx0XHRcdHJldHVybiBzZXRBdHRyaWJ1dGVzKHsgdXJsOiB2YWx1ZSB9KTtcblx0XHRcdFx0XHR9XG5cdFx0XHRcdH0pXG5cdFx0XHQpXG5cdFx0KTtcblx0fSxcblxuXHQvKipcbiAgKiBUaGUgc2F2ZSBmdW5jdGlvbiBkZWZpbmVzIHRoZSB3YXkgaW4gd2hpY2ggdGhlIGRpZmZlcmVudCBhdHRyaWJ1dGVzIHNob3VsZCBiZSBjb21iaW5lZFxuICAqIGludG8gdGhlIGZpbmFsIG1hcmt1cCwgd2hpY2ggaXMgdGhlbiBzZXJpYWxpemVkIGJ5IEd1dGVuYmVyZyBpbnRvIHBvc3RfY29udGVudC5cbiAgKlxuICAqIFRoZSBcInNhdmVcIiBwcm9wZXJ0eSBtdXN0IGJlIHNwZWNpZmllZCBhbmQgbXVzdCBiZSBhIHZhbGlkIGZ1bmN0aW9uLlxuICAqXG4gICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvYmxvY2stZWRpdC1zYXZlL1xuICAqL1xuXHRzYXZlOiBmdW5jdGlvbiBzYXZlKHByb3BzKSB7XG5cblx0XHQvLyBJbml0aWFsaXplIHRoZW1lXG5cdFx0dmFyIF9wcm9wcyRhdHRyaWJ1dGVzMiA9IHByb3BzLmF0dHJpYnV0ZXMsXG5cdFx0ICAgIGFsaWdubWVudCA9IF9wcm9wcyRhdHRyaWJ1dGVzMi5hbGlnbm1lbnQsXG5cdFx0ICAgIGNhcHRpb24gPSBfcHJvcHMkYXR0cmlidXRlczIuY2FwdGlvbixcblx0XHQgICAgaXNCbG9ja1dpZHRoID0gX3Byb3BzJGF0dHJpYnV0ZXMyLmlzQmxvY2tXaWR0aCxcblx0XHQgICAgaXNPdXRsaW5lID0gX3Byb3BzJGF0dHJpYnV0ZXMyLmlzT3V0bGluZSxcblx0XHQgICAgc2l6ZSA9IF9wcm9wcyRhdHRyaWJ1dGVzMi5zaXplLFxuXHRcdCAgICB0aGVtZSA9IF9wcm9wcyRhdHRyaWJ1dGVzMi50aGVtZSxcblx0XHQgICAgdXJsID0gX3Byb3BzJGF0dHJpYnV0ZXMyLnVybDtcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdCdkaXYnLFxuXHRcdFx0eyBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRjbGFzc05hbWU6ICdidG4gYnRuLScgKyAoaXNPdXRsaW5lID8gJ291dGxpbmUtJyA6ICcnKSArIHRoZW1lICsgJyAnICsgKHNpemUgIT09ICcnID8gJ2J0bi0nICsgc2l6ZSA6ICcnKSArICcgJyArIChpc0Jsb2NrV2lkdGggPyAnYnRuLWJsb2NrJyA6ICcnKSxcblx0XHRcdFx0aHJlZjogdXJsLFxuXHRcdFx0XHRyb2xlOiAnYnV0dG9uJyxcblx0XHRcdFx0dGFnTmFtZTogJ2EnLFxuXHRcdFx0XHR2YWx1ZTogY2FwdGlvblxuXHRcdFx0fSlcblx0XHQpO1xuXHR9XG59KTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9idXR0b24uanNcbi8vIG1vZHVsZSBpZCA9IDlcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///9\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/blockquote', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Blockquote'), // Block title.
+	description: __('For quoting blocks of content from another source within your document.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ viewBox: '0 0 512 512' },
+		wp.element.createElement('path', { d: 'M228 119c5.523 0 10-4.478 10-10V77c0-27.57-22.43-50-50-50H50C22.43 27 0 49.43 0 77v119.988c0 27.57 22.43 50 50 50h64.692c-2.276 74.706-30.621 113.542-86.459 118.622a10 10 0 0 0-9.094 9.959V475a10 10 0 0 0 10.561 9.984c68.908-3.876 121.511-27.591 156.349-70.487C220.521 372.051 238 310.029 238 230.152v-35.819c0-5.522-4.477-10-10-10s-10 4.478-10 10v35.819c0 146.644-58.535 223.331-178.86 234.097v-79.836c30.411-4.73 53.934-18.886 70.007-42.161 17.049-24.691 25.694-60.106 25.694-105.264 0-5.522-4.477-10-10-10H50c-16.542 0-30-13.458-30-30V77c0-16.542 13.458-30 30-30h138c16.542 0 30 13.458 30 30v32c0 5.522 4.477 10 10 10zM462 27H324c-27.57 0-50 22.43-50 50v119.988c0 27.57 22.43 50 50 50h64.692c-2.276 74.706-30.621 113.542-86.459 118.622a10 10 0 0 0-9.094 9.959V475a10 10 0 0 0 10.561 9.984c68.908-3.876 121.511-27.591 156.349-70.487C494.521 372.052 512 310.029 512 230.152V77c0-27.57-22.43-50-50-50zm30 203.152c0 146.644-58.535 223.331-178.861 234.097v-79.836c30.412-4.73 53.935-18.886 70.007-42.161 17.049-24.69 25.694-60.105 25.694-105.264 0-5.522-4.477-10-10-10H324c-16.542 0-30-13.458-30-30V77c0-16.542 13.458-30 30-30h120v74.034c0 5.522 4.477 10 10 10s10-4.478 10-10v-73.96c15.612 1.034 28 14.057 28 29.926v153.152z' }),
+		wp.element.createElement('path', { d: 'M454 145.751c-5.523 0-10 4.527-10 10.049 0 5.522 4.477 10 10 10 5.522 0 10-4.478 10-10v-.099c0-5.522-4.477-9.95-10-9.95zM228 141.666c-5.523 0-10 4.478-10 10v.209c0 5.522 4.477 10 10 10s10-4.478 10-10v-.209c0-5.522-4.477-10-10-10z' })
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Blockquote'), __('Quote')],
+	attributes: {
+		textColor: {
+			source: 'string'
+		},
+		margin: {
+			type: 'string',
+			default: 'my-3'
+		},
+		quote: {
+			source: 'text',
+			selector: '.blockquote'
+		},
+		source: {
+			source: 'text',
+			selector: 'footer.blockquote-footer',
+			default: 'Someone famous in <cite>Source Title</cite>'
+		},
+		alignment: {
+			type: 'string'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    margin = _props$attributes.margin,
+		    quote = _props$attributes.quote,
+		    source = _props$attributes.source,
+		    setAttributes = props.setAttributes;
+
+		function setMargin(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ margin: selected.value });
+			event.preventDefault();
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Margin')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setMargin },
+							wp.element.createElement(
+								'select',
+								{ value: margin, onChange: setMargin },
+								wp.element.createElement(
+									'option',
+									{ value: 'my-0' },
+									'No margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-1' },
+									'my-1 - Tiny margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-2' },
+									'my-2 - Small margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-3' },
+									'my-3 - Middle margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-4' },
+									'my-4 - Large margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-5' },
+									'my-5 - Hugh margin'
+								)
+							)
+						)
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: function onChange(alignment) {
+						setAttributes({ alignment: alignment });
+					}
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className },
+				wp.element.createElement(
+					'blockquote',
+					{ className: 'blockquote ' + margin, style: { textAlign: alignment } },
+					wp.element.createElement(RichText, {
+						className: 'mb-0 blockquote',
+						tagName: 'p',
+						onChange: function onChange(quote) {
+							setAttributes({ quote: quote });
+						},
+						value: quote
+					}),
+					wp.element.createElement(RichText, {
+						className: 'blockquote-footer',
+						format: 'string',
+						tagName: 'footer',
+						onChange: function onChange(source) {
+							setAttributes({ source: source });
+						},
+						value: source
+					})
+				)
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    margin = _props$attributes2.margin,
+		    quote = _props$attributes2.quote,
+		    source = _props$attributes2.source;
+
+
+		return wp.element.createElement(
+			'div',
+			null,
+			wp.element.createElement(
+				'div',
+				{ className: 'blockquote ' + margin, style: { textAlign: alignment } },
+				wp.element.createElement(RichText.Content, {
+					className: 'mb-0 blockquote',
+					tagName: 'p',
+					value: quote
+				}),
+				wp.element.createElement(RichText.Content, {
+					className: 'blockquote-footer',
+					format: 'string',
+					tagName: 'footer',
+					value: source
+				})
+			)
+		);
+	}
+});
 
 /***/ }),
 /* 10 */
+/*!************************************!*\
+  !*** ./src/block/button/button.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_button__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/button */ 11);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+// Import JS.
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var _wp$components = wp.components,
+    CheckboxControl = _wp$components.CheckboxControl,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    InspectorControls = _wp$editor.InspectorControls,
+    RichText = _wp$editor.RichText,
+    URLInput = _wp$editor.URLInput;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/button', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Button'), // Block title.
+	description: __('Use Bootstrap’s custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ viewBox: '0 0 512 512' },
+		wp.element.createElement('path', { d: 'M466.959 2.467H39.783C17.847 2.467 0 20.313 0 42.249V282.76c0 21.936 17.847 39.782 39.783 39.782h98.397c5.545 0 10.039-4.495 10.039-10.039s-4.495-10.039-10.04-10.039H39.783c-10.865 0-19.704-8.839-19.704-19.704V42.249c0-10.865 8.839-19.704 19.704-19.704h427.176c10.865 0 19.704 8.839 19.704 19.704V282.76c0 10.865-8.839 19.704-19.704 19.704h-30.148c-5.545 0-10.039 4.495-10.039 10.039s4.495 10.039 10.039 10.039h30.148c21.936 0 39.782-17.846 39.782-39.782V42.249c0-21.936-17.846-39.782-39.782-39.782z' }),
+		wp.element.createElement('path', { d: 'M511.99 371.309a19.331 19.331 0 0 0-12.644-17.566v-.001l-166.048-61.603c-11.245-4.17-23.498-1.494-31.978 6.984-8.481 8.478-11.16 20.731-6.992 31.975l61.447 165.775c2.767 7.464 9.696 12.43 17.653 12.652.186.006.37.008.554.008 7.735 0 14.672-4.527 17.776-11.655l16.997-39.021 36.85 36.861c10.488 10.491 27.557 10.495 38.049.006l14.215-14.212c5.082-5.081 7.882-11.837 7.883-19.024.001-7.186-2.797-13.943-7.877-19.025L461.49 407.07l39.016-17.417a19.331 19.331 0 0 0 11.484-18.344zm-72.007 23.372a10.04 10.04 0 0 0-3.008 16.266l46.7 46.713a6.833 6.833 0 0 1-.001 9.653l-14.215 14.212a6.78 6.78 0 0 1-4.826 1.998h-.001a6.778 6.778 0 0 1-4.827-2l-47.269-47.282a10.038 10.038 0 0 0-16.304 3.089l-22.212 50.994-60.865-164.203c-2.117-5.712 1.272-9.709 2.361-10.798.839-.838 3.403-3.041 7.148-3.041 1.117 0 2.34.196 3.651.683l164.497 61.027-50.829 22.689zm52.386-22.11a.016.016 0 0 0-.007-.004l3.492-9.412-3.485 9.416zM285.926 269.48l-28.368-28.37c-3.921-3.919-10.277-3.919-14.198 0-3.921 3.921-3.921 10.277-.001 14.198l28.369 28.37a10.009 10.009 0 0 0 7.099 2.94c2.569 0 5.139-.98 7.099-2.94 3.921-3.921 3.921-10.277 0-14.198zM258.097 302.551h-40.12c-5.545 0-10.039 4.495-10.039 10.039s4.495 10.039 10.039 10.039h40.12c5.544 0 10.039-4.495 10.039-10.039s-4.495-10.039-10.039-10.039zM315.704 204.824c-5.544 0-10.039 4.495-10.039 10.039v40.12c0 5.544 4.495 10.039 10.039 10.039s10.039-4.495 10.039-10.039v-40.12c0-5.544-4.495-10.039-10.039-10.039zM399.987 223.474c-3.921-3.919-10.277-3.92-14.198 0l-28.369 28.369c-3.921 3.921-3.921 10.277-.001 14.198a10.011 10.011 0 0 0 7.1 2.94c2.569 0 5.139-.98 7.099-2.94l28.369-28.369c3.921-3.921 3.921-10.277 0-14.198zM274.284 349.176c-3.921-3.919-10.278-3.919-14.198 0l-28.369 28.37c-3.921 3.921-3.92 10.277 0 14.198a10.007 10.007 0 0 0 7.099 2.94c2.57 0 5.139-.98 7.099-2.94l28.369-28.37c3.921-3.921 3.92-10.277 0-14.198z' }),
+		wp.element.createElement('circle', { cx: 178.01, cy: 312.5, r: 10.07 })
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Button')],
+	attributes: {
+		alignment: {
+			type: 'string'
+		},
+		caption: {
+			type: 'array',
+			source: 'children',
+			selector: 'div.content'
+		},
+		isBlockWidth: {
+			type: 'boolean'
+		},
+		isOutline: {
+			type: 'boolean'
+		},
+		size: {
+			type: 'string',
+			default: ''
+		},
+		theme: {
+			type: 'string',
+			default: 'primary'
+		},
+		url: {
+			type: 'string',
+			source: 'attribute',
+			selector: 'a',
+			attribute: 'href'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		// Theme selection
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    caption = _props$attributes.caption,
+		    isBlockWidth = _props$attributes.isBlockWidth,
+		    isOutline = _props$attributes.isOutline,
+		    size = _props$attributes.size,
+		    theme = _props$attributes.theme,
+		    url = _props$attributes.url,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected;
+
+
+		function setSize(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ size: selected.value });
+			event.preventDefault();
+		}
+
+		function setTheme(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ theme: selected.value });
+			event.preventDefault();
+		}
+
+		function onChangeAlignment(newAlignment) {
+			setAttributes({ alignment: newAlignment });
+		}
+
+		function onChangeCaption(newCaption) {
+			setAttributes({ caption: newCaption });
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Theme')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setTheme },
+							wp.element.createElement(
+								'select',
+								{ value: theme, onChange: setTheme },
+								wp.element.createElement(
+									'option',
+									{ value: 'primary' },
+									'Primary'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'secondary' },
+									'Secondary'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'success' },
+									'Success'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'danger' },
+									'Danger'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'warning' },
+									'Warning'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'info' },
+									'Info'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'light' },
+									'Light'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'dark' },
+									'Dark'
+								)
+							)
+						)
+					),
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(CheckboxControl, {
+							label: __('Outline Button?'),
+							checked: isOutline,
+							onChange: function onChange(isOutline) {
+								setAttributes({ isOutline: isOutline });
+							}
+						})
+					),
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Size')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setSize },
+							wp.element.createElement(
+								'select',
+								{ value: size, onChange: setSize },
+								wp.element.createElement(
+									'option',
+									{ value: '' },
+									'Default'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'sm' },
+									'Small'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'lg' },
+									'Large'
+								)
+							)
+						)
+					),
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(CheckboxControl, {
+							label: __('Block Button / Full width?'),
+							checked: isBlockWidth,
+							onChange: function onChange(isBlockWidth) {
+								setAttributes({ isBlockWidth: isBlockWidth });
+							}
+						})
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: onChangeAlignment
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className, style: { textAlign: alignment } },
+				wp.element.createElement(RichText, {
+					autoFocus: true,
+					className: 'btn btn-' + (isOutline ? 'outline-' : '') + theme + ' ' + (size !== '' ? 'btn-' + size : '') + ' ' + (isBlockWidth ? 'btn-block' : ''),
+					role: 'button',
+					href: '#',
+					tagName: 'a',
+					onChange: onChangeCaption,
+					value: caption
+				}),
+				wp.element.createElement(URLInput, {
+					autoFocus: false,
+					className: 'button-url',
+					value: url,
+					onChange: function onChange(value) {
+						return setAttributes({ url: value });
+					}
+				})
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    caption = _props$attributes2.caption,
+		    isBlockWidth = _props$attributes2.isBlockWidth,
+		    isOutline = _props$attributes2.isOutline,
+		    size = _props$attributes2.size,
+		    theme = _props$attributes2.theme,
+		    url = _props$attributes2.url;
+
+
+		return wp.element.createElement(
+			'div',
+			{ style: { textAlign: alignment } },
+			wp.element.createElement(RichText.Content, {
+				className: 'btn btn-' + (isOutline ? 'outline-' : '') + theme + ' ' + (size !== '' ? 'btn-' + size : '') + ' ' + (isBlockWidth ? 'btn-block' : ''),
+				href: url,
+				role: 'button',
+				tagName: 'a',
+				value: caption
+			})
+		);
+	}
+});
+
+/***/ }),
+/* 11 */
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap/js/src/button.js ***!
   \*************************************************/
@@ -172,40 +1785,613 @@ eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __web
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);\n\n\n/**\n * --------------------------------------------------------------------------\n * Bootstrap (v4.1.3): button.js\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n * --------------------------------------------------------------------------\n */\n\nconst Button = (($) => {\n  /**\n   * ------------------------------------------------------------------------\n   * Constants\n   * ------------------------------------------------------------------------\n   */\n\n  const NAME                = 'button'\n  const VERSION             = '4.1.3'\n  const DATA_KEY            = 'bs.button'\n  const EVENT_KEY           = `.${DATA_KEY}`\n  const DATA_API_KEY        = '.data-api'\n  const JQUERY_NO_CONFLICT  = $.fn[NAME]\n\n  const ClassName = {\n    ACTIVE : 'active',\n    BUTTON : 'btn',\n    FOCUS  : 'focus'\n  }\n\n  const Selector = {\n    DATA_TOGGLE_CARROT : '[data-toggle^=\"button\"]',\n    DATA_TOGGLE        : '[data-toggle=\"buttons\"]',\n    INPUT              : 'input',\n    ACTIVE             : '.active',\n    BUTTON             : '.btn'\n  }\n\n  const Event = {\n    CLICK_DATA_API      : `click${EVENT_KEY}${DATA_API_KEY}`,\n    FOCUS_BLUR_DATA_API : `focus${EVENT_KEY}${DATA_API_KEY} ` +\n                            `blur${EVENT_KEY}${DATA_API_KEY}`\n  }\n\n  /**\n   * ------------------------------------------------------------------------\n   * Class Definition\n   * ------------------------------------------------------------------------\n   */\n\n  class Button {\n    constructor(element) {\n      this._element = element\n    }\n\n    // Getters\n\n    static get VERSION() {\n      return VERSION\n    }\n\n    // Public\n\n    toggle() {\n      let triggerChangeEvent = true\n      let addAriaPressed = true\n      const rootElement = $(this._element).closest(\n        Selector.DATA_TOGGLE\n      )[0]\n\n      if (rootElement) {\n        const input = this._element.querySelector(Selector.INPUT)\n\n        if (input) {\n          if (input.type === 'radio') {\n            if (input.checked &&\n              this._element.classList.contains(ClassName.ACTIVE)) {\n              triggerChangeEvent = false\n            } else {\n              const activeElement = rootElement.querySelector(Selector.ACTIVE)\n\n              if (activeElement) {\n                $(activeElement).removeClass(ClassName.ACTIVE)\n              }\n            }\n          }\n\n          if (triggerChangeEvent) {\n            if (input.hasAttribute('disabled') ||\n              rootElement.hasAttribute('disabled') ||\n              input.classList.contains('disabled') ||\n              rootElement.classList.contains('disabled')) {\n              return\n            }\n            input.checked = !this._element.classList.contains(ClassName.ACTIVE)\n            $(input).trigger('change')\n          }\n\n          input.focus()\n          addAriaPressed = false\n        }\n      }\n\n      if (addAriaPressed) {\n        this._element.setAttribute('aria-pressed',\n          !this._element.classList.contains(ClassName.ACTIVE))\n      }\n\n      if (triggerChangeEvent) {\n        $(this._element).toggleClass(ClassName.ACTIVE)\n      }\n    }\n\n    dispose() {\n      $.removeData(this._element, DATA_KEY)\n      this._element = null\n    }\n\n    // Static\n\n    static _jQueryInterface(config) {\n      return this.each(function () {\n        let data = $(this).data(DATA_KEY)\n\n        if (!data) {\n          data = new Button(this)\n          $(this).data(DATA_KEY, data)\n        }\n\n        if (config === 'toggle') {\n          data[config]()\n        }\n      })\n    }\n  }\n\n  /**\n   * ------------------------------------------------------------------------\n   * Data Api implementation\n   * ------------------------------------------------------------------------\n   */\n\n  $(document)\n    .on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, (event) => {\n      event.preventDefault()\n\n      let button = event.target\n\n      if (!$(button).hasClass(ClassName.BUTTON)) {\n        button = $(button).closest(Selector.BUTTON)\n      }\n\n      Button._jQueryInterface.call($(button), 'toggle')\n    })\n    .on(Event.FOCUS_BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, (event) => {\n      const button = $(event.target).closest(Selector.BUTTON)[0]\n      $(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(event.type))\n    })\n\n  /**\n   * ------------------------------------------------------------------------\n   * jQuery\n   * ------------------------------------------------------------------------\n   */\n\n  $.fn[NAME] = Button._jQueryInterface\n  $.fn[NAME].Constructor = Button\n  $.fn[NAME].noConflict = function () {\n    $.fn[NAME] = JQUERY_NO_CONFLICT\n    return Button._jQueryInterface\n  }\n\n  return Button\n})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)\n\n/* unused harmony default export */ var _unused_webpack_default_export = (Button);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTAuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9ub2RlX21vZHVsZXMvYm9vdHN0cmFwL2pzL3NyYy9idXR0b24uanM/MDJmNCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJCBmcm9tICdqcXVlcnknXG5cbi8qKlxuICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAqIEJvb3RzdHJhcCAodjQuMS4zKTogYnV0dG9uLmpzXG4gKiBMaWNlbnNlZCB1bmRlciBNSVQgKGh0dHBzOi8vZ2l0aHViLmNvbS90d2JzL2Jvb3RzdHJhcC9ibG9iL21hc3Rlci9MSUNFTlNFKVxuICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAqL1xuXG5jb25zdCBCdXR0b24gPSAoKCQpID0+IHtcbiAgLyoqXG4gICAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgKiBDb25zdGFudHNcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqL1xuXG4gIGNvbnN0IE5BTUUgICAgICAgICAgICAgICAgPSAnYnV0dG9uJ1xuICBjb25zdCBWRVJTSU9OICAgICAgICAgICAgID0gJzQuMS4zJ1xuICBjb25zdCBEQVRBX0tFWSAgICAgICAgICAgID0gJ2JzLmJ1dHRvbidcbiAgY29uc3QgRVZFTlRfS0VZICAgICAgICAgICA9IGAuJHtEQVRBX0tFWX1gXG4gIGNvbnN0IERBVEFfQVBJX0tFWSAgICAgICAgPSAnLmRhdGEtYXBpJ1xuICBjb25zdCBKUVVFUllfTk9fQ09ORkxJQ1QgID0gJC5mbltOQU1FXVxuXG4gIGNvbnN0IENsYXNzTmFtZSA9IHtcbiAgICBBQ1RJVkUgOiAnYWN0aXZlJyxcbiAgICBCVVRUT04gOiAnYnRuJyxcbiAgICBGT0NVUyAgOiAnZm9jdXMnXG4gIH1cblxuICBjb25zdCBTZWxlY3RvciA9IHtcbiAgICBEQVRBX1RPR0dMRV9DQVJST1QgOiAnW2RhdGEtdG9nZ2xlXj1cImJ1dHRvblwiXScsXG4gICAgREFUQV9UT0dHTEUgICAgICAgIDogJ1tkYXRhLXRvZ2dsZT1cImJ1dHRvbnNcIl0nLFxuICAgIElOUFVUICAgICAgICAgICAgICA6ICdpbnB1dCcsXG4gICAgQUNUSVZFICAgICAgICAgICAgIDogJy5hY3RpdmUnLFxuICAgIEJVVFRPTiAgICAgICAgICAgICA6ICcuYnRuJ1xuICB9XG5cbiAgY29uc3QgRXZlbnQgPSB7XG4gICAgQ0xJQ0tfREFUQV9BUEkgICAgICA6IGBjbGljayR7RVZFTlRfS0VZfSR7REFUQV9BUElfS0VZfWAsXG4gICAgRk9DVVNfQkxVUl9EQVRBX0FQSSA6IGBmb2N1cyR7RVZFTlRfS0VZfSR7REFUQV9BUElfS0VZfSBgICtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBgYmx1ciR7RVZFTlRfS0VZfSR7REFUQV9BUElfS0VZfWBcbiAgfVxuXG4gIC8qKlxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICogQ2xhc3MgRGVmaW5pdGlvblxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICovXG5cbiAgY2xhc3MgQnV0dG9uIHtcbiAgICBjb25zdHJ1Y3RvcihlbGVtZW50KSB7XG4gICAgICB0aGlzLl9lbGVtZW50ID0gZWxlbWVudFxuICAgIH1cblxuICAgIC8vIEdldHRlcnNcblxuICAgIHN0YXRpYyBnZXQgVkVSU0lPTigpIHtcbiAgICAgIHJldHVybiBWRVJTSU9OXG4gICAgfVxuXG4gICAgLy8gUHVibGljXG5cbiAgICB0b2dnbGUoKSB7XG4gICAgICBsZXQgdHJpZ2dlckNoYW5nZUV2ZW50ID0gdHJ1ZVxuICAgICAgbGV0IGFkZEFyaWFQcmVzc2VkID0gdHJ1ZVxuICAgICAgY29uc3Qgcm9vdEVsZW1lbnQgPSAkKHRoaXMuX2VsZW1lbnQpLmNsb3Nlc3QoXG4gICAgICAgIFNlbGVjdG9yLkRBVEFfVE9HR0xFXG4gICAgICApWzBdXG5cbiAgICAgIGlmIChyb290RWxlbWVudCkge1xuICAgICAgICBjb25zdCBpbnB1dCA9IHRoaXMuX2VsZW1lbnQucXVlcnlTZWxlY3RvcihTZWxlY3Rvci5JTlBVVClcblxuICAgICAgICBpZiAoaW5wdXQpIHtcbiAgICAgICAgICBpZiAoaW5wdXQudHlwZSA9PT0gJ3JhZGlvJykge1xuICAgICAgICAgICAgaWYgKGlucHV0LmNoZWNrZWQgJiZcbiAgICAgICAgICAgICAgdGhpcy5fZWxlbWVudC5jbGFzc0xpc3QuY29udGFpbnMoQ2xhc3NOYW1lLkFDVElWRSkpIHtcbiAgICAgICAgICAgICAgdHJpZ2dlckNoYW5nZUV2ZW50ID0gZmFsc2VcbiAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgIGNvbnN0IGFjdGl2ZUVsZW1lbnQgPSByb290RWxlbWVudC5xdWVyeVNlbGVjdG9yKFNlbGVjdG9yLkFDVElWRSlcblxuICAgICAgICAgICAgICBpZiAoYWN0aXZlRWxlbWVudCkge1xuICAgICAgICAgICAgICAgICQoYWN0aXZlRWxlbWVudCkucmVtb3ZlQ2xhc3MoQ2xhc3NOYW1lLkFDVElWRSlcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfVxuICAgICAgICAgIH1cblxuICAgICAgICAgIGlmICh0cmlnZ2VyQ2hhbmdlRXZlbnQpIHtcbiAgICAgICAgICAgIGlmIChpbnB1dC5oYXNBdHRyaWJ1dGUoJ2Rpc2FibGVkJykgfHxcbiAgICAgICAgICAgICAgcm9vdEVsZW1lbnQuaGFzQXR0cmlidXRlKCdkaXNhYmxlZCcpIHx8XG4gICAgICAgICAgICAgIGlucHV0LmNsYXNzTGlzdC5jb250YWlucygnZGlzYWJsZWQnKSB8fFxuICAgICAgICAgICAgICByb290RWxlbWVudC5jbGFzc0xpc3QuY29udGFpbnMoJ2Rpc2FibGVkJykpIHtcbiAgICAgICAgICAgICAgcmV0dXJuXG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBpbnB1dC5jaGVja2VkID0gIXRoaXMuX2VsZW1lbnQuY2xhc3NMaXN0LmNvbnRhaW5zKENsYXNzTmFtZS5BQ1RJVkUpXG4gICAgICAgICAgICAkKGlucHV0KS50cmlnZ2VyKCdjaGFuZ2UnKVxuICAgICAgICAgIH1cblxuICAgICAgICAgIGlucHV0LmZvY3VzKClcbiAgICAgICAgICBhZGRBcmlhUHJlc3NlZCA9IGZhbHNlXG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgaWYgKGFkZEFyaWFQcmVzc2VkKSB7XG4gICAgICAgIHRoaXMuX2VsZW1lbnQuc2V0QXR0cmlidXRlKCdhcmlhLXByZXNzZWQnLFxuICAgICAgICAgICF0aGlzLl9lbGVtZW50LmNsYXNzTGlzdC5jb250YWlucyhDbGFzc05hbWUuQUNUSVZFKSlcbiAgICAgIH1cblxuICAgICAgaWYgKHRyaWdnZXJDaGFuZ2VFdmVudCkge1xuICAgICAgICAkKHRoaXMuX2VsZW1lbnQpLnRvZ2dsZUNsYXNzKENsYXNzTmFtZS5BQ1RJVkUpXG4gICAgICB9XG4gICAgfVxuXG4gICAgZGlzcG9zZSgpIHtcbiAgICAgICQucmVtb3ZlRGF0YSh0aGlzLl9lbGVtZW50LCBEQVRBX0tFWSlcbiAgICAgIHRoaXMuX2VsZW1lbnQgPSBudWxsXG4gICAgfVxuXG4gICAgLy8gU3RhdGljXG5cbiAgICBzdGF0aWMgX2pRdWVyeUludGVyZmFjZShjb25maWcpIHtcbiAgICAgIHJldHVybiB0aGlzLmVhY2goZnVuY3Rpb24gKCkge1xuICAgICAgICBsZXQgZGF0YSA9ICQodGhpcykuZGF0YShEQVRBX0tFWSlcblxuICAgICAgICBpZiAoIWRhdGEpIHtcbiAgICAgICAgICBkYXRhID0gbmV3IEJ1dHRvbih0aGlzKVxuICAgICAgICAgICQodGhpcykuZGF0YShEQVRBX0tFWSwgZGF0YSlcbiAgICAgICAgfVxuXG4gICAgICAgIGlmIChjb25maWcgPT09ICd0b2dnbGUnKSB7XG4gICAgICAgICAgZGF0YVtjb25maWddKClcbiAgICAgICAgfVxuICAgICAgfSlcbiAgICB9XG4gIH1cblxuICAvKipcbiAgICogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAqIERhdGEgQXBpIGltcGxlbWVudGF0aW9uXG4gICAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgKi9cblxuICAkKGRvY3VtZW50KVxuICAgIC5vbihFdmVudC5DTElDS19EQVRBX0FQSSwgU2VsZWN0b3IuREFUQV9UT0dHTEVfQ0FSUk9ULCAoZXZlbnQpID0+IHtcbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KClcblxuICAgICAgbGV0IGJ1dHRvbiA9IGV2ZW50LnRhcmdldFxuXG4gICAgICBpZiAoISQoYnV0dG9uKS5oYXNDbGFzcyhDbGFzc05hbWUuQlVUVE9OKSkge1xuICAgICAgICBidXR0b24gPSAkKGJ1dHRvbikuY2xvc2VzdChTZWxlY3Rvci5CVVRUT04pXG4gICAgICB9XG5cbiAgICAgIEJ1dHRvbi5falF1ZXJ5SW50ZXJmYWNlLmNhbGwoJChidXR0b24pLCAndG9nZ2xlJylcbiAgICB9KVxuICAgIC5vbihFdmVudC5GT0NVU19CTFVSX0RBVEFfQVBJLCBTZWxlY3Rvci5EQVRBX1RPR0dMRV9DQVJST1QsIChldmVudCkgPT4ge1xuICAgICAgY29uc3QgYnV0dG9uID0gJChldmVudC50YXJnZXQpLmNsb3Nlc3QoU2VsZWN0b3IuQlVUVE9OKVswXVxuICAgICAgJChidXR0b24pLnRvZ2dsZUNsYXNzKENsYXNzTmFtZS5GT0NVUywgL15mb2N1cyhpbik/JC8udGVzdChldmVudC50eXBlKSlcbiAgICB9KVxuXG4gIC8qKlxuICAgKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbiAgICogalF1ZXJ5XG4gICAqIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgKi9cblxuICAkLmZuW05BTUVdID0gQnV0dG9uLl9qUXVlcnlJbnRlcmZhY2VcbiAgJC5mbltOQU1FXS5Db25zdHJ1Y3RvciA9IEJ1dHRvblxuICAkLmZuW05BTUVdLm5vQ29uZmxpY3QgPSBmdW5jdGlvbiAoKSB7XG4gICAgJC5mbltOQU1FXSA9IEpRVUVSWV9OT19DT05GTElDVFxuICAgIHJldHVybiBCdXR0b24uX2pRdWVyeUludGVyZmFjZVxuICB9XG5cbiAgcmV0dXJuIEJ1dHRvblxufSkoJClcblxuZXhwb3J0IGRlZmF1bHQgQnV0dG9uXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL25vZGVfbW9kdWxlcy9ib290c3RyYXAvanMvc3JjL2J1dHRvbi5qc1xuLy8gbW9kdWxlIGlkID0gMTBcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///10\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 
-/***/ }),
-/* 11 */
-/*!********************************!*\
-  !*** ./src/block/container.js ***!
-  \********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    InnerBlocks = _wp$editor.InnerBlocks,\n    RichText = _wp$editor.RichText;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/container', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Container'), // Block title.\n\tdescription: __('Containers are the most basic layout element in Bootstrap and are required when using our default grid system. Choose from a responsive, fixed-width container (meaning its max-width changes at each breakpoint) or fluid-width (meaning it’s 100% wide all the time).'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ viewBox: '0 0 512 512' },\n\t\twp.element.createElement('path', { d: 'M16.797 51.094C-.044 52.193 0 67.02 0 67.02l1.244 386.934C1.26 458.667 3.821 460 8.533 460h494.933a8.533 8.533 0 0 0 8.533-8.533V58.933c-.071-.893 1.598-6.042-13.602-7.431 0 0-405.152-1.724-481.6-.408zm68.536 391.839H17.067V67.467h68.267v375.466zm324.267 0H102.4V67.467h307.2zm85.333 0h-68.267V67.467h68.267z' })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Container'), __('Grid')],\n\tattributes: {\n\t\tcontent: {\n\t\t\ttype: 'array',\n\t\t\tsource: 'children',\n\t\t\tselector: 'div.content'\n\t\t},\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    content = _props$attributes.content,\n\t\t    setAttributes = props.setAttributes;\n\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className, style: { textAlign: alignment } },\n\t\t\t\twp.element.createElement(InnerBlocks, null)\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar alignment = props.attributes.alignment;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\t{ style: { textAlign: alignment } },\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'container' },\n\t\t\t\twp.element.createElement(InnerBlocks.Content, null)\n\t\t\t)\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTEuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvYmxvY2svY29udGFpbmVyLmpzPzk5OTMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBCTE9DSzogYm9vdHN0cmFwLWJsb2Nrc1xuICpcbiAqIFJlZ2lzdGVyaW5nIGEgYmFzaWMgYmxvY2sgd2l0aCBHdXRlbmJlcmcuXG4gKiBTaW1wbGUgYmxvY2ssIHJlbmRlcnMgYW5kIHNhdmVzIHRoZSBzYW1lIGNvbnRlbnQgd2l0aG91dCBhbnkgaW50ZXJhY3Rpdml0eS5cbiAqL1xuXG4vLyAgSW1wb3J0IENTUy5cbmltcG9ydCAnLi9zdHlsZS5zY3NzJztcbmltcG9ydCAnLi9lZGl0b3Iuc2Nzcyc7XG5cbnZhciBfXyA9IHdwLmkxOG4uX187IC8vIEltcG9ydCBfXygpIGZyb20gd3AuaTE4blxuXG52YXIgcmVnaXN0ZXJCbG9ja1R5cGUgPSB3cC5ibG9ja3MucmVnaXN0ZXJCbG9ja1R5cGU7IC8vIEltcG9ydCByZWdpc3RlckJsb2NrVHlwZSgpIGZyb20gd3AuYmxvY2tzXG5cbnZhciBGcmFnbWVudCA9IHdwLmVsZW1lbnQuRnJhZ21lbnQ7XG52YXIgX3dwJGVkaXRvciA9IHdwLmVkaXRvcixcbiAgICBBbGlnbm1lbnRUb29sYmFyID0gX3dwJGVkaXRvci5BbGlnbm1lbnRUb29sYmFyLFxuICAgIEJsb2NrQ29udHJvbHMgPSBfd3AkZWRpdG9yLkJsb2NrQ29udHJvbHMsXG4gICAgSW5uZXJCbG9ja3MgPSBfd3AkZWRpdG9yLklubmVyQmxvY2tzLFxuICAgIFJpY2hUZXh0ID0gX3dwJGVkaXRvci5SaWNoVGV4dDtcbi8qKlxuICogUmVnaXN0ZXI6IGFhIEd1dGVuYmVyZyBCbG9jay5cbiAqXG4gKiBSZWdpc3RlcnMgYSBuZXcgYmxvY2sgcHJvdmlkZWQgYSB1bmlxdWUgbmFtZSBhbmQgYW4gb2JqZWN0IGRlZmluaW5nIGl0c1xuICogYmVoYXZpb3IuIE9uY2UgcmVnaXN0ZXJlZCwgdGhlIGJsb2NrIGlzIG1hZGUgZWRpdG9yIGFzIGFuIG9wdGlvbiB0byBhbnlcbiAqIGVkaXRvciBpbnRlcmZhY2Ugd2hlcmUgYmxvY2tzIGFyZSBpbXBsZW1lbnRlZC5cbiAqXG4gKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9cbiAqIEBwYXJhbSAge3N0cmluZ30gICBuYW1lICAgICBCbG9jayBuYW1lLlxuICogQHBhcmFtICB7T2JqZWN0fSAgIHNldHRpbmdzIEJsb2NrIHNldHRpbmdzLlxuICogQHJldHVybiB7P1dQQmxvY2t9ICAgICAgICAgIFRoZSBibG9jaywgaWYgaXQgaGFzIGJlZW4gc3VjY2Vzc2Z1bGx5XG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVnaXN0ZXJlZDsgb3RoZXJ3aXNlIGB1bmRlZmluZWRgLlxuICovXG5cbnJlZ2lzdGVyQmxvY2tUeXBlKCdnYmIvY29udGFpbmVyJywge1xuXHQvLyBCbG9jayBuYW1lLiBCbG9jayBuYW1lcyBtdXN0IGJlIHN0cmluZyB0aGF0IGNvbnRhaW5zIGEgbmFtZXNwYWNlIHByZWZpeC4gRXhhbXBsZTogbXktcGx1Z2luL215LWN1c3RvbS1ibG9jay5cblx0dGl0bGU6IF9fKCdCb290c3RyYXAgQ29udGFpbmVyJyksIC8vIEJsb2NrIHRpdGxlLlxuXHRkZXNjcmlwdGlvbjogX18oJ0NvbnRhaW5lcnMgYXJlIHRoZSBtb3N0IGJhc2ljIGxheW91dCBlbGVtZW50IGluIEJvb3RzdHJhcCBhbmQgYXJlIHJlcXVpcmVkIHdoZW4gdXNpbmcgb3VyIGRlZmF1bHQgZ3JpZCBzeXN0ZW0uIENob29zZSBmcm9tIGEgcmVzcG9uc2l2ZSwgZml4ZWQtd2lkdGggY29udGFpbmVyIChtZWFuaW5nIGl0cyBtYXgtd2lkdGggY2hhbmdlcyBhdCBlYWNoIGJyZWFrcG9pbnQpIG9yIGZsdWlkLXdpZHRoIChtZWFuaW5nIGl04oCZcyAxMDAlIHdpZGUgYWxsIHRoZSB0aW1lKS4nKSwgLy8gQmxvY2sgdGl0bGUuXG5cdGljb246IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHQnc3ZnJyxcblx0XHR7IHZpZXdCb3g6ICcwIDAgNTEyIDUxMicgfSxcblx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ3BhdGgnLCB7IGQ6ICdNMTYuNzk3IDUxLjA5NEMtLjA0NCA1Mi4xOTMgMCA2Ny4wMiAwIDY3LjAybDEuMjQ0IDM4Ni45MzRDMS4yNiA0NTguNjY3IDMuODIxIDQ2MCA4LjUzMyA0NjBoNDk0LjkzM2E4LjUzMyA4LjUzMyAwIDAgMCA4LjUzMy04LjUzM1Y1OC45MzNjLS4wNzEtLjg5MyAxLjU5OC02LjA0Mi0xMy42MDItNy40MzEgMCAwLTQwNS4xNTItMS43MjQtNDgxLjYtLjQwOHptNjguNTM2IDM5MS44MzlIMTcuMDY3VjY3LjQ2N2g2OC4yNjd2Mzc1LjQ2NnptMzI0LjI2NyAwSDEwMi40VjY3LjQ2N2gzMDcuMnptODUuMzMzIDBoLTY4LjI2N1Y2Ny40NjdoNjguMjY3eicgfSlcblx0KSxcblx0Y2F0ZWdvcnk6ICdnYmInLCAvLyBCbG9jayBjYXRlZ29yeSDigJQgR3JvdXAgYmxvY2tzIHRvZ2V0aGVyIGJhc2VkIG9uIGNvbW1vbiB0cmFpdHMgRS5nLiBjb21tb24sIGZvcm1hdHRpbmcsIGxheW91dCB3aWRnZXRzLCBlbWJlZC5cblx0a2V5d29yZHM6IFtfXygnQm9vdHN0cmFwJyksIF9fKCdDb250YWluZXInKSwgX18oJ0dyaWQnKV0sXG5cdGF0dHJpYnV0ZXM6IHtcblx0XHRjb250ZW50OiB7XG5cdFx0XHR0eXBlOiAnYXJyYXknLFxuXHRcdFx0c291cmNlOiAnY2hpbGRyZW4nLFxuXHRcdFx0c2VsZWN0b3I6ICdkaXYuY29udGVudCdcblx0XHR9LFxuXHRcdGFsaWdubWVudDoge1xuXHRcdFx0dHlwZTogJ3N0cmluZydcblx0XHR9XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIGVkaXQgZnVuY3Rpb24gZGVzY3JpYmVzIHRoZSBzdHJ1Y3R1cmUgb2YgeW91ciBibG9jayBpbiB0aGUgY29udGV4dCBvZiB0aGUgZWRpdG9yLlxuICAqIFRoaXMgcmVwcmVzZW50cyB3aGF0IHRoZSBlZGl0b3Igd2lsbCByZW5kZXIgd2hlbiB0aGUgYmxvY2sgaXMgdXNlZC5cbiAgKlxuICAqIFRoZSBcImVkaXRcIiBwcm9wZXJ0eSBtdXN0IGJlIGEgdmFsaWQgZnVuY3Rpb24uXG4gICpcbiAgKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9ibG9jay1lZGl0LXNhdmUvXG4gICovXG5cdGVkaXQ6IGZ1bmN0aW9uIGVkaXQocHJvcHMpIHtcblx0XHR2YXIgX3Byb3BzJGF0dHJpYnV0ZXMgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5hbGlnbm1lbnQsXG5cdFx0ICAgIGNvbnRlbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5jb250ZW50LFxuXHRcdCAgICBzZXRBdHRyaWJ1dGVzID0gcHJvcHMuc2V0QXR0cmlidXRlcztcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdEZyYWdtZW50LFxuXHRcdFx0bnVsbCxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdHsgY2xhc3NOYW1lOiBwcm9wcy5jbGFzc05hbWUsIHN0eWxlOiB7IHRleHRBbGlnbjogYWxpZ25tZW50IH0gfSxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KElubmVyQmxvY2tzLCBudWxsKVxuXHRcdFx0KVxuXHRcdCk7XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIHNhdmUgZnVuY3Rpb24gZGVmaW5lcyB0aGUgd2F5IGluIHdoaWNoIHRoZSBkaWZmZXJlbnQgYXR0cmlidXRlcyBzaG91bGQgYmUgY29tYmluZWRcbiAgKiBpbnRvIHRoZSBmaW5hbCBtYXJrdXAsIHdoaWNoIGlzIHRoZW4gc2VyaWFsaXplZCBieSBHdXRlbmJlcmcgaW50byBwb3N0X2NvbnRlbnQuXG4gICpcbiAgKiBUaGUgXCJzYXZlXCIgcHJvcGVydHkgbXVzdCBiZSBzcGVjaWZpZWQgYW5kIG11c3QgYmUgYSB2YWxpZCBmdW5jdGlvbi5cbiAgKlxuICAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL2Jsb2NrLWVkaXQtc2F2ZS9cbiAgKi9cblx0c2F2ZTogZnVuY3Rpb24gc2F2ZShwcm9wcykge1xuXG5cdFx0Ly8gSW5pdGlhbGl6ZSB0aGVtZVxuXHRcdHZhciBhbGlnbm1lbnQgPSBwcm9wcy5hdHRyaWJ1dGVzLmFsaWdubWVudDtcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdCdkaXYnLFxuXHRcdFx0eyBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdCdkaXYnLFxuXHRcdFx0XHR7IGNsYXNzTmFtZTogJ2NvbnRhaW5lcicgfSxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KElubmVyQmxvY2tzLkNvbnRlbnQsIG51bGwpXG5cdFx0XHQpXG5cdFx0KTtcblx0fVxufSk7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2svY29udGFpbmVyLmpzXG4vLyBtb2R1bGUgaWQgPSAxMVxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///11\n");
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.1.3): button.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+const Button = (($) => {
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  const NAME                = 'button'
+  const VERSION             = '4.1.3'
+  const DATA_KEY            = 'bs.button'
+  const EVENT_KEY           = `.${DATA_KEY}`
+  const DATA_API_KEY        = '.data-api'
+  const JQUERY_NO_CONFLICT  = $.fn[NAME]
+
+  const ClassName = {
+    ACTIVE : 'active',
+    BUTTON : 'btn',
+    FOCUS  : 'focus'
+  }
+
+  const Selector = {
+    DATA_TOGGLE_CARROT : '[data-toggle^="button"]',
+    DATA_TOGGLE        : '[data-toggle="buttons"]',
+    INPUT              : 'input',
+    ACTIVE             : '.active',
+    BUTTON             : '.btn'
+  }
+
+  const Event = {
+    CLICK_DATA_API      : `click${EVENT_KEY}${DATA_API_KEY}`,
+    FOCUS_BLUR_DATA_API : `focus${EVENT_KEY}${DATA_API_KEY} ` +
+                            `blur${EVENT_KEY}${DATA_API_KEY}`
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  class Button {
+    constructor(element) {
+      this._element = element
+    }
+
+    // Getters
+
+    static get VERSION() {
+      return VERSION
+    }
+
+    // Public
+
+    toggle() {
+      let triggerChangeEvent = true
+      let addAriaPressed = true
+      const rootElement = $(this._element).closest(
+        Selector.DATA_TOGGLE
+      )[0]
+
+      if (rootElement) {
+        const input = this._element.querySelector(Selector.INPUT)
+
+        if (input) {
+          if (input.type === 'radio') {
+            if (input.checked &&
+              this._element.classList.contains(ClassName.ACTIVE)) {
+              triggerChangeEvent = false
+            } else {
+              const activeElement = rootElement.querySelector(Selector.ACTIVE)
+
+              if (activeElement) {
+                $(activeElement).removeClass(ClassName.ACTIVE)
+              }
+            }
+          }
+
+          if (triggerChangeEvent) {
+            if (input.hasAttribute('disabled') ||
+              rootElement.hasAttribute('disabled') ||
+              input.classList.contains('disabled') ||
+              rootElement.classList.contains('disabled')) {
+              return
+            }
+            input.checked = !this._element.classList.contains(ClassName.ACTIVE)
+            $(input).trigger('change')
+          }
+
+          input.focus()
+          addAriaPressed = false
+        }
+      }
+
+      if (addAriaPressed) {
+        this._element.setAttribute('aria-pressed',
+          !this._element.classList.contains(ClassName.ACTIVE))
+      }
+
+      if (triggerChangeEvent) {
+        $(this._element).toggleClass(ClassName.ACTIVE)
+      }
+    }
+
+    dispose() {
+      $.removeData(this._element, DATA_KEY)
+      this._element = null
+    }
+
+    // Static
+
+    static _jQueryInterface(config) {
+      return this.each(function () {
+        let data = $(this).data(DATA_KEY)
+
+        if (!data) {
+          data = new Button(this)
+          $(this).data(DATA_KEY, data)
+        }
+
+        if (config === 'toggle') {
+          data[config]()
+        }
+      })
+    }
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+  $(document)
+    .on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE_CARROT, (event) => {
+      event.preventDefault()
+
+      let button = event.target
+
+      if (!$(button).hasClass(ClassName.BUTTON)) {
+        button = $(button).closest(Selector.BUTTON)
+      }
+
+      Button._jQueryInterface.call($(button), 'toggle')
+    })
+    .on(Event.FOCUS_BLUR_DATA_API, Selector.DATA_TOGGLE_CARROT, (event) => {
+      const button = $(event.target).closest(Selector.BUTTON)[0]
+      $(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(event.type))
+    })
+
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME] = Button._jQueryInterface
+  $.fn[NAME].Constructor = Button
+  $.fn[NAME].noConflict = function () {
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return Button._jQueryInterface
+  }
+
+  return Button
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Button);
+
 
 /***/ }),
 /* 12 */
-/*!****************************!*\
-  !*** ./src/block/media.js ***!
-  \****************************/
+/*!******************************************!*\
+  !*** ./src/block/container/container.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__media_icons__ = __webpack_require__(/*! ./media/icons */ 14);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar _wp$components = wp.components,\n    CheckboxControl = _wp$components.CheckboxControl,\n    PanelBody = _wp$components.PanelBody,\n    PanelRow = _wp$components.PanelRow;\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    ColorPalette = _wp$editor.ColorPalette,\n    InspectorControls = _wp$editor.InspectorControls,\n    MediaUpload = _wp$editor.MediaUpload,\n    RichText = _wp$editor.RichText;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/media', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Media List'), // Block title.\n\tdescription: __('media object to construct highly repetitive components like blog comments, tweets, and the like.'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ height: '496pt', viewBox: '0 0 496 496', width: '496pt' },\n\t\twp.element.createElement('path', {\n\t\t\td: 'M488 0H8C3.574 0 0 3.586 0 8v480c0 4.426 3.574 8 8 8h480c4.426 0 8-3.574 8-8V8c0-4.414-3.574-8-8-8zm-8 16v80H16V16zM16 480V112h464v368zm0 0' }),\n\t\twp.element.createElement('path', {\n\t\t\td: 'M56 80c13.23 0 24-10.77 24-24S69.23 32 56 32 32 42.77 32 56s10.77 24 24 24zm0-32c4.414 0 8 3.594 8 8s-3.586 8-8 8-8-3.594-8-8 3.586-8 8-8zm0 0M120 80c13.23 0 24-10.77 24-24s-10.77-24-24-24-24 10.77-24 24 10.77 24 24 24zm0-32c4.414 0 8 3.594 8 8s-3.586 8-8 8-8-3.594-8-8 3.586-8 8-8zm0 0M184 80c13.23 0 24-10.77 24-24s-10.77-24-24-24-24 10.77-24 24 10.77 24 24 24zm0-32c4.414 0 8 3.594 8 8s-3.586 8-8 8-8-3.594-8-8 3.586-8 8-8zm0 0M448 48h16v16h-16zm0 0M416 48h16v16h-16zm0 0M384 48h16v16h-16zm0 0M104 192H40c-4.426 0-8 3.586-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.414-3.574-8-8-8zm-8 64H48v-48h48zm0 0M128 256h112v16H128zm0 0M328 192h-64c-4.426 0-8 3.586-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.414-3.574-8-8-8zm-8 64h-48v-48h48zm0 0M352 256h112v16H352zm0 0M352 224h112v16H352zm0 0M128 224h112v16H128zm0 0M104 288H40a7.99 7.99 0 0 0-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.426-3.574-8-8-8zm-8 64H48v-48h48zm0 0M128 352h112v16H128zm0 0M328 288h-64a7.99 7.99 0 0 0-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.426-3.574-8-8-8zm-8 64h-48v-48h48zm0 0M352 352h112v16H352zm0 0M352 320h112v16H352zm0 0M128 320h112v16H128zm0 0M104 384H40a7.99 7.99 0 0 0-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.426-3.574-8-8-8zm-8 64H48v-48h48zm0 0M128 448h112v16H128zm0 0M328 384h-64a7.99 7.99 0 0 0-8 8v64c0 4.426 3.574 8 8 8h64c4.426 0 8-3.574 8-8v-64c0-4.426-3.574-8-8-8zm-8 64h-48v-48h48zm0 0M352 448h112v16H352zm0 0M352 416h112v16H352zm0 0M128 416h112v16H128zm0 0M32 160h432v16H32zm0 0M32 128h432v16H32zm0 0' })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Media Object'), __('List')],\n\tattributes: {\n\t\timageId: { type: 'string' },\n\t\timageUrl: { type: 'string' },\n\t\tmargin: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'my-3'\n\t\t},\n\t\ttextColor: {\n\t\t\tsource: 'string'\n\t\t},\n\t\ttitle: {\n\t\t\tsource: 'text',\n\t\t\tselector: 'h4.media-heading',\n\t\t\tdefault: 'Media heading'\n\t\t},\n\t\tcontent: {\n\t\t\ttype: 'array',\n\t\t\tsource: 'children',\n\t\t\tselector: 'div.content',\n\t\t\tdefault: 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.'\n\t\t},\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    content = _props$attributes.content,\n\t\t    imageId = _props$attributes.imageId,\n\t\t    imageUrl = _props$attributes.imageUrl,\n\t\t    margin = _props$attributes.margin,\n\t\t    title = _props$attributes.title,\n\t\t    setAttributes = props.setAttributes,\n\t\t    isSelected = props.isSelected;\n\n\t\tfunction setMargin(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ margin: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\tInspectorControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(\n\t\t\t\t\tPanelBody,\n\t\t\t\t\t{ title: __('Select options') },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Margin')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setMargin },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: margin, onChange: setMargin },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-0' },\n\t\t\t\t\t\t\t\t\t'No margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-1' },\n\t\t\t\t\t\t\t\t\t'my-1 - Tiny margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-2' },\n\t\t\t\t\t\t\t\t\t'my-2 - Small margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-3' },\n\t\t\t\t\t\t\t\t\t'my-3 - Middle margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-4' },\n\t\t\t\t\t\t\t\t\t'my-4 - Large margin'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'my-5' },\n\t\t\t\t\t\t\t\t\t'my-5 - Hugh margin'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\tBlockControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(AlignmentToolbar, {\n\t\t\t\t\tvalue: alignment,\n\t\t\t\t\tonChange: function onChange(alignment) {\n\t\t\t\t\t\tsetAttributes({ alignment: alignment });\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className },\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{\n\t\t\t\t\t\tclassName: 'media ' + margin,\n\t\t\t\t\t\tstyle: {\n\t\t\t\t\t\t\ttextAlign: alignment,\n\t\t\t\t\t\t\tmargin: margin\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\twp.element.createElement(MediaUpload, {\n\t\t\t\t\t\tbuttonProps: {\n\t\t\t\t\t\t\tclassName: 'change-image'\n\t\t\t\t\t\t},\n\t\t\t\t\t\tonSelect: function onSelect(img) {\n\t\t\t\t\t\t\treturn setAttributes({\n\t\t\t\t\t\t\t\timageId: img.id,\n\t\t\t\t\t\t\t\timageUrl: img.url\n\t\t\t\t\t\t\t});\n\t\t\t\t\t\t},\n\t\t\t\t\t\ttype: 'image',\n\t\t\t\t\t\tvalue: imageId,\n\t\t\t\t\t\trender: function render(_ref) {\n\t\t\t\t\t\t\tvar open = _ref.open;\n\t\t\t\t\t\t\treturn wp.element.createElement(\n\t\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\tclassName: 'media-image mr-3',\n\t\t\t\t\t\t\t\t\tonClick: open\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t!imageId ? wp.element.createElement(\n\t\t\t\t\t\t\t\t\t'div',\n\t\t\t\t\t\t\t\t\t{ className: 'btn btn-primary ' },\n\t\t\t\t\t\t\t\t\t__WEBPACK_IMPORTED_MODULE_2__media_icons__[\"a\" /* default */].upload\n\t\t\t\t\t\t\t\t) : wp.element.createElement('img', {\n\t\t\t\t\t\t\t\t\tsrc: imageUrl\n\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t}\n\t\t\t\t\t}),\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t'div',\n\t\t\t\t\t\t{ className: 'media-body' },\n\t\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\t\tclassName: 'media-heading mt-0',\n\t\t\t\t\t\t\ttagName: 'h5',\n\t\t\t\t\t\t\tonChange: function onChange(title) {\n\t\t\t\t\t\t\t\tsetAttributes({ title: title });\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\tvalue: title\n\t\t\t\t\t\t}),\n\t\t\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\t\t\tclassName: 'content',\n\t\t\t\t\t\t\ttagName: 'div',\n\t\t\t\t\t\t\tonChange: function onChange(content) {\n\t\t\t\t\t\t\t\tsetAttributes({ content: content });\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\tvalue: content\n\t\t\t\t\t\t})\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar _props$attributes2 = props.attributes,\n\t\t    alignment = _props$attributes2.alignment,\n\t\t    content = _props$attributes2.content,\n\t\t    imageUrl = _props$attributes2.imageUrl,\n\t\t    margin = _props$attributes2.margin,\n\t\t    title = _props$attributes2.title;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: 'media ' + margin,\n\t\t\t\t\tstyle: { textAlign: alignment }\n\t\t\t\t},\n\t\t\t\twp.element.createElement('img', { src: imageUrl, className: 'media-image mr-3' }),\n\t\t\t\twp.element.createElement(\n\t\t\t\t\t'div',\n\t\t\t\t\t{ className: 'media-body' },\n\t\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\t\tclassName: 'media-heading',\n\t\t\t\t\t\ttagName: 'h5',\n\t\t\t\t\t\tvalue: title\n\t\t\t\t\t}),\n\t\t\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\t\t\tclassName: 'content',\n\t\t\t\t\t\ttagName: 'div',\n\t\t\t\t\t\tvalue: content\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTIuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvYmxvY2svbWVkaWEuanM/MjA0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEJMT0NLOiBib290c3RyYXAtYmxvY2tzXG4gKlxuICogUmVnaXN0ZXJpbmcgYSBiYXNpYyBibG9jayB3aXRoIEd1dGVuYmVyZy5cbiAqIFNpbXBsZSBibG9jaywgcmVuZGVycyBhbmQgc2F2ZXMgdGhlIHNhbWUgY29udGVudCB3aXRob3V0IGFueSBpbnRlcmFjdGl2aXR5LlxuICovXG5cbi8vICBJbXBvcnQgQ1NTLlxuaW1wb3J0ICcuL3N0eWxlLnNjc3MnO1xuaW1wb3J0ICcuL2VkaXRvci5zY3NzJztcbmltcG9ydCBpY29ucyBmcm9tICcuL21lZGlhL2ljb25zJztcblxudmFyIF9fID0gd3AuaTE4bi5fXzsgLy8gSW1wb3J0IF9fKCkgZnJvbSB3cC5pMThuXG5cbnZhciByZWdpc3RlckJsb2NrVHlwZSA9IHdwLmJsb2Nrcy5yZWdpc3RlckJsb2NrVHlwZTsgLy8gSW1wb3J0IHJlZ2lzdGVyQmxvY2tUeXBlKCkgZnJvbSB3cC5ibG9ja3NcblxudmFyIF93cCRjb21wb25lbnRzID0gd3AuY29tcG9uZW50cyxcbiAgICBDaGVja2JveENvbnRyb2wgPSBfd3AkY29tcG9uZW50cy5DaGVja2JveENvbnRyb2wsXG4gICAgUGFuZWxCb2R5ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxCb2R5LFxuICAgIFBhbmVsUm93ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxSb3c7XG52YXIgRnJhZ21lbnQgPSB3cC5lbGVtZW50LkZyYWdtZW50O1xudmFyIF93cCRlZGl0b3IgPSB3cC5lZGl0b3IsXG4gICAgQWxpZ25tZW50VG9vbGJhciA9IF93cCRlZGl0b3IuQWxpZ25tZW50VG9vbGJhcixcbiAgICBCbG9ja0NvbnRyb2xzID0gX3dwJGVkaXRvci5CbG9ja0NvbnRyb2xzLFxuICAgIENvbG9yUGFsZXR0ZSA9IF93cCRlZGl0b3IuQ29sb3JQYWxldHRlLFxuICAgIEluc3BlY3RvckNvbnRyb2xzID0gX3dwJGVkaXRvci5JbnNwZWN0b3JDb250cm9scyxcbiAgICBNZWRpYVVwbG9hZCA9IF93cCRlZGl0b3IuTWVkaWFVcGxvYWQsXG4gICAgUmljaFRleHQgPSBfd3AkZWRpdG9yLlJpY2hUZXh0O1xuLyoqXG4gKiBSZWdpc3RlcjogYWEgR3V0ZW5iZXJnIEJsb2NrLlxuICpcbiAqIFJlZ2lzdGVycyBhIG5ldyBibG9jayBwcm92aWRlZCBhIHVuaXF1ZSBuYW1lIGFuZCBhbiBvYmplY3QgZGVmaW5pbmcgaXRzXG4gKiBiZWhhdmlvci4gT25jZSByZWdpc3RlcmVkLCB0aGUgYmxvY2sgaXMgbWFkZSBlZGl0b3IgYXMgYW4gb3B0aW9uIHRvIGFueVxuICogZWRpdG9yIGludGVyZmFjZSB3aGVyZSBibG9ja3MgYXJlIGltcGxlbWVudGVkLlxuICpcbiAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL1xuICogQHBhcmFtICB7c3RyaW5nfSAgIG5hbWUgICAgIEJsb2NrIG5hbWUuXG4gKiBAcGFyYW0gIHtPYmplY3R9ICAgc2V0dGluZ3MgQmxvY2sgc2V0dGluZ3MuXG4gKiBAcmV0dXJuIHs/V1BCbG9ja30gICAgICAgICAgVGhlIGJsb2NrLCBpZiBpdCBoYXMgYmVlbiBzdWNjZXNzZnVsbHlcbiAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWdpc3RlcmVkOyBvdGhlcndpc2UgYHVuZGVmaW5lZGAuXG4gKi9cblxucmVnaXN0ZXJCbG9ja1R5cGUoJ2diYi9tZWRpYScsIHtcblx0Ly8gQmxvY2sgbmFtZS4gQmxvY2sgbmFtZXMgbXVzdCBiZSBzdHJpbmcgdGhhdCBjb250YWlucyBhIG5hbWVzcGFjZSBwcmVmaXguIEV4YW1wbGU6IG15LXBsdWdpbi9teS1jdXN0b20tYmxvY2suXG5cdHRpdGxlOiBfXygnQm9vdHN0cmFwIE1lZGlhIExpc3QnKSwgLy8gQmxvY2sgdGl0bGUuXG5cdGRlc2NyaXB0aW9uOiBfXygnbWVkaWEgb2JqZWN0IHRvIGNvbnN0cnVjdCBoaWdobHkgcmVwZXRpdGl2ZSBjb21wb25lbnRzIGxpa2UgYmxvZyBjb21tZW50cywgdHdlZXRzLCBhbmQgdGhlIGxpa2UuJyksIC8vIEJsb2NrIHRpdGxlLlxuXHRpY29uOiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0J3N2ZycsXG5cdFx0eyBoZWlnaHQ6ICc0OTZwdCcsIHZpZXdCb3g6ICcwIDAgNDk2IDQ5NicsIHdpZHRoOiAnNDk2cHQnIH0sXG5cdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdwYXRoJywge1xuXHRcdFx0ZDogJ000ODggMEg4QzMuNTc0IDAgMCAzLjU4NiAwIDh2NDgwYzAgNC40MjYgMy41NzQgOCA4IDhoNDgwYzQuNDI2IDAgOC0zLjU3NCA4LThWOGMwLTQuNDE0LTMuNTc0LTgtOC04em0tOCAxNnY4MEgxNlYxNnpNMTYgNDgwVjExMmg0NjR2MzY4em0wIDAnIH0pLFxuXHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgncGF0aCcsIHtcblx0XHRcdGQ6ICdNNTYgODBjMTMuMjMgMCAyNC0xMC43NyAyNC0yNFM2OS4yMyAzMiA1NiAzMiAzMiA0Mi43NyAzMiA1NnMxMC43NyAyNCAyNCAyNHptMC0zMmM0LjQxNCAwIDggMy41OTQgOCA4cy0zLjU4NiA4LTggOC04LTMuNTk0LTgtOCAzLjU4Ni04IDgtOHptMCAwTTEyMCA4MGMxMy4yMyAwIDI0LTEwLjc3IDI0LTI0cy0xMC43Ny0yNC0yNC0yNC0yNCAxMC43Ny0yNCAyNCAxMC43NyAyNCAyNCAyNHptMC0zMmM0LjQxNCAwIDggMy41OTQgOCA4cy0zLjU4NiA4LTggOC04LTMuNTk0LTgtOCAzLjU4Ni04IDgtOHptMCAwTTE4NCA4MGMxMy4yMyAwIDI0LTEwLjc3IDI0LTI0cy0xMC43Ny0yNC0yNC0yNC0yNCAxMC43Ny0yNCAyNCAxMC43NyAyNCAyNCAyNHptMC0zMmM0LjQxNCAwIDggMy41OTQgOCA4cy0zLjU4NiA4LTggOC04LTMuNTk0LTgtOCAzLjU4Ni04IDgtOHptMCAwTTQ0OCA0OGgxNnYxNmgtMTZ6bTAgME00MTYgNDhoMTZ2MTZoLTE2em0wIDBNMzg0IDQ4aDE2djE2aC0xNnptMCAwTTEwNCAxOTJINDBjLTQuNDI2IDAtOCAzLjU4Ni04IDh2NjRjMCA0LjQyNiAzLjU3NCA4IDggOGg2NGM0LjQyNiAwIDgtMy41NzQgOC04di02NGMwLTQuNDE0LTMuNTc0LTgtOC04em0tOCA2NEg0OHYtNDhoNDh6bTAgME0xMjggMjU2aDExMnYxNkgxMjh6bTAgME0zMjggMTkyaC02NGMtNC40MjYgMC04IDMuNTg2LTggOHY2NGMwIDQuNDI2IDMuNTc0IDggOCA4aDY0YzQuNDI2IDAgOC0zLjU3NCA4LTh2LTY0YzAtNC40MTQtMy41NzQtOC04LTh6bS04IDY0aC00OHYtNDhoNDh6bTAgME0zNTIgMjU2aDExMnYxNkgzNTJ6bTAgME0zNTIgMjI0aDExMnYxNkgzNTJ6bTAgME0xMjggMjI0aDExMnYxNkgxMjh6bTAgME0xMDQgMjg4SDQwYTcuOTkgNy45OSAwIDAgMC04IDh2NjRjMCA0LjQyNiAzLjU3NCA4IDggOGg2NGM0LjQyNiAwIDgtMy41NzQgOC04di02NGMwLTQuNDI2LTMuNTc0LTgtOC04em0tOCA2NEg0OHYtNDhoNDh6bTAgME0xMjggMzUyaDExMnYxNkgxMjh6bTAgME0zMjggMjg4aC02NGE3Ljk5IDcuOTkgMCAwIDAtOCA4djY0YzAgNC40MjYgMy41NzQgOCA4IDhoNjRjNC40MjYgMCA4LTMuNTc0IDgtOHYtNjRjMC00LjQyNi0zLjU3NC04LTgtOHptLTggNjRoLTQ4di00OGg0OHptMCAwTTM1MiAzNTJoMTEydjE2SDM1MnptMCAwTTM1MiAzMjBoMTEydjE2SDM1MnptMCAwTTEyOCAzMjBoMTEydjE2SDEyOHptMCAwTTEwNCAzODRINDBhNy45OSA3Ljk5IDAgMCAwLTggOHY2NGMwIDQuNDI2IDMuNTc0IDggOCA4aDY0YzQuNDI2IDAgOC0zLjU3NCA4LTh2LTY0YzAtNC40MjYtMy41NzQtOC04LTh6bS04IDY0SDQ4di00OGg0OHptMCAwTTEyOCA0NDhoMTEydjE2SDEyOHptMCAwTTMyOCAzODRoLTY0YTcuOTkgNy45OSAwIDAgMC04IDh2NjRjMCA0LjQyNiAzLjU3NCA4IDggOGg2NGM0LjQyNiAwIDgtMy41NzQgOC04di02NGMwLTQuNDI2LTMuNTc0LTgtOC04em0tOCA2NGgtNDh2LTQ4aDQ4em0wIDBNMzUyIDQ0OGgxMTJ2MTZIMzUyem0wIDBNMzUyIDQxNmgxMTJ2MTZIMzUyem0wIDBNMTI4IDQxNmgxMTJ2MTZIMTI4em0wIDBNMzIgMTYwaDQzMnYxNkgzMnptMCAwTTMyIDEyOGg0MzJ2MTZIMzJ6bTAgMCcgfSlcblx0KSxcblx0Y2F0ZWdvcnk6ICdnYmInLCAvLyBCbG9jayBjYXRlZ29yeSDigJQgR3JvdXAgYmxvY2tzIHRvZ2V0aGVyIGJhc2VkIG9uIGNvbW1vbiB0cmFpdHMgRS5nLiBjb21tb24sIGZvcm1hdHRpbmcsIGxheW91dCB3aWRnZXRzLCBlbWJlZC5cblx0a2V5d29yZHM6IFtfXygnQm9vdHN0cmFwJyksIF9fKCdNZWRpYSBPYmplY3QnKSwgX18oJ0xpc3QnKV0sXG5cdGF0dHJpYnV0ZXM6IHtcblx0XHRpbWFnZUlkOiB7IHR5cGU6ICdzdHJpbmcnIH0sXG5cdFx0aW1hZ2VVcmw6IHsgdHlwZTogJ3N0cmluZycgfSxcblx0XHRtYXJnaW46IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnLFxuXHRcdFx0ZGVmYXVsdDogJ215LTMnXG5cdFx0fSxcblx0XHR0ZXh0Q29sb3I6IHtcblx0XHRcdHNvdXJjZTogJ3N0cmluZydcblx0XHR9LFxuXHRcdHRpdGxlOiB7XG5cdFx0XHRzb3VyY2U6ICd0ZXh0Jyxcblx0XHRcdHNlbGVjdG9yOiAnaDQubWVkaWEtaGVhZGluZycsXG5cdFx0XHRkZWZhdWx0OiAnTWVkaWEgaGVhZGluZydcblx0XHR9LFxuXHRcdGNvbnRlbnQ6IHtcblx0XHRcdHR5cGU6ICdhcnJheScsXG5cdFx0XHRzb3VyY2U6ICdjaGlsZHJlbicsXG5cdFx0XHRzZWxlY3RvcjogJ2Rpdi5jb250ZW50Jyxcblx0XHRcdGRlZmF1bHQ6ICdDcmFzIHNpdCBhbWV0IG5pYmggbGliZXJvLCBpbiBncmF2aWRhIG51bGxhLiBOdWxsYSB2ZWwgbWV0dXMgc2NlbGVyaXNxdWUgYW50ZSBzb2xsaWNpdHVkaW4uIENyYXMgcHVydXMgb2RpbywgdmVzdGlidWx1bSBpbiB2dWxwdXRhdGUgYXQsIHRlbXB1cyB2aXZlcnJhIHR1cnBpcy4gRnVzY2UgY29uZGltZW50dW0gbnVuYyBhYyBuaXNpIHZ1bHB1dGF0ZSBmcmluZ2lsbGEuIERvbmVjIGxhY2luaWEgY29uZ3VlIGZlbGlzIGluIGZhdWNpYnVzLidcblx0XHR9LFxuXHRcdGFsaWdubWVudDoge1xuXHRcdFx0dHlwZTogJ3N0cmluZydcblx0XHR9XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIGVkaXQgZnVuY3Rpb24gZGVzY3JpYmVzIHRoZSBzdHJ1Y3R1cmUgb2YgeW91ciBibG9jayBpbiB0aGUgY29udGV4dCBvZiB0aGUgZWRpdG9yLlxuICAqIFRoaXMgcmVwcmVzZW50cyB3aGF0IHRoZSBlZGl0b3Igd2lsbCByZW5kZXIgd2hlbiB0aGUgYmxvY2sgaXMgdXNlZC5cbiAgKlxuICAqIFRoZSBcImVkaXRcIiBwcm9wZXJ0eSBtdXN0IGJlIGEgdmFsaWQgZnVuY3Rpb24uXG4gICpcbiAgKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9ibG9jay1lZGl0LXNhdmUvXG4gICovXG5cdGVkaXQ6IGZ1bmN0aW9uIGVkaXQocHJvcHMpIHtcblx0XHR2YXIgX3Byb3BzJGF0dHJpYnV0ZXMgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5hbGlnbm1lbnQsXG5cdFx0ICAgIGNvbnRlbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5jb250ZW50LFxuXHRcdCAgICBpbWFnZUlkID0gX3Byb3BzJGF0dHJpYnV0ZXMuaW1hZ2VJZCxcblx0XHQgICAgaW1hZ2VVcmwgPSBfcHJvcHMkYXR0cmlidXRlcy5pbWFnZVVybCxcblx0XHQgICAgbWFyZ2luID0gX3Byb3BzJGF0dHJpYnV0ZXMubWFyZ2luLFxuXHRcdCAgICB0aXRsZSA9IF9wcm9wcyRhdHRyaWJ1dGVzLnRpdGxlLFxuXHRcdCAgICBzZXRBdHRyaWJ1dGVzID0gcHJvcHMuc2V0QXR0cmlidXRlcyxcblx0XHQgICAgaXNTZWxlY3RlZCA9IHByb3BzLmlzU2VsZWN0ZWQ7XG5cblx0XHRmdW5jdGlvbiBzZXRNYXJnaW4oZXZlbnQpIHtcblx0XHRcdHZhciBzZWxlY3RlZCA9IGV2ZW50LnRhcmdldC5xdWVyeVNlbGVjdG9yKCdvcHRpb246Y2hlY2tlZCcpO1xuXHRcdFx0c2V0QXR0cmlidXRlcyh7IG1hcmdpbjogc2VsZWN0ZWQudmFsdWUgfSk7XG5cdFx0XHRldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuXHRcdH1cblxuXHRcdHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRGcmFnbWVudCxcblx0XHRcdG51bGwsXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdEluc3BlY3RvckNvbnRyb2xzLFxuXHRcdFx0XHRudWxsLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0UGFuZWxCb2R5LFxuXHRcdFx0XHRcdHsgdGl0bGU6IF9fKCdTZWxlY3Qgb3B0aW9ucycpIH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0UGFuZWxSb3csXG5cdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnbGFiZWwnLFxuXHRcdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0XHRfXygnTWFyZ2luJylcblx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdCdmb3JtJyxcblx0XHRcdFx0XHRcdFx0eyBvblN1Ym1pdDogc2V0TWFyZ2luIH0sXG5cdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHQnc2VsZWN0Jyxcblx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiBtYXJnaW4sIG9uQ2hhbmdlOiBzZXRNYXJnaW4gfSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdteS0wJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J05vIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTEnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktMSAtIFRpbnkgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktMicgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS0yIC0gU21hbGwgbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnbXktMycgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdteS0zIC0gTWlkZGxlIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTQnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktNCAtIExhcmdlIG1hcmdpbidcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ215LTUnIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnbXktNSAtIEh1Z2ggbWFyZ2luJ1xuXHRcdFx0XHRcdFx0XHRcdClcblx0XHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdClcblx0XHRcdFx0KVxuXHRcdFx0KSxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0QmxvY2tDb250cm9scyxcblx0XHRcdFx0bnVsbCxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KEFsaWdubWVudFRvb2xiYXIsIHtcblx0XHRcdFx0XHR2YWx1ZTogYWxpZ25tZW50LFxuXHRcdFx0XHRcdG9uQ2hhbmdlOiBmdW5jdGlvbiBvbkNoYW5nZShhbGlnbm1lbnQpIHtcblx0XHRcdFx0XHRcdHNldEF0dHJpYnV0ZXMoeyBhbGlnbm1lbnQ6IGFsaWdubWVudCB9KTtcblx0XHRcdFx0XHR9XG5cdFx0XHRcdH0pXG5cdFx0XHQpLFxuXHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHQnZGl2Jyxcblx0XHRcdFx0eyBjbGFzc05hbWU6IHByb3BzLmNsYXNzTmFtZSB9LFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdFx0e1xuXHRcdFx0XHRcdFx0Y2xhc3NOYW1lOiAnbWVkaWEgJyArIG1hcmdpbixcblx0XHRcdFx0XHRcdHN0eWxlOiB7XG5cdFx0XHRcdFx0XHRcdHRleHRBbGlnbjogYWxpZ25tZW50LFxuXHRcdFx0XHRcdFx0XHRtYXJnaW46IG1hcmdpblxuXHRcdFx0XHRcdFx0fVxuXHRcdFx0XHRcdH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KE1lZGlhVXBsb2FkLCB7XG5cdFx0XHRcdFx0XHRidXR0b25Qcm9wczoge1xuXHRcdFx0XHRcdFx0XHRjbGFzc05hbWU6ICdjaGFuZ2UtaW1hZ2UnXG5cdFx0XHRcdFx0XHR9LFxuXHRcdFx0XHRcdFx0b25TZWxlY3Q6IGZ1bmN0aW9uIG9uU2VsZWN0KGltZykge1xuXHRcdFx0XHRcdFx0XHRyZXR1cm4gc2V0QXR0cmlidXRlcyh7XG5cdFx0XHRcdFx0XHRcdFx0aW1hZ2VJZDogaW1nLmlkLFxuXHRcdFx0XHRcdFx0XHRcdGltYWdlVXJsOiBpbWcudXJsXG5cdFx0XHRcdFx0XHRcdH0pO1xuXHRcdFx0XHRcdFx0fSxcblx0XHRcdFx0XHRcdHR5cGU6ICdpbWFnZScsXG5cdFx0XHRcdFx0XHR2YWx1ZTogaW1hZ2VJZCxcblx0XHRcdFx0XHRcdHJlbmRlcjogZnVuY3Rpb24gcmVuZGVyKF9yZWYpIHtcblx0XHRcdFx0XHRcdFx0dmFyIG9wZW4gPSBfcmVmLm9wZW47XG5cdFx0XHRcdFx0XHRcdHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdFx0XHRcdFx0e1xuXHRcdFx0XHRcdFx0XHRcdFx0Y2xhc3NOYW1lOiAnbWVkaWEtaW1hZ2UgbXItMycsXG5cdFx0XHRcdFx0XHRcdFx0XHRvbkNsaWNrOiBvcGVuXG5cdFx0XHRcdFx0XHRcdFx0fSxcblx0XHRcdFx0XHRcdFx0XHQhaW1hZ2VJZCA/IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdkaXYnLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyBjbGFzc05hbWU6ICdidG4gYnRuLXByaW1hcnkgJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0aWNvbnMudXBsb2FkXG5cdFx0XHRcdFx0XHRcdFx0KSA6IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywge1xuXHRcdFx0XHRcdFx0XHRcdFx0c3JjOiBpbWFnZVVybFxuXHRcdFx0XHRcdFx0XHRcdH0pXG5cdFx0XHRcdFx0XHRcdCk7XG5cdFx0XHRcdFx0XHR9XG5cdFx0XHRcdFx0fSksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdFx0XHR7IGNsYXNzTmFtZTogJ21lZGlhLWJvZHknIH0sXG5cdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQsIHtcblx0XHRcdFx0XHRcdFx0Y2xhc3NOYW1lOiAnbWVkaWEtaGVhZGluZyBtdC0wJyxcblx0XHRcdFx0XHRcdFx0dGFnTmFtZTogJ2g1Jyxcblx0XHRcdFx0XHRcdFx0b25DaGFuZ2U6IGZ1bmN0aW9uIG9uQ2hhbmdlKHRpdGxlKSB7XG5cdFx0XHRcdFx0XHRcdFx0c2V0QXR0cmlidXRlcyh7IHRpdGxlOiB0aXRsZSB9KTtcblx0XHRcdFx0XHRcdFx0fSxcblx0XHRcdFx0XHRcdFx0dmFsdWU6IHRpdGxlXG5cdFx0XHRcdFx0XHR9KSxcblx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChSaWNoVGV4dCwge1xuXHRcdFx0XHRcdFx0XHRjbGFzc05hbWU6ICdjb250ZW50Jyxcblx0XHRcdFx0XHRcdFx0dGFnTmFtZTogJ2RpdicsXG5cdFx0XHRcdFx0XHRcdG9uQ2hhbmdlOiBmdW5jdGlvbiBvbkNoYW5nZShjb250ZW50KSB7XG5cdFx0XHRcdFx0XHRcdFx0c2V0QXR0cmlidXRlcyh7IGNvbnRlbnQ6IGNvbnRlbnQgfSk7XG5cdFx0XHRcdFx0XHRcdH0sXG5cdFx0XHRcdFx0XHRcdHZhbHVlOiBjb250ZW50XG5cdFx0XHRcdFx0XHR9KVxuXHRcdFx0XHRcdClcblx0XHRcdFx0KVxuXHRcdFx0KVxuXHRcdCk7XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIHNhdmUgZnVuY3Rpb24gZGVmaW5lcyB0aGUgd2F5IGluIHdoaWNoIHRoZSBkaWZmZXJlbnQgYXR0cmlidXRlcyBzaG91bGQgYmUgY29tYmluZWRcbiAgKiBpbnRvIHRoZSBmaW5hbCBtYXJrdXAsIHdoaWNoIGlzIHRoZW4gc2VyaWFsaXplZCBieSBHdXRlbmJlcmcgaW50byBwb3N0X2NvbnRlbnQuXG4gICpcbiAgKiBUaGUgXCJzYXZlXCIgcHJvcGVydHkgbXVzdCBiZSBzcGVjaWZpZWQgYW5kIG11c3QgYmUgYSB2YWxpZCBmdW5jdGlvbi5cbiAgKlxuICAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL2Jsb2NrLWVkaXQtc2F2ZS9cbiAgKi9cblx0c2F2ZTogZnVuY3Rpb24gc2F2ZShwcm9wcykge1xuXG5cdFx0Ly8gSW5pdGlhbGl6ZSB0aGVtZVxuXHRcdHZhciBfcHJvcHMkYXR0cmlidXRlczIgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlczIuYWxpZ25tZW50LFxuXHRcdCAgICBjb250ZW50ID0gX3Byb3BzJGF0dHJpYnV0ZXMyLmNvbnRlbnQsXG5cdFx0ICAgIGltYWdlVXJsID0gX3Byb3BzJGF0dHJpYnV0ZXMyLmltYWdlVXJsLFxuXHRcdCAgICBtYXJnaW4gPSBfcHJvcHMkYXR0cmlidXRlczIubWFyZ2luLFxuXHRcdCAgICB0aXRsZSA9IF9wcm9wcyRhdHRyaWJ1dGVzMi50aXRsZTtcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdCdkaXYnLFxuXHRcdFx0bnVsbCxcblx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0J2RpdicsXG5cdFx0XHRcdHsgY2xhc3NOYW1lOiAnbWVkaWEgJyArIG1hcmdpbixcblx0XHRcdFx0XHRzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9XG5cdFx0XHRcdH0sXG5cdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywgeyBzcmM6IGltYWdlVXJsLCBjbGFzc05hbWU6ICdtZWRpYS1pbWFnZSBtci0zJyB9KSxcblx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdCdkaXYnLFxuXHRcdFx0XHRcdHsgY2xhc3NOYW1lOiAnbWVkaWEtYm9keScgfSxcblx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRcdFx0Y2xhc3NOYW1lOiAnbWVkaWEtaGVhZGluZycsXG5cdFx0XHRcdFx0XHR0YWdOYW1lOiAnaDUnLFxuXHRcdFx0XHRcdFx0dmFsdWU6IHRpdGxlXG5cdFx0XHRcdFx0fSksXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFJpY2hUZXh0LkNvbnRlbnQsIHtcblx0XHRcdFx0XHRcdGNsYXNzTmFtZTogJ2NvbnRlbnQnLFxuXHRcdFx0XHRcdFx0dGFnTmFtZTogJ2RpdicsXG5cdFx0XHRcdFx0XHR2YWx1ZTogY29udGVudFxuXHRcdFx0XHRcdH0pXG5cdFx0XHRcdClcblx0XHRcdClcblx0XHQpO1xuXHR9XG59KTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9tZWRpYS5qc1xuLy8gbW9kdWxlIGlkID0gMTJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///12\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    InnerBlocks = _wp$editor.InnerBlocks,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/container', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Container'), // Block title.
+	description: __('Containers are the most basic layout element in Bootstrap and are required when using our default grid system. Choose from a responsive, fixed-width container (meaning its max-width changes at each breakpoint) or fluid-width (meaning it’s 100% wide all the time).'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ viewBox: '0 0 512 512' },
+		wp.element.createElement('path', { d: 'M16.797 51.094C-.044 52.193 0 67.02 0 67.02l1.244 386.934C1.26 458.667 3.821 460 8.533 460h494.933a8.533 8.533 0 0 0 8.533-8.533V58.933c-.071-.893 1.598-6.042-13.602-7.431 0 0-405.152-1.724-481.6-.408zm68.536 391.839H17.067V67.467h68.267v375.466zm324.267 0H102.4V67.467h307.2zm85.333 0h-68.267V67.467h68.267z' })
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Container'), __('Grid')],
+	attributes: {
+		content: {
+			type: 'array',
+			source: 'children',
+			selector: 'div.content'
+		},
+		alignment: {
+			type: 'string'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    content = _props$attributes.content,
+		    setAttributes = props.setAttributes;
+
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				'div',
+				{ className: props.className + ' my-5', style: { textAlign: alignment } },
+				wp.element.createElement(InnerBlocks, null)
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var alignment = props.attributes.alignment;
+
+
+		return wp.element.createElement(
+			'div',
+			{ style: { textAlign: alignment } },
+			wp.element.createElement(
+				'div',
+				{ className: 'container' },
+				wp.element.createElement(InnerBlocks.Content, null)
+			)
+		);
+	}
+});
 
 /***/ }),
 /* 13 */
-/*!***************************!*\
-  !*** ./src/block/type.js ***!
-  \***************************/
+/*!**********************************!*\
+  !*** ./src/block/media/media.js ***!
+  \**********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ./style.scss */ 1);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);\n/**\n * BLOCK: bootstrap-blocks\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n// Import JS.\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar _wp$components = wp.components,\n    CheckboxControl = _wp$components.CheckboxControl,\n    PanelBody = _wp$components.PanelBody,\n    PanelRow = _wp$components.PanelRow;\nvar Fragment = wp.element.Fragment;\nvar _wp$editor = wp.editor,\n    AlignmentToolbar = _wp$editor.AlignmentToolbar,\n    BlockControls = _wp$editor.BlockControls,\n    ColorPalette = _wp$editor.ColorPalette,\n    InspectorControls = _wp$editor.InspectorControls,\n    RichText = _wp$editor.RichText;\n/**\n * Register: aa Gutenberg Block.\n *\n * Registers a new block provided a unique name and an object defining its\n * behavior. Once registered, the block is made editor as an option to any\n * editor interface where blocks are implemented.\n *\n * @link https://wordpress.org/gutenberg/handbook/block-api/\n * @param  {string}   name     Block name.\n * @param  {Object}   settings Block settings.\n * @return {?WPBlock}          The block, if it has been successfully\n *                             registered; otherwise `undefined`.\n */\n\nregisterBlockType('gbb/type', {\n\t// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n\ttitle: __('Bootstrap Type Headings'), // Block title.\n\tdescription: __('Provide contextual feedback messages for typical user actions with the handful of available and flexible type messages.'), // Block title.\n\ticon: wp.element.createElement(\n\t\t'svg',\n\t\t{ viewBox: '0 0 220.068 220.068' },\n\t\twp.element.createElement('path', { d: 'M136.922 51.991H89.297v148.332H47.253V51.991H0V19.745h136.922v32.246z' }),\n\t\twp.element.createElement('path', { d: 'M220.068 98.245h-38.463v102.078h-38.236V98.245H105.47V68.919h114.598v29.326z' })\n\t),\n\tcategory: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n\tkeywords: [__('Bootstrap'), __('Header'), __('Typography')],\n\tattributes: {\n\t\talignment: {\n\t\t\ttype: 'string'\n\t\t},\n\t\tcontent: {\n\t\t\ttype: 'array',\n\t\t\tsource: 'children',\n\t\t\tselector: 'div.type-content'\n\t\t},\n\t\ttype: {\n\t\t\ttype: 'string',\n\t\t\tdefault: 'display-1'\n\t\t}\n\t},\n\n\t/**\n  * The edit function describes the structure of your block in the context of the editor.\n  * This represents what the editor will render when the block is used.\n  *\n  * The \"edit\" property must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tedit: function edit(props) {\n\t\t// Theme selection\n\t\tvar _props$attributes = props.attributes,\n\t\t    alignment = _props$attributes.alignment,\n\t\t    content = _props$attributes.content,\n\t\t    type = _props$attributes.type,\n\t\t    setAttributes = props.setAttributes,\n\t\t    isSelected = props.isSelected;\n\n\n\t\tfunction setType(event) {\n\t\t\tvar selected = event.target.querySelector('option:checked');\n\t\t\tsetAttributes({ type: selected.value });\n\t\t\tevent.preventDefault();\n\t\t}\n\n\t\tfunction onChangeAlignment(newAlignment) {\n\t\t\tsetAttributes({ alignment: newAlignment });\n\t\t}\n\n\t\tfunction onChangeContent(newContent) {\n\t\t\tsetAttributes({ content: newContent });\n\t\t}\n\n\t\treturn wp.element.createElement(\n\t\t\tFragment,\n\t\t\tnull,\n\t\t\twp.element.createElement(\n\t\t\t\tInspectorControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(\n\t\t\t\t\tPanelBody,\n\t\t\t\t\t{ title: __('Select options') },\n\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\tPanelRow,\n\t\t\t\t\t\tnull,\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'label',\n\t\t\t\t\t\t\tnull,\n\t\t\t\t\t\t\t__('Theme')\n\t\t\t\t\t\t),\n\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t'form',\n\t\t\t\t\t\t\t{ onSubmit: setType },\n\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t'select',\n\t\t\t\t\t\t\t\t{ value: type, onChange: setType },\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'display-1' },\n\t\t\t\t\t\t\t\t\t'Display 1'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'display-2' },\n\t\t\t\t\t\t\t\t\t'Display 2'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'display-3' },\n\t\t\t\t\t\t\t\t\t'Display 3'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'display-4' },\n\t\t\t\t\t\t\t\t\t'Display 4'\n\t\t\t\t\t\t\t\t),\n\t\t\t\t\t\t\t\twp.element.createElement(\n\t\t\t\t\t\t\t\t\t'option',\n\t\t\t\t\t\t\t\t\t{ value: 'lead' },\n\t\t\t\t\t\t\t\t\t'Lead'\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\tBlockControls,\n\t\t\t\tnull,\n\t\t\t\twp.element.createElement(AlignmentToolbar, {\n\t\t\t\t\tvalue: alignment,\n\t\t\t\t\tonChange: onChangeAlignment\n\t\t\t\t})\n\t\t\t),\n\t\t\twp.element.createElement(\n\t\t\t\t'div',\n\t\t\t\t{ className: props.className, style: { textAlign: alignment } },\n\t\t\t\twp.element.createElement(RichText, {\n\t\t\t\t\tclassName: 'type-content ' + type,\n\t\t\t\t\ttagName: 'div',\n\t\t\t\t\tonChange: onChangeContent,\n\t\t\t\t\tvalue: content\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t},\n\n\t/**\n  * The save function defines the way in which the different attributes should be combined\n  * into the final markup, which is then serialized by Gutenberg into post_content.\n  *\n  * The \"save\" property must be specified and must be a valid function.\n  *\n  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n  */\n\tsave: function save(props) {\n\n\t\t// Initialize theme\n\t\tvar _props$attributes2 = props.attributes,\n\t\t    alignment = _props$attributes2.alignment,\n\t\t    content = _props$attributes2.content,\n\t\t    type = _props$attributes2.type;\n\n\n\t\treturn wp.element.createElement(\n\t\t\t'div',\n\t\t\t{ style: { textAlign: alignment } },\n\t\t\twp.element.createElement(RichText.Content, {\n\t\t\t\tclassName: 'type-content ' + type,\n\t\t\t\ttagName: 'div',\n\t\t\t\tvalue: content\n\t\t\t})\n\t\t);\n\t}\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvYmxvY2svdHlwZS5qcz81MGUyIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQkxPQ0s6IGJvb3RzdHJhcC1ibG9ja3NcbiAqXG4gKiBSZWdpc3RlcmluZyBhIGJhc2ljIGJsb2NrIHdpdGggR3V0ZW5iZXJnLlxuICogU2ltcGxlIGJsb2NrLCByZW5kZXJzIGFuZCBzYXZlcyB0aGUgc2FtZSBjb250ZW50IHdpdGhvdXQgYW55IGludGVyYWN0aXZpdHkuXG4gKi9cblxuLy8gIEltcG9ydCBDU1MuXG5pbXBvcnQgJy4vc3R5bGUuc2Nzcyc7XG5pbXBvcnQgJy4vZWRpdG9yLnNjc3MnO1xuLy8gSW1wb3J0IEpTLlxudmFyIF9fID0gd3AuaTE4bi5fXzsgLy8gSW1wb3J0IF9fKCkgZnJvbSB3cC5pMThuXG5cbnZhciByZWdpc3RlckJsb2NrVHlwZSA9IHdwLmJsb2Nrcy5yZWdpc3RlckJsb2NrVHlwZTsgLy8gSW1wb3J0IHJlZ2lzdGVyQmxvY2tUeXBlKCkgZnJvbSB3cC5ibG9ja3NcblxudmFyIF93cCRjb21wb25lbnRzID0gd3AuY29tcG9uZW50cyxcbiAgICBDaGVja2JveENvbnRyb2wgPSBfd3AkY29tcG9uZW50cy5DaGVja2JveENvbnRyb2wsXG4gICAgUGFuZWxCb2R5ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxCb2R5LFxuICAgIFBhbmVsUm93ID0gX3dwJGNvbXBvbmVudHMuUGFuZWxSb3c7XG52YXIgRnJhZ21lbnQgPSB3cC5lbGVtZW50LkZyYWdtZW50O1xudmFyIF93cCRlZGl0b3IgPSB3cC5lZGl0b3IsXG4gICAgQWxpZ25tZW50VG9vbGJhciA9IF93cCRlZGl0b3IuQWxpZ25tZW50VG9vbGJhcixcbiAgICBCbG9ja0NvbnRyb2xzID0gX3dwJGVkaXRvci5CbG9ja0NvbnRyb2xzLFxuICAgIENvbG9yUGFsZXR0ZSA9IF93cCRlZGl0b3IuQ29sb3JQYWxldHRlLFxuICAgIEluc3BlY3RvckNvbnRyb2xzID0gX3dwJGVkaXRvci5JbnNwZWN0b3JDb250cm9scyxcbiAgICBSaWNoVGV4dCA9IF93cCRlZGl0b3IuUmljaFRleHQ7XG4vKipcbiAqIFJlZ2lzdGVyOiBhYSBHdXRlbmJlcmcgQmxvY2suXG4gKlxuICogUmVnaXN0ZXJzIGEgbmV3IGJsb2NrIHByb3ZpZGVkIGEgdW5pcXVlIG5hbWUgYW5kIGFuIG9iamVjdCBkZWZpbmluZyBpdHNcbiAqIGJlaGF2aW9yLiBPbmNlIHJlZ2lzdGVyZWQsIHRoZSBibG9jayBpcyBtYWRlIGVkaXRvciBhcyBhbiBvcHRpb24gdG8gYW55XG4gKiBlZGl0b3IgaW50ZXJmYWNlIHdoZXJlIGJsb2NrcyBhcmUgaW1wbGVtZW50ZWQuXG4gKlxuICogQGxpbmsgaHR0cHM6Ly93b3JkcHJlc3Mub3JnL2d1dGVuYmVyZy9oYW5kYm9vay9ibG9jay1hcGkvXG4gKiBAcGFyYW0gIHtzdHJpbmd9ICAgbmFtZSAgICAgQmxvY2sgbmFtZS5cbiAqIEBwYXJhbSAge09iamVjdH0gICBzZXR0aW5ncyBCbG9jayBzZXR0aW5ncy5cbiAqIEByZXR1cm4gez9XUEJsb2NrfSAgICAgICAgICBUaGUgYmxvY2ssIGlmIGl0IGhhcyBiZWVuIHN1Y2Nlc3NmdWxseVxuICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZ2lzdGVyZWQ7IG90aGVyd2lzZSBgdW5kZWZpbmVkYC5cbiAqL1xuXG5yZWdpc3RlckJsb2NrVHlwZSgnZ2JiL3R5cGUnLCB7XG5cdC8vIEJsb2NrIG5hbWUuIEJsb2NrIG5hbWVzIG11c3QgYmUgc3RyaW5nIHRoYXQgY29udGFpbnMgYSBuYW1lc3BhY2UgcHJlZml4LiBFeGFtcGxlOiBteS1wbHVnaW4vbXktY3VzdG9tLWJsb2NrLlxuXHR0aXRsZTogX18oJ0Jvb3RzdHJhcCBUeXBlIEhlYWRpbmdzJyksIC8vIEJsb2NrIHRpdGxlLlxuXHRkZXNjcmlwdGlvbjogX18oJ1Byb3ZpZGUgY29udGV4dHVhbCBmZWVkYmFjayBtZXNzYWdlcyBmb3IgdHlwaWNhbCB1c2VyIGFjdGlvbnMgd2l0aCB0aGUgaGFuZGZ1bCBvZiBhdmFpbGFibGUgYW5kIGZsZXhpYmxlIHR5cGUgbWVzc2FnZXMuJyksIC8vIEJsb2NrIHRpdGxlLlxuXHRpY29uOiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0J3N2ZycsXG5cdFx0eyB2aWV3Qm94OiAnMCAwIDIyMC4wNjggMjIwLjA2OCcgfSxcblx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ3BhdGgnLCB7IGQ6ICdNMTM2LjkyMiA1MS45OTFIODkuMjk3djE0OC4zMzJINDcuMjUzVjUxLjk5MUgwVjE5Ljc0NWgxMzYuOTIydjMyLjI0NnonIH0pLFxuXHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgncGF0aCcsIHsgZDogJ00yMjAuMDY4IDk4LjI0NWgtMzguNDYzdjEwMi4wNzhoLTM4LjIzNlY5OC4yNDVIMTA1LjQ3VjY4LjkxOWgxMTQuNTk4djI5LjMyNnonIH0pXG5cdCksXG5cdGNhdGVnb3J5OiAnZ2JiJywgLy8gQmxvY2sgY2F0ZWdvcnkg4oCUIEdyb3VwIGJsb2NrcyB0b2dldGhlciBiYXNlZCBvbiBjb21tb24gdHJhaXRzIEUuZy4gY29tbW9uLCBmb3JtYXR0aW5nLCBsYXlvdXQgd2lkZ2V0cywgZW1iZWQuXG5cdGtleXdvcmRzOiBbX18oJ0Jvb3RzdHJhcCcpLCBfXygnSGVhZGVyJyksIF9fKCdUeXBvZ3JhcGh5JyldLFxuXHRhdHRyaWJ1dGVzOiB7XG5cdFx0YWxpZ25tZW50OiB7XG5cdFx0XHR0eXBlOiAnc3RyaW5nJ1xuXHRcdH0sXG5cdFx0Y29udGVudDoge1xuXHRcdFx0dHlwZTogJ2FycmF5Jyxcblx0XHRcdHNvdXJjZTogJ2NoaWxkcmVuJyxcblx0XHRcdHNlbGVjdG9yOiAnZGl2LnR5cGUtY29udGVudCdcblx0XHR9LFxuXHRcdHR5cGU6IHtcblx0XHRcdHR5cGU6ICdzdHJpbmcnLFxuXHRcdFx0ZGVmYXVsdDogJ2Rpc3BsYXktMSdcblx0XHR9XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIGVkaXQgZnVuY3Rpb24gZGVzY3JpYmVzIHRoZSBzdHJ1Y3R1cmUgb2YgeW91ciBibG9jayBpbiB0aGUgY29udGV4dCBvZiB0aGUgZWRpdG9yLlxuICAqIFRoaXMgcmVwcmVzZW50cyB3aGF0IHRoZSBlZGl0b3Igd2lsbCByZW5kZXIgd2hlbiB0aGUgYmxvY2sgaXMgdXNlZC5cbiAgKlxuICAqIFRoZSBcImVkaXRcIiBwcm9wZXJ0eSBtdXN0IGJlIGEgdmFsaWQgZnVuY3Rpb24uXG4gICpcbiAgKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9ibG9jay1lZGl0LXNhdmUvXG4gICovXG5cdGVkaXQ6IGZ1bmN0aW9uIGVkaXQocHJvcHMpIHtcblx0XHQvLyBUaGVtZSBzZWxlY3Rpb25cblx0XHR2YXIgX3Byb3BzJGF0dHJpYnV0ZXMgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5hbGlnbm1lbnQsXG5cdFx0ICAgIGNvbnRlbnQgPSBfcHJvcHMkYXR0cmlidXRlcy5jb250ZW50LFxuXHRcdCAgICB0eXBlID0gX3Byb3BzJGF0dHJpYnV0ZXMudHlwZSxcblx0XHQgICAgc2V0QXR0cmlidXRlcyA9IHByb3BzLnNldEF0dHJpYnV0ZXMsXG5cdFx0ICAgIGlzU2VsZWN0ZWQgPSBwcm9wcy5pc1NlbGVjdGVkO1xuXG5cblx0XHRmdW5jdGlvbiBzZXRUeXBlKGV2ZW50KSB7XG5cdFx0XHR2YXIgc2VsZWN0ZWQgPSBldmVudC50YXJnZXQucXVlcnlTZWxlY3Rvcignb3B0aW9uOmNoZWNrZWQnKTtcblx0XHRcdHNldEF0dHJpYnV0ZXMoeyB0eXBlOiBzZWxlY3RlZC52YWx1ZSB9KTtcblx0XHRcdGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cdFx0fVxuXG5cdFx0ZnVuY3Rpb24gb25DaGFuZ2VBbGlnbm1lbnQobmV3QWxpZ25tZW50KSB7XG5cdFx0XHRzZXRBdHRyaWJ1dGVzKHsgYWxpZ25tZW50OiBuZXdBbGlnbm1lbnQgfSk7XG5cdFx0fVxuXG5cdFx0ZnVuY3Rpb24gb25DaGFuZ2VDb250ZW50KG5ld0NvbnRlbnQpIHtcblx0XHRcdHNldEF0dHJpYnV0ZXMoeyBjb250ZW50OiBuZXdDb250ZW50IH0pO1xuXHRcdH1cblxuXHRcdHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRGcmFnbWVudCxcblx0XHRcdG51bGwsXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdEluc3BlY3RvckNvbnRyb2xzLFxuXHRcdFx0XHRudWxsLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0UGFuZWxCb2R5LFxuXHRcdFx0XHRcdHsgdGl0bGU6IF9fKCdTZWxlY3Qgb3B0aW9ucycpIH0sXG5cdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0UGFuZWxSb3csXG5cdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHQnbGFiZWwnLFxuXHRcdFx0XHRcdFx0XHRudWxsLFxuXHRcdFx0XHRcdFx0XHRfXygnVGhlbWUnKVxuXHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0J2Zvcm0nLFxuXHRcdFx0XHRcdFx0XHR7IG9uU3VibWl0OiBzZXRUeXBlIH0sXG5cdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHQnc2VsZWN0Jyxcblx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiB0eXBlLCBvbkNoYW5nZTogc2V0VHlwZSB9LFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2Rpc3BsYXktMScgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdEaXNwbGF5IDEnXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdkaXNwbGF5LTInIH0sXG5cdFx0XHRcdFx0XHRcdFx0XHQnRGlzcGxheSAyJ1xuXHRcdFx0XHRcdFx0XHRcdCksXG5cdFx0XHRcdFx0XHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRcdFx0XHRcdFx0J29wdGlvbicsXG5cdFx0XHRcdFx0XHRcdFx0XHR7IHZhbHVlOiAnZGlzcGxheS0zJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J0Rpc3BsYXkgMydcblx0XHRcdFx0XHRcdFx0XHQpLFxuXHRcdFx0XHRcdFx0XHRcdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdFx0XHRcdFx0XHRcdCdvcHRpb24nLFxuXHRcdFx0XHRcdFx0XHRcdFx0eyB2YWx1ZTogJ2Rpc3BsYXktNCcgfSxcblx0XHRcdFx0XHRcdFx0XHRcdCdEaXNwbGF5IDQnXG5cdFx0XHRcdFx0XHRcdFx0KSxcblx0XHRcdFx0XHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG5cdFx0XHRcdFx0XHRcdFx0XHQnb3B0aW9uJyxcblx0XHRcdFx0XHRcdFx0XHRcdHsgdmFsdWU6ICdsZWFkJyB9LFxuXHRcdFx0XHRcdFx0XHRcdFx0J0xlYWQnXG5cdFx0XHRcdFx0XHRcdFx0KVxuXHRcdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0XHQpXG5cdFx0XHRcdFx0KVxuXHRcdFx0XHQpXG5cdFx0XHQpLFxuXHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHRCbG9ja0NvbnRyb2xzLFxuXHRcdFx0XHRudWxsLFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoQWxpZ25tZW50VG9vbGJhciwge1xuXHRcdFx0XHRcdHZhbHVlOiBhbGlnbm1lbnQsXG5cdFx0XHRcdFx0b25DaGFuZ2U6IG9uQ2hhbmdlQWxpZ25tZW50XG5cdFx0XHRcdH0pXG5cdFx0XHQpLFxuXHRcdFx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHRcdFx0XHQnZGl2Jyxcblx0XHRcdFx0eyBjbGFzc05hbWU6IHByb3BzLmNsYXNzTmFtZSwgc3R5bGU6IHsgdGV4dEFsaWduOiBhbGlnbm1lbnQgfSB9LFxuXHRcdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQsIHtcblx0XHRcdFx0XHRjbGFzc05hbWU6ICd0eXBlLWNvbnRlbnQgJyArIHR5cGUsXG5cdFx0XHRcdFx0dGFnTmFtZTogJ2RpdicsXG5cdFx0XHRcdFx0b25DaGFuZ2U6IG9uQ2hhbmdlQ29udGVudCxcblx0XHRcdFx0XHR2YWx1ZTogY29udGVudFxuXHRcdFx0XHR9KVxuXHRcdFx0KVxuXHRcdCk7XG5cdH0sXG5cblx0LyoqXG4gICogVGhlIHNhdmUgZnVuY3Rpb24gZGVmaW5lcyB0aGUgd2F5IGluIHdoaWNoIHRoZSBkaWZmZXJlbnQgYXR0cmlidXRlcyBzaG91bGQgYmUgY29tYmluZWRcbiAgKiBpbnRvIHRoZSBmaW5hbCBtYXJrdXAsIHdoaWNoIGlzIHRoZW4gc2VyaWFsaXplZCBieSBHdXRlbmJlcmcgaW50byBwb3N0X2NvbnRlbnQuXG4gICpcbiAgKiBUaGUgXCJzYXZlXCIgcHJvcGVydHkgbXVzdCBiZSBzcGVjaWZpZWQgYW5kIG11c3QgYmUgYSB2YWxpZCBmdW5jdGlvbi5cbiAgKlxuICAqIEBsaW5rIGh0dHBzOi8vd29yZHByZXNzLm9yZy9ndXRlbmJlcmcvaGFuZGJvb2svYmxvY2stYXBpL2Jsb2NrLWVkaXQtc2F2ZS9cbiAgKi9cblx0c2F2ZTogZnVuY3Rpb24gc2F2ZShwcm9wcykge1xuXG5cdFx0Ly8gSW5pdGlhbGl6ZSB0aGVtZVxuXHRcdHZhciBfcHJvcHMkYXR0cmlidXRlczIgPSBwcm9wcy5hdHRyaWJ1dGVzLFxuXHRcdCAgICBhbGlnbm1lbnQgPSBfcHJvcHMkYXR0cmlidXRlczIuYWxpZ25tZW50LFxuXHRcdCAgICBjb250ZW50ID0gX3Byb3BzJGF0dHJpYnV0ZXMyLmNvbnRlbnQsXG5cdFx0ICAgIHR5cGUgPSBfcHJvcHMkYXR0cmlidXRlczIudHlwZTtcblxuXG5cdFx0cmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcblx0XHRcdCdkaXYnLFxuXHRcdFx0eyBzdHlsZTogeyB0ZXh0QWxpZ246IGFsaWdubWVudCB9IH0sXG5cdFx0XHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoUmljaFRleHQuQ29udGVudCwge1xuXHRcdFx0XHRjbGFzc05hbWU6ICd0eXBlLWNvbnRlbnQgJyArIHR5cGUsXG5cdFx0XHRcdHRhZ05hbWU6ICdkaXYnLFxuXHRcdFx0XHR2YWx1ZTogY29udGVudFxuXHRcdFx0fSlcblx0XHQpO1xuXHR9XG59KTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay90eXBlLmpzXG4vLyBtb2R1bGUgaWQgPSAxM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///13\n");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icons__ = __webpack_require__(/*! ./icons */ 14);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var _wp$components = wp.components,
+    CheckboxControl = _wp$components.CheckboxControl,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    InspectorControls = _wp$editor.InspectorControls,
+    MediaUpload = _wp$editor.MediaUpload,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/media', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Media Object'), // Block title.
+	description: __('media object to construct highly repetitive components like blog comments, tweets, and the like.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ width: 512, height: 512, viewBox: '0 0 612 612' },
+		wp.element.createElement('path', {
+			d: 'M159.209 283.684c-.021 0-.021 0 0 0l-139.249-.165C8.947 283.477 0 274.489 0 263.496L.166 124.35c0-11.014 8.947-19.981 19.939-19.981l139.249.166c11.013.042 19.96 9.009 19.96 20.022l-.165 139.146c0 5.331-2.087 10.332-5.848 14.113a19.772 19.772 0 0 1-14.092 5.868zM20.146 120.92c-1.612 0-3.451 1.798-3.451 3.43l-.165 139.146c0 1.88 1.591 3.471 3.472 3.471l139.166.166v8.265l.042-8.265c1.611 0 3.43-1.818 3.43-3.43l.166-139.146a3.466 3.466 0 0 0-3.472-3.471l-139.188-.166zM159.209 507.631c-.021 0-.021 0 0 0l-139.249-.124C8.947 507.465 0 498.498 0 487.505l.166-139.207c0-11.014 8.947-19.981 19.939-19.981l139.249.165c11.013.041 19.96 9.03 19.96 20.022l-.165 139.146c0 5.331-2.087 10.332-5.848 14.113a19.772 19.772 0 0 1-14.092 5.868zM20.146 344.867c-1.612 0-3.451 1.798-3.451 3.431l-.165 139.207c0 1.88 1.591 3.45 3.472 3.45l139.166.124v8.266l.042-8.266c1.611 0 3.43-1.818 3.43-3.43l.166-139.146a3.466 3.466 0 0 0-3.472-3.472l-139.188-.164zM595.325 186.464H230.104c-9.195 0-16.675-8.183-16.675-18.266s7.48-18.266 16.675-18.266h365.221c9.194 0 16.675 8.183 16.675 18.266s-7.48 18.266-16.675 18.266zM230.104 162.33c-2.314 0-4.277 2.686-4.277 5.868s1.963 5.868 4.277 5.868h365.221c2.313 0 4.277-2.686 4.277-5.868s-1.964-5.868-4.277-5.868H230.104zM595.325 238.122H230.104c-9.195 0-16.675-8.183-16.675-18.266s7.48-18.266 16.675-18.266h365.221c9.194 0 16.675 8.183 16.675 18.266s-7.48 18.266-16.675 18.266zm-365.221-24.135c-2.314 0-4.277 2.686-4.277 5.868s1.963 5.868 4.277 5.868h365.221c2.313 0 4.277-2.686 4.277-5.868s-1.964-5.868-4.277-5.868H230.104zM595.325 410.411H230.104c-9.195 0-16.675-8.183-16.675-18.267s7.48-18.267 16.675-18.267h365.221c9.194 0 16.675 8.183 16.675 18.267s-7.48 18.267-16.675 18.267zm-365.221-24.135c-2.314 0-4.277 2.687-4.277 5.868s1.963 5.868 4.277 5.868h365.221c2.313 0 4.277-2.687 4.277-5.868s-1.964-5.868-4.277-5.868H230.104zM595.325 462.068H230.104c-9.195 0-16.675-8.183-16.675-18.266 0-10.084 7.48-18.267 16.675-18.267h365.221c9.194 0 16.675 8.183 16.675 18.267s-7.48 18.266-16.675 18.266zm-365.221-24.134c-2.314 0-4.277 2.687-4.277 5.869s1.963 5.868 4.277 5.868h365.221c2.313 0 4.277-2.687 4.277-5.868 0-3.183-1.964-5.869-4.277-5.869H230.104z',
+			'data-original': '#000000',
+			className: 'active-path',
+			'data-old_color': '#484747',
+			fill: '#444'
+		})
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Media Object'), __('image')],
+	attributes: {
+		imageId: { type: 'string' },
+		imageUrl: { type: 'string' },
+		margin: {
+			type: 'string',
+			default: 'my-3'
+		},
+		textColor: {
+			source: 'string'
+		},
+		title: {
+			source: 'text',
+			selector: 'h4.media-heading',
+			default: 'Media heading'
+		},
+		content: {
+			type: 'array',
+			source: 'children',
+			selector: 'div.content',
+			default: 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.'
+		},
+		alignment: {
+			type: 'string'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    content = _props$attributes.content,
+		    imageId = _props$attributes.imageId,
+		    imageUrl = _props$attributes.imageUrl,
+		    margin = _props$attributes.margin,
+		    title = _props$attributes.title,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected;
+
+
+		function setMargin(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ margin: selected.value });
+			event.preventDefault();
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Margin')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setMargin },
+							wp.element.createElement(
+								'select',
+								{ value: margin, onChange: setMargin },
+								wp.element.createElement(
+									'option',
+									{ value: 'my-0' },
+									'No margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-1' },
+									'my-1 - Tiny margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-2' },
+									'my-2 - Small margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-3' },
+									'my-3 - Middle margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-4' },
+									'my-4 - Large margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-5' },
+									'my-5 - Hugh margin'
+								)
+							)
+						)
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: function onChange(alignment) {
+						setAttributes({ alignment: alignment });
+					}
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className },
+				wp.element.createElement(
+					'div',
+					{
+						className: 'media ' + margin,
+						style: {
+							textAlign: alignment,
+							margin: margin
+						}
+					},
+					wp.element.createElement(MediaUpload, {
+						buttonProps: {
+							className: 'change-image'
+						},
+						onSelect: function onSelect(img) {
+							return setAttributes({
+								imageId: img.id,
+								imageUrl: img.url
+							});
+						},
+						type: 'image',
+						value: imageId,
+						render: function render(_ref) {
+							var open = _ref.open;
+							return wp.element.createElement(
+								'div',
+								{
+									className: 'media-image mr-3',
+									onClick: open
+								},
+								!imageId ? wp.element.createElement(
+									'div',
+									{ className: 'btn btn-primary ' },
+									__WEBPACK_IMPORTED_MODULE_2__icons__["a" /* default */].upload
+								) : wp.element.createElement('img', {
+									src: imageUrl
+								})
+							);
+						}
+					}),
+					wp.element.createElement(
+						'div',
+						{ className: 'media-body' },
+						wp.element.createElement(RichText, {
+							className: 'media-heading mt-0',
+							tagName: 'h5',
+							onChange: function onChange(title) {
+								setAttributes({ title: title });
+							},
+							value: title
+						}),
+						wp.element.createElement(RichText, {
+							className: 'content',
+							tagName: 'div',
+							onChange: function onChange(content) {
+								setAttributes({ content: content });
+							},
+							value: content
+						})
+					)
+				)
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    content = _props$attributes2.content,
+		    imageUrl = _props$attributes2.imageUrl,
+		    margin = _props$attributes2.margin,
+		    title = _props$attributes2.title;
+
+
+		return wp.element.createElement(
+			'div',
+			null,
+			wp.element.createElement(
+				'div',
+				{ className: 'media ' + margin,
+					style: { textAlign: alignment }
+				},
+				wp.element.createElement('img', { src: imageUrl, className: 'media-image mr-3' }),
+				wp.element.createElement(
+					'div',
+					{ className: 'media-body' },
+					wp.element.createElement(RichText.Content, {
+						className: 'media-heading',
+						tagName: 'h5',
+						value: title
+					}),
+					wp.element.createElement(RichText.Content, {
+						className: 'content',
+						tagName: 'div',
+						value: content
+					})
+				)
+			)
+		);
+	}
+});
 
 /***/ }),
 /* 14 */
@@ -217,7 +2403,238 @@ eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __web
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("var icons = {};\n\nicons.upload = wp.element.createElement(\n\t'svg',\n\t{ width: '20px', height: '20px', viewBox: '0 0 100 100', xmlns: 'http://www.w3.org/2000/svg' },\n\twp.element.createElement('path', { d: 'm77.945 91.453h-72.371c-3.3711 0-5.5742-2.3633-5.5742-5.2422v-55.719c0-3.457 2.1172-6.0703 5.5742-6.0703h44.453v11.051l-38.98-0.003906v45.008h60.977v-17.133l11.988-0.007812v22.875c0 2.8789-2.7812 5.2422-6.0664 5.2422z'\n\t}),\n\twp.element.createElement('path', { d: 'm16.543 75.48l23.25-22.324 10.441 9.7773 11.234-14.766 5.5039 10.539 0.039063 16.773z'\n\t}),\n\twp.element.createElement('path', { d: 'm28.047 52.992c-3.168 0-5.7422-2.5742-5.7422-5.7461 0-3.1758 2.5742-5.75 5.7422-5.75 3.1797 0 5.7539 2.5742 5.7539 5.75 0 3.1719-2.5742 5.7461-5.7539 5.7461z'\n\t}),\n\twp.element.createElement('path', { d: 'm84.043 30.492v22.02h-12.059l-0.015625-22.02h-15.852l21.941-21.945 21.941 21.945z'\n\t})\n);\n\n/* harmony default export */ __webpack_exports__[\"a\"] = (icons);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9zcmMvYmxvY2svbWVkaWEvaWNvbnMuanM/YzIyNSJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgaWNvbnMgPSB7fTtcblxuaWNvbnMudXBsb2FkID0gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuXHQnc3ZnJyxcblx0eyB3aWR0aDogJzIwcHgnLCBoZWlnaHQ6ICcyMHB4Jywgdmlld0JveDogJzAgMCAxMDAgMTAwJywgeG1sbnM6ICdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZycgfSxcblx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdwYXRoJywgeyBkOiAnbTc3Ljk0NSA5MS40NTNoLTcyLjM3MWMtMy4zNzExIDAtNS41NzQyLTIuMzYzMy01LjU3NDItNS4yNDIydi01NS43MTljMC0zLjQ1NyAyLjExNzItNi4wNzAzIDUuNTc0Mi02LjA3MDNoNDQuNDUzdjExLjA1MWwtMzguOTgtMC4wMDM5MDZ2NDUuMDA4aDYwLjk3N3YtMTcuMTMzbDExLjk4OC0wLjAwNzgxMnYyMi44NzVjMCAyLjg3ODktMi43ODEyIDUuMjQyMi02LjA2NjQgNS4yNDIyeidcblx0fSksXG5cdHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgncGF0aCcsIHsgZDogJ20xNi41NDMgNzUuNDhsMjMuMjUtMjIuMzI0IDEwLjQ0MSA5Ljc3NzMgMTEuMjM0LTE0Ljc2NiA1LjUwMzkgMTAuNTM5IDAuMDM5MDYzIDE2Ljc3M3onXG5cdH0pLFxuXHR3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ3BhdGgnLCB7IGQ6ICdtMjguMDQ3IDUyLjk5MmMtMy4xNjggMC01Ljc0MjItMi41NzQyLTUuNzQyMi01Ljc0NjEgMC0zLjE3NTggMi41NzQyLTUuNzUgNS43NDIyLTUuNzUgMy4xNzk3IDAgNS43NTM5IDIuNTc0MiA1Ljc1MzkgNS43NSAwIDMuMTcxOS0yLjU3NDIgNS43NDYxLTUuNzUzOSA1Ljc0NjF6J1xuXHR9KSxcblx0d3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdwYXRoJywgeyBkOiAnbTg0LjA0MyAzMC40OTJ2MjIuMDJoLTEyLjA1OWwtMC4wMTU2MjUtMjIuMDJoLTE1Ljg1MmwyMS45NDEtMjEuOTQ1IDIxLjk0MSAyMS45NDV6J1xuXHR9KVxuKTtcblxuZXhwb3J0IGRlZmF1bHQgaWNvbnM7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2svbWVkaWEvaWNvbnMuanNcbi8vIG1vZHVsZSBpZCA9IDE0XG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///14\n");
+var icons = {};
+
+icons.upload = wp.element.createElement(
+	'svg',
+	{ width: '20px', height: '20px', viewBox: '0 0 100 100', xmlns: 'http://www.w3.org/2000/svg' },
+	wp.element.createElement('path', { d: 'm77.945 91.453h-72.371c-3.3711 0-5.5742-2.3633-5.5742-5.2422v-55.719c0-3.457 2.1172-6.0703 5.5742-6.0703h44.453v11.051l-38.98-0.003906v45.008h60.977v-17.133l11.988-0.007812v22.875c0 2.8789-2.7812 5.2422-6.0664 5.2422z'
+	}),
+	wp.element.createElement('path', { d: 'm16.543 75.48l23.25-22.324 10.441 9.7773 11.234-14.766 5.5039 10.539 0.039063 16.773z'
+	}),
+	wp.element.createElement('path', { d: 'm28.047 52.992c-3.168 0-5.7422-2.5742-5.7422-5.7461 0-3.1758 2.5742-5.75 5.7422-5.75 3.1797 0 5.7539 2.5742 5.7539 5.75 0 3.1719-2.5742 5.7461-5.7539 5.7461z'
+	}),
+	wp.element.createElement('path', { d: 'm84.043 30.492v22.02h-12.059l-0.015625-22.02h-15.852l21.941-21.945 21.941 21.945z'
+	})
+);
+
+/* harmony default export */ __webpack_exports__["a"] = (icons);
+
+/***/ }),
+/* 15 */
+/*!********************************!*\
+  !*** ./src/block/type/type.js ***!
+  \********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+/**
+ * BLOCK: bootstrap-blocks
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+
+//  Import CSS.
+
+
+
+var __ = wp.i18n.__; // Import __() from wp.i18n
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+var _wp$components = wp.components,
+    CheckboxControl = _wp$components.CheckboxControl,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+var Fragment = wp.element.Fragment;
+var _wp$editor = wp.editor,
+    AlignmentToolbar = _wp$editor.AlignmentToolbar,
+    BlockControls = _wp$editor.BlockControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    InspectorControls = _wp$editor.InspectorControls,
+    RichText = _wp$editor.RichText;
+/**
+ * Register: aa Gutenberg Block.
+ *
+ * Registers a new block provided a unique name and an object defining its
+ * behavior. Once registered, the block is made editor as an option to any
+ * editor interface where blocks are implemented.
+ *
+ * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @param  {string}   name     Block name.
+ * @param  {Object}   settings Block settings.
+ * @return {?WPBlock}          The block, if it has been successfully
+ *                             registered; otherwise `undefined`.
+ */
+
+registerBlockType('gbb/type', {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('Bootstrap Type Headings'), // Block title.
+	description: __('Provide contextual feedback messages for typical user actions with the handful of available and flexible type messages.'), // Block title.
+	icon: wp.element.createElement(
+		'svg',
+		{ viewBox: '0 0 220.068 220.068' },
+		wp.element.createElement('path', { d: 'M136.922 51.991H89.297v148.332H47.253V51.991H0V19.745h136.922v32.246z' }),
+		wp.element.createElement('path', { d: 'M220.068 98.245h-38.463v102.078h-38.236V98.245H105.47V68.919h114.598v29.326z' })
+	),
+	category: 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	keywords: [__('Bootstrap'), __('Header'), __('Typography')],
+	attributes: {
+		alignment: {
+			type: 'string'
+		},
+		content: {
+			type: 'array',
+			source: 'children',
+			selector: 'div.type-content'
+		},
+		type: {
+			type: 'string',
+			default: 'display-1'
+		}
+	},
+
+	/**
+  * The edit function describes the structure of your block in the context of the editor.
+  * This represents what the editor will render when the block is used.
+  *
+  * The "edit" property must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	edit: function edit(props) {
+		// Theme selection
+		var _props$attributes = props.attributes,
+		    alignment = _props$attributes.alignment,
+		    content = _props$attributes.content,
+		    type = _props$attributes.type,
+		    setAttributes = props.setAttributes,
+		    isSelected = props.isSelected;
+
+
+		function setType(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ type: selected.value });
+			event.preventDefault();
+		}
+
+		function onChangeAlignment(newAlignment) {
+			setAttributes({ alignment: newAlignment });
+		}
+
+		function onChangeContent(newContent) {
+			setAttributes({ content: newContent });
+		}
+
+		return wp.element.createElement(
+			Fragment,
+			null,
+			wp.element.createElement(
+				InspectorControls,
+				null,
+				wp.element.createElement(
+					PanelBody,
+					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Theme')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setType },
+							wp.element.createElement(
+								'select',
+								{ value: type, onChange: setType },
+								wp.element.createElement(
+									'option',
+									{ value: 'display-1' },
+									'Display 1'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'display-2' },
+									'Display 2'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'display-3' },
+									'Display 3'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'display-4' },
+									'Display 4'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'lead' },
+									'Lead'
+								)
+							)
+						)
+					)
+				)
+			),
+			wp.element.createElement(
+				BlockControls,
+				null,
+				wp.element.createElement(AlignmentToolbar, {
+					value: alignment,
+					onChange: onChangeAlignment
+				})
+			),
+			wp.element.createElement(
+				'div',
+				{ className: props.className, style: { textAlign: alignment } },
+				wp.element.createElement(RichText, {
+					className: 'type-content ' + type,
+					tagName: 'div',
+					onChange: onChangeContent,
+					value: content
+				})
+			)
+		);
+	},
+
+	/**
+  * The save function defines the way in which the different attributes should be combined
+  * into the final markup, which is then serialized by Gutenberg into post_content.
+  *
+  * The "save" property must be specified and must be a valid function.
+  *
+  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+  */
+	save: function save(props) {
+
+		// Initialize theme
+		var _props$attributes2 = props.attributes,
+		    alignment = _props$attributes2.alignment,
+		    content = _props$attributes2.content,
+		    type = _props$attributes2.type;
+
+
+		return wp.element.createElement(
+			'div',
+			{ style: { textAlign: alignment } },
+			wp.element.createElement(RichText.Content, {
+				className: 'type-content ' + type,
+				tagName: 'div',
+				value: content
+			})
+		);
+	}
+});
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=blocks.editor.build.js.map
