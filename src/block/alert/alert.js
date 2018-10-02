@@ -89,9 +89,6 @@ registerBlockType('gbb/alert', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function (props) {
-		// Creates a <p class='wp-block-gbb-alert'></p>.
-
-		// Theme selection
 		const {attributes: {alignment, content, isDismissable, margin, title, theme}, setAttributes, isSelected} = props;
 		function setMargin(event) {
 			const selected = event.target.querySelector('option:checked');
@@ -130,9 +127,6 @@ registerBlockType('gbb/alert', {
 						<option value="light">Light</option>
 						<option value="dark">Dark</option>
 					</select>
-					{/*<ColorPalette
-						value={textColor}
-						onChange={(textColor) => setAttributes({ textColor })} />*/}
 				</form>
 			);
 		}

@@ -1,10 +1,20 @@
 // Accordion
 .wp-block-gbb-accordion {
+  @import "~bootstrap/scss/buttons";
   @import "~bootstrap/scss/card";
+  @import "~bootstrap/scss/utilities/float";
 
   .card {
     padding: 0;
     margin: 0;
     max-width: 100%;
+  }
+
+  .card-header {
+    cursor: pointer;
+
+    &:active, &:hover {
+      box-shadow: none;
+    }
   }
 }

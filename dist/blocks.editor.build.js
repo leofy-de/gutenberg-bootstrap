@@ -605,6 +605,10 @@ registerBlockType('gbb/accordion', {
 				}
 			}
 		},
+		margin: {
+			type: 'string',
+			default: 'my-3'
+		},
 		theme: {
 			type: 'string',
 			default: 'success'
@@ -624,15 +628,40 @@ registerBlockType('gbb/accordion', {
 		var _props$attributes = props.attributes,
 		    alignment = _props$attributes.alignment,
 		    content = _props$attributes.content,
+		    margin = _props$attributes.margin,
 		    theme = _props$attributes.theme,
 		    setAttributes = props.setAttributes,
 		    isSelected = props.isSelected;
 
 
+		function setMargin(event) {
+			var selected = event.target.querySelector('option:checked');
+			setAttributes({ margin: selected.value });
+			event.preventDefault();
+		}
+
 		function setTheme(event) {
 			var selected = event.target.querySelector('option:checked');
 			setAttributes({ theme: selected.value });
 			event.preventDefault();
+		}
+
+		function addCard() {
+			var newContent = content;
+			newContent.push({
+				title: 'Collapsible Group Item #' + (content.length + 1),
+				body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			});
+			setAttributes({ content: newContent });
+		}
+
+		function removeCard(key) {
+			var newContent = content;
+			var index = newContent.indexOf(key);
+			if (index > -1) {
+				newContent.splice(index, 1);
+			}
+			setAttributes({ content: newContent });
 		}
 
 		function onChangeCardBody(key, body) {
@@ -656,6 +685,53 @@ registerBlockType('gbb/accordion', {
 				wp.element.createElement(
 					PanelBody,
 					{ title: __('Select options') },
+					wp.element.createElement(
+						PanelRow,
+						null,
+						wp.element.createElement(
+							'label',
+							null,
+							__('Margin')
+						),
+						wp.element.createElement(
+							'form',
+							{ onSubmit: setMargin },
+							wp.element.createElement(
+								'select',
+								{ value: margin, onChange: setMargin },
+								wp.element.createElement(
+									'option',
+									{ value: 'my-0' },
+									'No margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-1' },
+									'my-1 - Tiny margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-2' },
+									'my-2 - Small margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-3' },
+									'my-3 - Middle margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-4' },
+									'my-4 - Large margin'
+								),
+								wp.element.createElement(
+									'option',
+									{ value: 'my-5' },
+									'my-5 - Hugh margin'
+								)
+							)
+						)
+					),
 					wp.element.createElement(
 						PanelRow,
 						null,
@@ -731,7 +807,7 @@ registerBlockType('gbb/accordion', {
 				wp.element.createElement(
 					'div',
 					{
-						className: 'accordion',
+						className: 'accordion ' + margin,
 						style: { textAlign: alignment }
 					},
 					content.map(function (card, key) {
@@ -739,14 +815,33 @@ registerBlockType('gbb/accordion', {
 							'div',
 							{ className: 'card' },
 							wp.element.createElement(
-								'div',
+								'a',
 								{ className: 'card-header',
 									'data-toggle': 'collapse',
-									'data-target': '#collapse' + key
+									'data-target': '#collapse' + key,
+									'aria-expanded': 'false',
+									'aria-controls': 'collapse' + key
 								},
+								wp.element.createElement(
+									'div',
+									{ className: 'removeCard float-right' },
+									wp.element.createElement(
+										'a',
+										{
+											className: 'btn btn-secondary btn-sm',
+											onClick: function onClick() {
+												return removeCard(key);
+											}
+										},
+										wp.element.createElement('span', { className: 'dashicons dashicons-minus' }),
+										' ',
+										__('Remove card')
+									)
+								),
 								wp.element.createElement(RichText, {
 									tagName: 'h5',
 									className: 'mb-0',
+									multiline: 'p',
 									onChange: function onChange(title) {
 										return onChangeCardTitle(key, title);
 									},
@@ -756,7 +851,7 @@ registerBlockType('gbb/accordion', {
 							wp.element.createElement(
 								'div',
 								{
-									id: '#collapse' + key,
+									id: 'collapse' + key,
 									className: 'collapse'
 								},
 								wp.element.createElement(RichText, {
@@ -769,7 +864,21 @@ registerBlockType('gbb/accordion', {
 								})
 							)
 						);
-					})
+					}),
+					wp.element.createElement(
+						'div',
+						{ className: 'addCard text-center' },
+						wp.element.createElement(
+							'a',
+							{
+								className: 'btn btn-secondary mt-3',
+								onClick: addCard
+							},
+							wp.element.createElement('span', { className: 'dashicons dashicons-plus' }),
+							' ',
+							__('Add card')
+						)
+					)
 				)
 			)
 		);
@@ -789,6 +898,7 @@ registerBlockType('gbb/accordion', {
 		var _props$attributes2 = props.attributes,
 		    alignment = _props$attributes2.alignment,
 		    content = _props$attributes2.content,
+		    margin = _props$attributes2.margin,
 		    theme = _props$attributes2.theme;
 
 
@@ -798,7 +908,7 @@ registerBlockType('gbb/accordion', {
 			wp.element.createElement(
 				'div',
 				{
-					className: 'accordion',
+					className: 'accordion ' + margin,
 					style: { textAlign: alignment }
 				},
 				content.map(function (card, key) {
@@ -806,7 +916,7 @@ registerBlockType('gbb/accordion', {
 						'div',
 						{ className: 'card' },
 						wp.element.createElement(
-							'div',
+							'a',
 							{ className: 'card-header',
 								'data-toggle': 'collapse',
 								'data-target': '#collapse' + key
@@ -820,7 +930,7 @@ registerBlockType('gbb/accordion', {
 						wp.element.createElement(
 							'div',
 							{
-								id: '#collapse' + key,
+								id: 'collapse' + key,
 								className: 'collapse'
 							},
 							wp.element.createElement(RichText.Content, {
@@ -943,9 +1053,6 @@ registerBlockType('gbb/alert', {
   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
   */
 	edit: function edit(props) {
-		// Creates a <p class='wp-block-gbb-alert'></p>.
-
-		// Theme selection
 		var _props$attributes = props.attributes,
 		    alignment = _props$attributes.alignment,
 		    content = _props$attributes.content,

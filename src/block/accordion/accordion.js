@@ -63,16 +63,16 @@ registerBlockType('gbb/accordion', {
 			source  : 'query',
 			default : [
 				{
-					title : 'Collapsible Group Item #1',
-					body  : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+					title: 'Collapsible Group Item #1',
+					body : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
 				},
 				{
-					title : 'Collapsible Group Item #2',
-					body  : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+					title: 'Collapsible Group Item #2',
+					body : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
 				},
 				{
-					title : 'Collapsible Group Item #3',
-					body  : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+					title: 'Collapsible Group Item #3',
+					body : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
 				},
 			],
 			selector: '.accordion .card',
@@ -82,17 +82,21 @@ registerBlockType('gbb/accordion', {
 					source  : 'text',
 					default: false,
 				},*/
-				title : {
+				title: {
 					type    : 'string',
 					source  : 'text',
 					selector: '.card-header h5',
 				},
-				body  : {
+				body : {
 					type    : 'array',
 					selector: '.card-body',
 					source  : 'children',
 				},
 			},
+		},
+		margin   : {
+			type   : 'string',
+			default: 'my-3'
 		},
 		theme    : {
 			type   : 'string',
@@ -110,7 +114,13 @@ registerBlockType('gbb/accordion', {
 	 */
 	edit: function (props) {
 		// Theme selection
-		const {attributes: {alignment, content, theme}, setAttributes, isSelected} = props;
+		const {attributes: {alignment, content, margin, theme}, setAttributes, isSelected} = props;
+
+		function setMargin(event) {
+			const selected = event.target.querySelector('option:checked');
+			setAttributes({margin: selected.value});
+			event.preventDefault();
+		}
 
 		function setTheme(event) {
 			const selected = event.target.querySelector('option:checked');
@@ -118,14 +128,32 @@ registerBlockType('gbb/accordion', {
 			event.preventDefault();
 		}
 
-		function onChangeCardBody(key, body) {
+		function addCard() {
 			const newContent = content;
+			newContent.push({
+				title: `Collapsible Group Item #${content.length + 1}`,
+				body : ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			});
+			setAttributes({content: newContent});
+		}
+
+		function removeCard(key) {
+			const newContent = content;
+			const index      = newContent.indexOf(key);
+			if (index > -1) {
+				newContent.splice(index, 1);
+			}
+			setAttributes({content: newContent});
+		}
+
+		function onChangeCardBody(key, body) {
+			const newContent     = content;
 			newContent[key].body = body;
 			setAttributes({content: newContent});
 		}
 
 		function onChangeCardTitle(key, title) {
-			const newContent = content;
+			const newContent      = content;
 			newContent[key].title = title;
 			setAttributes({content: newContent});
 		}
@@ -134,6 +162,19 @@ registerBlockType('gbb/accordion', {
 			<Fragment>
 				<InspectorControls>
 					<PanelBody title={__('Select options')}>
+						<PanelRow>
+							<label>{__('Margin')}</label>
+							<form onSubmit={setMargin}>
+								<select value={margin} onChange={setMargin}>
+									<option value="my-0">No margin</option>
+									<option value="my-1">my-1 - Tiny margin</option>
+									<option value="my-2">my-2 - Small margin</option>
+									<option value="my-3">my-3 - Middle margin</option>
+									<option value="my-4">my-4 - Large margin</option>
+									<option value="my-5">my-5 - Hugh margin</option>
+								</select>
+							</form>
+						</PanelRow>
 						<PanelRow>
 							<label>{__('Theme')}</label>
 							<form onSubmit={setTheme} style={{textAlign: alignment}}>
@@ -161,25 +202,36 @@ registerBlockType('gbb/accordion', {
 				</BlockControls>
 				<div className={props.className}>
 					<div
-						className={`accordion`}
+						className={`accordion ${margin}`}
 						style={{textAlign: alignment}}
 					>
 						{
 							content.map((card, key) => {
 								return <div className="card">
-									<div className="card-header"
-										 data-toggle="collapse"
-										 data-target={`#collapse${key}`}
+									<a className="card-header"
+									   data-toggle="collapse"
+									   data-target={`#collapse${key}`}
+									   aria-expanded="false"
+									   aria-controls={`collapse${key}`}
 									>
+										<div className="removeCard float-right">
+											<a
+												className="btn btn-secondary btn-sm"
+												onClick={() => removeCard(key)}
+											>
+												<span className="dashicons dashicons-minus"></span> {__('Remove card')}
+											</a>
+										</div>
 										<RichText
 											tagName="h5"
 											className="mb-0"
+											multiline="p"
 											onChange={(title) => onChangeCardTitle(key, title)}
 											value={card.title}
 										/>
-									</div>
+									</a>
 									<div
-										id={`#collapse${key}`}
+										id={`collapse${key}`}
 										className={`collapse`}
 									>
 										<RichText
@@ -192,6 +244,16 @@ registerBlockType('gbb/accordion', {
 								</div>
 							})
 						}
+
+						<div className="addCard text-center">
+							<a
+								className="btn btn-secondary mt-3"
+								onClick={addCard}
+							>
+								<span className="dashicons dashicons-plus"></span> {__('Add card')}
+							</a>
+						</div>
+
 					</div>
 				</div>
 			</Fragment>
@@ -209,29 +271,29 @@ registerBlockType('gbb/accordion', {
 	save: function (props) {
 
 		// Initialize theme
-		const {attributes: {alignment, content, theme}} = props;
+		const {attributes: {alignment, content, margin, theme}} = props;
 
 		return (
 			<div>
 				<div
-					className={`accordion`}
+					className={`accordion ${margin}`}
 					style={{textAlign: alignment}}
 				>
 					{
 						content.map((card, key) => {
 							return <div className="card">
-								<div className="card-header"
-									 data-toggle="collapse"
-									 data-target={`#collapse${key}`}
+								<a className="card-header"
+								   data-toggle="collapse"
+								   data-target={`#collapse${key}`}
 								>
 									<RichText.Content
 										className="mb-0"
 										tagName="h5"
 										value={card.title}
 									/>
-								</div>
+								</a>
 								<div
-									id={`#collapse${key}`}
+									id={`collapse${key}`}
 									className={`collapse`}
 								>
 									<RichText.Content
