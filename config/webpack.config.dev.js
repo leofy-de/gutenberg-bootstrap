@@ -70,6 +70,7 @@ const extractConfig = {
 
 // Export configuration.
 module.exports = {
+	mode: 'development',
 	entry: {
 		'./dist/blocks.build': paths.pluginBlocksJs, // 'name' : 'path/file.ext'.
 		'./dist/blocks.editor.build': paths.pluginEditorBlocksJs, // 'name' : 'path/file.ext'.
