@@ -2,6 +2,10 @@
 .wp-block-gbb-media {
   @import "~bootstrap/scss/media";
 
+  .btn-secondary svg {
+    fill: #fff;
+  }
+
   .media-image {
     max-width: 30%;
   }

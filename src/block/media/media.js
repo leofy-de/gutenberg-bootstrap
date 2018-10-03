@@ -68,7 +68,7 @@ registerBlockType('gbb/media', {
 		title    : {
 			source  : 'text',
 			selector: 'h4.media-heading',
-			default : 'Media heading',
+			default : 'Enter a heading here',
 		},
 		content  : {
 			type    : 'array',
@@ -150,11 +150,11 @@ registerBlockType('gbb/media', {
 									onClick={open}
 								>
 									{!imageId ?
-										<div className="btn btn-primary ">
-											{icons.upload}
-										</div> : <img
-											src={imageUrl}
-										/>}
+										<div className="btn btn-secondary">
+											{icons.upload} {__('Upload image')}
+										</div> :
+										<img src={imageUrl} />
+									}
 								</div>
 							)}
 						>
@@ -162,6 +162,7 @@ registerBlockType('gbb/media', {
 						<div className="media-body">
 							<RichText
 								className="media-heading mt-0"
+								multiline="p"
 								tagName="h5"
 								onChange={(title) => {
 									setAttributes({title})
@@ -194,14 +195,18 @@ registerBlockType('gbb/media', {
 	save: function (props) {
 
 		// Initialize theme
-		const {attributes: {alignment, content, imageUrl, margin, title}} = props;
+		const {attributes: {alignment, content, imageId, imageUrl, margin, title}} = props;
 
 		return (
 			<div>
 				<div className={`media ${margin}`}
 					 style={{textAlign: alignment}}
 				>
-					<img src={imageUrl} className="media-image mr-3"/>
+					{
+						imageId &&
+						<img src={imageUrl} className="media-image mr-3"/>
+					}
+
 					<div className="media-body">
 						<RichText.Content
 							className="media-heading"

@@ -60,31 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!******************************!*\
-  !*** ./src/block/style.scss ***!
-  \******************************/
-/*! dynamic exports provided */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 1 */
-/*!*******************************!*\
-  !*** ./src/block/editor.scss ***!
-  \*******************************/
-/*! dynamic exports provided */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 2 */
 /*!*************************!*\
   !*** external "jQuery" ***!
   \*************************/
@@ -95,371 +75,31 @@
 module.exports = jQuery;
 
 /***/ }),
-/* 3 */
-/*!***********************************************!*\
-  !*** ./node_modules/bootstrap/js/src/util.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 1 */
+/*!******************************!*\
+  !*** ./src/block/style.scss ***!
+  \******************************/
+/*! dynamic exports provided */
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): util.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-const Util = (($) => {
-  /**
-   * ------------------------------------------------------------------------
-   * Private TransitionEnd Helpers
-   * ------------------------------------------------------------------------
-   */
-
-  const TRANSITION_END = 'transitionend'
-  const MAX_UID = 1000000
-  const MILLISECONDS_MULTIPLIER = 1000
-
-  // Shoutout AngusCroll (https://goo.gl/pxwQGp)
-  function toType(obj) {
-    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
-  }
-
-  function getSpecialTransitionEndEvent() {
-    return {
-      bindType: TRANSITION_END,
-      delegateType: TRANSITION_END,
-      handle(event) {
-        if ($(event.target).is(this)) {
-          return event.handleObj.handler.apply(this, arguments) // eslint-disable-line prefer-rest-params
-        }
-        return undefined // eslint-disable-line no-undefined
-      }
-    }
-  }
-
-  function transitionEndEmulator(duration) {
-    let called = false
-
-    $(this).one(Util.TRANSITION_END, () => {
-      called = true
-    })
-
-    setTimeout(() => {
-      if (!called) {
-        Util.triggerTransitionEnd(this)
-      }
-    }, duration)
-
-    return this
-  }
-
-  function setTransitionEndSupport() {
-    $.fn.emulateTransitionEnd = transitionEndEmulator
-    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent()
-  }
-
-  /**
-   * --------------------------------------------------------------------------
-   * Public Util Api
-   * --------------------------------------------------------------------------
-   */
-
-  const Util = {
-
-    TRANSITION_END: 'bsTransitionEnd',
-
-    getUID(prefix) {
-      do {
-        // eslint-disable-next-line no-bitwise
-        prefix += ~~(Math.random() * MAX_UID) // "~~" acts like a faster Math.floor() here
-      } while (document.getElementById(prefix))
-      return prefix
-    },
-
-    getSelectorFromElement(element) {
-      let selector = element.getAttribute('data-target')
-      if (!selector || selector === '#') {
-        selector = element.getAttribute('href') || ''
-      }
-
-      try {
-        return document.querySelector(selector) ? selector : null
-      } catch (err) {
-        return null
-      }
-    },
-
-    getTransitionDurationFromElement(element) {
-      if (!element) {
-        return 0
-      }
-
-      // Get transition-duration of the element
-      let transitionDuration = $(element).css('transition-duration')
-      const floatTransitionDuration = parseFloat(transitionDuration)
-
-      // Return 0 if element or transition duration is not found
-      if (!floatTransitionDuration) {
-        return 0
-      }
-
-      // If multiple durations are defined, take the first
-      transitionDuration = transitionDuration.split(',')[0]
-
-      return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER
-    },
-
-    reflow(element) {
-      return element.offsetHeight
-    },
-
-    triggerTransitionEnd(element) {
-      $(element).trigger(TRANSITION_END)
-    },
-
-    // TODO: Remove in v5
-    supportsTransitionEnd() {
-      return Boolean(TRANSITION_END)
-    },
-
-    isElement(obj) {
-      return (obj[0] || obj).nodeType
-    },
-
-    typeCheckConfig(componentName, config, configTypes) {
-      for (const property in configTypes) {
-        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
-          const expectedTypes = configTypes[property]
-          const value         = config[property]
-          const valueType     = value && Util.isElement(value)
-            ? 'element' : toType(value)
-
-          if (!new RegExp(expectedTypes).test(valueType)) {
-            throw new Error(
-              `${componentName.toUpperCase()}: ` +
-              `Option "${property}" provided type "${valueType}" ` +
-              `but expected type "${expectedTypes}".`)
-          }
-        }
-      }
-    }
-  }
-
-  setTransitionEndSupport()
-
-  return Util
-})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
-
-/* harmony default export */ __webpack_exports__["a"] = (Util);
-
+// removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */
-/*!************************************************!*\
-  !*** ./node_modules/bootstrap/js/src/alert.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 2 */
+/*!*******************************!*\
+  !*** ./src/block/editor.scss ***!
+  \*******************************/
+/*! dynamic exports provided */
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(/*! ./util */ 3);
-
-
-
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v4.1.3): alert.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * --------------------------------------------------------------------------
- */
-
-const Alert = (($) => {
-  /**
-   * ------------------------------------------------------------------------
-   * Constants
-   * ------------------------------------------------------------------------
-   */
-
-  const NAME                = 'alert'
-  const VERSION             = '4.1.3'
-  const DATA_KEY            = 'bs.alert'
-  const EVENT_KEY           = `.${DATA_KEY}`
-  const DATA_API_KEY        = '.data-api'
-  const JQUERY_NO_CONFLICT  = $.fn[NAME]
-
-  const Selector = {
-    DISMISS : '[data-dismiss="alert"]'
-  }
-
-  const Event = {
-    CLOSE          : `close${EVENT_KEY}`,
-    CLOSED         : `closed${EVENT_KEY}`,
-    CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
-  }
-
-  const ClassName = {
-    ALERT : 'alert',
-    FADE  : 'fade',
-    SHOW  : 'show'
-  }
-
-  /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
-   */
-
-  class Alert {
-    constructor(element) {
-      this._element = element
-    }
-
-    // Getters
-
-    static get VERSION() {
-      return VERSION
-    }
-
-    // Public
-
-    close(element) {
-      let rootElement = this._element
-      if (element) {
-        rootElement = this._getRootElement(element)
-      }
-
-      const customEvent = this._triggerCloseEvent(rootElement)
-
-      if (customEvent.isDefaultPrevented()) {
-        return
-      }
-
-      this._removeElement(rootElement)
-    }
-
-    dispose() {
-      $.removeData(this._element, DATA_KEY)
-      this._element = null
-    }
-
-    // Private
-
-    _getRootElement(element) {
-      const selector = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getSelectorFromElement(element)
-      let parent     = false
-
-      if (selector) {
-        parent = document.querySelector(selector)
-      }
-
-      if (!parent) {
-        parent = $(element).closest(`.${ClassName.ALERT}`)[0]
-      }
-
-      return parent
-    }
-
-    _triggerCloseEvent(element) {
-      const closeEvent = $.Event(Event.CLOSE)
-
-      $(element).trigger(closeEvent)
-      return closeEvent
-    }
-
-    _removeElement(element) {
-      $(element).removeClass(ClassName.SHOW)
-
-      if (!$(element).hasClass(ClassName.FADE)) {
-        this._destroyElement(element)
-        return
-      }
-
-      const transitionDuration = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getTransitionDurationFromElement(element)
-
-      $(element)
-        .one(__WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].TRANSITION_END, (event) => this._destroyElement(element, event))
-        .emulateTransitionEnd(transitionDuration)
-    }
-
-    _destroyElement(element) {
-      $(element)
-        .detach()
-        .trigger(Event.CLOSED)
-        .remove()
-    }
-
-    // Static
-
-    static _jQueryInterface(config) {
-      return this.each(function () {
-        const $element = $(this)
-        let data       = $element.data(DATA_KEY)
-
-        if (!data) {
-          data = new Alert(this)
-          $element.data(DATA_KEY, data)
-        }
-
-        if (config === 'close') {
-          data[config](this)
-        }
-      })
-    }
-
-    static _handleDismiss(alertInstance) {
-      return function (event) {
-        if (event) {
-          event.preventDefault()
-        }
-
-        alertInstance.close(this)
-      }
-    }
-  }
-
-  /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
-   */
-
-  $(document).on(
-    Event.CLICK_DATA_API,
-    Selector.DISMISS,
-    Alert._handleDismiss(new Alert())
-  )
-
-  /**
-   * ------------------------------------------------------------------------
-   * jQuery
-   * ------------------------------------------------------------------------
-   */
-
-  $.fn[NAME]             = Alert._jQueryInterface
-  $.fn[NAME].Constructor = Alert
-  $.fn[NAME].noConflict  = function () {
-    $.fn[NAME] = JQUERY_NO_CONFLICT
-    return Alert._jQueryInterface
-  }
-
-  return Alert
-})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
-
-/* unused harmony default export */ var _unused_webpack_default_export = (Alert);
-
+// removed by extract-text-webpack-plugin
 
 /***/ }),
+/* 3 */,
+/* 4 */,
 /* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */
 /*!******************************!*\
   !*** ./src/blocks.editor.js ***!
   \******************************/
@@ -469,13 +109,13 @@ const Alert = (($) => {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_accordion_accordion__ = __webpack_require__(/*! ./block/accordion/accordion */ 7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_alert_alert__ = __webpack_require__(/*! ./block/alert/alert */ 8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__block_blockquote_blockquote__ = __webpack_require__(/*! ./block/blockquote/blockquote */ 9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__block_button_button__ = __webpack_require__(/*! ./block/button/button */ 10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__block_container_container__ = __webpack_require__(/*! ./block/container/container */ 12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__block_media_media__ = __webpack_require__(/*! ./block/media/media */ 13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__block_type_type__ = __webpack_require__(/*! ./block/type/type */ 15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_accordion_accordion__ = __webpack_require__(/*! ./block/accordion/accordion */ 8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_alert_alert__ = __webpack_require__(/*! ./block/alert/alert */ 9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__block_blockquote_blockquote__ = __webpack_require__(/*! ./block/blockquote/blockquote */ 12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__block_button_button__ = __webpack_require__(/*! ./block/button/button */ 13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__block_container_container__ = __webpack_require__(/*! ./block/container/container */ 15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__block_media_media__ = __webpack_require__(/*! ./block/media/media */ 16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__block_type_type__ = __webpack_require__(/*! ./block/type/type */ 18);
 /**
  * Gutenberg Blocks
  *
@@ -500,7 +140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /*!******************************************!*\
   !*** ./src/block/accordion/accordion.js ***!
   \******************************************/
@@ -508,10 +148,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -647,21 +289,19 @@ registerBlockType('gbb/accordion', {
 		}
 
 		function addCard() {
-			var newContent = content;
-			newContent.push({
+			var card = {
 				title: 'Collapsible Group Item #' + (content.length + 1),
 				body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+			};
+			setAttributes({
+				content: [].concat(_toConsumableArray(content), [card])
 			});
-			setAttributes({ content: newContent });
 		}
 
 		function removeCard(key) {
-			var newContent = content;
-			var index = newContent.indexOf(key);
-			if (index > -1) {
-				newContent.splice(index, 1);
-			}
-			setAttributes({ content: newContent });
+			setAttributes({ content: content.filter(function (card, i) {
+					return i !== key;
+				}) });
 		}
 
 		function onChangeCardBody(key, body) {
@@ -947,7 +587,7 @@ registerBlockType('gbb/accordion', {
 });
 
 /***/ }),
-/* 8 */
+/* 9 */
 /*!**********************************!*\
   !*** ./src/block/alert/alert.js ***!
   \**********************************/
@@ -955,11 +595,11 @@ registerBlockType('gbb/accordion', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_alert__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/alert */ 4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_alert__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/alert */ 10);
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -1312,7 +952,370 @@ registerBlockType('gbb/alert', {
 });
 
 /***/ }),
-/* 9 */
+/* 10 */
+/*!************************************************!*\
+  !*** ./node_modules/bootstrap/js/src/alert.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util__ = __webpack_require__(/*! ./util */ 11);
+
+
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.1.3): alert.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+const Alert = (($) => {
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  const NAME                = 'alert'
+  const VERSION             = '4.1.3'
+  const DATA_KEY            = 'bs.alert'
+  const EVENT_KEY           = `.${DATA_KEY}`
+  const DATA_API_KEY        = '.data-api'
+  const JQUERY_NO_CONFLICT  = $.fn[NAME]
+
+  const Selector = {
+    DISMISS : '[data-dismiss="alert"]'
+  }
+
+  const Event = {
+    CLOSE          : `close${EVENT_KEY}`,
+    CLOSED         : `closed${EVENT_KEY}`,
+    CLICK_DATA_API : `click${EVENT_KEY}${DATA_API_KEY}`
+  }
+
+  const ClassName = {
+    ALERT : 'alert',
+    FADE  : 'fade',
+    SHOW  : 'show'
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  class Alert {
+    constructor(element) {
+      this._element = element
+    }
+
+    // Getters
+
+    static get VERSION() {
+      return VERSION
+    }
+
+    // Public
+
+    close(element) {
+      let rootElement = this._element
+      if (element) {
+        rootElement = this._getRootElement(element)
+      }
+
+      const customEvent = this._triggerCloseEvent(rootElement)
+
+      if (customEvent.isDefaultPrevented()) {
+        return
+      }
+
+      this._removeElement(rootElement)
+    }
+
+    dispose() {
+      $.removeData(this._element, DATA_KEY)
+      this._element = null
+    }
+
+    // Private
+
+    _getRootElement(element) {
+      const selector = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getSelectorFromElement(element)
+      let parent     = false
+
+      if (selector) {
+        parent = document.querySelector(selector)
+      }
+
+      if (!parent) {
+        parent = $(element).closest(`.${ClassName.ALERT}`)[0]
+      }
+
+      return parent
+    }
+
+    _triggerCloseEvent(element) {
+      const closeEvent = $.Event(Event.CLOSE)
+
+      $(element).trigger(closeEvent)
+      return closeEvent
+    }
+
+    _removeElement(element) {
+      $(element).removeClass(ClassName.SHOW)
+
+      if (!$(element).hasClass(ClassName.FADE)) {
+        this._destroyElement(element)
+        return
+      }
+
+      const transitionDuration = __WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].getTransitionDurationFromElement(element)
+
+      $(element)
+        .one(__WEBPACK_IMPORTED_MODULE_1__util__["a" /* default */].TRANSITION_END, (event) => this._destroyElement(element, event))
+        .emulateTransitionEnd(transitionDuration)
+    }
+
+    _destroyElement(element) {
+      $(element)
+        .detach()
+        .trigger(Event.CLOSED)
+        .remove()
+    }
+
+    // Static
+
+    static _jQueryInterface(config) {
+      return this.each(function () {
+        const $element = $(this)
+        let data       = $element.data(DATA_KEY)
+
+        if (!data) {
+          data = new Alert(this)
+          $element.data(DATA_KEY, data)
+        }
+
+        if (config === 'close') {
+          data[config](this)
+        }
+      })
+    }
+
+    static _handleDismiss(alertInstance) {
+      return function (event) {
+        if (event) {
+          event.preventDefault()
+        }
+
+        alertInstance.close(this)
+      }
+    }
+  }
+
+  /**
+   * ------------------------------------------------------------------------
+   * Data Api implementation
+   * ------------------------------------------------------------------------
+   */
+
+  $(document).on(
+    Event.CLICK_DATA_API,
+    Selector.DISMISS,
+    Alert._handleDismiss(new Alert())
+  )
+
+  /**
+   * ------------------------------------------------------------------------
+   * jQuery
+   * ------------------------------------------------------------------------
+   */
+
+  $.fn[NAME]             = Alert._jQueryInterface
+  $.fn[NAME].Constructor = Alert
+  $.fn[NAME].noConflict  = function () {
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return Alert._jQueryInterface
+  }
+
+  return Alert
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
+
+/* unused harmony default export */ var _unused_webpack_default_export = (Alert);
+
+
+/***/ }),
+/* 11 */
+/*!***********************************************!*\
+  !*** ./node_modules/bootstrap/js/src/util.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/*! exports used: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v4.1.3): util.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * --------------------------------------------------------------------------
+ */
+
+const Util = (($) => {
+  /**
+   * ------------------------------------------------------------------------
+   * Private TransitionEnd Helpers
+   * ------------------------------------------------------------------------
+   */
+
+  const TRANSITION_END = 'transitionend'
+  const MAX_UID = 1000000
+  const MILLISECONDS_MULTIPLIER = 1000
+
+  // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+  function toType(obj) {
+    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
+  }
+
+  function getSpecialTransitionEndEvent() {
+    return {
+      bindType: TRANSITION_END,
+      delegateType: TRANSITION_END,
+      handle(event) {
+        if ($(event.target).is(this)) {
+          return event.handleObj.handler.apply(this, arguments) // eslint-disable-line prefer-rest-params
+        }
+        return undefined // eslint-disable-line no-undefined
+      }
+    }
+  }
+
+  function transitionEndEmulator(duration) {
+    let called = false
+
+    $(this).one(Util.TRANSITION_END, () => {
+      called = true
+    })
+
+    setTimeout(() => {
+      if (!called) {
+        Util.triggerTransitionEnd(this)
+      }
+    }, duration)
+
+    return this
+  }
+
+  function setTransitionEndSupport() {
+    $.fn.emulateTransitionEnd = transitionEndEmulator
+    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent()
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Public Util Api
+   * --------------------------------------------------------------------------
+   */
+
+  const Util = {
+
+    TRANSITION_END: 'bsTransitionEnd',
+
+    getUID(prefix) {
+      do {
+        // eslint-disable-next-line no-bitwise
+        prefix += ~~(Math.random() * MAX_UID) // "~~" acts like a faster Math.floor() here
+      } while (document.getElementById(prefix))
+      return prefix
+    },
+
+    getSelectorFromElement(element) {
+      let selector = element.getAttribute('data-target')
+      if (!selector || selector === '#') {
+        selector = element.getAttribute('href') || ''
+      }
+
+      try {
+        return document.querySelector(selector) ? selector : null
+      } catch (err) {
+        return null
+      }
+    },
+
+    getTransitionDurationFromElement(element) {
+      if (!element) {
+        return 0
+      }
+
+      // Get transition-duration of the element
+      let transitionDuration = $(element).css('transition-duration')
+      const floatTransitionDuration = parseFloat(transitionDuration)
+
+      // Return 0 if element or transition duration is not found
+      if (!floatTransitionDuration) {
+        return 0
+      }
+
+      // If multiple durations are defined, take the first
+      transitionDuration = transitionDuration.split(',')[0]
+
+      return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER
+    },
+
+    reflow(element) {
+      return element.offsetHeight
+    },
+
+    triggerTransitionEnd(element) {
+      $(element).trigger(TRANSITION_END)
+    },
+
+    // TODO: Remove in v5
+    supportsTransitionEnd() {
+      return Boolean(TRANSITION_END)
+    },
+
+    isElement(obj) {
+      return (obj[0] || obj).nodeType
+    },
+
+    typeCheckConfig(componentName, config, configTypes) {
+      for (const property in configTypes) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
+          const expectedTypes = configTypes[property]
+          const value         = config[property]
+          const valueType     = value && Util.isElement(value)
+            ? 'element' : toType(value)
+
+          if (!new RegExp(expectedTypes).test(valueType)) {
+            throw new Error(
+              `${componentName.toUpperCase()}: ` +
+              `Option "${property}" provided type "${valueType}" ` +
+              `but expected type "${expectedTypes}".`)
+          }
+        }
+      }
+    }
+  }
+
+  setTransitionEndSupport()
+
+  return Util
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a)
+
+/* harmony default export */ __webpack_exports__["a"] = (Util);
+
+
+/***/ }),
+/* 12 */
 /*!********************************************!*\
   !*** ./src/block/blockquote/blockquote.js ***!
   \********************************************/
@@ -1320,9 +1323,9 @@ registerBlockType('gbb/alert', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
 /**
  * BLOCK: bootstrap-blocks
@@ -1551,7 +1554,7 @@ registerBlockType('gbb/blockquote', {
 });
 
 /***/ }),
-/* 10 */
+/* 13 */
 /*!************************************!*\
   !*** ./src/block/button/button.js ***!
   \************************************/
@@ -1559,11 +1562,11 @@ registerBlockType('gbb/blockquote', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_button__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/button */ 11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_src_button__ = __webpack_require__(/*! ../../../node_modules/bootstrap/js/src/button */ 14);
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -1884,7 +1887,7 @@ registerBlockType('gbb/button', {
 });
 
 /***/ }),
-/* 11 */
+/* 14 */
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap/js/src/button.js ***!
   \*************************************************/
@@ -1892,7 +1895,7 @@ registerBlockType('gbb/button', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(/*! jquery */ 0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 
 
@@ -2072,7 +2075,7 @@ const Button = (($) => {
 
 
 /***/ }),
-/* 12 */
+/* 15 */
 /*!******************************************!*\
   !*** ./src/block/container/container.js ***!
   \******************************************/
@@ -2080,9 +2083,9 @@ const Button = (($) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
 /**
  * BLOCK: bootstrap-blocks
@@ -2194,7 +2197,7 @@ registerBlockType('gbb/container', {
 });
 
 /***/ }),
-/* 13 */
+/* 16 */
 /*!**********************************!*\
   !*** ./src/block/media/media.js ***!
   \**********************************/
@@ -2202,11 +2205,11 @@ registerBlockType('gbb/container', {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icons__ = __webpack_require__(/*! ./icons */ 14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icons__ = __webpack_require__(/*! ./icons */ 17);
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -2279,7 +2282,7 @@ registerBlockType('gbb/media', {
 		title: {
 			source: 'text',
 			selector: 'h4.media-heading',
-			default: 'Media heading'
+			default: 'Enter a heading here'
 		},
 		content: {
 			type: 'array',
@@ -2420,11 +2423,11 @@ registerBlockType('gbb/media', {
 								},
 								!imageId ? wp.element.createElement(
 									'div',
-									{ className: 'btn btn-primary ' },
-									__WEBPACK_IMPORTED_MODULE_2__icons__["a" /* default */].upload
-								) : wp.element.createElement('img', {
-									src: imageUrl
-								})
+									{ className: 'btn btn-secondary' },
+									__WEBPACK_IMPORTED_MODULE_2__icons__["a" /* default */].upload,
+									' ',
+									__('Upload image')
+								) : wp.element.createElement('img', { src: imageUrl })
 							);
 						}
 					}),
@@ -2433,6 +2436,7 @@ registerBlockType('gbb/media', {
 						{ className: 'media-body' },
 						wp.element.createElement(RichText, {
 							className: 'media-heading mt-0',
+							multiline: 'p',
 							tagName: 'h5',
 							onChange: function onChange(title) {
 								setAttributes({ title: title });
@@ -2467,6 +2471,7 @@ registerBlockType('gbb/media', {
 		var _props$attributes2 = props.attributes,
 		    alignment = _props$attributes2.alignment,
 		    content = _props$attributes2.content,
+		    imageId = _props$attributes2.imageId,
 		    imageUrl = _props$attributes2.imageUrl,
 		    margin = _props$attributes2.margin,
 		    title = _props$attributes2.title;
@@ -2480,7 +2485,7 @@ registerBlockType('gbb/media', {
 				{ className: 'media ' + margin,
 					style: { textAlign: alignment }
 				},
-				wp.element.createElement('img', { src: imageUrl, className: 'media-image mr-3' }),
+				imageId && wp.element.createElement('img', { src: imageUrl, className: 'media-image mr-3' }),
 				wp.element.createElement(
 					'div',
 					{ className: 'media-body' },
@@ -2501,7 +2506,7 @@ registerBlockType('gbb/media', {
 });
 
 /***/ }),
-/* 14 */
+/* 17 */
 /*!**********************************!*\
   !*** ./src/block/media/icons.js ***!
   \**********************************/
@@ -2528,7 +2533,7 @@ icons.upload = wp.element.createElement(
 /* harmony default export */ __webpack_exports__["a"] = (icons);
 
 /***/ }),
-/* 15 */
+/* 18 */
 /*!********************************!*\
   !*** ./src/block/type/type.js ***!
   \********************************/
@@ -2536,9 +2541,9 @@ icons.upload = wp.element.createElement(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(/*! ../style.scss */ 1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss__ = __webpack_require__(/*! ../editor.scss */ 2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__editor_scss__);
 /**
  * BLOCK: bootstrap-blocks

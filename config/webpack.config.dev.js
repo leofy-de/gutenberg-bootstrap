@@ -82,7 +82,7 @@ module.exports = {
 		filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
 	},
 	// You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-	devtool: 'cheap-eval-source-map',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{

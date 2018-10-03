@@ -60,12 +60,24 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
-/******/ ({
+/******/ ([
+/* 0 */
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports) {
 
-/***/ 17:
+module.exports = jQuery;
+
+/***/ }),
+/* 1 */,
+/* 2 */,
+/* 3 */
 /*!************************************************!*\
   !*** ./node_modules/bootstrap/js/dist/util.js ***!
   \************************************************/
@@ -74,7 +86,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
-   true ? module.exports = factory(__webpack_require__(/*! jquery */ 2)) :
+   true ? module.exports = factory(__webpack_require__(/*! jquery */ 0)) :
   typeof define === 'function' && define.amd ? define(['jquery'], factory) :
   (global.Util = factory(global.jQuery));
 }(this, (function ($) { 'use strict';
@@ -220,8 +232,45 @@
 
 
 /***/ }),
+/* 4 */
+/*!***********************!*\
+  !*** ./src/blocks.js ***!
+  \***********************/
+/*! no exports provided */
+/*! all exports used */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/***/ 18:
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/util */ 3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/alert */ 5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/collapse */ 6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse__);
+/**
+ * Gutenberg Blocks
+ *
+ * All blocks related JavaScript files should be imported here.
+ * You can create a new block folder in this dir and include code
+ * for that block here as well.
+ *
+ * All blocks should be included here since this is the file that
+ * Webpack is compiling as the input file.
+ */
+
+// Import bootstrap dependencies
+
+
+// Alert
+
+
+
+// Modal
+//import '../node_modules/bootstrap/js/dist/modal';
+
+/***/ }),
+/* 5 */
 /*!*************************************************!*\
   !*** ./node_modules/bootstrap/js/dist/alert.js ***!
   \*************************************************/
@@ -229,7 +278,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
-   true ? module.exports = factory(__webpack_require__(/*! jquery */ 2), __webpack_require__(/*! ./util.js */ 17)) :
+   true ? module.exports = factory(__webpack_require__(/*! jquery */ 0), __webpack_require__(/*! ./util.js */ 3)) :
   typeof define === 'function' && define.amd ? define(['jquery', './util.js'], factory) :
   (global.Alert = factory(global.jQuery,global.Util));
 }(this, (function ($,Util) { 'use strict';
@@ -435,8 +484,7 @@
 
 
 /***/ }),
-
-/***/ 19:
+/* 6 */
 /*!****************************************************!*\
   !*** ./node_modules/bootstrap/js/dist/collapse.js ***!
   \****************************************************/
@@ -444,7 +492,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
-   true ? module.exports = factory(__webpack_require__(/*! jquery */ 2), __webpack_require__(/*! ./util.js */ 17)) :
+   true ? module.exports = factory(__webpack_require__(/*! jquery */ 0), __webpack_require__(/*! ./util.js */ 3)) :
   typeof define === 'function' && define.amd ? define(['jquery', './util.js'], factory) :
   (global.Collapse = factory(global.jQuery,global.Util));
 }(this, (function ($,Util) { 'use strict';
@@ -876,58 +924,6 @@
 //# sourceMappingURL=collapse.js.map
 
 
-/***/ }),
-
-/***/ 2:
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/*! dynamic exports provided */
-/*! all exports used */
-/***/ (function(module, exports) {
-
-module.exports = jQuery;
-
-/***/ }),
-
-/***/ 5:
-/*!***********************!*\
-  !*** ./src/blocks.js ***!
-  \***********************/
-/*! no exports provided */
-/*! all exports used */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/util */ 17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__node_modules_bootstrap_js_dist_util__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/alert */ 18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__node_modules_bootstrap_js_dist_alert__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse__ = __webpack_require__(/*! ../node_modules/bootstrap/js/dist/collapse */ 19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__node_modules_bootstrap_js_dist_collapse__);
-/**
- * Gutenberg Blocks
- *
- * All blocks related JavaScript files should be imported here.
- * You can create a new block folder in this dir and include code
- * for that block here as well.
- *
- * All blocks should be included here since this is the file that
- * Webpack is compiling as the input file.
- */
-
-// Import bootstrap dependencies
-
-
-// Alert
-
-
-
-// Modal
-//import '../node_modules/bootstrap/js/dist/modal';
-
 /***/ })
-
-/******/ });
+/******/ ]);
 //# sourceMappingURL=blocks.build.js.map
