@@ -455,6 +455,22 @@ registerBlockType('gbb/accordion', {
 							'div',
 							{ className: 'card' },
 							wp.element.createElement(
+								'div',
+								{ className: 'removeCard float-right' },
+								wp.element.createElement(
+									'a',
+									{
+										className: 'btn btn-secondary btn-sm',
+										onClick: function onClick() {
+											return removeCard(key);
+										}
+									},
+									wp.element.createElement('span', { className: 'dashicons dashicons-minus' }),
+									' ',
+									__('Remove card')
+								)
+							),
+							wp.element.createElement(
 								'a',
 								{ className: 'card-header',
 									'data-toggle': 'collapse',
@@ -462,22 +478,6 @@ registerBlockType('gbb/accordion', {
 									'aria-expanded': 'false',
 									'aria-controls': 'collapse' + key
 								},
-								wp.element.createElement(
-									'div',
-									{ className: 'removeCard float-right' },
-									wp.element.createElement(
-										'a',
-										{
-											className: 'btn btn-secondary btn-sm',
-											onClick: function onClick() {
-												return removeCard(key);
-											}
-										},
-										wp.element.createElement('span', { className: 'dashicons dashicons-minus' }),
-										' ',
-										__('Remove card')
-									)
-								),
 								wp.element.createElement(RichText, {
 									tagName: 'h5',
 									className: 'mb-0',

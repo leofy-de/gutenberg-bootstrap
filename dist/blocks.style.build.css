@@ -1837,6 +1837,12 @@
   .wp-block-gbb-accordion .float-xl-none {
     float: none !important; } }
 
+.wp-block-gbb-accordion .removeCard {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 10; }
+
 .wp-block-gbb-accordion .card {
   padding: 0;
   margin: 0;

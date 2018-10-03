@@ -204,20 +204,20 @@ registerBlockType('gbb/accordion', {
 						{
 							content.map((card, key) => {
 								return <div className="card">
+									<div className="removeCard float-right">
+										<a
+											className="btn btn-secondary btn-sm"
+											onClick={() => removeCard(key)}
+										>
+											<span className="dashicons dashicons-minus"></span> {__('Remove card')}
+										</a>
+									</div>
 									<a className="card-header"
 									   data-toggle="collapse"
 									   data-target={`#collapse${key}`}
 									   aria-expanded="false"
 									   aria-controls={`collapse${key}`}
 									>
-										<div className="removeCard float-right">
-											<a
-												className="btn btn-secondary btn-sm"
-												onClick={() => removeCard(key)}
-											>
-												<span className="dashicons dashicons-minus"></span> {__('Remove card')}
-											</a>
-										</div>
 										<RichText
 											tagName="h5"
 											className="mb-0"

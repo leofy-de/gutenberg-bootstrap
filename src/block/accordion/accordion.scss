@@ -4,6 +4,13 @@
   @import "~bootstrap/scss/card";
   @import "~bootstrap/scss/utilities/float";
 
+  .removeCard {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+  }
+
   .card {
     padding: 0;
     margin: 0;
