@@ -13,7 +13,6 @@ import * as React from 'react';
 // Import JS.
 import '../../../node_modules/bootstrap/js/src/button';
 import icons from "../../lib/icons";
-import {wp} from "../../@types/global";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks

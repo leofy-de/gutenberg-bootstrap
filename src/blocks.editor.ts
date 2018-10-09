@@ -12,7 +12,7 @@
 // Import bootstrap dependencies
 //import '../node_modules/bootstrap/js/src/util';
 
-//import './block/accordion/accordion';
+import './block/accordion/accordion';
 import './block/alert/alert';
 import './block/blockquote/blockquote';
 import './block/button/button';

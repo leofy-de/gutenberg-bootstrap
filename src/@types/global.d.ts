@@ -34,12 +34,15 @@ interface GutenbergBlock {
     }): ReactNode
 
 }
-declare const wp: {
-    i18n: any
-    components: any
-    editor: any
-    element: any
-    blocks: {
-        registerBlockType(name: string, options: GutenbergBlock): void;
-    }
-};
+
+declare global {
+    const wp: {
+        i18n: any
+        components: any
+        editor: any
+        element: any
+        blocks: {
+            registerBlockType(name: string, options: GutenbergBlock): void;
+        }
+    };
+}

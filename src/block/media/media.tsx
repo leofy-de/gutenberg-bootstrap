@@ -9,7 +9,6 @@
 import '../style.scss';
 import '../editor.scss';
 import icons from '../../lib/icons';
-import {wp} from "../../@types/global";
 import * as React from 'react';
 
 const {__}                                   = wp.i18n; // Import __() from wp.i18n

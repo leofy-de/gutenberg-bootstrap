@@ -9,7 +9,6 @@
 import * as styles from '../styles.module.scss';
 import '../editor.scss';
 
-import {wp} from "../../@types/global";
 import icons from "../../lib/icons";
 import * as React from 'react';
 

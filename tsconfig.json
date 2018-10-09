@@ -10,10 +10,6 @@
     "lib": [
       "es2015"
     ],
-    "typeRoots": [
-      "src/@types",
-      "node_modules/@types"
-    ],
     "moduleResolution": "node"
   },
   "include": [
