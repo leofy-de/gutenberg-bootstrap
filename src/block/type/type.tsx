@@ -9,6 +9,10 @@
 import '../style.scss';
 import '../editor.scss';
 
+import icons from '../../lib/icons';
+import * as React from 'react';
+import {wp} from "../../@types/global";
+
 const {__}                                   = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType}                    = wp.blocks; // Import registerBlockType() from wp.blocks
 const {CheckboxControl, PanelBody, PanelRow} = wp.components;
@@ -38,10 +42,7 @@ registerBlockType('gbb/type', {
 	title      : __('Bootstrap Type Headings'), // Block title.
 	description: __(
 		'Provide contextual feedback messages for typical user actions with the handful of available and flexible type messages.'), // Block title.
-	icon       : <svg viewBox="0 0 220.068 220.068">
-		<path d="M136.922 51.991H89.297v148.332H47.253V51.991H0V19.745h136.922v32.246z" />
-		<path d="M220.068 98.245h-38.463v102.078h-38.236V98.245H105.47V68.919h114.598v29.326z" />
-	</svg>,
+	icon       : icons.type,
 	category   : 'gbb', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords   : [
 		__('Bootstrap'),

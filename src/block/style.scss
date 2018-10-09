@@ -3,14 +3,13 @@
  *
  * CSS for both Frontend+Backend.
  */
+@import "../common";
 
 // Common and global imports
-@import "~bootstrap/scss/alert";
 @import "~bootstrap/scss/utilities/spacing";
 @import "~bootstrap/scss/transitions";
 
 @import "accordion/accordion";
-@import "alert/alert";
 @import "blockquote/blockquote";
 @import "button/button";
 @import "container/container";

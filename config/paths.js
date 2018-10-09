@@ -15,8 +15,8 @@ const resolvePlugin = relativePath => path.resolve( pluginDir, relativePath );
 module.exports = {
 	dotenv: resolvePlugin( '.env' ),
 	pluginSrc: resolvePlugin( 'src' ), // Plugin src folder path.
-	pluginBlocksJs: resolvePlugin( 'src/blocks.js' ),
-	pluginEditorBlocksJs: resolvePlugin( 'src/blocks.editor.js' ),
+	pluginBlocksJs: resolvePlugin( 'src/blocks.ts' ),
+	pluginEditorBlocksJs: resolvePlugin( 'src/blocks.editor.ts' ),
 	yarnLockFile: resolvePlugin( 'yarn.lock' ),
 	pluginDist: resolvePlugin( '.' ), // We are in ./dist folder already so the path '.' resolves to ./dist/.
 };

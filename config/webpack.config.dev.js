@@ -4,124 +4,154 @@
  * Working of a Webpack can be very simple or complex. This is an intenally simple
  * build configuration.
  *
- * Webpack basics — If you are new the Webpack here's all you need to know:
- *     1. Webpack is a module bundler. It bundles different JS modules together.
- *     2. It needs and entry point and an ouput to process file(s) and bundle them.
- *     3. By default it only understands common JavaScript but you can make it
- *        understand other formats by way of adding a Webpack loader.
- *     4. In the file below you will find an entry point, an ouput, and a babel-loader
- *        that tests all .js files excluding the ones in node_modules to process the
- *        ESNext and make it compatible with older browsers i.e. it converts the
- *        ESNext (new standards of JavaScript) into old JavaScript through a loader
- *        by Babel.
- *
- * TODO: Instructions.
- *
  * @since 1.0.0
  */
+const webpack              = require('webpack');
+const autoprefixer         = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const paths                = require('./paths');
 
-const paths = require( './paths' );
-const autoprefixer = require( 'autoprefixer' );
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-
-// Extract style.css for both editor and frontend styles.
-const blocksCSSPlugin = new ExtractTextPlugin( {
-	filename: './dist/blocks.style.build.css',
-} );
-
-// Extract editor.css for editor styles.
-const editBlocksCSSPlugin = new ExtractTextPlugin( {
-	filename: './dist/blocks.editor.build.css',
-} );
-
-// Configuration for the ExtractTextPlugin — DRY rule.
-const extractConfig = {
-	use: [
-		// "postcss" loader applies autoprefixer to our CSS.
-		{ loader: 'raw-loader' },
-		{
-			loader: 'postcss-loader',
-			options: {
-				ident: 'postcss',
-				plugins: [
-					autoprefixer( {
-						browsers: [
-							'>1%',
-							'last 4 versions',
-							'Firefox ESR',
-							'not ie < 9', // React doesn't support IE8 anyway
-						],
-						flexbox: 'no-2009',
-					} ),
-				],
-			},
-		},
-		// "sass" loader converst SCSS to CSS.
-		{
-			loader: 'sass-loader',
-			options: {
-				// Add common CSS file for variables and mixins.
-				data: '@import "./src/common.scss";\n',
-				outputStyle: 'nested',
-			},
-		},
-	],
+const CSSModuleLoader = {
+	loader : 'typings-for-css-modules-loader',
+	options: {
+		namedExport   : true,
+		camelcase     : true,
+		modules       : true,
+		localIdentName: '[local]--[hash:base64:5]',
+		sourceMap     : true,
+		importLoaders : 2,
+	},
 };
+
+const CSSLoader = {
+	loader : 'typings-for-css-modules-loader',
+	options: {
+		namedExport  : false,
+		camelcase    : true,
+		modules      : false,
+		sourceMap    : true,
+		importLoaders: 2,
+	},
+};
+
+const postCSSLoader = {
+	loader : 'postcss-loader',
+	options: {
+		ident    : 'postcss',
+		sourceMap: true,
+		plugins  : () => [
+			autoprefixer({
+				browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9']
+			})
+		]
+	}
+};
+
+function recursiveIssuer(m) {
+	if (m.issuer) {
+		return recursiveIssuer(m.issuer);
+	} else if (m.name) {
+		return m.name;
+	} else {
+		return false;
+	}
+}
+
 
 // Export configuration.
 module.exports = {
-	mode: 'development',
-	entry: {
-		'./dist/blocks.build': paths.pluginBlocksJs, // 'name' : 'path/file.ext'.
+	mode        : 'development',
+	entry       : {
+		'./dist/blocks.build'       : paths.pluginBlocksJs, // 'name' : 'path/file.ext'.
 		'./dist/blocks.editor.build': paths.pluginEditorBlocksJs, // 'name' : 'path/file.ext'.
 	},
-	output: {
+	output      : {
 		// Add /* filename */ comments to generated require()s in the output.
 		pathinfo: true,
 		// The dist folder.
-		path: paths.pluginDist,
+		path    : paths.pluginDist,
 		filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
 	},
 	// You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-	devtool: 'source-map',
-	module: {
+	devtool     : 'source-map',
+	devServer   : {
+		contentBase       : '/',
+		historyApiFallback: true,
+		hot               : true,
+	},
+	module      : {
 		rules: [
 			{
-				test: /\.(js|jsx|mjs)$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-
-						// This is a feature of `babel-loader` for webpack (not Babel itself).
-						// It enables caching results in ./node_modules/.cache/babel-loader/
-						// directory for faster rebuilds.
-						cacheDirectory: true,
-					},
+				test   : /\.([tj])s(x)?$/,
+				resolve: {extensions: ['.ts', '.tsx', '.js', '.jsx', '.d.ts']},
+				exclude: /node_modules/,
+				use    : {
+					loader: 'awesome-typescript-loader',
 				},
 			},
 			{
-				test: /style\.s?css$/,
-				exclude: /(node_modules|bower_components)/,
-				use: blocksCSSPlugin.extract( extractConfig ),
+				test   : /\.scss$/,
+				exclude: /\.module\.scss$/,
+				use    : [
+					MiniCssExtractPlugin.loader,
+					CSSLoader,
+					postCSSLoader,
+					'sass-loader'
+				]
 			},
 			{
-				test: /editor\.s?css$/,
-				exclude: /(node_modules|bower_components)/,
-				use: editBlocksCSSPlugin.extract( extractConfig ),
+				test: /\.module\.scss$/,
+				use : [
+					MiniCssExtractPlugin.loader,
+					CSSModuleLoader,
+					postCSSLoader,
+					'sass-loader',
+				]
 			},
 		],
 	},
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				styles: {
+					name   : 'styles',
+					test   : (m, c, entry = './dist/blocks.build') => m.constructor.name === 'CssModule' && recursiveIssuer(
+						m) === entry,
+					chunks : 'all',
+					enforce: true
+				},
+				editor: {
+					name   : 'editor',
+					test   : (m, c, entry = './dist/blocks.editor.build') => m.constructor.name === 'CssModule' && recursiveIssuer(
+						m) === entry,
+					chunks : 'all',
+					enforce: true
+				}
+			}
+		}
+	},
 	// Add plugins.
-	plugins: [ blocksCSSPlugin, editBlocksCSSPlugin ],
-	stats: 'minimal',
+	plugins     : [
+		new webpack.WatchIgnorePlugin([
+			/s?css\.d\.ts$/,
+		]),
+		new MiniCssExtractPlugin({
+			filename     : `[name].css`,
+			chunkFilename: `chunks/[name].css`,
+		}),
+	],
+	resolve     : {
+		extensions      : ['.tsx', '.ts', '.js', '.jsx', '.es6', '.scss', '.d.ts'],
+		enforceExtension: false,
+	},
+	stats       : 'minimal',
 	// stats: 'errors-only',
 	// Add externals.
-	externals: {
-		react: 'React',
+	externals   : {
+		react      : 'React',
 		'react-dom': 'ReactDOM',
-		ga: 'ga', // Old Google Analytics.
-		gtag: 'gtag', // New Google Analytics.
-		jquery: 'jQuery', // import $ from 'jquery' // Use the WordPress version.
+		ga         : 'ga', // Old Google Analytics.
+		gtag       : 'gtag', // New Google Analytics.
+		jquery     : 'jQuery', // import $ from 'jquery' // Use the WordPress version.
 	},
 };
