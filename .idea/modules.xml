@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/gutenberg-bootstrap.iml" filepath="$PROJECT_DIR$/.idea/gutenberg-bootstrap.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../../../gutenberg-examples/.idea/gutenberg-examples.iml" filepath="$PROJECT_DIR$/../../../../../gutenberg-examples/.idea/gutenberg-examples.iml" />
     </modules>
   </component>
 </project>

@@ -12,39 +12,7 @@ import '../editor.scss';
 import '../../../node_modules/bootstrap/js/src/alert';
 import icons from "../../lib/icons";
 import * as React from 'react';
-
-import {ReactNode} from "react";
-
-interface GutenbergBlock {
-    title: string
-    description: string
-    icon: ReactNode
-    category: string
-    keywords: string[]
-    attributes: {}
-    edit(props: {
-        setAttributes(props: {})
-        isSelected: boolean
-        attributes: any
-        className: string
-    }): ReactNode
-    save(props: {
-        setAttributes(props: {})
-        isSelected: boolean
-        attributes: any
-        className: string
-    }): ReactNode
-}
-declare var wp: {
-    i18n: any
-    components: any
-    editor: any
-    element: any
-    blocks: {
-        registerBlockType(name: string, options: GutenbergBlock): void;
-    }
-};
-
+import {wp} from "../../@types/global";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -110,6 +78,14 @@ registerBlockType('gbb/alert', {
             type: 'string',
         },
     },
+    deprecated: [
+        {
+            attributes: {},
+            save( props ) {
+                return <p>{ props.attributes.text }</p>;
+            },
+        }
+    ],
 
     /**
      * The edit function describes the structure of your block in the context of the editor.

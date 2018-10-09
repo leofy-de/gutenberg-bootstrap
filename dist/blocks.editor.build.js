@@ -670,6 +670,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _types_global__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../@types/global */ "./src/@types/global.d.ts");
+/* harmony import */ var _types_global__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_types_global__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -683,11 +685,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var __ = wp.i18n.__; // Import __() from wp.i18n
-var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, CheckboxControl = _a.CheckboxControl, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
-var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, ColorPalette = _b.ColorPalette, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
+
+var __ = _types_global__WEBPACK_IMPORTED_MODULE_5__["wp"].i18n.__; // Import __() from wp.i18n
+var registerBlockType = _types_global__WEBPACK_IMPORTED_MODULE_5__["wp"].blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+var _a = _types_global__WEBPACK_IMPORTED_MODULE_5__["wp"].components, CheckboxControl = _a.CheckboxControl, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+var Fragment = _types_global__WEBPACK_IMPORTED_MODULE_5__["wp"].element.Fragment;
+var _b = _types_global__WEBPACK_IMPORTED_MODULE_5__["wp"].editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, ColorPalette = _b.ColorPalette, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
 /**
  * Register: aa Gutenberg Block.
  *
@@ -740,6 +743,14 @@ registerBlockType('gbb/alert', {
             type: 'string',
         },
     },
+    deprecated: [
+        {
+            attributes: {},
+            save: function (props) {
+                return react__WEBPACK_IMPORTED_MODULE_4__["createElement"]("p", null, props.attributes.text);
+            },
+        }
+    ],
     /**
      * The edit function describes the structure of your block in the context of the editor.
      * This represents what the editor will render when the block is used.

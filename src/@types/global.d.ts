@@ -6,11 +6,20 @@ import {ReactNode} from 'react';
 
 interface GutenbergBlock {
     title: string
-    description: string
-    icon: ReactNode
-    category: string
-    keywords: string[]
+    description?: string
+    icon?: ReactNode
+    category?: string
+    keywords?: string[]
     attributes: {}
+    deprecated?: {
+        attributes: {}
+        save(props: {
+            setAttributes(props: {})
+            isSelected: boolean
+            attributes: any
+            className: string
+        }): ReactNode
+    }[]
     edit(props: {
         setAttributes(props: {})
         isSelected: boolean
@@ -23,6 +32,7 @@ interface GutenbergBlock {
         attributes: any
         className: string
     }): ReactNode
+
 }
 declare const wp: {
     i18n: any
