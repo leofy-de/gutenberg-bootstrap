@@ -31,3 +31,4 @@ export const clearfix: string;
 export const shadow: string;
 export const visible: string;
 export const invisible: string;
+export const removeCard: string;

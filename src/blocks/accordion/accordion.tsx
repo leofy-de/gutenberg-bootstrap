@@ -7,7 +7,6 @@
 
 //  Import CSS.
 import * as styles from '../../assets/scss/styles.module.scss';
-import '../../assets/scss/editor.scss';
 
 import icons from "../../lib/icons";
 import * as React from 'react';
@@ -192,21 +191,21 @@ registerBlockType('gbb/accordion', {
                 </BlockControls>
                 <div className={props.className}>
                     <div
-                        className={`${styles.accordion} ${margin}`}
+                        className={`${styles.accordion} ${styles[margin]}`}
                         style={{textAlign: alignment}}
                     >
                         {
                             content.map((card, key) => {
                                 return <div className={styles.card}>
-                                    <div className="removeCard float-right">
-                                        <a
-                                            className={`${styles.btn} ${styles['btn-secondary']} ${styles['btn-sm']}`}
+                                    <div className={`${styles.removeCard} ${styles['float-right']}`}>
+                                        <button
+                                            className={`${styles.btn} ${styles['btn-secondary']}  ${styles['btn-sm']}`}
                                             onClick={() => removeCard(key)}
                                         >
-                                            <span className="dashicons dashicons-minus"></span> {__('Remove card')}
-                                        </a>
+                                            <span className="dashicons dashicons-minus"></span> {__('Remove')}
+                                        </button>
                                     </div>
-                                    <a className={styles["card-header"]}
+                                    <div className={styles["card-header"]}
                                        data-toggle="collapse"
                                        data-target={`#collapse${key}`}
                                        aria-expanded="false"
@@ -214,12 +213,12 @@ registerBlockType('gbb/accordion', {
                                     >
                                         <RichText
                                             tagName="h5"
-                                            className={styles['mb-0']}
+                                            className={`${styles['mb-0']} ${styles.h5}`}
                                             multiline="p"
                                             onChange={(title) => onChangeCardTitle(key, title)}
                                             value={card.title}
                                         />
-                                    </a>
+                                    </div>
                                     <div
                                         id={`collapse${key}`}
                                         className={`collapse`}
@@ -236,12 +235,12 @@ registerBlockType('gbb/accordion', {
                         }
 
                         <div className={`addCard ${styles['text-center']}`}>
-                            <a
+                            <button
                                 className={`${styles.btn} ${styles['btn-secondary']} ${styles['mt-3']}`}
                                 onClick={addCard}
                             >
-                                <span className="dashicons dashicons-plus"></span> {__('Add card')}
-                            </a>
+                                <span className="dashicons dashicons-plus"></span> {__('Add')}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -265,28 +264,28 @@ registerBlockType('gbb/accordion', {
         return (
             <div>
                 <div
-                    className={`accordion ${margin}`}
+                    className={`${styles.accordion} ${styles[margin]}`}
                     style={{textAlign: alignment}}
                 >
                     {
                         content.map((card, key) => {
-                            return <div className="card">
-                                <a className="card-header"
+                            return <div className={styles.card}>
+                                <div className={styles['card-header']}
                                    data-toggle="collapse"
                                    data-target={`#collapse${key}`}
                                 >
                                     <RichText.Content
-                                        className="mb-0"
+                                        className={`${styles['mb-0']} ${styles.h5}`}
                                         tagName="h5"
                                         value={card.title}
                                     />
-                                </a>
+                                </div>
                                 <div
                                     id={`collapse${key}`}
                                     className={`collapse`}
                                 >
                                     <RichText.Content
-                                        className="card-body"
+                                        className={styles['card-body']}
                                         tagName="div"
                                         value={card.body}
                                     />

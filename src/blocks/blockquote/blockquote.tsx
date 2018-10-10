@@ -7,7 +7,6 @@
 
 //  Import CSS.
 import * as styles from '../../assets/scss/styles.module.scss';
-import '../../assets/scss/editor.scss';
 
 import icons from "../../lib/icons";
 import * as React from 'react';
@@ -15,7 +14,8 @@ import * as React from 'react';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {Fragment, PanelBody, PanelRow} = wp.element;
+const {PanelBody, PanelRow} = wp.components;
+const {Fragment} = wp.element;
 const {AlignmentToolbar, BlockControls, RichText, InspectorControls} = wp.editor;
 /**
  * Register: aa Gutenberg Block.
@@ -51,7 +51,8 @@ registerBlockType('gbb/blockquote', {
         },
         quote: {
             source: 'text',
-            selector: '.blockquote'
+            selector: '.blockquote',
+            default: 'Enter your quote here'
         },
         source: {
             source: 'text',
@@ -108,9 +109,9 @@ registerBlockType('gbb/blockquote', {
                     />
                 </BlockControls>
                 <div className={props.className}>
-                    <blockquote className={`blockquote ${margin}`} style={{textAlign: alignment}}>
+                    <blockquote className={`${styles.blockquote} ${styles[margin]}`} style={{textAlign: alignment}}>
                         <RichText
-                            className="mb-0 blockquote"
+                            className={`${styles.blockquote} ${styles['mb-0']}`}
                             tagName="p"
                             onChange={(quote) => {
                                 setAttributes({quote})
@@ -118,7 +119,7 @@ registerBlockType('gbb/blockquote', {
                             value={quote}
                         />
                         <RichText
-                            className="blockquote-footer"
+                            className={styles['blockquote-footer']}
                             format="string"
                             tagName="footer"
                             onChange={(source) => {
@@ -147,14 +148,14 @@ registerBlockType('gbb/blockquote', {
 
         return (
             <div>
-                <div className={`blockquote ${margin}`} style={{textAlign: alignment}}>
+                <div className={`${styles.blockquote} ${styles[margin]}`} style={{textAlign: alignment}}>
                     <RichText.Content
-                        className="mb-0 blockquote"
+                        className={`${styles.blockquote} ${styles['mb-0']}`}
                         tagName="p"
                         value={quote}
                     />
                     <RichText.Content
-                        className="blockquote-footer"
+                        className={styles['blockquote-footer']}
                         format="string"
                         tagName="footer"
                         value={source}

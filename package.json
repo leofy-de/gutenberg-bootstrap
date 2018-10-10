@@ -6,7 +6,7 @@
   "name": "bootstrap-blocks-cgb-guten-block",
   "version": "1.0.0",
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "set NODE_ENV=development && node scripts/start.js",
     "dev": "webpack-dev-server --progress --color --display-error-details --config config/webpack.config.dev.js --open-page \"dist/index.html\"",
     "build": "node scripts/build.js"
   },
