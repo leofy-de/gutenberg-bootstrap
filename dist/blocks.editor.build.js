@@ -989,7 +989,8 @@ var blockAttributes = {
     },
     title: {
         source: 'text',
-        selector: 'h4.alert-heading'
+        selector: 'h4.alert-heading',
+        default: __('Enter an optional title here')
     },
     margin: {
         type: 'string',
@@ -998,7 +999,8 @@ var blockAttributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content'
+        selector: 'div.content',
+        default: __('Enter any text message here')
     },
     isDismissable: {
         type: 'boolean',
@@ -1426,7 +1428,7 @@ registerBlockType('gbb/button', {
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: onChangeAlignment })),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className, style: { textAlign: alignment } },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { autoFocus: true, className: "btn btn-" + (isOutline ? 'outline-' : '') + theme + " " + (size !== '' ? "btn-" + size : '') + " " + (isBlockWidth ? "btn-block" : ''), role: "button", href: "#", tagName: "a", onChange: onChangeCaption, value: caption }),
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { autoFocus: true, className: "btn btn-" + (isOutline ? 'outline-' : '') + theme + " " + (size !== '' ? "btn-" + size : '') + " " + (isBlockWidth ? "btn-block" : ''), tagName: "a", onChange: onChangeCaption, value: caption }),
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](URLInput, { autoFocus: false, className: "button-url", value: url, onChange: function (value) { return setAttributes({ url: value }); } }))));
     },
     /**

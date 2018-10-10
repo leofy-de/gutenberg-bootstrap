@@ -66,7 +66,7 @@ registerBlockType('gbb/container', {
         return (
             <Fragment>
                 <div className={`${props.className} my-5`} style={{textAlign: alignment}}>
-                    <InnerBlocks/>
+                    <InnerBlocks />
                 </div>
             </Fragment>
         );

@@ -6,7 +6,6 @@
  */
 //  Import CSS.
 import * as styles from '../../assets/scss/styles.module.scss';
-
 // Import JS.
 import '../../../node_modules/bootstrap/js/src/alert';
 import icons from "../../lib/icons";
@@ -36,7 +35,8 @@ const blockAttributes = {
     },
     title: {
         source: 'text',
-        selector: 'h4.alert-heading'
+        selector: 'h4.alert-heading',
+        default: __('Enter an optional title here')
     },
     margin: {
         type: 'string',
@@ -45,7 +45,8 @@ const blockAttributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content'
+        selector: 'div.content',
+        default: __('Enter any text message here')
     },
     isDismissable: {
         type: 'boolean',

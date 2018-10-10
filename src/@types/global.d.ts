@@ -3,6 +3,8 @@
 // Definitions by: [Sebastian Buckpesch] <[https://www.gutenberg-unlimited.org]>
 
 import {Component, ReactNode} from 'react';
+import * as styles from "../assets/scss/styles.module.scss";
+import * as React from "react";
 
 interface GutenbergBlock {
     title: string
@@ -63,7 +65,64 @@ declare global {
             }>
             CheckboxControl(): Component<any>
         }
-        editor: any
+        // @see https://github.com/WordPress/gutenberg/tree/master/packages/editor/src/components
+        editor: {
+            Autocomplete(): Component<any>
+            AlignmentToolbar(): Component<any>
+            BlockAlignmentToolbar(): Component<any>
+            BlockControls(): Component<any>
+            BlockEdit(): Component<any>
+            BlockFormatControls(): Component<any>
+            BlockIcon(): Component<any>
+            ColorPalette(): Component<any>
+            withColorContext(): Component<any>
+            ContrastChecker(): Component<any>
+            InnerBlocks: {
+                Content():  Component<{
+                    className?: string
+                    format?:string
+                    tagName?: string
+                    value: any[] | string
+                }>
+                (): Component<any>
+            }
+            InspectorAdvancedControls(): Component<any>
+            InspectorControls(): Component<any>
+            PanelColor(): Component<any>
+            PanelColorSettings(): Component<any>
+            PlainText(): Component<any>
+            RichText: {
+                Content(): Component<{
+                    className?: string
+                    format?:string
+                    tagName?: string
+                    value: any[] | string
+                }>
+                ():  Component<{
+                    autoFocus?: boolean
+                    autocompleters?: any[]
+                    className?: string
+                    format?:string
+                    formattingControls?: string[]
+                    isSelected?: boolean
+                    keepPlaceholderOnFocus?: boolean
+                    multiline?: string
+                    placeholder?: string
+                    tagName?: string
+                    value: any[] | string
+                    onChange(value: any): any
+                    onMerge?(forward: boolean): any
+                    onRemove?(forward: boolean): any
+                    onReplace?(blocks: any[]): any
+                    onSplit?(before: any[]|string, after: any[]|string, blocks: any): any
+                }>
+            }
+            ServerSideRender(): Component<any>
+            MediaPlaceholder(): Component<any>
+            MediaUpload(): Component<any>
+            URLInput(): Component<any>
+            URLInputButton(): Component<any>
+        }
         element: any
         blocks: {
             registerBlockType(name: string, typeDefinition: GutenbergBlock): void;

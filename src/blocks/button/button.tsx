@@ -172,8 +172,6 @@ registerBlockType('gbb/button', {
                     <RichText
                         autoFocus={true}
                         className={`btn btn-${isOutline ? 'outline-' : ''}${theme} ${size !== '' ? `btn-${size}` : ''} ${isBlockWidth ? `btn-block` : ''}`}
-                        role="button"
-                        href={`#`}
                         tagName="a"
                         onChange={onChangeCaption}
                         value={caption}

@@ -206,10 +206,10 @@ registerBlockType('gbb/accordion', {
                                         </button>
                                     </div>
                                     <div className={styles["card-header"]}
-                                       data-toggle="collapse"
-                                       data-target={`#collapse${key}`}
-                                       aria-expanded="false"
-                                       aria-controls={`collapse${key}`}
+                                         data-toggle="collapse"
+                                         data-target={`#collapse${key}`}
+                                         aria-expanded="false"
+                                         aria-controls={`collapse${key}`}
                                     >
                                         <RichText
                                             tagName="h5"
@@ -271,8 +271,8 @@ registerBlockType('gbb/accordion', {
                         content.map((card, key) => {
                             return <div className={styles.card}>
                                 <div className={styles['card-header']}
-                                   data-toggle="collapse"
-                                   data-target={`#collapse${key}`}
+                                     data-toggle="collapse"
+                                     data-target={`#collapse${key}`}
                                 >
                                     <RichText.Content
                                         className={`${styles['mb-0']} ${styles.h5}`}
