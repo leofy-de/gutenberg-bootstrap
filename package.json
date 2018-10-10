@@ -1,7 +1,10 @@
 {
+  "author": "Sebastian Buckpesch",
+  "description": "Bootstrap 4 Blocks for Gutenberg",
+  "homepage": "https://www.gutenberg-unlimited.org",
+  "license": "GPL2+",
   "name": "bootstrap-blocks-cgb-guten-block",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "start": "node scripts/start.js",
     "dev": "webpack-dev-server --progress --color --display-error-details --config config/webpack.config.dev.js --open-page \"dist/index.html\"",
@@ -23,7 +26,7 @@
     "fs-extra": "^5.0.0",
     "gzip-size": "^4.1.0",
     "inquirer": "^5.0.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.9.3",
     "ora": "^1.3.0",
     "reactstrap": "^6.4.0",
     "resolve-pkg": "^1.0.0",
@@ -38,6 +41,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
     "raw-loader": "^0.5.1",
@@ -48,5 +52,6 @@
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
-  }
+  },
+  "sideEffects": false
 }

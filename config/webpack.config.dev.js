@@ -6,10 +6,18 @@
  *
  * @since 1.0.0
  */
+const path                 = require('path');
+const rootPath             = process.cwd();
 const webpack              = require('webpack');
 const autoprefixer         = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const paths                = require('./paths');
+
+const MiniCssExtractPluginLoader = {
+	loader : MiniCssExtractPlugin.loader,
+	options: {
+		publicPath: path.resolve(rootPath, 'dist', 'css')
+	},
+};
 
 const CSSModuleLoader = {
 	loader : 'typings-for-css-modules-loader',
@@ -47,32 +55,20 @@ const postCSSLoader = {
 	}
 };
 
-function recursiveIssuer(m) {
-	if (m.issuer) {
-		return recursiveIssuer(m.issuer);
-	} else if (m.name) {
-		return m.name;
-	} else {
-		return false;
-	}
-}
-
-
 // Export configuration.
 module.exports = {
 	mode        : 'development',
 	entry       : {
-		'./dist/blocks.build'       : paths.pluginBlocksJs, // 'name' : 'path/file.ext'.
-		'./dist/blocks.editor.build': paths.pluginEditorBlocksJs, // 'name' : 'path/file.ext'.
+		'blocks.style.build'       : `${path.resolve(rootPath, 'src', 'assets', 'scss')}/style.scss`,
+		'blocks.style.editor.build': `${path.resolve(rootPath, 'src', 'assets', 'scss')}/editor.scss`,
+		'blocks.build'             : `${path.resolve(rootPath, 'src')}/blocks.ts`,
+		'blocks.editor.build'      : `${path.resolve(rootPath, 'src')}/blocks.editor.ts`,
 	},
 	output      : {
-		// Add /* filename */ comments to generated require()s in the output.
 		pathinfo: true,
-		// The dist folder.
-		path    : paths.pluginDist,
-		filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
+		path    : path.resolve(rootPath, 'dist'),
+		filename: '[name].js',
 	},
-	// You may want 'eval' instead if you prefer to see the compiled output in DevTools.
 	devtool     : 'source-map',
 	devServer   : {
 		contentBase       : '/',
@@ -93,7 +89,7 @@ module.exports = {
 				test   : /\.scss$/,
 				exclude: /\.module\.scss$/,
 				use    : [
-					MiniCssExtractPlugin.loader,
+					MiniCssExtractPluginLoader,
 					CSSLoader,
 					postCSSLoader,
 					'sass-loader'
@@ -102,33 +98,13 @@ module.exports = {
 			{
 				test: /\.module\.scss$/,
 				use : [
-					MiniCssExtractPlugin.loader,
+					MiniCssExtractPluginLoader,
 					CSSModuleLoader,
 					postCSSLoader,
 					'sass-loader',
 				]
 			},
 		],
-	},
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				styles: {
-					name   : 'styles',
-					test   : (m, c, entry = './dist/blocks.build') => m.constructor.name === 'CssModule' && recursiveIssuer(
-						m) === entry,
-					chunks : 'all',
-					enforce: true
-				},
-				editor: {
-					name   : 'editor',
-					test   : (m, c, entry = './dist/blocks.editor.build') => m.constructor.name === 'CssModule' && recursiveIssuer(
-						m) === entry,
-					chunks : 'all',
-					enforce: true
-				}
-			}
-		}
 	},
 	// Add plugins.
 	plugins     : [

@@ -5,10 +5,12 @@
  * build configuration.
  * @since 1.0.0
  */
-const webpack              = require('webpack');
-const autoprefixer         = require('autoprefixer');
-const paths                = require('./paths');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path                    = require('path');
+const rootPath                = process.cwd();
+const autoprefixer            = require('autoprefixer');
+const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
+const UglifyJsPlugin          = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 
 const CSSModuleLoader = {
@@ -50,21 +52,19 @@ const postCSSLoader = {
 
 // Export configuration.
 module.exports = {
-	mode     : 'production',
-	entry    : {
-		'./dist/blocks.build'       : paths.pluginBlocksJs, // 'name' : 'path/file.ext'.
-		'./dist/blocks.editor.build': paths.pluginEditorBlocksJs, // 'name' : 'path/file.ext'.
+	mode        : 'production',
+	entry       : {
+		'blocks.style.build'       : `${path.resolve(rootPath, 'src', 'assets', 'scss')}/style.scss`,
+		'blocks.style.editor.build': `${path.resolve(rootPath, 'src', 'assets', 'scss')}/editor.scss`,
+		'blocks.build'             : `${path.resolve(rootPath, 'src')}/blocks.ts`,
+		'blocks.editor.build'      : `${path.resolve(rootPath, 'src')}/blocks.editor.ts`,
 	},
-	output   : {
-		// Add /* filename */ comments to generated require()s in the output.
-		//pathinfo: true,
-		// The dist folder.
-		path    : paths.pluginDist,
-		filename: '[name].js', // [name] = './dist/blocks.build' as defined above.
+	output      : {
+		pathinfo: true,
+		path    : path.resolve(rootPath, 'dist'),
+		filename: '[name].js',
 	},
-	// You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-	//devtool: 'source-map',
-	module   : {
+	module      : {
 		rules: [
 			{
 				test   : /\.([tj])s(x)?$/,
@@ -95,24 +95,28 @@ module.exports = {
 			},
 		],
 	},
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin({
+				cache    : true,
+				parallel : true,
+				sourceMap: true // set to true if you want JS source maps
+			}),
+			new OptimizeCSSAssetsPlugin({})
+		],
+	},
 	// Add plugins.
-	plugins  : [
-		new webpack.WatchIgnorePlugin([
-			/s?css\.d\.ts$/,
-		]),
-		new MiniCssExtractPlugin({
-			filename     : `[name].css`,
-			chunkFilename: `chunks/[name].css`,
-		}),
+	plugins     : [
+		new MiniCssExtractPlugin(),
 	],
-	resolve  : {
+	resolve     : {
 		extensions      : ['.tsx', '.ts', '.js', '.jsx', '.es6', '.scss', '.d.ts'],
 		enforceExtension: false,
 	},
-	stats    : 'minimal',
+	stats       : 'minimal',
 	// stats: 'errors-only',
 	// Add externals.
-	externals: {
+	externals   : {
 		'react'    : 'React',
 		'react-dom': 'ReactDOM',
 		jquery     : 'jQuery', // import $ from 'jquery' // Use the WordPress version.

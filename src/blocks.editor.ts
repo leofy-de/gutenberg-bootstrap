@@ -12,11 +12,11 @@
 // Import bootstrap dependencies
 //import '../node_modules/bootstrap/js/src/util';
 
-import './block/accordion/accordion';
-import './block/alert/alert';
-import './block/blockquote/blockquote';
-import './block/button/button';
-import './block/container/container';
-import './block/media/media';
+import './blocks/accordion/accordion';
+import './blocks/alert/alert';
+import './blocks/blockquote/blockquote';
+import './blocks/button/button';
+import './blocks/container/container';
+import './blocks/media/media';
 //import './block/modal';
-import './block/type/type';
+import './blocks/type/type';
