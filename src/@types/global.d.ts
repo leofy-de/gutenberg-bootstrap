@@ -3,8 +3,6 @@
 // Definitions by: [Sebastian Buckpesch] <[https://www.gutenberg-unlimited.org]>
 
 import {Component, ReactNode} from 'react';
-import * as styles from "../assets/scss/styles.module.scss";
-import * as React from "react";
 
 interface GutenbergBlock {
     title: string
@@ -14,14 +12,16 @@ interface GutenbergBlock {
     keywords?: string[]
     attributes?: {}
     deprecated?: {
-        attributes: {}
-        save(props: {
+        attributes: {} // @see https://wordpress.org/gutenberg/handbook/block-api/attributes/
+        support?: {} // @see https://wordpress.org/gutenberg/handbook/block-api/
+        save(props: { // @see https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
             setAttributes(props: {})
             isSelected: boolean
             attributes: any
             className: string
         }): ReactNode
-        migrate(props: any, innerBlocks: any): {} | any[]
+        migrate?(attributes: any, innerBlocks: any): {} | any[]
+        isEligible?(attributes: any, innerBlocks?: any): any
     }[]
 
     edit(props: {
@@ -42,7 +42,15 @@ interface GutenbergBlock {
 
 declare global {
     const wp: {
-        i18n: any
+        // @see https://github.com/WordPress/gutenberg/tree/master/packages/i18n
+        i18n: {
+            __( text: string, domain?: string ): string
+            _x( text: string, context: string, domain?: string ): string
+            _n( single: string, plural: string, number: number, domain?: string ): string
+            _nx( single: string, plural: string, number: number, context: string, domain?: string ): string
+            sprintf( format: string, ...args: any[] ): string
+            setLocaleData( data: {}, domain: string )
+        }
         // @see https://github.com/WordPress/gutenberg/tree/master/packages/components/src
         components: {
             Panel(): Component<{
@@ -82,7 +90,7 @@ declare global {
                     className?: string
                     format?:string
                     tagName?: string
-                    value: any[] | string
+                    value?: any[] | string
                 }>
                 (): Component<any>
             }
@@ -127,6 +135,8 @@ declare global {
         blocks: {
             registerBlockType(name: string, typeDefinition: GutenbergBlock): void;
             createBlock(name: string, typeDefinition: any): void;
+            getBlockType(name: string): any
+            getControlSettings(name: string): any
         }
     };
 }

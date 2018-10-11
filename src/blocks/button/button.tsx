@@ -203,13 +203,17 @@ registerBlockType('gbb/button', {
 
         return (
             <div style={{textAlign: alignment}}>
-                <RichText.Content
-                    className={`btn btn-${isOutline ? 'outline-' : ''}${theme} ${size !== '' ? `btn-${size}` : ''} ${isBlockWidth ? `btn-block` : ''}`}
+                <a
                     href={url}
+                    className={`btn btn-${isOutline ? 'outline-' : ''}${theme} ${size !== '' ? `btn-${size}` : ''} ${isBlockWidth ? `btn-block` : ''}`}
                     role="button"
-                    tagName="a"
-                    value={caption}
-                />
+                >
+                    <RichText.Content
+                        tagName="span"
+                        value={caption}
+                    />
+                </a>
+
             </div>
         );
     },

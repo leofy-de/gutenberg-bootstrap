@@ -642,6 +642,65 @@ const Util = (($) => {
 
 /***/ }),
 
+/***/ "./node_modules/classnames/bind.js":
+/*!*****************************************!*\
+  !*** ./node_modules/classnames/bind.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(this && this[arg] || arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(this, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(this && this[key] || key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
 /***/ "./src/assets/scss/editor.scss":
 /*!*************************************!*\
   !*** ./src/assets/scss/editor.scss ***!
@@ -742,9 +801,60 @@ __webpack_require__.r(__webpack_exports__);
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, CheckboxControl = _a.CheckboxControl, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+var _a = wp.components, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
 var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, ColorPalette = _b.ColorPalette, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
+var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
+var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
+var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
+var attributes = {
+    alignment: {
+        type: 'string',
+    },
+    content: {
+        type: 'array',
+        source: 'query',
+        default: [
+            {
+                title: 'Collapsible Group Item #1',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+            {
+                title: 'Collapsible Group Item #2',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+            {
+                title: 'Collapsible Group Item #3',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+        ],
+        selector: '.accordion .card',
+        query: {
+            /*active: {
+                type   : 'boolean',
+                source  : 'text',
+                default: false,
+            },*/
+            title: {
+                type: 'string',
+                source: 'text',
+                selector: '.card-header h5',
+            },
+            body: {
+                type: 'array',
+                selector: '.card-body',
+                source: 'children',
+            },
+        },
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+    theme: {
+        type: 'string',
+        default: 'light'
+    },
+};
 /**
  * Register: aa Gutenberg Block.
  *
@@ -769,55 +879,7 @@ registerBlockType('gbb/accordion', {
         __('Accordion'),
         __('Collapse'),
     ],
-    attributes: {
-        alignment: {
-            type: 'string',
-        },
-        content: {
-            type: 'array',
-            source: 'query',
-            default: [
-                {
-                    title: 'Collapsible Group Item #1',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-                {
-                    title: 'Collapsible Group Item #2',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-                {
-                    title: 'Collapsible Group Item #3',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-            ],
-            selector: '.accordion .card',
-            query: {
-                /*active: {
-                    type   : 'boolean',
-                    source  : 'text',
-                    default: false,
-                },*/
-                title: {
-                    type: 'string',
-                    source: 'text',
-                    selector: '.card-header h5',
-                },
-                body: {
-                    type: 'array',
-                    selector: '.card-body',
-                    source: 'children',
-                },
-            },
-        },
-        margin: {
-            type: 'string',
-            default: 'my-3'
-        },
-        theme: {
-            type: 'string',
-            default: 'success'
-        },
-    },
+    attributes: attributes,
     /**
      * The edit function describes the structure of your block in the context of the editor.
      * This represents what the editor will render when the block is used.
@@ -894,12 +956,12 @@ registerBlockType('gbb/accordion', {
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } },
                     content.map(function (card, key) {
                         return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["removeCard"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["float-right"] },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn-secondary"] + "  " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn-sm"], onClick: function () { return removeCard(key); } },
+                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('removeCard', 'float-right') },
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: cx('btn', 'btn-secondary', 'btn-sm'), onClick: function () { return removeCard(key); } },
                                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "dashicons dashicons-minus" }),
                                     " ",
                                     __('Remove'))),
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-header"], "data-toggle": "collapse", "data-target": "#collapse" + key, "aria-expanded": "false", "aria-controls": "collapse" + key },
+                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + key, "aria-expanded": "false", "aria-controls": "collapse" + key },
                                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { tagName: "h5", className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], multiline: "p", onChange: function (title) { return onChangeCardTitle(key, title); }, value: card.title })),
                             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + key, className: "collapse" },
                                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", onChange: function (body) { return onChangeCardBody(key, body); }, value: card.body })));
@@ -919,12 +981,11 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-        // Initialize theme
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, theme = _a.theme;
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", null,
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } }, content.map(function (card, key) {
                 return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-header"], "data-toggle": "collapse", "data-target": "#collapse" + key },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + key },
                         react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], tagName: "h5", value: card.title })),
                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + key, className: "collapse" },
                         react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", value: card.body })));
@@ -1443,7 +1504,8 @@ registerBlockType('gbb/button', {
         // Initialize theme
         var _a = props.attributes, alignment = _a.alignment, caption = _a.caption, isBlockWidth = _a.isBlockWidth, isOutline = _a.isOutline, size = _a.size, theme = _a.theme, url = _a.url;
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { style: { textAlign: alignment } },
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "btn btn-" + (isOutline ? 'outline-' : '') + theme + " " + (size !== '' ? "btn-" + size : '') + " " + (isBlockWidth ? "btn-block" : ''), href: url, role: "button", tagName: "a", value: caption })));
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("a", { href: url, className: "btn btn-" + (isOutline ? 'outline-' : '') + theme + " " + (size !== '' ? "btn-" + size : '') + " " + (isBlockWidth ? "btn-block" : ''), role: "button" },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { tagName: "span", value: caption }))));
     },
 });
 
@@ -1459,13 +1521,11 @@ registerBlockType('gbb/button', {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/scss/style.scss */ "./src/assets/scss/style.scss");
-/* harmony import */ var _assets_scss_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_scss_editor_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/scss/editor.scss */ "./src/assets/scss/editor.scss");
-/* harmony import */ var _assets_scss_editor_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_editor_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -1476,11 +1536,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
 var Fragment = wp.element.Fragment;
-var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, InnerBlocks = _a.InnerBlocks, RichText = _a.RichText;
+var _a = wp.editor, InnerBlocks = _a.InnerBlocks, InspectorControls = _a.InspectorControls;
+var _b = wp.components, PanelBody = _b.PanelBody, PanelRow = _b.PanelRow;
+var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
+var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
+var attributes = {
+    alignment: {
+        type: 'string',
+    },
+    content: {
+        type: 'array',
+        source: 'children',
+        selector: 'div.content'
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+};
 /**
  * Register: aa Gutenberg Block.
  *
@@ -1498,23 +1574,14 @@ registerBlockType('gbb/container', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Bootstrap Container'),
     description: __('Containers are the most basic layout element in Bootstrap and are required when using our default grid system. Choose from a responsive, fixed-width container (meaning its max-width changes at each breakpoint) or fluid-width (meaning it’s 100% wide all the time).'),
-    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_2__["default"].container,
+    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_1__["default"].container,
     category: 'gbb',
     keywords: [
         __('Bootstrap'),
         __('Container'),
         __('Grid'),
     ],
-    attributes: {
-        content: {
-            type: 'array',
-            source: 'children',
-            selector: 'div.content'
-        },
-        alignment: {
-            type: 'string',
-        },
-    },
+    attributes: attributes,
     /**
      * The edit function describes the structure of your block in the context of the editor.
      * This represents what the editor will render when the block is used.
@@ -1524,10 +1591,27 @@ registerBlockType('gbb/container', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit: function (props) {
-        var _a = props.attributes, alignment = _a.alignment, content = _a.content, setAttributes = props.setAttributes;
-        return (react__WEBPACK_IMPORTED_MODULE_3__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("div", { className: props.className + " my-5", style: { textAlign: alignment } },
-                react__WEBPACK_IMPORTED_MODULE_3__["createElement"](InnerBlocks, null))));
+        var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, setAttributes = props.setAttributes;
+        function setMargin(event) {
+            var selected = event.target.querySelector('option:checked');
+            setAttributes({ margin: selected.value });
+            event.preventDefault();
+        }
+        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
+                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className + " " + cx(margin), style: { textAlign: alignment } },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InnerBlocks, null))));
     },
     /**
      * The save function defines the way in which the different attributes should be combined
@@ -1538,11 +1622,10 @@ registerBlockType('gbb/container', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-        // Initialize theme
-        var alignment = props.attributes.alignment;
-        return (react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("div", { style: { textAlign: alignment } },
-            react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("div", { className: "container" },
-                react__WEBPACK_IMPORTED_MODULE_3__["createElement"](InnerBlocks.Content, null))));
+        var _a = props.attributes, alignment = _a.alignment, margin = _a.margin;
+        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx(margin), style: { textAlign: alignment } },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "" + cx('container') },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InnerBlocks.Content, null))));
     },
 });
 

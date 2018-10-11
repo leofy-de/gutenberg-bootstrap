@@ -13,15 +13,67 @@ import * as React from 'react';
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {CheckboxControl, PanelBody, PanelRow} = wp.components;
+const {PanelBody, PanelRow} = wp.components;
 const {Fragment} = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
-    ColorPalette,
     InspectorControls,
     RichText,
 } = wp.editor;
+const classNames = require('classnames/bind');
+let cx = classNames.bind(styles);
+
+const attributes = {
+    alignment: {
+        type: 'string',
+    },
+    content: {
+        type: 'array',
+        source: 'query',
+        default: [
+            {
+                title: 'Collapsible Group Item #1',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+            {
+                title: 'Collapsible Group Item #2',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+            {
+                title: 'Collapsible Group Item #3',
+                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
+            },
+        ],
+        selector: '.accordion .card',
+        query: {
+            /*active: {
+                type   : 'boolean',
+                source  : 'text',
+                default: false,
+            },*/
+            title: {
+                type: 'string',
+                source: 'text',
+                selector: '.card-header h5',
+            },
+            body: {
+                type: 'array',
+                selector: '.card-body',
+                source: 'children',
+            },
+        },
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+    theme: {
+        type: 'string',
+        default: 'light'
+    },
+};
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -47,55 +99,7 @@ registerBlockType('gbb/accordion', {
         __('Accordion'),
         __('Collapse'),
     ],
-    attributes: {
-        alignment: {
-            type: 'string',
-        },
-        content: {
-            type: 'array',
-            source: 'query',
-            default: [
-                {
-                    title: 'Collapsible Group Item #1',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-                {
-                    title: 'Collapsible Group Item #2',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-                {
-                    title: 'Collapsible Group Item #3',
-                    body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
-                },
-            ],
-            selector: '.accordion .card',
-            query: {
-                /*active: {
-                    type   : 'boolean',
-                    source  : 'text',
-                    default: false,
-                },*/
-                title: {
-                    type: 'string',
-                    source: 'text',
-                    selector: '.card-header h5',
-                },
-                body: {
-                    type: 'array',
-                    selector: '.card-body',
-                    source: 'children',
-                },
-            },
-        },
-        margin: {
-            type: 'string',
-            default: 'my-3'
-        },
-        theme: {
-            type: 'string',
-            default: 'success'
-        },
-    },
+    attributes,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -197,19 +201,20 @@ registerBlockType('gbb/accordion', {
                         {
                             content.map((card, key) => {
                                 return <div className={styles.card}>
-                                    <div className={`${styles.removeCard} ${styles['float-right']}`}>
+                                    <div className={cx('removeCard', 'float-right')}>
                                         <button
-                                            className={`${styles.btn} ${styles['btn-secondary']}  ${styles['btn-sm']}`}
+                                            className={cx('btn', 'btn-secondary', 'btn-sm')}
                                             onClick={() => removeCard(key)}
                                         >
                                             <span className="dashicons dashicons-minus"></span> {__('Remove')}
                                         </button>
                                     </div>
-                                    <div className={styles["card-header"]}
-                                         data-toggle="collapse"
-                                         data-target={`#collapse${key}`}
-                                         aria-expanded="false"
-                                         aria-controls={`collapse${key}`}
+                                    <div
+                                        className={cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}
+                                        data-toggle="collapse"
+                                        data-target={`#collapse${key}`}
+                                        aria-expanded="false"
+                                        aria-controls={`collapse${key}`}
                                     >
                                         <RichText
                                             tagName="h5"
@@ -257,8 +262,6 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-
-        // Initialize theme
         const {attributes: {alignment, content, margin, theme}} = props;
 
         return (
@@ -270,7 +273,7 @@ registerBlockType('gbb/accordion', {
                     {
                         content.map((card, key) => {
                             return <div className={styles.card}>
-                                <div className={styles['card-header']}
+                                <div className={cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}
                                      data-toggle="collapse"
                                      data-target={`#collapse${key}`}
                                 >

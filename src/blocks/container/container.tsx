@@ -6,8 +6,7 @@
  */
 
 //  Import CSS.
-import '../../assets/scss/style.scss';
-import '../../assets/scss/editor.scss';
+import * as styles from '../../assets/scss/styles.module.scss';
 
 import icons from "../../lib/icons";
 import * as React from 'react';
@@ -15,7 +14,26 @@ import * as React from 'react';
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {Fragment} = wp.element;
-const {AlignmentToolbar, BlockControls, InnerBlocks, RichText} = wp.editor;
+const {InnerBlocks, InspectorControls} = wp.editor;
+const {PanelBody, PanelRow} = wp.components;
+const classNames = require('classnames/bind');
+let cx = classNames.bind(styles);
+
+const attributes = {
+    alignment: {
+        type: 'string',
+    },
+    content: {
+        type: 'array',
+        source: 'children',
+        selector: 'div.content'
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+};
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -41,16 +59,7 @@ registerBlockType('gbb/container', {
         __('Container'),
         __('Grid'),
     ],
-    attributes: {
-        content: {
-            type: 'array',
-            source: 'children',
-            selector: 'div.content'
-        },
-        alignment: {
-            type: 'string',
-        },
-    },
+    attributes,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -61,12 +70,35 @@ registerBlockType('gbb/container', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit: function (props) {
-        const {attributes: {alignment, content}, setAttributes} = props;
+        const {attributes: {alignment, content, margin}, setAttributes} = props;
+
+        function setMargin(event) {
+            const selected = event.target.querySelector('option:checked');
+            setAttributes({margin: selected.value});
+            event.preventDefault();
+        }
 
         return (
             <Fragment>
-                <div className={`${props.className} my-5`} style={{textAlign: alignment}}>
-                    <InnerBlocks />
+                <InspectorControls>
+                    <PanelBody title={__('Select options')}>
+                        <PanelRow>
+                            <label>{__('Margin')}</label>
+                            <form onSubmit={setMargin}>
+                                <select value={margin} onChange={setMargin}>
+                                    <option value="my-0">No margin</option>
+                                    <option value="my-1">my-1 - Tiny margin</option>
+                                    <option value="my-2">my-2 - Small margin</option>
+                                    <option value="my-3">my-3 - Middle margin</option>
+                                    <option value="my-4">my-4 - Large margin</option>
+                                    <option value="my-5">my-5 - Hugh margin</option>
+                                </select>
+                            </form>
+                        </PanelRow>
+                    </PanelBody>
+                </InspectorControls>
+                <div className={`${props.className} ${cx(margin)}`} style={{textAlign: alignment}}>
+                    <InnerBlocks/>
                 </div>
             </Fragment>
         );
@@ -81,16 +113,13 @@ registerBlockType('gbb/container', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-
-        // Initialize theme
-        const {attributes: {alignment}} = props;
+        const {attributes: {alignment, margin}} = props;
 
         return (
-            <div style={{textAlign: alignment}}>
-                <div className="container">
+            <div className={cx(margin)} style={{textAlign: alignment}}>
+                <div className={`${cx('container')}`}>
                     <InnerBlocks.Content/>
                 </div>
-
             </div>
         );
     },

@@ -7894,5 +7894,13 @@ a.text-dark:hover, a.text-dark:focus {
 .wp-block-gbb-media .btn-primary svg {
   fill: #fff; }
 
+.editor-block-list__block:not(.is-selected-parent) .wp-block-gbb-container {
+  border-left: 2px dashed #ccc;
+  border-right: 2px dashed #ccc;
+  margin-left: -30px;
+  margin-right: -30px;
+  padding-left: 30px;
+  padding-right: 30px; }
+
 
 /*# sourceMappingURL=blocks.editor.build.css.map*/
