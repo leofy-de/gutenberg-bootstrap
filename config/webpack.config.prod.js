@@ -3,6 +3,7 @@
  *
  * Working of a Webpack can be very simple or complex. This is an intenally simple
  * build configuration.
+ *
  * @since 1.0.0
  */
 const path                    = require('path');
@@ -11,7 +12,14 @@ const autoprefixer            = require('autoprefixer');
 const MiniCssExtractPlugin    = require('mini-css-extract-plugin');
 const UglifyJsPlugin          = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const {TsConfigPathsPlugin}   = require('awesome-typescript-loader');
 
+const MiniCssExtractPluginLoader = {
+	loader : MiniCssExtractPlugin.loader,
+	options: {
+		publicPath: path.resolve(rootPath, 'dist', 'css')
+	},
+};
 
 const CSSModuleLoader = {
 	loader : 'typings-for-css-modules-loader',
@@ -19,9 +27,9 @@ const CSSModuleLoader = {
 		namedExport   : true,
 		camelcase     : true,
 		modules       : true,
-		localIdentName: '[hash:base64:5]',
+		localIdentName: '[local]--[hash:base64:5]',
 		sourceMap     : true,
-		minimize      : true,
+		importLoaders : 2,
 	},
 };
 
@@ -32,7 +40,6 @@ const CSSLoader = {
 		camelcase    : true,
 		modules      : false,
 		sourceMap    : true,
-		minimize     : true,
 		importLoaders: 2,
 	},
 };
@@ -78,7 +85,7 @@ module.exports = {
 				test   : /\.scss$/,
 				exclude: /\.module\.scss$/,
 				use    : [
-					MiniCssExtractPlugin.loader,
+					MiniCssExtractPluginLoader,
 					CSSLoader,
 					postCSSLoader,
 					'sass-loader'
@@ -87,7 +94,7 @@ module.exports = {
 			{
 				test: /\.module\.scss$/,
 				use : [
-					MiniCssExtractPlugin.loader,
+					MiniCssExtractPluginLoader,
 					CSSModuleLoader,
 					postCSSLoader,
 					'sass-loader',
@@ -95,7 +102,7 @@ module.exports = {
 			},
 		],
 	},
-	optimization: {
+	/*optimization: {
 		minimizer: [
 			new UglifyJsPlugin({
 				cache    : true,
@@ -104,14 +111,18 @@ module.exports = {
 			}),
 			new OptimizeCSSAssetsPlugin({})
 		],
-	},
+	},*/
 	// Add plugins.
 	plugins     : [
-		new MiniCssExtractPlugin(),
+		new MiniCssExtractPlugin({
+			filename     : `[name].css`,
+			chunkFilename: `chunks/[name].css`,
+		}),
 	],
 	resolve     : {
 		extensions      : ['.tsx', '.ts', '.js', '.jsx', '.es6', '.scss', '.d.ts'],
 		enforceExtension: false,
+		plugins         : [new TsConfigPathsPlugin()],
 	},
 	stats       : 'minimal',
 	// stats: 'errors-only',

@@ -35,6 +35,7 @@ const formatWebpackMessages = require(cgbDevUtilsPath +
 // Build file paths.
 const theCWD                  = process.cwd();
 const fileBuildJS             = path.resolve(theCWD, './dist/blocks.build.js');
+//const fileBuildCSSModules     = path.resolve(theCWD, './dist/blocks.build.css');
 const fileEditorBuildJS       = path.resolve(theCWD, './dist/blocks.editor.build.js');
 const fileStyleBuildCSS       = path.resolve(theCWD, './dist/blocks.style.build.css');
 const fileStyleEditorBuildCSS = path.resolve(theCWD, './dist/blocks.style.editor.build.css');
@@ -118,6 +119,8 @@ async function build(webpackConfig) {
 			'\n\n',
 			'File sizes after gzip:',
 			'\n\n',
+			'Javascript bundles',
+			'--',
 			getFileSize(fileBuildJS),
 			`${ chalk.dim('— ./dist/') }`,
 			`${ chalk.green('blocks.build.js') }`,
@@ -125,14 +128,20 @@ async function build(webpackConfig) {
 			getFileSize(fileEditorBuildJS),
 			`${ chalk.dim('— ./dist/') }`,
 			`${ chalk.green('blocks.editor.build.js') }`,
+			'\n\n',
+			'CSS bundles',
+			'--',
+			/*getFileSize(fileBuildCSSModules),
+			`${ chalk.dim('— ./dist/') }`,
+			`${ chalk.green('blocks.build.css (CSS Modules)') }`,*/
 			'\n',
 			getFileSize(fileStyleBuildCSS),
 			`${ chalk.dim('— ./dist/') }`,
-			`${ chalk.green('blocks.style.build.css') }`,
+			`${ chalk.green('blocks.style.build.css (style.scss)') }`,
 			'\n',
 			getFileSize(fileStyleEditorBuildCSS),
 			`${ chalk.dim('— ./dist/') }`,
-			`${ chalk.green('blocks.style.editor.build.css') }`,
+			`${ chalk.green('blocks.style.editor.build.css (editor.scss)') }`,
 			'\n\n'
 		);
 

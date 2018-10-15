@@ -31,18 +31,24 @@ function bootstrap_blocks_cgb_block_assets() {
 	);
 
 	// Styles.
+	// CSS Module styles, extracted by MiniCssExtractPlugin
+	wp_enqueue_style(
+		'bootstrap_blocks-cgb-block-editor-module-css', // Handle.
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+		[ 'wp-edit-blocks' ] // Dependency to include the CSS after it.
+	);
+	// CSS styles by from src/assets/editor.scss
 	wp_enqueue_style(
 		'bootstrap_blocks-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		[ 'wp-edit-blocks' ] // Dependency to include the CSS after it.
-	// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
 	);
-	/*wp_enqueue_style(
+	// CSS styles by from src/assets/style.scss
+	wp_enqueue_style(
 		'bootstrap_blocks-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		[ 'wp-blocks' ] // Dependency to include the CSS after it.
-	// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
-	);*/
+	);
 } // End function bootstrap_blocks_cgb_block_assets().
 
 // Hook: Frontend assets.
@@ -68,11 +74,17 @@ function bootstrap_blocks_cgb_editor_assets() {
 	);
 
 	// Styles.
+	// CSS Module styles, extracted by MiniCssExtractPlugin
 	wp_enqueue_style(
-		'bootstrap_blocks-cgb-block-editor-css', // Handle.
+		'bootstrap_blocks-cgb-block-editor-module-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		[ 'wp-edit-blocks' ] // Dependency to include the CSS after it.
-	// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
+	);
+	// CSS styles by from src/assets/editor.scss
+	wp_enqueue_style(
+		'bootstrap_blocks-cgb-block-editor-css', // Handle.
+		plugins_url( 'dist/blocks.style.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+		[ 'wp-edit-blocks' ] // Dependency to include the CSS after it.
 	);
 } // End function bootstrap_blocks_cgb_editor_assets().
 

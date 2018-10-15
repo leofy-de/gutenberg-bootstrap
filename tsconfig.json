@@ -10,7 +10,11 @@
     "lib": [
       "es2015"
     ],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "lib/*": ["lib/*"]
+    }
   },
   "include": [
     "./src/"

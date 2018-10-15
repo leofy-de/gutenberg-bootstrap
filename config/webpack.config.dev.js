@@ -6,11 +6,12 @@
  *
  * @since 1.0.0
  */
-const path                 = require('path');
-const rootPath             = process.cwd();
-const webpack              = require('webpack');
-const autoprefixer         = require('autoprefixer');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path                  = require('path');
+const rootPath              = process.cwd();
+const autoprefixer          = require('autoprefixer');
+const MiniCssExtractPlugin  = require('mini-css-extract-plugin');
+const webpack               = require('webpack');
+const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 
 const MiniCssExtractPluginLoader = {
 	loader : MiniCssExtractPlugin.loader,
@@ -57,25 +58,25 @@ const postCSSLoader = {
 
 // Export configuration.
 module.exports = {
-	mode        : 'development',
-	entry       : {
+	mode     : 'development',
+	entry    : {
 		'blocks.style.build'       : `${path.resolve(rootPath, 'src', 'assets', 'scss')}/style.scss`,
 		'blocks.style.editor.build': `${path.resolve(rootPath, 'src', 'assets', 'scss')}/editor.scss`,
 		'blocks.build'             : `${path.resolve(rootPath, 'src')}/blocks.ts`,
 		'blocks.editor.build'      : `${path.resolve(rootPath, 'src')}/blocks.editor.ts`,
 	},
-	output      : {
+	output   : {
 		pathinfo: true,
 		path    : path.resolve(rootPath, 'dist'),
 		filename: '[name].js',
 	},
-	devtool     : 'source-map',
-	devServer   : {
+	devtool  : 'source-map',
+	devServer: {
 		contentBase       : '/',
 		historyApiFallback: true,
 		hot               : true,
 	},
-	module      : {
+	module   : {
 		rules: [
 			{
 				test   : /\.([tj])s(x)?$/,
@@ -107,7 +108,7 @@ module.exports = {
 		],
 	},
 	// Add plugins.
-	plugins     : [
+	plugins  : [
 		new webpack.WatchIgnorePlugin([
 			/s?css\.d\.ts$/,
 		]),
@@ -116,14 +117,15 @@ module.exports = {
 			chunkFilename: `chunks/[name].css`,
 		}),
 	],
-	resolve     : {
+	resolve  : {
 		extensions      : ['.tsx', '.ts', '.js', '.jsx', '.es6', '.scss', '.d.ts'],
 		enforceExtension: false,
+		plugins         : [new TsConfigPathsPlugin()],
 	},
-	stats       : 'minimal',
+	stats    : 'minimal',
 	// stats: 'errors-only',
 	// Add externals.
-	externals   : {
+	externals: {
 		react      : 'React',
 		'react-dom': 'ReactDOM',
 		ga         : 'ga', // Old Google Analytics.

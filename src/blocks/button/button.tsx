@@ -6,8 +6,7 @@
  */
 
 //  Import CSS.
-import '../../assets/scss/style.scss';
-import '../../assets/scss/editor.scss';
+import * as styles from '../../assets/scss/styles.module.scss';
 import * as React from 'react';
 
 // Import JS.
@@ -21,11 +20,49 @@ const {Fragment} = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
-    ColorPalette,
     InspectorControls,
     RichText,
     URLInput,
 } = wp.editor;
+const classNames = require('classnames/bind');
+let cx = classNames.bind(styles);
+const attributes = {
+    alignment: {
+        type: 'string',
+    },
+    caption: {
+        type: 'array',
+        source: 'children',
+        selector: 'div.content',
+        default: 'Visit Gutenberg-Unlimited Website'
+    },
+    isBlockWidth: {
+        type: 'boolean',
+    },
+    isOutline: {
+        type: 'boolean',
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+    size: {
+        type: 'string',
+        default: ''
+    },
+    theme: {
+        type: 'string',
+        default: 'primary'
+    },
+    url: {
+        type: 'string',
+        source: 'attribute',
+        selector: 'a',
+        attribute: 'href',
+        default: 'https://www.gutenberg-unlimited.org'
+    },
+};
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -50,36 +87,7 @@ registerBlockType('gbb/button', {
         __('Bootstrap'),
         __('Button'),
     ],
-    attributes: {
-        alignment: {
-            type: 'string',
-        },
-        caption: {
-            type: 'array',
-            source: 'children',
-            selector: 'div.content'
-        },
-        isBlockWidth: {
-            type: 'boolean',
-        },
-        isOutline: {
-            type: 'boolean',
-        },
-        size: {
-            type: 'string',
-            default: ''
-        },
-        theme: {
-            type: 'string',
-            default: 'primary'
-        },
-        url: {
-            type: 'string',
-            source: 'attribute',
-            selector: 'a',
-            attribute: 'href',
-        },
-    },
+    attributes,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -91,7 +99,13 @@ registerBlockType('gbb/button', {
      */
     edit: function (props) {
         // Theme selection
-        const {attributes: {alignment, caption, isBlockWidth, isOutline, size, theme, url}, setAttributes, isSelected} = props;
+        const {attributes: {alignment, caption, isBlockWidth, isOutline, margin, size, theme, url}, setAttributes} = props;
+
+        function setMargin(event) {
+            const selected = event.target.querySelector('option:checked');
+            setAttributes({margin: selected.value});
+            event.preventDefault();
+        }
 
         function setSize(event) {
             const selected = event.target.querySelector('option:checked');
@@ -113,10 +127,37 @@ registerBlockType('gbb/button', {
             setAttributes({caption: newCaption});
         }
 
+        function getButtonClasses() {
+            let classes = ['btn'];
+
+            classes.push(isOutline ? `btn-outline-${theme}` : `btn-${theme}`);
+            if (size !== '') {
+                classes.push(`btn-${size}`);
+            }
+            if (isBlockWidth) {
+                classes.push(`btn-block`);
+            }
+
+            return classes;
+        }
+
         return (
             <Fragment>
                 <InspectorControls>
                     <PanelBody title={__('Select options')}>
+                        <PanelRow>
+                            <label>{__('Margin')}</label>
+                            <form onSubmit={setMargin}>
+                                <select value={margin} onChange={setMargin}>
+                                    <option value="my-0">No margin</option>
+                                    <option value="my-1">my-1 - Tiny margin</option>
+                                    <option value="my-2">my-2 - Small margin</option>
+                                    <option value="my-3">my-3 - Middle margin</option>
+                                    <option value="my-4">my-4 - Large margin</option>
+                                    <option value="my-5">my-5 - Hugh margin</option>
+                                </select>
+                            </form>
+                        </PanelRow>
                         <PanelRow>
                             <label>{__('Theme')}</label>
                             <form onSubmit={setTheme}>
@@ -153,7 +194,7 @@ registerBlockType('gbb/button', {
                         </PanelRow>
                         <PanelRow>
                             <CheckboxControl
-                                label={__('Block Button / Full width?')}
+                                label={__('Full width? (.btn-block)')}
                                 checked={isBlockWidth}
                                 onChange={(isBlockWidth) => {
                                     setAttributes({isBlockWidth})
@@ -171,8 +212,9 @@ registerBlockType('gbb/button', {
                 <div className={props.className} style={{textAlign: alignment}}>
                     <RichText
                         autoFocus={true}
-                        className={`btn btn-${isOutline ? 'outline-' : ''}${theme} ${size !== '' ? `btn-${size}` : ''} ${isBlockWidth ? `btn-block` : ''}`}
-                        tagName="a"
+                        className={cx(getButtonClasses(), margin)}
+                        tagName="span"
+                        multiline="p"
                         onChange={onChangeCaption}
                         value={caption}
                     />
@@ -199,13 +241,27 @@ registerBlockType('gbb/button', {
     save: function (props) {
 
         // Initialize theme
-        const {attributes: {alignment, caption, isBlockWidth, isOutline, size, theme, url}} = props;
+        const {attributes: {alignment, caption, isBlockWidth, isOutline, margin, size, theme, url}} = props;
+
+        function getButtonClasses() {
+            let classes = ['btn'];
+
+            classes.push(isOutline ? `btn-outline-${theme}` : `btn-${theme}`);
+            if (size !== '') {
+                classes.push(`btn-${size}`);
+            }
+            if (isBlockWidth) {
+                classes.push(`btn-block`);
+            }
+
+            return classes;
+        }
 
         return (
             <div style={{textAlign: alignment}}>
                 <a
                     href={url}
-                    className={`btn btn-${isOutline ? 'outline-' : ''}${theme} ${size !== '' ? `btn-${size}` : ''} ${isBlockWidth ? `btn-block` : ''}`}
+                    className={cx(getButtonClasses(), margin)}
                     role="button"
                 >
                     <RichText.Content

@@ -203,7 +203,6 @@ registerBlockType('gbb/alert', {
                             value={title}
                         />
                         <RichText
-                            className="content"
                             tagName="div"
                             onChange={(content) => {
                                 setAttributes({content})
@@ -233,7 +232,7 @@ registerBlockType('gbb/alert', {
     save: function (props) {
 
         // Initialize theme
-        const {attributes: {alignment, content, margin, title, theme}} = props;
+        const {attributes: {alignment, content, isDismissable, margin, title, theme}} = props;
 
         return (
             <div>
@@ -248,13 +247,15 @@ registerBlockType('gbb/alert', {
                         value={title}
                     />
                     <RichText.Content
-                        className="content"
                         tagName="div"
                         value={content}
                     />
-                    <button type="button" className={`close`} data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    {
+                        isDismissable &&
+						<button type="button" className={`close`} data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+                    }
                 </div>
             </div>
         );
