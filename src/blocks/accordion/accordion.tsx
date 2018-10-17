@@ -28,6 +28,9 @@ const attributes = {
     alignment: {
         type: 'string',
     },
+    clientId: {
+        type: 'string'
+    },
     content: {
         type: 'array',
         source: 'query',
@@ -45,7 +48,7 @@ const attributes = {
                 body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
             },
         ],
-        selector: '.accordion .card',
+        selector: '.gbb-accordion .gbb-card',
         query: {
             /*active: {
                 type   : 'boolean',
@@ -55,11 +58,11 @@ const attributes = {
             title: {
                 type: 'string',
                 source: 'text',
-                selector: '.card-header h5',
+                selector: '.gbb-card-header h5',
             },
             body: {
                 type: 'array',
-                selector: '.card-body',
+                selector: '.gbb-card-body',
                 source: 'children',
             },
         },
@@ -110,8 +113,10 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit: function (props) {
-        // Theme selection
-        const {attributes: {alignment, content, margin, theme}, setAttributes, isSelected} = props;
+        const {attributes: {alignment, clientId, content, margin, theme}, setAttributes} = props;
+
+        // Set the block identifier
+        setAttributes({clientId: props.clientId});
 
         function setMargin(event) {
             const selected = event.target.querySelector('option:checked');
@@ -195,12 +200,12 @@ registerBlockType('gbb/accordion', {
                 </BlockControls>
                 <div className={props.className}>
                     <div
-                        className={`${styles.accordion} ${styles[margin]}`}
+                        className={`gbb-accordion ${styles.accordion} ${styles[margin]}`}
                         style={{textAlign: alignment}}
                     >
                         {
                             content.map((card, key) => {
-                                return <div className={styles.card}>
+                                return <div className={`gbb-card ${styles.card}`}>
                                     <div className={cx('removeCard', 'float-right')}>
                                         <button
                                             className={cx('btn', 'btn-secondary', 'btn-sm')}
@@ -210,26 +215,25 @@ registerBlockType('gbb/accordion', {
                                         </button>
                                     </div>
                                     <div
-                                        className={cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}
+                                        className={`gbb-card-header ${cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}`}
                                         data-toggle="collapse"
-                                        data-target={`#collapse${key}`}
+                                        data-target={`#collapse${clientId}-${key}`}
                                         aria-expanded="false"
                                         aria-controls={`collapse${key}`}
                                     >
                                         <RichText
                                             tagName="h5"
                                             className={`${styles['mb-0']} ${styles.h5}`}
-                                            multiline="p"
                                             onChange={(title) => onChangeCardTitle(key, title)}
                                             value={card.title}
                                         />
                                     </div>
                                     <div
-                                        id={`collapse${key}`}
+                                        id={`collapse${clientId}-${key}`}
                                         className={`collapse`}
                                     >
                                         <RichText
-                                            className={styles["card-body"]}
+                                            className={`gbb-card-header ${styles["card-body"]}`}
                                             tagName="div"
                                             onChange={(body) => onChangeCardBody(key, body)}
                                             value={card.body}
@@ -262,20 +266,20 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-        const {attributes: {alignment, content, margin, theme}} = props;
+        const {attributes: {alignment, clientId, content, margin, theme}} = props;
 
         return (
             <div>
                 <div
-                    className={`${styles.accordion} ${styles[margin]}`}
+                    className={`gbb-accordion ${styles.accordion} ${styles[margin]}`}
                     style={{textAlign: alignment}}
                 >
                     {
                         content.map((card, key) => {
-                            return <div className={styles.card}>
-                                <div className={cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}
+                            return <div className={`gbb-card ${styles.card}`}>
+                                <div className={`gbb-card-header ${cx('card-header', `bg-${theme}`, {'text-white': (theme !== 'light')})}`}
                                      data-toggle="collapse"
-                                     data-target={`#collapse${key}`}
+                                     data-target={`#collapse${clientId}-${key}`}
                                 >
                                     <RichText.Content
                                         className={`${styles['mb-0']} ${styles.h5}`}
@@ -284,11 +288,11 @@ registerBlockType('gbb/accordion', {
                                     />
                                 </div>
                                 <div
-                                    id={`collapse${key}`}
+                                    id={`collapse${clientId}-${key}`}
                                     className={`collapse`}
                                 >
                                     <RichText.Content
-                                        className={styles['card-body']}
+                                        className={`gbb-card-body ${styles['card-body']}`}
                                         tagName="div"
                                         value={card.body}
                                     />

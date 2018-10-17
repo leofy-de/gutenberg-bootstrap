@@ -788,6 +788,9 @@ var attributes = {
     alignment: {
         type: 'string',
     },
+    clientId: {
+        type: 'string'
+    },
     content: {
         type: 'array',
         source: 'query',
@@ -805,7 +808,7 @@ var attributes = {
                 body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
             },
         ],
-        selector: '.accordion .card',
+        selector: '.gbb-accordion .gbb-card',
         query: {
             /*active: {
                 type   : 'boolean',
@@ -815,11 +818,11 @@ var attributes = {
             title: {
                 type: 'string',
                 source: 'text',
-                selector: '.card-header h5',
+                selector: '.gbb-card-header h5',
             },
             body: {
                 type: 'array',
-                selector: '.card-body',
+                selector: '.gbb-card-body',
                 source: 'children',
             },
         },
@@ -867,8 +870,9 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit: function (props) {
-        // Theme selection
-        var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, theme = _a.theme, setAttributes = props.setAttributes, isSelected = props.isSelected;
+        var _a = props.attributes, alignment = _a.alignment, clientId = _a.clientId, content = _a.content, margin = _a.margin, theme = _a.theme, setAttributes = props.setAttributes;
+        // Set the block identifier
+        setAttributes({ clientId: props.clientId });
         function setMargin(event) {
             var selected = event.target.querySelector('option:checked');
             setAttributes({ margin: selected.value });
@@ -931,18 +935,18 @@ registerBlockType('gbb/accordion', {
                         setAttributes({ alignment: newAlignment });
                     } })),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } },
+                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-accordion " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } },
                     content.map(function (card, key) {
-                        return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
+                        return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-card " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
                             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('removeCard', 'float-right') },
                                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: cx('btn', 'btn-secondary', 'btn-sm'), onClick: function () { return removeCard(key); } },
                                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "dashicons dashicons-minus" }),
                                     " ",
                                     __('Remove'))),
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + key, "aria-expanded": "false", "aria-controls": "collapse" + key },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { tagName: "h5", className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], multiline: "p", onChange: function (title) { return onChangeCardTitle(key, title); }, value: card.title })),
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + key, className: "collapse" },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", onChange: function (body) { return onChangeCardBody(key, body); }, value: card.body })));
+                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-card-header " + cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + clientId + "-" + key, "aria-expanded": "false", "aria-controls": "collapse" + key },
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { tagName: "h5", className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], onChange: function (title) { return onChangeCardTitle(key, title); }, value: card.title })),
+                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + clientId + "-" + key, className: "collapse" },
+                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: "gbb-card-header " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", onChange: function (body) { return onChangeCardBody(key, body); }, value: card.body })));
                     }),
                     react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "addCard " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["text-center"] },
                         react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn-secondary"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mt-3"], onClick: addCard },
@@ -959,14 +963,14 @@ registerBlockType('gbb/accordion', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-        var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, theme = _a.theme;
+        var _a = props.attributes, alignment = _a.alignment, clientId = _a.clientId, content = _a.content, margin = _a.margin, theme = _a.theme;
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } }, content.map(function (card, key) {
-                return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + key },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-accordion " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["accordion"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } }, content.map(function (card, key) {
+                return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-card " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card"] },
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-card-header " + cx('card-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + clientId + "-" + key },
                         react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], tagName: "h5", value: card.title })),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + key, className: "collapse" },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", value: card.body })));
+                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + clientId + "-" + key, className: "collapse" },
+                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "gbb-card-body " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["card-body"], tagName: "div", value: card.body })));
             }))));
     },
 });

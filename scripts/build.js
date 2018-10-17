@@ -120,7 +120,7 @@ async function build(webpackConfig) {
 			'File sizes after gzip:',
 			'\n\n',
 			'Javascript bundles',
-			'--',
+			'\n--\n',
 			getFileSize(fileBuildJS),
 			`${ chalk.dim('— ./dist/') }`,
 			`${ chalk.green('blocks.build.js') }`,
@@ -130,11 +130,11 @@ async function build(webpackConfig) {
 			`${ chalk.green('blocks.editor.build.js') }`,
 			'\n\n',
 			'CSS bundles',
-			'--',
+			'\n--\n',
 			/*getFileSize(fileBuildCSSModules),
 			`${ chalk.dim('— ./dist/') }`,
-			`${ chalk.green('blocks.build.css (CSS Modules)') }`,*/
-			'\n',
+			`${ chalk.green('blocks.build.css (CSS Modules)') }`,
+			'\n',*/
 			getFileSize(fileStyleBuildCSS),
 			`${ chalk.dim('— ./dist/') }`,
 			`${ chalk.green('blocks.style.build.css (style.scss)') }`,
