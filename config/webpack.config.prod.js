@@ -25,7 +25,7 @@ const CSSModuleLoader = {
 	loader : 'typings-for-css-modules-loader',
 	options: {
 		namedExport   : true,
-		camelcase     : true,
+		camelCase     : true,
 		modules       : true,
 		localIdentName: '[local]--[hash:base64:5]',
 		sourceMap     : true,
@@ -37,7 +37,7 @@ const CSSLoader = {
 	loader : 'typings-for-css-modules-loader',
 	options: {
 		namedExport  : false,
-		camelcase    : true,
+		camelCase    : true,
 		modules      : false,
 		sourceMap    : true,
 		importLoaders: 2,

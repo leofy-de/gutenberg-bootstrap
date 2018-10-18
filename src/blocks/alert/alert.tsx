@@ -18,9 +18,7 @@ const {Fragment} = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
-    ColorPalette,
     InspectorControls,
-    InnerBlocks,
     RichText,
 } = wp.editor;
 
@@ -35,8 +33,7 @@ const blockAttributes = {
     },
     title: {
         source: 'text',
-        selector: 'h4.alert-heading',
-        default: __('Enter an optional title here')
+        selector: 'h4.gbb-alert-heading'
     },
     margin: {
         type: 'string',
@@ -46,7 +43,6 @@ const blockAttributes = {
         type: 'array',
         source: 'children',
         selector: 'div.content',
-        default: __('Enter any text message here')
     },
     isDismissable: {
         type: 'boolean',
@@ -194,12 +190,13 @@ registerBlockType('gbb/alert', {
                         role="alert"
                         style={{textAlign: alignment}}>
                         <RichText
-                            className={styles["alert-heading"]}
+                            className={`gbb-alert-heading ${styles.alertHeading}`}
                             tagName="h4"
-                            multiline="p"
                             onChange={(title) => {
                                 setAttributes({title})
                             }}
+                            keepPlaceholderOnFocus={true}
+                            placeholder={ __( 'Enter an optional title here...' ) }
                             value={title}
                         />
                         <RichText
@@ -207,6 +204,8 @@ registerBlockType('gbb/alert', {
                             onChange={(content) => {
                                 setAttributes({content})
                             }}
+                            keepPlaceholderOnFocus={true}
+                            placeholder={ __( 'Enter any text message here...' ) }
                             value={content}
                         />
                         {
@@ -230,22 +229,25 @@ registerBlockType('gbb/alert', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     save: function (props) {
-
-        // Initialize theme
         const {attributes: {alignment, content, isDismissable, margin, title, theme}} = props;
+
+        // Check if a title is available
+        const titleAvailable = (title || '').replace(/<(?:.|\n)*?>/gm, '').length > 0;
 
         return (
             <div>
                 <div
-                    className={`${styles['alert']} ${styles[`alert-${theme}`]} alert alert-dismissible fade show ${styles[margin]}`}
+                    className={`${styles.alert} ${styles[`alert-${theme}`]} alert alert-dismissible fade show ${styles[margin]}`}
                     role="alert"
                     style={{textAlign: alignment}}
                 >
-                    <RichText.Content
-                        className={styles["alert-heading"]}
-                        tagName="h4"
-                        value={title}
-                    />
+                    {
+                        titleAvailable && <RichText.Content
+							className={`gbb-alert-heading ${styles.alertHeading}`}
+							tagName="h4"
+							value={title}
+						/>
+                    }
                     <RichText.Content
                         tagName="div"
                         value={content}

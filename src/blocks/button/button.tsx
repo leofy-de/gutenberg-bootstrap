@@ -12,15 +12,14 @@ import * as React from 'react';
 // Import JS.
 import '../../../node_modules/bootstrap/js/src/button';
 import icons from "../../lib/icons";
+import Inspector from "./components/inspector";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {CheckboxControl, PanelBody, PanelRow} = wp.components;
 const {Fragment} = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
-    InspectorControls,
     RichText,
     URLInput,
 } = wp.editor;
@@ -31,9 +30,8 @@ const attributes = {
         type: 'string',
     },
     caption: {
-        type: 'array',
-        source: 'children',
-        selector: 'div.content',
+        type: 'string',
+        selector: '.gbb-caption',
         default: 'Visit Gutenberg-Unlimited Website'
     },
     isBlockWidth: {
@@ -98,26 +96,7 @@ registerBlockType('gbb/button', {
      * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
      */
     edit: function (props) {
-        // Theme selection
         const {attributes: {alignment, caption, isBlockWidth, isOutline, margin, size, theme, url}, setAttributes} = props;
-
-        function setMargin(event) {
-            const selected = event.target.querySelector('option:checked');
-            setAttributes({margin: selected.value});
-            event.preventDefault();
-        }
-
-        function setSize(event) {
-            const selected = event.target.querySelector('option:checked');
-            setAttributes({size: selected.value});
-            event.preventDefault();
-        }
-
-        function setTheme(event) {
-            const selected = event.target.querySelector('option:checked');
-            setAttributes({theme: selected.value});
-            event.preventDefault();
-        }
 
         function onChangeAlignment(newAlignment) {
             setAttributes({alignment: newAlignment});
@@ -143,78 +122,18 @@ registerBlockType('gbb/button', {
 
         return (
             <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Select options')}>
-                        <PanelRow>
-                            <label>{__('Margin')}</label>
-                            <form onSubmit={setMargin}>
-                                <select value={margin} onChange={setMargin}>
-                                    <option value="my-0">No margin</option>
-                                    <option value="my-1">my-1 - Tiny margin</option>
-                                    <option value="my-2">my-2 - Small margin</option>
-                                    <option value="my-3">my-3 - Middle margin</option>
-                                    <option value="my-4">my-4 - Large margin</option>
-                                    <option value="my-5">my-5 - Hugh margin</option>
-                                </select>
-                            </form>
-                        </PanelRow>
-                        <PanelRow>
-                            <label>{__('Theme')}</label>
-                            <form onSubmit={setTheme}>
-                                <select value={theme} onChange={setTheme}>
-                                    <option value="primary">Primary</option>
-                                    <option value="secondary">Secondary</option>
-                                    <option value="success">Success</option>
-                                    <option value="danger">Danger</option>
-                                    <option value="warning">Warning</option>
-                                    <option value="info">Info</option>
-                                    <option value="light">Light</option>
-                                    <option value="dark">Dark</option>
-                                </select>
-                            </form>
-                        </PanelRow>
-                        <PanelRow>
-                            <CheckboxControl
-                                label={__('Outline Button?')}
-                                checked={isOutline}
-                                onChange={(isOutline) => {
-                                    setAttributes({isOutline})
-                                }}
-                            />
-                        </PanelRow>
-                        <PanelRow>
-                            <label>{__('Size')}</label>
-                            <form onSubmit={setSize}>
-                                <select value={size} onChange={setSize}>
-                                    <option value="">Default</option>
-                                    <option value="sm">Small</option>
-                                    <option value="lg">Large</option>
-                                </select>
-                            </form>
-                        </PanelRow>
-                        <PanelRow>
-                            <CheckboxControl
-                                label={__('Full width? (.btn-block)')}
-                                checked={isBlockWidth}
-                                onChange={(isBlockWidth) => {
-                                    setAttributes({isBlockWidth})
-                                }}
-                            />
-                        </PanelRow>
-                    </PanelBody>
-                </InspectorControls>
+                <Inspector {...props} />
                 <BlockControls>
                     <AlignmentToolbar
                         value={alignment}
                         onChange={onChangeAlignment}
                     />
                 </BlockControls>
-                <div className={props.className} style={{textAlign: alignment}}>
+                <div className={`${props.className} ${styles.gbbButton}`} style={{textAlign: alignment}}>
                     <RichText
                         autoFocus={true}
-                        className={cx(getButtonClasses(), margin)}
+                        className={`gbb-caption ${cx(getButtonClasses(), margin)}`}
                         tagName="span"
-                        multiline="p"
                         onChange={onChangeCaption}
                         value={caption}
                     />
@@ -258,10 +177,10 @@ registerBlockType('gbb/button', {
         }
 
         return (
-            <div style={{textAlign: alignment}}>
+            <div className={styles.gbbButton} style={{textAlign: alignment}}>
                 <a
                     href={url}
-                    className={cx(getButtonClasses(), margin)}
+                    className={`gbb-caption ${cx(getButtonClasses(), margin)}`}
                     role="button"
                 >
                     <RichText.Content

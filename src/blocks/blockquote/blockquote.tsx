@@ -7,16 +7,36 @@
 
 //  Import CSS.
 import * as styles from '../../assets/scss/styles.module.scss';
-
 import icons from "../../lib/icons";
 import * as React from 'react';
-
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {PanelBody, PanelRow} = wp.components;
 const {Fragment} = wp.element;
 const {AlignmentToolbar, BlockControls, RichText, InspectorControls} = wp.editor;
+
+const attributes = {
+    textColor: {
+        source: 'string',
+    },
+    margin: {
+        type: 'string',
+        default: 'my-3'
+    },
+    quote: {
+        source: 'text',
+        selector: '.gbb-blockquote',
+    },
+    source: {
+        source: 'text',
+        selector: 'footer.gbb-blockquote-footer',
+    },
+    alignment: {
+        type: 'string',
+    },
+};
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -41,28 +61,7 @@ registerBlockType('gbb/blockquote', {
         __('Blockquote'),
         __('Quote'),
     ],
-    attributes: {
-        textColor: {
-            source: 'string',
-        },
-        margin: {
-            type: 'string',
-            default: 'my-3'
-        },
-        quote: {
-            source: 'text',
-            selector: '.blockquote',
-            default: 'Enter your quote here'
-        },
-        source: {
-            source: 'text',
-            selector: 'footer.blockquote-footer',
-            default: 'Someone famous in <cite>Source Title</cite>',
-        },
-        alignment: {
-            type: 'string',
-        },
-    },
+    attributes,
 
     /**
      * The edit function describes the structure of your block in the context of the editor.
@@ -111,20 +110,24 @@ registerBlockType('gbb/blockquote', {
                 <div className={props.className}>
                     <blockquote className={`${styles.blockquote} ${styles[margin]}`} style={{textAlign: alignment}}>
                         <RichText
-                            className={`${styles.blockquote} ${styles['mb-0']}`}
+                            className={`gbb-blockquote ${styles.blockquote} ${styles['mb-0']}`}
                             tagName="p"
                             onChange={(quote) => {
                                 setAttributes({quote})
                             }}
+                            placeholder={"Enter your quote here..."}
+                            keepPlaceholderOnFocus={true}
                             value={quote}
                         />
                         <RichText
-                            className={styles['blockquote-footer']}
+                            className={`gbb-blockquote-footer ${styles['blockquote-footer']}`}
                             format="string"
                             tagName="footer"
                             onChange={(source) => {
                                 setAttributes({source})
                             }}
+                            placeholder={"Sebastian Buckpesch in \"Let's talk Gutenberg\""}
+                            keepPlaceholderOnFocus={true}
                             value={source}
                         />
                     </blockquote>
@@ -150,18 +153,17 @@ registerBlockType('gbb/blockquote', {
             <div>
                 <div className={`${styles.blockquote} ${styles[margin]}`} style={{textAlign: alignment}}>
                     <RichText.Content
-                        className={`${styles.blockquote} ${styles['mb-0']}`}
+                        className={`gbb-blockquote ${styles.blockquote} ${styles['mb-0']}`}
                         tagName="p"
                         value={quote}
                     />
                     <RichText.Content
-                        className={styles['blockquote-footer']}
+                        className={`gbb-blockquote-footer ${styles['blockquote-footer']}`}
                         format="string"
                         tagName="footer"
                         value={source}
                     />
                 </div>
-
             </div>
         );
     },
