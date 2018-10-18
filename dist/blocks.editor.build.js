@@ -16538,7 +16538,7 @@ var Component = wp.element.Component;
 // Import block components
 var _a = wp.editor, InspectorControls = _a.InspectorControls, PanelColorSettings = _a.PanelColorSettings;
 // Import Inspector components
-var _b = wp.components, Button = _b.Button, ButtonGroup = _b.ButtonGroup, PanelBody = _b.PanelBody, PanelRow = _b.PanelRow;
+var _b = wp.components, Button = _b.Button, ButtonGroup = _b.ButtonGroup, PanelBody = _b.PanelBody, PanelRow = _b.PanelRow, SelectControl = _b.SelectControl;
 /**
  * Create an Inspector Controls wrapper Component
  */
@@ -16550,6 +16550,7 @@ var Inspector = /** @class */ (function (_super) {
     Inspector.prototype.render = function () {
         // Setup the attributes
         var _a = this.props, _b = _a.attributes, isBlockWidth = _b.isBlockWidth, isOutline = _b.isOutline, margin = _b.margin, size = _b.size, theme = _b.theme, setAttributes = _a.setAttributes;
+        // Theme color settings
         var availableColors = [
             { 'name': 'primary', color: '#007bff' },
             { 'name': 'secondary', color: '#6c757d' },
@@ -16561,27 +16562,22 @@ var Inspector = /** @class */ (function (_super) {
             { 'name': 'dark', color: '#343a40' },
         ];
         var selectedThemeColor = availableColors.find(function (c) { return c.name === theme; }) || { color: '#007bff', name: 'primary' };
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
         function setThemeColor(color) {
             var selectedTheme = availableColors.find(function (c) { return c.color === color.hex; }) || { color: '#007bff', name: 'primary' };
             setAttributes({ theme: selectedTheme.name });
         }
+        // Margin options
+        var marginOptions = [
+            { value: 'my-0', label: __('No margin') },
+            { value: 'my-1', label: __('my-1 - Tiny margin') },
+            { value: 'my-2', label: __('my-2 - Small margin') },
+            { value: 'my-3', label: __('my-3 - Middle margin') },
+            { value: 'my-4', label: __('my-4 - Large margin') },
+            { value: 'my-5', label: __('my-5 - Hugh margin') },
+        ];
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
             react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
-                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Margin')),
-                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("form", { onSubmit: setMargin },
-                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("select", { value: margin, onChange: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-0" }, "No margin"),
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](SelectControl, { label: __('Margin (top & bottom)'), value: margin, options: marginOptions, onChange: function (margin) { return setAttributes({ margin: margin }); } }),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
                     react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Color')),
                     react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_color__WEBPACK_IMPORTED_MODULE_1__["CirclePicker"], { color: selectedThemeColor.color, colors: availableColors.map(function (color) { return color.color; }), onChangeComplete: setThemeColor })),

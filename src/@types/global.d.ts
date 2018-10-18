@@ -83,7 +83,7 @@ declare global {
                     color: string
                 }[]
                 value: string
-                onChange(color: string): void
+                onChange(color: string): any
             }>
             Dashicon(): void
             DatePicker(any: any): void
@@ -141,7 +141,17 @@ declare global {
             SVG(any: any): void
             SandBox: {}
             ScrollLock(): void
-            SelectControl(): void
+            SelectControl(): Component<{
+                label?: string
+                help?: string
+                multiple?: boolean
+                options?: {
+                    label: string
+                    value: string
+                }[]
+                value: string
+                onChange(any: any): any
+            }>
             ServerSideRender(any: any): void
             Slot(): void
             SlotFillProvider(): void
