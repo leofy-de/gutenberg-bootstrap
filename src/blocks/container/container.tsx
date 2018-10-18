@@ -10,12 +10,12 @@ import * as styles from '../../assets/scss/styles.module.scss';
 
 import icons from "../../lib/icons";
 import * as React from 'react';
+import Inspector from "./components/inspector";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
 const {Fragment} = wp.element;
-const {InnerBlocks, InspectorControls} = wp.editor;
-const {PanelBody, PanelRow} = wp.components;
+const {InnerBlocks} = wp.editor;
 const classNames = require('classnames/bind');
 let cx = classNames.bind(styles);
 
@@ -72,31 +72,9 @@ registerBlockType('gbb/container', {
     edit: function (props) {
         const {attributes: {alignment, content, margin}, setAttributes} = props;
 
-        function setMargin(event) {
-            const selected = event.target.querySelector('option:checked');
-            setAttributes({margin: selected.value});
-            event.preventDefault();
-        }
-
         return (
             <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Select options')}>
-                        <PanelRow>
-                            <label>{__('Margin')}</label>
-                            <form onSubmit={setMargin}>
-                                <select value={margin} onChange={setMargin}>
-                                    <option value="my-0">No margin</option>
-                                    <option value="my-1">my-1 - Tiny margin</option>
-                                    <option value="my-2">my-2 - Small margin</option>
-                                    <option value="my-3">my-3 - Middle margin</option>
-                                    <option value="my-4">my-4 - Large margin</option>
-                                    <option value="my-5">my-5 - Hugh margin</option>
-                                </select>
-                            </form>
-                        </PanelRow>
-                    </PanelBody>
-                </InspectorControls>
+                <Inspector {...props} />
                 <div className={`${props.className} ${cx(margin)}`} style={{textAlign: alignment}}>
                     <InnerBlocks/>
                 </div>

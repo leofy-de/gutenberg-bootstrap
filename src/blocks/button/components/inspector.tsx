@@ -4,6 +4,8 @@
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
 import {GutenbergBlockProps} from "../../../@types/global";
+import ThemePicker from "../../../lib/inspector/themePicker";
+import MarginPicker from "../../../lib/inspector/marginPicker";
 
 // Setup the block
 const {__} = wp.i18n;
@@ -12,7 +14,6 @@ const {Component} = wp.element;
 // Import block components
 const {
     InspectorControls,
-    PanelColorSettings,
 } = wp.editor;
 
 // Import Inspector components
@@ -35,30 +36,6 @@ export default class Inspector extends React.Component<GutenbergBlockProps, {}> 
         // Setup the attributes
         const {attributes: {isBlockWidth, isOutline, margin, size, theme}, setAttributes} = this.props;
 
-        // Theme color settings
-        const availableColors = [
-            {'name': 'primary', color: '#007bff'},
-            {'name': 'secondary', color: '#6c757d'},
-            {'name': 'success', color: '#28a745'},
-            {'name': 'info', color: '#17a2b8'},
-            {'name': 'warning', color: '#ffc107'},
-            {'name': 'danger', color: '#dc3545'},
-            {'name': 'light', color: '#f8f9fa'},
-            {'name': 'dark', color: '#343a40'},
-        ];
-        const selectedThemeColor = availableColors.find(c => c.name === theme) ||  {color: '#007bff', name: 'primary'};
-        function setThemeColor(color: {
-            hex: string
-            hsl: any
-            hsv: any
-            oldHue: any
-            rgb: any
-            source: "hex" | "hsl" | "hsv" | "rbg"
-        }) {
-            const selectedTheme = availableColors.find(c => c.color === color.hex) || {color: '#007bff', name: 'primary'};
-            setAttributes({theme: selectedTheme.name});
-        }
-
         // Margin options
         const marginOptions = [
             { value: 'my-0', label: __( 'No margin' ) },
@@ -72,20 +49,8 @@ export default class Inspector extends React.Component<GutenbergBlockProps, {}> 
         return (
             <InspectorControls key="inspector">
                 <PanelBody title={__('Select options')}>
-                    <SelectControl
-                        label={ __( 'Margin (top & bottom)' ) }
-                        value={ margin }
-                        options={ marginOptions }
-                        onChange={ margin => setAttributes( { margin } ) }
-                    />
-                    <PanelRow>
-                        <label>{__('Color')}</label>
-                        <CirclePicker
-                            color={ selectedThemeColor.color }
-                            colors={ availableColors.map(color => color.color) }
-                            onChangeComplete={ setThemeColor }
-                        />
-                    </PanelRow>
+
+                    <ThemePicker theme={theme} setAttributes={setAttributes}/>
                     <PanelRow>
                         <label>{__('Style')}</label>
                         <ButtonGroup>
@@ -111,6 +76,8 @@ export default class Inspector extends React.Component<GutenbergBlockProps, {}> 
                             }}>Large</Button>
                         </ButtonGroup>
                     </PanelRow>
+
+                    <MarginPicker margin={margin} setAttributes={setAttributes}/>
                 </PanelBody>
             </InspectorControls>
         );

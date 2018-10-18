@@ -15775,21 +15775,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/accordion/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //  Import CSS.
+
 
 
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
 var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
+var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, RichText = _a.RichText;
 var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
 var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
 var attributes = {
@@ -15886,11 +15898,6 @@ registerBlockType('gbb/accordion', {
             setAttributes({ margin: selected.value });
             event.preventDefault();
         }
-        function setTheme(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ theme: selected.value });
-            event.preventDefault();
-        }
         function addCard() {
             var card = {
                 title: "Collapsible Group Item #" + (content.length + 1),
@@ -15914,30 +15921,7 @@ registerBlockType('gbb/accordion', {
             setAttributes({ content: newContent });
         }
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Theme')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setTheme, style: { textAlign: alignment } },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: theme, onChange: setTheme },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "primary" }, "Primary"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "secondary" }, "Secondary"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "success" }, "Success"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "danger" }, "Danger"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "warning" }, "Warning"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "info" }, "Info"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "light" }, "Light"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "dark" }, "Dark")))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (newAlignment) {
                         setAttributes({ alignment: newAlignment });
@@ -15986,6 +15970,68 @@ registerBlockType('gbb/accordion', {
 
 /***/ }),
 
+/***/ "./src/blocks/accordion/components/inspector.tsx":
+/*!*******************************************************!*\
+  !*** ./src/blocks/accordion/components/inspector.tsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/themePicker */ "./src/lib/inspector/themePicker.tsx");
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+
+// Setup the block
+var __ = wp.i18n.__;
+var Component = wp.element.Component;
+// Import block components
+var InspectorControls = wp.editor.InspectorControls;
+// Import Inspector components
+var _a = wp.components, Button = _a.Button, ButtonGroup = _a.ButtonGroup, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__["default"], { theme: theme, setAttributes: setAttributes }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes }))));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
+
+
+/***/ }),
+
 /***/ "./src/blocks/alert/alert.tsx":
 /*!************************************!*\
   !*** ./src/blocks/alert/alert.tsx ***!
@@ -16001,6 +16047,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/alert/components/inspector.tsx");
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -16021,6 +16068,7 @@ var __assign = (undefined && undefined.__assign) || function () {
 //  Import CSS.
 
 // Import JS.
+
 
 
 
@@ -16111,48 +16159,8 @@ registerBlockType('gbb/alert', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, isDismissable = _a.isDismissable, margin = _a.margin, title = _a.title, theme = _a.theme, setAttributes = props.setAttributes;
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
-        function setTheme(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ theme: selected.value });
-            event.preventDefault();
-        }
-        function showThemeForm() {
-            return (react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("form", { onSubmit: setTheme, style: { textAlign: alignment } },
-                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("select", { value: theme, onChange: setTheme },
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "primary" }, "Primary"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "secondary" }, "Secondary"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "success" }, "Success"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "danger" }, "Danger"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "warning" }, "Warning"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "info" }, "Info"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "light" }, "Light"),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "dark" }, "Dark"))));
-        }
         return (react__WEBPACK_IMPORTED_MODULE_3__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_3__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_3__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("label", null, __('Theme')),
-                        showThemeForm()),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_3__["createElement"](CheckboxControl, { label: __('Is dismissable?'), help: __('Can the user hide the alert by clicking a X button on the top right.'), checked: isDismissable, onChange: function (isDismissable) {
-                                setAttributes({ isDismissable: isDismissable });
-                            } })))),
+            react__WEBPACK_IMPORTED_MODULE_3__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], __assign({}, props)),
             react__WEBPACK_IMPORTED_MODULE_3__["createElement"](BlockControls, null,
                 react__WEBPACK_IMPORTED_MODULE_3__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
                         setAttributes({ alignment: alignment });
@@ -16194,6 +16202,74 @@ registerBlockType('gbb/alert', {
 
 /***/ }),
 
+/***/ "./src/blocks/alert/components/inspector.tsx":
+/*!***************************************************!*\
+  !*** ./src/blocks/alert/components/inspector.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/themePicker */ "./src/lib/inspector/themePicker.tsx");
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+
+// Setup the block
+var __ = wp.i18n.__;
+var Component = wp.element.Component;
+// Import block components
+var InspectorControls = wp.editor.InspectorControls;
+// Import Inspector components
+var _a = wp.components, Button = _a.Button, ButtonGroup = _a.ButtonGroup, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, _b = _a.attributes, isDismissable = _b.isDismissable, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__["default"], { theme: theme, setAttributes: setAttributes }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Options')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](ButtonGroup, null,
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: isDismissable, onClick: function () {
+                                setAttributes({ isDismissable: !isDismissable });
+                            } }, __('Is dismissible')))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes }))));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
+
+
+/***/ }),
+
 /***/ "./src/blocks/blockquote/blockquote.tsx":
 /*!**********************************************!*\
   !*** ./src/blocks/blockquote/blockquote.tsx ***!
@@ -16208,21 +16284,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/blockquote/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //  Import CSS.
+
 
 
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
 var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, RichText = _b.RichText, InspectorControls = _b.InspectorControls;
+var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, RichText = _a.RichText;
 var attributes = {
     textColor: {
         source: 'string',
@@ -16278,24 +16366,8 @@ registerBlockType('gbb/blockquote', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, margin = _a.margin, quote = _a.quote, source = _a.source, setAttributes = props.setAttributes;
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
                         setAttributes({ alignment: alignment });
@@ -16326,6 +16398,61 @@ registerBlockType('gbb/blockquote', {
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "gbb-blockquote-footer " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote-footer"], format: "string", tagName: "footer", value: source }))));
     },
 });
+
+
+/***/ }),
+
+/***/ "./src/blocks/blockquote/components/inspector.tsx":
+/*!********************************************************!*\
+  !*** ./src/blocks/blockquote/components/inspector.tsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+// Setup the block
+var __ = wp.i18n.__;
+// Import block components
+var InspectorControls = wp.editor.InspectorControls;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes })));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
 
 
 /***/ }),
@@ -16512,8 +16639,8 @@ registerBlockType('gbb/button', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-color */ "./node_modules/react-color/lib/index.js");
-/* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_color__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/themePicker */ "./src/lib/inspector/themePicker.tsx");
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -16532,13 +16659,14 @@ var __extends = (undefined && undefined.__extends) || (function () {
  */
 
 
+
 // Setup the block
 var __ = wp.i18n.__;
 var Component = wp.element.Component;
 // Import block components
-var _a = wp.editor, InspectorControls = _a.InspectorControls, PanelColorSettings = _a.PanelColorSettings;
+var InspectorControls = wp.editor.InspectorControls;
 // Import Inspector components
-var _b = wp.components, Button = _b.Button, ButtonGroup = _b.ButtonGroup, PanelBody = _b.PanelBody, PanelRow = _b.PanelRow, SelectControl = _b.SelectControl;
+var _a = wp.components, Button = _a.Button, ButtonGroup = _a.ButtonGroup, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow, SelectControl = _a.SelectControl;
 /**
  * Create an Inspector Controls wrapper Component
  */
@@ -16550,22 +16678,6 @@ var Inspector = /** @class */ (function (_super) {
     Inspector.prototype.render = function () {
         // Setup the attributes
         var _a = this.props, _b = _a.attributes, isBlockWidth = _b.isBlockWidth, isOutline = _b.isOutline, margin = _b.margin, size = _b.size, theme = _b.theme, setAttributes = _a.setAttributes;
-        // Theme color settings
-        var availableColors = [
-            { 'name': 'primary', color: '#007bff' },
-            { 'name': 'secondary', color: '#6c757d' },
-            { 'name': 'success', color: '#28a745' },
-            { 'name': 'info', color: '#17a2b8' },
-            { 'name': 'warning', color: '#ffc107' },
-            { 'name': 'danger', color: '#dc3545' },
-            { 'name': 'light', color: '#f8f9fa' },
-            { 'name': 'dark', color: '#343a40' },
-        ];
-        var selectedThemeColor = availableColors.find(function (c) { return c.name === theme; }) || { color: '#007bff', name: 'primary' };
-        function setThemeColor(color) {
-            var selectedTheme = availableColors.find(function (c) { return c.color === color.hex; }) || { color: '#007bff', name: 'primary' };
-            setAttributes({ theme: selectedTheme.name });
-        }
         // Margin options
         var marginOptions = [
             { value: 'my-0', label: __('No margin') },
@@ -16577,10 +16689,7 @@ var Inspector = /** @class */ (function (_super) {
         ];
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
             react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](SelectControl, { label: __('Margin (top & bottom)'), value: margin, options: marginOptions, onChange: function (margin) { return setAttributes({ margin: margin }); } }),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
-                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Color')),
-                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_color__WEBPACK_IMPORTED_MODULE_1__["CirclePicker"], { color: selectedThemeColor.color, colors: availableColors.map(function (color) { return color.color; }), onChangeComplete: setThemeColor })),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__["default"], { theme: theme, setAttributes: setAttributes }),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
                     react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Style')),
                     react__WEBPACK_IMPORTED_MODULE_0__["createElement"](ButtonGroup, null,
@@ -16601,7 +16710,63 @@ var Inspector = /** @class */ (function (_super) {
                             } }, "Default"),
                         react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: size === 'lg', onClick: function () {
                                 setAttributes({ size: 'lg' });
-                            } }, "Large"))))));
+                            } }, "Large"))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes }))));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
+
+
+/***/ }),
+
+/***/ "./src/blocks/container/components/inspector.tsx":
+/*!*******************************************************!*\
+  !*** ./src/blocks/container/components/inspector.tsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+// Setup the block
+var __ = wp.i18n.__;
+// Import block components
+var InspectorControls = wp.editor.InspectorControls;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes })));
     };
     return Inspector;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
@@ -16624,21 +16789,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/container/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //  Import CSS.
+
 
 
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
 var Fragment = wp.element.Fragment;
-var _a = wp.editor, InnerBlocks = _a.InnerBlocks, InspectorControls = _a.InspectorControls;
-var _b = wp.components, PanelBody = _b.PanelBody, PanelRow = _b.PanelRow;
+var InnerBlocks = wp.editor.InnerBlocks;
 var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
 var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
 var attributes = {
@@ -16690,24 +16867,8 @@ registerBlockType('gbb/container', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, setAttributes = props.setAttributes;
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className + " " + cx(margin), style: { textAlign: alignment } },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InnerBlocks, null))));
     },
@@ -16730,6 +16891,61 @@ registerBlockType('gbb/container', {
 
 /***/ }),
 
+/***/ "./src/blocks/media/components/inspector.tsx":
+/*!***************************************************!*\
+  !*** ./src/blocks/media/components/inspector.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+// Setup the block
+var __ = wp.i18n.__;
+// Import block components
+var InspectorControls = wp.editor.InspectorControls;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes })));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
+
+
+/***/ }),
+
 /***/ "./src/blocks/media/media.tsx":
 /*!************************************!*\
   !*** ./src/blocks/media/media.tsx ***!
@@ -16741,24 +16957,36 @@ registerBlockType('gbb/container', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
 /* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/media/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //  Import CSS.
+
 
 
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
 var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, InspectorControls = _b.InspectorControls, MediaUpload = _b.MediaUpload, RichText = _b.RichText;
+var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, MediaUpload = _a.MediaUpload, RichText = _a.RichText;
 var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
 var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
 var attributes = {
@@ -16803,7 +17031,7 @@ registerBlockType('gbb/media', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('Bootstrap Media Object'),
     description: __('media object to construct highly repetitive components like blog comments, tweets, and the like.'),
-    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_1__["default"].media,
+    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_2__["default"].media,
     category: 'gbb',
     keywords: [
         __('Bootstrap'),
@@ -16821,51 +17049,35 @@ registerBlockType('gbb/media', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, imageId = _a.imageId, imageUrl = _a.imageUrl, margin = _a.margin, title = _a.title, setAttributes = props.setAttributes;
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))))),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](BlockControls, null,
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
                         setAttributes({ alignment: alignment });
                     } })),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('media', margin), style: {
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: props.className },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: cx('media', margin), style: {
                         textAlign: alignment
                     } },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](MediaUpload, { buttonProps: {
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](MediaUpload, { buttonProps: {
                             className: 'change-image'
                         }, onSelect: function (img) { return setAttributes({
                             imageId: img.id,
                             imageUrl: img.url,
                         }); }, type: "image", value: imageId, render: function (_a) {
                             var open = _a.open;
-                            return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx("media-image", "mr-3"), onClick: open }, !imageId ?
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "btn btn-secondary" },
-                                    _lib_icons__WEBPACK_IMPORTED_MODULE_1__["default"].upload,
+                            return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: cx("media-image", "mr-3"), onClick: open }, !imageId ?
+                                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "btn btn-secondary" },
+                                    _lib_icons__WEBPACK_IMPORTED_MODULE_2__["default"].upload,
                                     " ",
                                     __('Upload image')) :
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("img", { src: imageUrl })));
+                                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { src: imageUrl })));
                         } }),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx("media-body") },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: cx("media-heading", "mt-0"), multiline: "p", tagName: "h5", onChange: function (title) {
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: cx("media-body") },
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](RichText, { className: cx("media-heading", "mt-0"), multiline: "p", tagName: "h5", onChange: function (title) {
                                 setAttributes({ title: title });
                             }, value: title }),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: cx("content"), tagName: "div", onChange: function (content) {
+                        react__WEBPACK_IMPORTED_MODULE_1__["createElement"](RichText, { className: cx("content"), tagName: "div", onChange: function (content) {
                                 setAttributes({ content: content });
                             }, value: content }))))));
     },
@@ -16880,15 +17092,88 @@ registerBlockType('gbb/media', {
     save: function (props) {
         // Initialize theme
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, imageId = _a.imageId, imageUrl = _a.imageUrl, margin = _a.margin, title = _a.title;
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('media', margin), style: { textAlign: alignment } },
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", null,
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: cx('media', margin), style: { textAlign: alignment } },
                 imageId &&
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("img", { src: imageUrl, className: cx("media-image", "mr-3") }),
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "media-body" },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: cx("media-heading", "mt-0"), tagName: "h5", value: title }),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: cx("content"), tagName: "div", value: content })))));
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("img", { src: imageUrl, className: cx("media-image", "mr-3") }),
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", { className: "media-body" },
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](RichText.Content, { className: cx("media-heading", "mt-0"), tagName: "h5", value: title }),
+                    react__WEBPACK_IMPORTED_MODULE_1__["createElement"](RichText.Content, { className: cx("content"), tagName: "div", value: content })))));
     },
 });
+
+
+/***/ }),
+
+/***/ "./src/blocks/type/components/inspector.tsx":
+/*!**************************************************!*\
+  !*** ./src/blocks/type/components/inspector.tsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+// Setup the block
+var __ = wp.i18n.__;
+// Import block components
+var _a = wp.components, Button = _a.Button, ButtonGroup = _a.ButtonGroup, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+var InspectorControls = wp.editor.InspectorControls;
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var Inspector = /** @class */ (function (_super) {
+    __extends(Inspector, _super);
+    function Inspector() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inspector.prototype.render = function () {
+        var _a = this.props, _b = _a.attributes, margin = _b.margin, type = _b.type, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Size') },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](ButtonGroup, null,
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: type === 'display-1', onClick: function () {
+                                setAttributes({ type: 'display-1' });
+                            } }, "Display 1"),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: type === 'display-2', onClick: function () {
+                                setAttributes({ type: 'display-2' });
+                            } }, "Display 2"),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: type === 'display-3', onClick: function () {
+                                setAttributes({ type: 'display-3' });
+                            } }, "Display 3"),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: type === 'display-4', onClick: function () {
+                                setAttributes({ type: 'display-4' });
+                            } }, "Display 4"),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: type === 'lead', onClick: function () {
+                                setAttributes({ type: 'lead' });
+                            } }, "Lead"))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes }))));
+    };
+    return Inspector;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
 
 
 /***/ }),
@@ -16907,21 +17192,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/type/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //  Import CSS.
+
 
 
 
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-var _a = wp.components, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
 var Fragment = wp.element.Fragment;
-var _b = wp.editor, AlignmentToolbar = _b.AlignmentToolbar, BlockControls = _b.BlockControls, InspectorControls = _b.InspectorControls, RichText = _b.RichText;
+var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, RichText = _a.RichText;
 var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
 var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
 var attributes = {
@@ -16977,16 +17274,6 @@ registerBlockType('gbb/type', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, type = _a.type, setAttributes = props.setAttributes;
-        function setMargin(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ margin: selected.value });
-            event.preventDefault();
-        }
-        function setType(event) {
-            var selected = event.target.querySelector('option:checked');
-            setAttributes({ type: selected.value });
-            event.preventDefault();
-        }
         function onChangeAlignment(newAlignment) {
             setAttributes({ alignment: newAlignment });
         }
@@ -16994,27 +17281,7 @@ registerBlockType('gbb/type', {
             setAttributes({ content: newContent });
         }
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InspectorControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelBody, { title: __('Select options') },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Margin')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setMargin },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: margin, onChange: setMargin },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-0" }, "No margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-1" }, "my-1 - Tiny margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-2" }, "my-2 - Small margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-3" }, "my-3 - Middle margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-4" }, "my-4 - Large margin"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "my-5" }, "my-5 - Hugh margin")))),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](PanelRow, null,
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("label", null, __('Theme')),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("form", { onSubmit: setType },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("select", { value: type, onChange: setType },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "display-1" }, "Display 1"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "display-2" }, "Display 2"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "display-3" }, "Display 3"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "display-4" }, "Display 4"),
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("option", { value: "lead" }, "Lead")))))),
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: onChangeAlignment })),
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className, style: { textAlign: alignment } },
@@ -17077,6 +17344,182 @@ icons.upload = react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("svg", { widt
     react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", { d: 'm28.047 52.992c-3.168 0-5.7422-2.5742-5.7422-5.7461 0-3.1758 2.5742-5.75 5.7422-5.75 3.1797 0 5.7539 2.5742 5.7539 5.75 0 3.1719-2.5742 5.7461-5.7539 5.7461z' }),
     react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", { d: 'm84.043 30.492v22.02h-12.059l-0.015625-22.02h-15.852l21.941-21.945 21.941 21.945z' }));
 /* harmony default export */ __webpack_exports__["default"] = (icons);
+
+
+/***/ }),
+
+/***/ "./src/lib/inspector/marginPicker.tsx":
+/*!********************************************!*\
+  !*** ./src/lib/inspector/marginPicker.tsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+// Setup the block
+var __ = wp.i18n.__;
+var Component = wp.element.Component;
+// Import Inspector components
+var _a = wp.components, ButtonGroup = _a.ButtonGroup, Button = _a.Button, PanelBody = _a.PanelBody, PanelRow = _a.PanelRow;
+// Margin options
+var marginOptions = [
+    { value: 'my-0', label: __('No margin') },
+    { value: 'my-1', label: __('my-1 - Tiny margin') },
+    { value: 'my-2', label: __('my-2 - Small margin') },
+    { value: 'my-3', label: __('my-3 - Middle margin') },
+    { value: 'my-4', label: __('my-4 - Large margin') },
+    { value: 'my-5', label: __('my-5 - Hugh margin') },
+];
+var MarginList;
+(function (MarginList) {
+    MarginList["none"] = "my-0";
+    MarginList["xs"] = "my-1";
+    MarginList["sm"] = "my-2";
+    MarginList["md"] = "my-3";
+    MarginList["lg"] = "my-4";
+    MarginList["xl"] = "my-5";
+})(MarginList || (MarginList = {}));
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var MarginPicker = /** @class */ (function (_super) {
+    __extends(MarginPicker, _super);
+    function MarginPicker() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    MarginPicker.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, margin = _a.margin, setAttributes = _a.setAttributes;
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Margin top & bottom') },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](ButtonGroup, null,
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-0', onClick: function () {
+                            setAttributes({ margin: 'my-0' });
+                        } }, __('None')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-1', onClick: function () {
+                            setAttributes({ margin: 'my-1' });
+                        } }, __('xs')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-2', onClick: function () {
+                            setAttributes({ margin: 'my-2' });
+                        } }, __('sm')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-3', onClick: function () {
+                            setAttributes({ margin: 'my-3' });
+                        } }, __('md')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-4', onClick: function () {
+                            setAttributes({ margin: 'my-4' });
+                        } }, __('lg')),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: margin === 'my-5', onClick: function () {
+                            setAttributes({ margin: 'my-5' });
+                        } }, __('xl'))))));
+    };
+    return MarginPicker;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (MarginPicker);
+
+
+/***/ }),
+
+/***/ "./src/lib/inspector/themePicker.tsx":
+/*!*******************************************!*\
+  !*** ./src/lib/inspector/themePicker.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-color */ "./node_modules/react-color/lib/index.js");
+/* harmony import */ var react_color__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_color__WEBPACK_IMPORTED_MODULE_1__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * Inspector Controls
+ */
+
+
+// Setup the block
+var __ = wp.i18n.__;
+var Component = wp.element.Component;
+// Import Inspector components
+var PanelRow = wp.components.PanelRow;
+var AvailableColorList;
+(function (AvailableColorList) {
+    AvailableColorList["primary"] = "primary";
+    AvailableColorList["secondary"] = "secondary";
+    AvailableColorList["success"] = "success";
+    AvailableColorList["info"] = "info";
+    AvailableColorList["warning"] = "warning";
+    AvailableColorList["danger"] = "danger";
+    AvailableColorList["light"] = "light";
+    AvailableColorList["dark"] = "dark";
+})(AvailableColorList || (AvailableColorList = {}));
+// Theme color settings
+var availableColors = [
+    { 'name': 'primary', color: '#007bff' },
+    { 'name': 'secondary', color: '#6c757d' },
+    { 'name': 'success', color: '#28a745' },
+    { 'name': 'info', color: '#17a2b8' },
+    { 'name': 'warning', color: '#ffc107' },
+    { 'name': 'danger', color: '#dc3545' },
+    { 'name': 'light', color: '#f8f9fa' },
+    { 'name': 'dark', color: '#343a40' },
+];
+/**
+ * Create an Inspector Controls wrapper Component
+ */
+var ThemePicker = /** @class */ (function (_super) {
+    __extends(ThemePicker, _super);
+    function ThemePicker() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ThemePicker.prototype.render = function () {
+        // Setup the attributes
+        var _a = this.props, theme = _a.theme, setAttributes = _a.setAttributes;
+        var selectedThemeColor = availableColors.find(function (c) { return c.name === theme; }) || { color: '#007bff', name: 'primary' };
+        function setThemeColor(color) {
+            var selectedTheme = availableColors.find(function (c) { return c.color === color.hex; }) || { color: '#007bff', name: 'primary' };
+            setAttributes({ theme: selectedTheme.name });
+        }
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Color')),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_color__WEBPACK_IMPORTED_MODULE_1__["CirclePicker"], { color: selectedThemeColor.color, colors: availableColors.map(function (color) { return color.color; }), onChangeComplete: setThemeColor })));
+    };
+    return ThemePicker;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+/* harmony default export */ __webpack_exports__["default"] = (ThemePicker);
 
 
 /***/ }),

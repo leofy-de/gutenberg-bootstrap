@@ -9,12 +9,12 @@
 import * as styles from '../../assets/scss/styles.module.scss';
 import icons from "../../lib/icons";
 import * as React from 'react';
+import Inspector from "./components/inspector";
 
 const {__} = wp.i18n; // Import __() from wp.i18n
 const {registerBlockType} = wp.blocks; // Import registerBlockType() from wp.blocks
-const {PanelBody, PanelRow} = wp.components;
 const {Fragment} = wp.element;
-const {AlignmentToolbar, BlockControls, RichText, InspectorControls} = wp.editor;
+const {AlignmentToolbar, BlockControls, RichText} = wp.editor;
 
 const attributes = {
     textColor: {
@@ -74,31 +74,9 @@ registerBlockType('gbb/blockquote', {
     edit: function (props) {
         const {attributes: {alignment, margin, quote, source}, setAttributes} = props;
 
-        function setMargin(event) {
-            const selected = event.target.querySelector('option:checked');
-            setAttributes({margin: selected.value});
-            event.preventDefault();
-        }
-
         return (
             <Fragment>
-                <InspectorControls>
-                    <PanelBody title={__('Select options')}>
-                        <PanelRow>
-                            <label>{__('Margin')}</label>
-                            <form onSubmit={setMargin}>
-                                <select value={margin} onChange={setMargin}>
-                                    <option value="my-0">No margin</option>
-                                    <option value="my-1">my-1 - Tiny margin</option>
-                                    <option value="my-2">my-2 - Small margin</option>
-                                    <option value="my-3">my-3 - Middle margin</option>
-                                    <option value="my-4">my-4 - Large margin</option>
-                                    <option value="my-5">my-5 - Hugh margin</option>
-                                </select>
-                            </form>
-                        </PanelRow>
-                    </PanelBody>
-                </InspectorControls>
+                <Inspector {...props} />
                 <BlockControls>
                     <AlignmentToolbar
                         value={alignment}
