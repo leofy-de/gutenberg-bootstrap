@@ -16097,7 +16097,7 @@ var blockAttributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content',
+        selector: 'div.gbb-alert-content',
     },
     isDismissable: {
         type: 'boolean',
@@ -16170,7 +16170,7 @@ registerBlockType('gbb/alert', {
                     react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText, { className: "gbb-alert-heading " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["alertHeading"], tagName: "h4", onChange: function (title) {
                             setAttributes({ title: title });
                         }, keepPlaceholderOnFocus: true, placeholder: __('Enter an optional title here...'), value: title }),
-                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText, { tagName: "div", onChange: function (content) {
+                    react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText, { className: "gbb-alert-content", tagName: "div", onChange: function (content) {
                             setAttributes({ content: content });
                         }, keepPlaceholderOnFocus: true, placeholder: __('Enter any text message here...'), value: content }),
                     isDismissable &&
@@ -16192,7 +16192,7 @@ registerBlockType('gbb/alert', {
         return (react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("div", null,
             react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["alert"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["alert-" + theme] + " alert alert-dismissible fade show " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], role: "alert", style: { textAlign: alignment } },
                 titleAvailable && react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText.Content, { className: "gbb-alert-heading " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["alertHeading"], tagName: "h4", value: title }),
-                react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText.Content, { tagName: "div", value: content }),
+                react__WEBPACK_IMPORTED_MODULE_3__["createElement"](RichText.Content, { className: "gbb-alert-content", tagName: "div", value: content }),
                 isDismissable &&
                     react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("button", { type: "button", className: "close", "data-dismiss": "alert", "aria-label": "Close" },
                         react__WEBPACK_IMPORTED_MODULE_3__["createElement"]("span", { "aria-hidden": "true" }, "\u00D7")))));
@@ -16253,15 +16253,14 @@ var Inspector = /** @class */ (function (_super) {
         // Setup the attributes
         var _a = this.props, _b = _a.attributes, isDismissable = _b.isDismissable, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Alert options') },
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__["default"], { theme: theme, setAttributes: setAttributes }),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelRow, null,
-                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("label", null, __('Options')),
                     react__WEBPACK_IMPORTED_MODULE_0__["createElement"](ButtonGroup, null,
                         react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Button, { isLarge: true, isPrimary: isDismissable, onClick: function () {
                                 setAttributes({ isDismissable: !isDismissable });
-                            } }, __('Is dismissible')))),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes }))));
+                            } }, __('Is dismissible'))))),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes })));
     };
     return Inspector;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
@@ -16825,7 +16824,7 @@ var attributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content'
+        selector: 'div.gbb-container'
     },
     margin: {
         type: 'string',
@@ -16869,7 +16868,7 @@ registerBlockType('gbb/container', {
         var _a = props.attributes, alignment = _a.alignment, content = _a.content, margin = _a.margin, setAttributes = props.setAttributes;
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
             react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className + " " + cx(margin), style: { textAlign: alignment } },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className + " " + cx(margin) + " gbb-container", style: { textAlign: alignment } },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InnerBlocks, null))));
     },
     /**
@@ -16883,7 +16882,7 @@ registerBlockType('gbb/container', {
     save: function (props) {
         var _a = props.attributes, alignment = _a.alignment, margin = _a.margin;
         return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx(margin), style: { textAlign: alignment } },
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "" + cx('container') },
+            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('container') + " gbb-container" },
                 react__WEBPACK_IMPORTED_MODULE_2__["createElement"](InnerBlocks.Content, null))));
     },
 });

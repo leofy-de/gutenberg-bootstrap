@@ -26,7 +26,7 @@ const attributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content'
+        selector: 'div.gbb-container'
     },
     margin: {
         type: 'string',
@@ -75,7 +75,7 @@ registerBlockType('gbb/container', {
         return (
             <Fragment>
                 <Inspector {...props} />
-                <div className={`${props.className} ${cx(margin)}`} style={{textAlign: alignment}}>
+                <div className={`${props.className} ${cx(margin)} gbb-container`} style={{textAlign: alignment}}>
                     <InnerBlocks/>
                 </div>
             </Fragment>
@@ -95,7 +95,7 @@ registerBlockType('gbb/container', {
 
         return (
             <div className={cx(margin)} style={{textAlign: alignment}}>
-                <div className={`${cx('container')}`}>
+                <div className={`${cx('container')} gbb-container`}>
                     <InnerBlocks.Content/>
                 </div>
             </div>

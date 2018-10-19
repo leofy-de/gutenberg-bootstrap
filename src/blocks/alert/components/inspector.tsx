@@ -37,22 +37,20 @@ export default class Inspector extends React.Component<GutenbergBlockProps, {}> 
 
         return (
 			<InspectorControls key="inspector">
-				<PanelBody title={__('Select options')}>
-
+				<PanelBody title={__('Alert options')}>
 
 					<ThemePicker theme={theme} setAttributes={setAttributes}/>
 
                     <PanelRow>
-                        <label>{__('Options')}</label>
                         <ButtonGroup>
                             <Button isLarge isPrimary={isDismissable} onClick={() => {
                                 setAttributes({isDismissable: !isDismissable})
                             }}>{__('Is dismissible')}</Button>
                         </ButtonGroup>
                     </PanelRow>
-
-                    <MarginPicker margin={margin} setAttributes={setAttributes}/>
 				</PanelBody>
+
+                <MarginPicker margin={margin} setAttributes={setAttributes}/>
 			</InspectorControls>
         );
     }

@@ -4,6 +4,7 @@
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
 import {GutenbergBlockProps} from "../../@types/global";
+import * as styles from '../../assets/scss/styles.module.scss';
 
 // Setup the block
 const {__} = wp.i18n;

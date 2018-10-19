@@ -43,7 +43,7 @@ const blockAttributes = {
     content: {
         type: 'array',
         source: 'children',
-        selector: 'div.content',
+        selector: 'div.gbb-alert-content',
     },
     isDismissable: {
         type: 'boolean',
@@ -142,6 +142,7 @@ registerBlockType('gbb/alert', {
                             value={title}
                         />
                         <RichText
+                            className={`gbb-alert-content`}
                             tagName="div"
                             onChange={(content) => {
                                 setAttributes({content})
@@ -191,6 +192,7 @@ registerBlockType('gbb/alert', {
 						/>
                     }
                     <RichText.Content
+                        className={`gbb-alert-content`}
                         tagName="div"
                         value={content}
                     />
