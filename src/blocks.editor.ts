@@ -16,6 +16,7 @@ import './blocks/accordion/accordion';
 import './blocks/alert/alert';
 import './blocks/blockquote/blockquote';
 import './blocks/button/button';
+import './blocks/carousel/carousel';
 import './blocks/container/container';
 import './blocks/media/media';
 //import './block/modal';
