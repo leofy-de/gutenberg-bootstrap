@@ -4,8 +4,8 @@
 import * as React from 'react';
 import { CirclePicker } from 'react-color';
 import {GutenbergBlockProps} from "../../../@types/global";
-import ThemePicker from "../../../lib/inspector/themePicker";
 import MarginPicker from "../../../lib/inspector/marginPicker";
+import ThemePicker from "../../../lib/inspector/themePicker";
 
 // Setup the block
 const {__} = wp.i18n;
@@ -30,7 +30,7 @@ const {
 export default class Inspector extends React.Component<GutenbergBlockProps, {}> {
 
 
-    render() {
+    public render() {
 
         // Setup the attributes
         const {attributes: {margin, theme}, setAttributes} = this.props;

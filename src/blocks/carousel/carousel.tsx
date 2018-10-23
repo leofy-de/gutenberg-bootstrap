@@ -69,11 +69,11 @@ const attributes = {
 	},
 	margin: {
 		default: "my-3",
-		type: "string",
+		type: "string"
 	},
 	theme: {
 		default: "light",
-		type: "string",
+		type: "string"
 	}
 };
 

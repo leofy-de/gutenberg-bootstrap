@@ -16811,11 +16811,11 @@ var attributes = {
     },
     margin: {
         default: "my-3",
-        type: "string",
+        type: "string"
     },
     theme: {
         default: "light",
-        type: "string",
+        type: "string"
     }
 };
 /**
@@ -16944,8 +16944,8 @@ registerBlockType("gbb/carousel", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/themePicker */ "./src/lib/inspector/themePicker.tsx");
-/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+/* harmony import */ var _lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/inspector/marginPicker */ "./src/lib/inspector/marginPicker.tsx");
+/* harmony import */ var _lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/inspector/themePicker */ "./src/lib/inspector/themePicker.tsx");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -16985,8 +16985,8 @@ var Inspector = /** @class */ (function (_super) {
         var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
             react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_1__["default"], { theme: theme, setAttributes: setAttributes }),
-                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_2__["default"], { margin: margin, setAttributes: setAttributes }))));
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_2__["default"], { theme: theme, setAttributes: setAttributes }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes }))));
     };
     return Inspector;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]));
