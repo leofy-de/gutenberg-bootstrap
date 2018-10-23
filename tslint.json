@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    // override tslint-react rules here
+    "jsx-no-lambda": false,
+    "prettier": true
+  }
+}

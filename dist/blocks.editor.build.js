@@ -15749,7 +15749,7 @@ __webpack_require__.r(__webpack_exports__);
  * Webpack is compiling as the input file.
  */
 // Import bootstrap dependencies
-//import '../node_modules/bootstrap/js/src/util';
+// import '../node_modules/bootstrap/js/src/util';
 
 
 
@@ -15757,7 +15757,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import './block/modal';
+// import './block/modal';
 
 
 
@@ -16725,12 +16725,14 @@ var Inspector = /** @class */ (function (_super) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
-/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/carousel/components/inspector.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames_bind__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
+/* harmony import */ var classnames_bind__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames_bind__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
+/* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/carousel/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
  *
@@ -16753,61 +16755,61 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 
+
 var __ = wp.i18n.__; // Import __() from wp.i18n
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
 var Fragment = wp.element.Fragment;
 var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, RichText = _a.RichText;
-var classNames = __webpack_require__(/*! classnames/bind */ "./node_modules/classnames/bind.js");
-var cx = classNames.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
+var cx = classnames_bind__WEBPACK_IMPORTED_MODULE_2___default.a.bind(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__);
 var attributes = {
     alignment: {
-        type: 'string',
+        type: "string",
     },
     clientId: {
-        type: 'string'
+        type: "string",
     },
     content: {
-        type: 'array',
-        source: 'query',
         default: [
             {
-                title: 'Slide #1',
-                body: ['Praesent commodo cursus magna, vel scelerisque nisl consectetur.']
+                body: ["Praesent commodo cursus magna, vel scelerisque nisl consectetur."],
+                title: "Slide #1",
             },
             {
-                title: 'Slide #2',
-                body: ['Praesent commodo cursus magna, vel scelerisque nisl consectetur.']
+                body: ["Praesent commodo cursus magna, vel scelerisque nisl consectetur."],
+                title: "Slide #2",
             },
             {
-                title: 'Slide #3',
-                body: ['Praesent commodo cursus magna, vel scelerisque nisl consectetur.']
+                body: ["Praesent commodo cursus magna, vel scelerisque nisl consectetur."],
+                title: "Slide #3",
             },
         ],
-        selector: '.gbb-carousel .gbb-carousel-item',
         query: {
             active: {
-                type: 'boolean',
                 default: false,
-            },
-            title: {
-                type: 'string',
-                source: 'text',
-                selector: '.gbb-carousel-caption h5',
+                type: "boolean",
             },
             body: {
-                type: 'array',
-                selector: '.gbb-carousel-caption-body',
-                source: 'children',
+                selector: ".gbb-carousel-caption-body",
+                source: "children",
+                type: "array",
+            },
+            title: {
+                selector: ".gbb-carousel-caption h5",
+                source: "text",
+                type: "string",
             },
         },
+        selector: ".gbb-carousel .gbb-carousel-item",
+        source: "query",
+        type: "array",
     },
     margin: {
-        type: 'string',
-        default: 'my-3'
+        type: "string",
+        default: "my-3",
     },
     theme: {
-        type: 'string',
-        default: 'light'
+        type: "string",
+        default: "light",
     },
 };
 /**
@@ -16823,16 +16825,16 @@ var attributes = {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('gbb/carousel', {
+registerBlockType("gbb/carousel", {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Bootstrap Carousel'),
-    description: __('A slideshow component for cycling through elements—images or slides of text—like a carousel.'),
-    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_1__["default"].carousel,
-    category: 'gbb',
+    title: __("Bootstrap Carousel"),
+    description: __("A slideshow component for cycling through elements—images or slides of text—like a carousel."),
+    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_3__["default"].carousel,
+    category: "gbb",
     keywords: [
-        __('Bootstrap'),
-        __('Carousel'),
-        __('Slider'),
+        __("Bootstrap"),
+        __("Carousel"),
+        __("Slider"),
     ],
     attributes: attributes,
     /**
@@ -16850,11 +16852,11 @@ registerBlockType('gbb/carousel', {
         var carouselId = "carousel-" + clientId;
         function addSlide() {
             var slide = {
+                body: ["Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."],
                 title: "Collapsible Group Item #" + (content.length + 1),
-                body: ['Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.']
             };
             setAttributes({
-                content: content.concat([slide])
+                content: content.concat([slide]),
             });
         }
         function removeSlide(key) {
@@ -16870,36 +16872,36 @@ registerBlockType('gbb/carousel', {
             newContent[key].title = title;
             setAttributes({ content: newContent });
         }
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (newAlignment) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], __assign({}, props)),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](BlockControls, null,
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (newAlignment) {
                         setAttributes({ alignment: newAlignment });
                     } })),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: carouselId, className: "carousel gbb-carousel " + cx('carousel', 'slide') + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment }, "data-ride": "carousel" },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("ol", { className: cx('carousel-indicators') }, content.map(function (slide, key) { return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("li", { "data-target": "#" + carouselId, "data-slide-to": key, className: "active" }); })),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('carousel-inner') }, content.map(function (slide, key) { return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-carousel-item " + cx('carousel-item', { active: key === 0 }) },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: cx('removeSlide', 'float-right') },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: cx('btn', 'btn-secondary', 'btn-sm'), onClick: function () { return removeSlide(key); } },
-                                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "dashicons dashicons-minus" }),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: props.className },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: carouselId, className: "carousel gbb-carousel " + cx("carousel", "slide") + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__[margin], style: { textAlign: alignment }, "data-ride": "carousel" },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("ol", { className: cx("carousel-indicators") }, content.map(function (slide, key) { return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("li", { key: key, "data-target": "#" + carouselId, "data-slide-to": key, className: "active" }); })),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: cx("carousel-inner") }, content.map(function (slide, key) { return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { key: key, className: "gbb-carousel-item " + cx("carousel-item", { active: key === 0 }) },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: cx("removeSlide", "float-right") },
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { className: cx("btn", "btn-secondary", "btn-sm"), onClick: function () { return removeSlide(key); } },
+                                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: "dashicons dashicons-minus" }),
                                 " ",
-                                __('Remove'))),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("img", { className: cx('d-block', 'w-100'), src: "https://placehold.it/800x400" }),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-carousel-caption " + cx('carousel-caption', 'd-none', 'd-md-block') },
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { tagName: "h5", onChange: function (title) { return onChangeSlideTitle(key, title); }, value: slide.title }),
-                            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: "gbb-carousel-caption-body", tagName: "p", onChange: function (body) { return onChangeSlideBody(key, body); }, value: slide.body }))); })),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("a", { className: cx('carousel-control-prev'), href: "#" + carouselId, role: "button", "data-slide": "prev" },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: cx('carousel-control-prev-icon'), "aria-hidden": "true" }),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "sr-only" }, "Previous")),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("a", { className: cx('carousel-control-next'), href: "#" + carouselId, role: "button", "data-slide": "next" },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: cx('carousel-control-next-icon'), "aria-hidden": "true" }),
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "sr-only" }, "Next"))),
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "addSlide " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["text-center"] },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("button", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["btn-secondary"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mt-3"], onClick: addSlide },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", { className: "dashicons dashicons-plus" }),
+                                __("Remove"))),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("img", { className: cx("d-block", "w-100"), src: "https://placehold.it/800x400" }),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "gbb-carousel-caption " + cx("carousel-caption", "d-none", "d-md-block") },
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText, { tagName: "h5", onChange: function (title) { return onChangeSlideTitle(key, title); }, value: slide.title }),
+                            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText, { className: "gbb-carousel-caption-body", tagName: "p", onChange: function (body) { return onChangeSlideBody(key, body); }, value: slide.body }))); })),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", { className: cx("carousel-control-prev"), href: "#" + carouselId, role: "button", "data-slide": "prev" },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: cx("carousel-control-prev-icon"), "aria-hidden": "true" }),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: "sr-only" }, "Previous")),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", { className: cx("carousel-control-next"), href: "#" + carouselId, role: "button", "data-slide": "next" },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: cx("carousel-control-next-icon"), "aria-hidden": "true" }),
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: "sr-only" }, "Next"))),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "addSlide " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["text-center"] },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["btn"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["btn-secondary"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["mt-3"], onClick: addSlide },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("span", { className: "dashicons dashicons-plus" }),
                         " ",
-                        __('Add'))))));
+                        __("Add"))))));
     },
     /**
      * The save function defines the way in which the different attributes should be combined
@@ -16911,13 +16913,13 @@ registerBlockType('gbb/carousel', {
      */
     save: function (props) {
         var _a = props.attributes, alignment = _a.alignment, clientId = _a.clientId, content = _a.content, margin = _a.margin, theme = _a.theme;
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-carousel " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["carousel"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } }, content.map(function (slide, key) {
-                return react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-slide" },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: "gbb-slide-header " + cx('slide-header', "bg-" + theme, { 'text-white': (theme !== 'light') }), "data-toggle": "collapse", "data-target": "#collapse" + clientId + "-" + key },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["h5"], tagName: "h5", value: slide.title })),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { id: "collapse" + clientId + "-" + key, className: "collapse" },
-                        react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "gbb-slide-body " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["slide-body"], tagName: "div", value: slide.body })));
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "gbb-carousel " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["carousel"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__[margin], style: { textAlign: alignment } }, content.map(function (slide, key) {
+                return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "gbb-slide", key: key },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: "gbb-slide-header " + cx("slide-header", "bg-" + theme, { "text-white": (theme !== "light") }), "data-toggle": "collapse", "data-target": "#collapse" + clientId + "-" + key },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText.Content, { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["mb-0"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["h5"], tagName: "h5", value: slide.title })),
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { id: "collapse" + clientId + "-" + key, className: "collapse" },
+                        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText.Content, { className: "gbb-slide-body " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["slide-body"], tagName: "div", value: slide.body })));
             }))));
     },
 });

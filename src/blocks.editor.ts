@@ -10,14 +10,14 @@
  */
 
 // Import bootstrap dependencies
-//import '../node_modules/bootstrap/js/src/util';
+// import '../node_modules/bootstrap/js/src/util';
 
-import './blocks/accordion/accordion';
-import './blocks/alert/alert';
-import './blocks/blockquote/blockquote';
-import './blocks/button/button';
-import './blocks/carousel/carousel';
-import './blocks/container/container';
-import './blocks/media/media';
-//import './block/modal';
-import './blocks/type/type';
+import "./blocks/accordion/accordion";
+import "./blocks/alert/alert";
+import "./blocks/blockquote/blockquote";
+import "./blocks/button/button";
+import "./blocks/carousel/carousel";
+import "./blocks/container/container";
+import "./blocks/media/media";
+// import './block/modal';
+import "./blocks/type/type";
