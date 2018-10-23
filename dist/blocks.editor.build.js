@@ -16275,11 +16275,11 @@ var Inspector = /** @class */ (function (_super) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
-/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/scss/styles.module.scss */ "./src/assets/scss/styles.module.scss");
+/* harmony import */ var _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/icons */ "./src/lib/icons.tsx");
 /* harmony import */ var _components_inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/inspector */ "./src/blocks/blockquote/components/inspector.tsx");
 /**
  * BLOCK: bootstrap-blocks
@@ -16308,23 +16308,23 @@ var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType
 var Fragment = wp.element.Fragment;
 var _a = wp.editor, AlignmentToolbar = _a.AlignmentToolbar, BlockControls = _a.BlockControls, RichText = _a.RichText;
 var attributes = {
-    textColor: {
-        source: 'string',
+    alignment: {
+        type: "string"
     },
     margin: {
-        type: 'string',
-        default: 'my-3'
+        default: "my-3",
+        type: "string"
     },
     quote: {
-        source: 'text',
-        selector: '.gbb-blockquote',
+        selector: ".gbb-blockquote",
+        source: "text"
     },
     source: {
-        source: 'text',
-        selector: 'footer.gbb-blockquote-footer',
+        selector: "footer.gbb-blockquote-footer",
+        source: "text"
     },
-    alignment: {
-        type: 'string',
+    textColor: {
+        source: "string"
     },
 };
 /**
@@ -16340,18 +16340,13 @@ var attributes = {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType('gbb/blockquote', {
-    // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-    title: __('Bootstrap Blockquote'),
-    description: __('For quoting blocks of content from another source within your document.'),
-    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_1__["default"].blockquote,
-    category: 'gbb',
-    keywords: [
-        __('Bootstrap'),
-        __('Blockquote'),
-        __('Quote'),
-    ],
+registerBlockType("gbb/blockquote", {
     attributes: attributes,
+    category: "gbb",
+    description: __("For quoting blocks of content from another source within your document."),
+    icon: _lib_icons__WEBPACK_IMPORTED_MODULE_2__["default"].blockquote,
+    keywords: [__("Bootstrap"), __("Blockquote"), __("Quote")],
+    title: __("Bootstrap Blockquote"),
     /**
      * The edit function describes the structure of your block in the context of the editor.
      * This represents what the editor will render when the block is used.
@@ -16362,20 +16357,20 @@ registerBlockType('gbb/blockquote', {
      */
     edit: function (props) {
         var _a = props.attributes, alignment = _a.alignment, margin = _a.margin, quote = _a.quote, source = _a.source, setAttributes = props.setAttributes;
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"](Fragment, null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"](BlockControls, null,
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Fragment, null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], __assign({}, props)),
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](BlockControls, null,
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](AlignmentToolbar, { value: alignment, onChange: function (alignment) {
                         setAttributes({ alignment: alignment });
                     } })),
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: props.className },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("blockquote", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } },
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: "gbb-blockquote " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"], tagName: "p", onChange: function (quote) {
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: props.className },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("blockquote", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__[margin], style: { textAlign: alignment } },
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText, { className: "gbb-blockquote " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["mb-0"], tagName: "p", onChange: function (quote) {
                             setAttributes({ quote: quote });
                         }, placeholder: "Enter your quote here...", keepPlaceholderOnFocus: true, value: quote }),
-                    react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText, { className: "gbb-blockquote-footer " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote-footer"], format: "string", tagName: "footer", onChange: function (source) {
+                    react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText, { className: "gbb-blockquote-footer " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote-footer"], format: "string", tagName: "footer", onChange: function (source) {
                             setAttributes({ source: source });
-                        }, placeholder: "Sebastian Buckpesch in \"Let's talk Gutenberg\"", keepPlaceholderOnFocus: true, value: source })))));
+                        }, placeholder: 'Sebastian Buckpesch in "Let\'s talk Gutenberg"', keepPlaceholderOnFocus: true, value: source })))));
     },
     /**
      * The save function defines the way in which the different attributes should be combined
@@ -16388,11 +16383,11 @@ registerBlockType('gbb/blockquote', {
     save: function (props) {
         // Initialize theme
         var _a = props.attributes, alignment = _a.alignment, margin = _a.margin, quote = _a.quote, source = _a.source;
-        return (react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", null,
-            react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__[margin], style: { textAlign: alignment } },
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "gbb-blockquote " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["mb-0"], tagName: "p", value: quote }),
-                react__WEBPACK_IMPORTED_MODULE_2__["createElement"](RichText.Content, { className: "gbb-blockquote-footer " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_0__["blockquote-footer"], format: "string", tagName: "footer", value: source }))));
-    },
+        return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null,
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", { className: _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__[margin], style: { textAlign: alignment } },
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText.Content, { className: "gbb-blockquote " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote"] + " " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["mb-0"], tagName: "p", value: quote }),
+                react__WEBPACK_IMPORTED_MODULE_0__["createElement"](RichText.Content, { className: "gbb-blockquote-footer " + _assets_scss_styles_module_scss__WEBPACK_IMPORTED_MODULE_1__["blockquote-footer"], format: "string", tagName: "footer", value: source }))));
+    }
 });
 
 
