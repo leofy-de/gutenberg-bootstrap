@@ -16984,7 +16984,7 @@ var Inspector = /** @class */ (function (_super) {
         // Setup the attributes
         var _a = this.props, _b = _a.attributes, margin = _b.margin, theme = _b.theme, setAttributes = _a.setAttributes;
         return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"](InspectorControls, { key: "inspector" },
-            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __('Select options') },
+            react__WEBPACK_IMPORTED_MODULE_0__["createElement"](PanelBody, { title: __("Select options") },
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_themePicker__WEBPACK_IMPORTED_MODULE_2__["default"], { theme: theme, setAttributes: setAttributes }),
                 react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_lib_inspector_marginPicker__WEBPACK_IMPORTED_MODULE_1__["default"], { margin: margin, setAttributes: setAttributes }))));
     };
