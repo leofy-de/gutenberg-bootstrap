@@ -16325,7 +16325,7 @@ var attributes = {
     },
     textColor: {
         source: "string"
-    },
+    }
 };
 /**
  * Register: aa Gutenberg Block.

@@ -34,7 +34,7 @@ const attributes = {
 	},
 	textColor: {
 		source: "string"
-	},
+	}
 };
 
 /**
@@ -60,15 +60,15 @@ registerBlockType("gbb/blockquote", {
 	keywords: [__("Bootstrap"), __("Blockquote"), __("Quote")],
 	title: __("Bootstrap Blockquote"), // Block title.
 
-  /**
-   * The edit function describes the structure of your block in the context of the editor.
-   * This represents what the editor will render when the block is used.
-   *
-   * The "edit" property must be a valid function.
-   *
-   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-   */
-  edit: props => {
+	/**
+	 * The edit function describes the structure of your block in the context of the editor.
+	 * This represents what the editor will render when the block is used.
+	 *
+	 * The "edit" property must be a valid function.
+	 *
+	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+	 */
+	edit: props => {
 		const {
 			attributes: { alignment, margin, quote, source },
 			setAttributes
@@ -119,15 +119,15 @@ registerBlockType("gbb/blockquote", {
 		);
 	},
 
-  /**
-   * The save function defines the way in which the different attributes should be combined
-   * into the final markup, which is then serialized by Gutenberg into post_content.
-   *
-   * The "save" property must be specified and must be a valid function.
-   *
-   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-   */
-  save: props => {
+	/**
+	 * The save function defines the way in which the different attributes should be combined
+	 * into the final markup, which is then serialized by Gutenberg into post_content.
+	 *
+	 * The "save" property must be specified and must be a valid function.
+	 *
+	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+	 */
+	save: props => {
 		// Initialize theme
 		const {
 			attributes: { alignment, margin, quote, source }
